@@ -1,18 +1,10 @@
 packages:
   - 'packages/*'
   - 'apps/*'
-onlyBuiltDependencies:
-  - esbuild
-  - msgpackr-extract
-  - sharp
-  - '@swc/core'
 
-# Resolution overrides:
-# Some Expo SDK 56 sub-deps pin @types/react ^19.0.0, but react-native 0.85
-# and @types/react-dom 19.2.x want ^19.2.0. Force a single modern copy so the
-# whole workspace shares one definition and TS doesn't see two Reacts.
-overrides:
-  '@types/react': '~19.2.15'
+# onlyBuiltDependencies and overrides live in root package.json under "pnpm"
+# so pnpm 11 honours them on CI (the workspace yaml location was being
+# ignored by `pnpm install --frozen-lockfile`).
 minimumReleaseAgeExclude:
   - '@typescript-eslint/eslint-plugin@8.60.0'
   - '@typescript-eslint/parser@8.60.0'

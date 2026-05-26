@@ -12,6 +12,11 @@ node_modules/
 **/.expo-shared/
 **/*.tsbuildinfo
 
+# Stray declaration files emitted next to source (build outputs belong in lib/)
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+packages/*/src/**/*.js.map
+
 # Test/coverage
 **/coverage/
 **/.nyc_output/
