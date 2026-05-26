@@ -109,7 +109,8 @@ jobs:
         with: { version: 11.3.0 }
       - uses: actions/setup-node@v4
         with: { node-version: '22', cache: 'pnpm' }
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm rebuild esbuild msgpackr-extract sharp
       - run: pnpm --filter @mindees/ui test:perf -- --baseline origin/main
 
   release:
@@ -131,7 +132,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm rebuild esbuild msgpackr-extract sharp
       - run: pnpm build
       - uses: changesets/action@v1
         with:
