@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
+  "changelog": ["@changesets/changelog-github", { "repo": "mindees/mindees-ui" }],
+  "commit": false,
+  "fixed": [],
+  "linked": [["@mindees/ui", "@mindees/tokens", "@mindees/icons"]],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@mindees/example", "@mindees/docs"]
+}

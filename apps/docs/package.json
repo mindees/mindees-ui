@@ -1,0 +1,30 @@
+{
+  "name": "@mindees/docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Documentation site for MindeesUI (Next.js + Fumadocs).",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "fumadocs-mdx && next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "next lint",
+    "test": "jest --passWithNoTests",
+    "clean": "rm -rf .next .source .turbo"
+  },
+  "dependencies": {
+    "fumadocs-core": "^16.9.1",
+    "fumadocs-mdx": "^11.0.0",
+    "fumadocs-ui": "^15.0.0",
+    "next": "^15.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "typescript": "^5.6.3"
+  }
+}

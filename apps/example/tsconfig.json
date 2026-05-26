@@ -1,0 +1,14 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@mindees/ui": ["../../packages/core/src"],
+      "@mindees/ui/*": ["../../packages/core/src/*"],
+      "@mindees/tokens": ["../../packages/tokens/src"],
+      "@mindees/tokens/*": ["../../packages/tokens/src/*"],
+      "@mindees/icons": ["../../packages/icons/src"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+}

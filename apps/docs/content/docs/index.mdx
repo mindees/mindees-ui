@@ -1,0 +1,35 @@
+---
+title: Getting Started
+description: Install MindeesUI and ship your first screen in minutes.
+---
+
+# Getting Started
+
+MindeesUI is a universal React Native component library for **Expo SDK 55 & 56** (React Native 0.83 & 0.85), New Architecture only. Drop components in; the Layout Intelligence Layer handles spacing, sizing, alignment, and accessibility.
+
+## Install
+
+```sh
+pnpm add @mindees/ui @mindees/tokens @mindees/icons
+pnpm add react-native-reanimated react-native-gesture-handler \
+  react-native-unistyles react-native-nitro-modules react-native-edge-to-edge \
+  react-native-safe-area-context react-native-svg @shopify/flash-list
+```
+
+## Wrap your app
+
+```tsx
+import { ThemeProvider, PortalProvider, ErrorBoundary } from '@mindees/ui';
+
+export default function App() {
+  return (
+    <ThemeProvider mode="auto">
+      <PortalProvider>
+        <ErrorBoundary>
+          {/* your app */}
+        </ErrorBoundary>
+      </PortalProvider>
+    </ThemeProvider>
+  );
+}
+```

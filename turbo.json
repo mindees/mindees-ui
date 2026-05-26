@@ -1,0 +1,69 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "tsconfig.base.json",
+    ".eslintrc.*",
+    "eslint.config.*",
+    "prettier.config.*",
+    ".prettierrc*"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["lib/**", "dist/**", ".next/**", "!.next/cache/**", "build/**"],
+      "inputs": [
+        "src/**",
+        "app/**",
+        "public/**",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.build.json",
+        "babel.config.*",
+        "next.config.*",
+        "source.config.*"
+      ]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": ["*.tsbuildinfo"],
+      "inputs": ["src/**", "test/**", "tsconfig.json", "package.json"]
+    },
+    "lint": {
+      "outputs": [],
+      "inputs": [
+        "src/**",
+        "test/**",
+        "eslint.config.*",
+        ".eslintrc.*",
+        "package.json"
+      ]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "inputs": [
+        "src/**",
+        "test/**",
+        "jest.config.*",
+        "jest.setup.*",
+        "package.json"
+      ]
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
+    },
+    "test:perf": {
+      "dependsOn": ["^build"],
+      "outputs": [".reassure/**"]
+    },
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "mindees-ui-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "MindeesUI — universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer.",
+  "license": "MIT",
+  "homepage": "https://mindees.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mindees/mindees-ui.git"
+  },
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=11.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:perf": "turbo run test:perf",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "verify:versions": "node scripts/verify-versions.mjs",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,mdx,yml,yaml}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=./packages/* && changeset publish",
+    "example": "pnpm --filter @mindees/example",
+    "docs": "pnpm --filter @mindees/docs",
+    "storybook": "pnpm --filter @mindees/example storybook",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@types/node": "^22.10.0",
+    "eslint": "^9.16.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.4.2",
+    "turbo": "^2.9.14",
+    "typescript": "^5.6.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

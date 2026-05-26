@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "MindeesUI Example",
+    "slug": "mindees-ui-example",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "mindeesui",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.mindees.example"
+    },
+    "android": {
+      "package": "dev.mindees.example",
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

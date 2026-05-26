@@ -1,0 +1,13 @@
+# MindeesUI
+
+> Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. Components introspect their children and auto-adjust spacing, sizing, alignment, roles, and styling.
+
+## Docs
+- [Getting started](https://mindees.dev/docs)
+- [Layout Intelligence Layer](https://mindees.dev/docs/architecture)
+- [Compatibility matrix](https://mindees.dev/docs/compatibility)
+- [Theming](https://mindees.dev/docs/theming)
+
+## Project
+- [GitHub](https://github.com/mindees/mindees-ui)
+- [npm: @mindees/ui](https://www.npmjs.com/package/@mindees/ui)

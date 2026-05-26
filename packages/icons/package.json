@@ -1,0 +1,46 @@
+{
+  "name": "@mindees/icons",
+  "version": "0.0.1",
+  "description": "Tree-shakeable icon set for MindeesUI, built on react-native-svg.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
+  "react-native": "./src/index.ts",
+  "source": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/typescript/src/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/module/index.js",
+      "require": "./lib/commonjs/index.js"
+    }
+  },
+  "files": ["src", "lib", "!**/__tests__"],
+  "scripts": {
+    "build": "bob build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "test": "jest --passWithNoTests",
+    "clean": "rm -rf lib .turbo"
+  },
+  "peerDependencies": {
+    "react": ">=19.1.0",
+    "react-native": ">=0.83.0",
+    "react-native-svg": ">=15.0.0"
+  },
+  "devDependencies": {
+    "react-native-builder-bob": "^0.41.0"
+  },
+  "publishConfig": { "access": "public" },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      ["commonjs", { "esm": true }],
+      ["module", { "esm": true }],
+      ["typescript", { "project": "tsconfig.build.json", "esm": true }]
+    ]
+  }
+}

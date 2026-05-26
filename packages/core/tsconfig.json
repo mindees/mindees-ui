@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/typescript",
+    "types": ["jest", "node"],
+    "paths": {
+      "@mindees/tokens": ["../tokens/src"],
+      "@mindees/tokens/*": ["../tokens/src/*"]
+    }
+  },
+  "include": ["src/**/*", "jest.setup.ts"],
+  "exclude": ["lib", "**/*.test.ts", "**/*.test.tsx"]
+}
