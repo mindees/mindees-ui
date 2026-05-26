@@ -9,7 +9,10 @@ import { View, StyleSheet } from 'react-native';
 // Why our own instead of `@gorhom/portal`: zero peer-dep cost, full control
 // over named hosts + per-host z-index ordering using our `zIndex` token.
 
-interface PortalEntry { readonly key: string; readonly node: React.ReactNode }
+interface PortalEntry {
+  readonly key: string;
+  readonly node: React.ReactNode;
+}
 type PortalState = Record<string, PortalEntry[]>;
 
 interface PortalContextValue {
