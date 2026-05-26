@@ -2,6 +2,11 @@ packages:
   - 'packages/*'
   - 'apps/*'
 
+allowBuilds:
+  esbuild: set this to true or false
+  msgpackr-extract: set this to true or false
+  sharp: set this to true or false
+
 # onlyBuiltDependencies and overrides live in root package.json under "pnpm"
 # so pnpm 11 honours them on CI (the workspace yaml location was being
 # ignored by `pnpm install --frozen-lockfile`).

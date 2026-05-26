@@ -32,8 +32,14 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Install (skip native build scripts)
+        # pnpm 11 errors on --frozen-lockfile if any package's build script
+        # isn't pre-approved via lockfile metadata. We skip all scripts here
+        # and rebuild only the allow-listed native deps in the next step.
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Rebuild allow-listed native deps
+        run: pnpm rebuild esbuild msgpackr-extract sharp
 
       - name: Verify peer-dep matrix against npm
         run: pnpm verify:versions
