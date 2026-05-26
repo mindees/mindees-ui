@@ -79,7 +79,15 @@ export type ComponentTag =
   | 'Calendar'
   // specialised / utility
   | 'EmptyState'
-  | 'ScreenWrapper';
+  | 'ScreenWrapper'
+  | 'CodeBlock'
+  | 'QRCode'
+  | 'Barcode'
+  | 'MapView'
+  | 'ColorPicker'
+  | 'SignaturePad'
+  | 'WebView'
+  | 'Camera';
 
 interface Tagged {
   [COMPONENT_TAG]?: ComponentTag;

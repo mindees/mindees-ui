@@ -10,3 +10,4 @@ export * from './Button';
 export * from './Overlay';
 export * from './Nav';
 export * from './Display';
+export * from './Specialised';
