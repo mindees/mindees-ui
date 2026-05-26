@@ -4,12 +4,12 @@
 
 The original brief asked for four things that can't be _guaranteed_. Each was translated into an engineering condition that produces them in expectation:
 
-| Original ask                          | Engineering substitute we actually deliver                                                                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| "No single error / no single mistake" | TypeScript strict, ≥ 90% test coverage, CI gates that block merge on type/lint/test/a11y failure. Near-zero-defect, not magically zero.    |
-| "100% performance optimized"          | Measurable perf budgets verified with Reassure (render-perf regression) and Flashlight (runtime fps). Documented in `docs/PERFORMANCE.md`. |
-| "Ranked #1 on search engines"         | Technical SEO done to spec (sitemap, JSON-LD, Core Web Vitals green, `llms.txt`, strong README). Ranking is _earned_, not promised.        |
-| "Something never done before"         | A genuinely novel **deterministic** Layout Intelligence Layer — smart composition, not AI magic. Documented in `docs/ARCHITECTURE.md`.     |
+| Original ask                          | Engineering substitute we actually deliver                                                                                                                                                                                                                                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| "No single error / no single mistake" | TypeScript strict, ≥ 90% test coverage by Phase 2's first release, CI gates that block merge on type/lint/test/a11y failure. Phase 1 currently sits at ~50% lines (LIL primitives covered; providers + themes pending) and the gate is set there until tests catch up. Near-zero-defect, not magically zero. |
+| "100% performance optimized"          | Measurable perf budgets verified with Reassure (render-perf regression) and Flashlight (runtime fps). Documented in `docs/PERFORMANCE.md`.                                                                                                                                                                   |
+| "Ranked #1 on search engines"         | Technical SEO done to spec (sitemap, JSON-LD, Core Web Vitals green, `llms.txt`, strong README). Ranking is _earned_, not promised.                                                                                                                                                                          |
+| "Something never done before"         | A genuinely novel **deterministic** Layout Intelligence Layer — smart composition, not AI magic. Documented in `docs/ARCHITECTURE.md`.                                                                                                                                                                       |
 
 ## Phase status
 
