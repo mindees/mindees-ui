@@ -1,7 +1,0 @@
-1:"$Sreact.fragment"
-2:I[12097,["/mindees-ui/_next/static/chunks/07skbh3aabxp1.js","/mindees-ui/_next/static/chunks/004t5fr_0h8qn.js"],""]
-3:I[53500,["/mindees-ui/_next/static/chunks/07skbh3aabxp1.js","/mindees-ui/_next/static/chunks/004t5fr_0h8qn.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/mindees-ui/logo.png","image"]
-0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"style":{"maxWidth":880,"margin":"0 auto","padding":"4rem 1.5rem"},"children":[["$","img",null,{"src":"/mindees-ui/logo.png","alt":"MindeesUI","width":96,"height":96,"style":{"display":"block","marginBottom":24}}],["$","h1",null,{"style":{"fontSize":56,"lineHeight":1.1,"margin":0},"children":"MindeesUI"}],["$","p",null,{"style":{"fontSize":20,"color":"#444","marginTop":16},"children":"Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer."}],["$","p",null,{"style":{"marginTop":24},"children":["$","$L2",null,{"href":"/docs","children":"Read the docs →"}]}]]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"mMKEuQjCTxB7INRPGHv9d"}
-5:null

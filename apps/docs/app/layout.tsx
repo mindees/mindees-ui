@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import 'fumadocs-ui/style.css';
+import './globals.css';
 
 export const metadata = {
   title: { default: 'MindeesUI', template: '%s · MindeesUI' },
@@ -36,13 +37,8 @@ export const metadata = {
   },
   alternates: { canonical: '/' },
   robots: { index: true, follow: true },
-  // app/icon.png and app/apple-icon.png are picked up automatically by
-  // Next.js's file-based metadata convention — no explicit `icons` entry needed.
 };
 
-// JSON-LD: SoftwareSourceCode + WebSite. Helps Google understand what
-// MindeesUI is and what queries to surface it on. Two graphs in one
-// `<script type="application/ld+json">` keeps the payload tight.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [

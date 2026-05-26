@@ -4,8 +4,10 @@ node_modules/
 
 # Build outputs
 **/lib/
+!apps/docs/lib/
 **/dist/
 **/build/
+apps/docs/out/
 **/.turbo/
 **/.next/
 **/.expo/
