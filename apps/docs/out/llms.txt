@@ -1,0 +1,78 @@
+# MindeesUI
+
+> Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. Components introspect their children and auto-adjust spacing, sizing, alignment, accessibility roles, and styling — every rule documented and overridable. New Architecture only (Fabric + JSI + TurboModules + Bridgeless). iOS, Android, React Native Web. TypeScript strict, WCAG 2.2 AA, Reanimated v4 UI-thread animations, Unistyles v3 zero-re-render theming.
+
+## Getting Started
+
+- [Documentation home](https://mindees.dev/docs)
+- [Installation](https://mindees.dev/docs/installation)
+- [Quickstart](https://mindees.dev/docs)
+- [Compatibility matrix](https://mindees.dev/docs/compatibility)
+
+## Architecture
+
+- [Layout Intelligence Layer](https://mindees.dev/docs/architecture)
+- [Slot / asChild pattern](https://mindees.dev/docs/architecture#slot--aschild)
+- [Tagged components + child introspection](https://mindees.dev/docs/architecture#tagged-components)
+- [Intrinsic sizing (fill / hug / fixed)](https://mindees.dev/docs/architecture#intrinsic-sizing)
+- [Auto-spacing rules](https://mindees.dev/docs/architecture#auto-spacing-rules)
+- [Specialised parent–child contexts](https://mindees.dev/docs/architecture#specialised-contexts)
+
+## Theming
+
+- [createTheme + ThemeProvider](https://mindees.dev/docs/theming)
+- [Design tokens](https://mindees.dev/docs/tokens)
+- [Dark mode + high contrast](https://mindees.dev/docs/theming#dark-mode)
+
+## Components
+
+### Layout & Typography
+- `Box`, `Stack`, `HStack`, `VStack`, `ZStack`, `Grid`, `Divider`, `Spacer`
+- `SafeAreaView`, `ScreenWrapper`
+- `Text`, `Heading`, `Caption`, `Label`, `Link`, `Code`, `Kbd`
+
+### Forms & Inputs
+- `FormField`, `Input`, `Textarea`, `PasswordInput`, `SearchInput`
+- `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`
+
+### Buttons & Overlays
+- `Button`, `IconButton`, `FAB`, `ButtonGroup`
+- `Modal`, `BottomSheet`, `Toast`, `Tooltip`, `Popover`, `Drawer`, `Alert`, `ActionSheet`
+
+### Navigation
+- `Tabs` + `Tab` + `TabList` + `TabPanel`
+- `TopBar`, `Breadcrumb`, `Pagination`, `Stepper`
+
+### Display & Data
+- `Card`, `Avatar`, `AvatarGroup`, `Badge`, `Tag`, `Chip`
+- `Image`, `List`, `ListItem`, `Accordion`
+- `Progress`, `Skeleton`, `Spinner`, `Stat`, `Rating`, `Timeline`
+
+### Specialised (gated optional peers, graceful fallback)
+- `CodeBlock` (zero-deps), `ColorPicker` (zero-deps)
+- `QRCode` (requires `react-native-qrcode-svg`)
+- `Barcode` + `Camera` (requires `expo-camera`)
+- `MapView` (requires `react-native-maps`)
+- `SignaturePad` (requires `react-native-signature-canvas`)
+- `WebView` (requires `react-native-webview`)
+
+## Foundations & Helpers
+
+- `Slot`, `tagComponent`, `describeChildren`, `flattenChildren`
+- `resolveSizeProps`, `resolveGapRule`, `resolveGapToken`
+- `ThemeProvider`, `useTheme`, `useTokens`, `useReduceMotion`
+- `PortalProvider`, `Portal`, `ErrorBoundary`
+- `configureUnistyles`, `createStyles`, `resolveResponsive`, `useResponsive`
+- `useUniqueId`, `useFormFieldA11y`, `useAnnouncer`
+
+## Project
+
+- [GitHub](https://github.com/mindees/mindees-ui)
+- [npm: @mindees/ui](https://www.npmjs.com/package/@mindees/ui)
+- [npm: @mindees/tokens](https://www.npmjs.com/package/@mindees/tokens)
+- [npm: @mindees/icons](https://www.npmjs.com/package/@mindees/icons)
+- [License: MIT](https://github.com/mindees/mindees-ui/blob/main/LICENSE)
+- [Roadmap](https://github.com/mindees/mindees-ui/blob/main/docs/ROADMAP.md)
+- [Contributing](https://github.com/mindees/mindees-ui/blob/main/docs/CONTRIBUTING.md)
+- [Architecture deep-dive](https://github.com/mindees/mindees-ui/blob/main/docs/ARCHITECTURE.md)
+- [Performance budgets](https://github.com/mindees/mindees-ui/blob/main/docs/PERFORMANCE.md)
