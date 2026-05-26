@@ -29,6 +29,7 @@ export type ComponentTag =
   | 'FAB'
   | 'ButtonGroup'
   // forms
+  | 'FormField'
   | 'Input'
   | 'Textarea'
   | 'PasswordInput'

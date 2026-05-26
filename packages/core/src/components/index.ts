@@ -5,3 +5,4 @@ export * from './Divider/Divider';
 export * from './Spacer/Spacer';
 export * from './Screen';
 export * from './Text';
+export * from './Form';

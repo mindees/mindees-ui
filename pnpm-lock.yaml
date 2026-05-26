@@ -172,6 +172,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@mindees/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@mindees/tokens':
         specifier: workspace:*
         version: link:../tokens
