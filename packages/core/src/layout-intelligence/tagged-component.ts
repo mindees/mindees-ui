@@ -72,6 +72,11 @@ export type ComponentTag =
   | 'Progress'
   | 'Skeleton'
   | 'Spinner'
+  | 'Stat'
+  | 'StatCard'
+  | 'Rating'
+  | 'Timeline'
+  | 'Calendar'
   // specialised / utility
   | 'EmptyState'
   | 'ScreenWrapper';

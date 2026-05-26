@@ -1,6 +1,6 @@
 {
   "name": "@mindees/ui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer.",
   "keywords": [
     "react-native",

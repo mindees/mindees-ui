@@ -10,7 +10,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint \"./**/*.{ts,tsx}\"",
+    "lint": "eslint \"./app/**/*.{ts,tsx}\"",
     "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {

@@ -8,3 +8,5 @@ export * from './Text';
 export * from './Form';
 export * from './Button';
 export * from './Overlay';
+export * from './Nav';
+export * from './Display';
