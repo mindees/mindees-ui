@@ -3,6 +3,5 @@
   "buildCommand": "pnpm --filter @mindees/ui --filter @mindees/tokens --filter @mindees/icons build && pnpm --filter @mindees/docs build",
   "installCommand": "pnpm install --frozen-lockfile --ignore-scripts && pnpm rebuild esbuild msgpackr-extract sharp",
   "outputDirectory": "apps/docs/out",
-  "framework": null,
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./apps/docs ./packages ./vercel.json"
+  "framework": null
 }
