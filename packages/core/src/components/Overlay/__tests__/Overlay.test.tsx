@@ -23,9 +23,9 @@ describe('Phase 4 overlays — tag identity', () => {
         </Tooltip>,
       ),
     ).toBe('Tooltip');
-    expect(
-      getComponentTag(<Popover visible={false} onClose={noop} trigger={<></>} />),
-    ).toBe('Popover');
+    expect(getComponentTag(<Popover visible={false} onClose={noop} trigger={<></>} />)).toBe(
+      'Popover',
+    );
     expect(getComponentTag(<Drawer visible={false} onClose={noop} />)).toBe('Drawer');
     expect(getComponentTag(<Alert visible={false} onClose={noop} title="x" />)).toBe('Alert');
     expect(getComponentTag(<ActionSheet visible={false} onClose={noop} items={[]} />)).toBe(
