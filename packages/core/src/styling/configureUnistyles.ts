@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native-unistyles';
 import { breakpoints as defaultBreakpoints } from '@mindees/tokens';
+import { StyleSheet } from 'react-native-unistyles';
 
 import { darkTheme, lightTheme, type Theme } from '../theme/createTheme';
 // Side-effect import: pulls the Unistyles module augmentation into the

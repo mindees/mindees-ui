@@ -1,6 +1,5 @@
-import { useWindowDimensions } from 'react-native';
-
 import { breakpoints, type BreakpointToken, type ResponsiveValue } from '@mindees/tokens';
+import { useWindowDimensions } from 'react-native';
 
 const ORDERED_BREAKPOINTS: readonly BreakpointToken[] = [
   'xs',

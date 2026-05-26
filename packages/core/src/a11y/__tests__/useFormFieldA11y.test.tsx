@@ -1,6 +1,6 @@
+import { render } from '@testing-library/react-native';
 import * as React from 'react';
 import { Text } from 'react-native';
-import { render } from '@testing-library/react-native';
 
 import { FormFieldContext, type FormFieldContextValue } from '../../layout-intelligence/context';
 import { useFormFieldA11y, type FormFieldA11y } from '../useFormFieldA11y';

@@ -48,6 +48,17 @@ export default tseslint.config(
     rules: {
       // Public API hygiene — no `any` in exports
       '@typescript-eslint/no-explicit-any': 'error',
+      // Underscore-prefixed params/vars are intentionally unused (e.g. forwardRef
+      // signatures we don't dispatch).
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },

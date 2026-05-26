@@ -76,10 +76,15 @@ interface Tagged {
   [COMPONENT_TAG]?: ComponentTag;
 }
 
-export function tagComponent<T extends React.ComponentType<unknown>>(
-  component: T,
-  tag: ComponentTag,
-): T {
+// The constraint accepts both `ComponentType<P>` (class/function components)
+// and `ForwardRefExoticComponent<P>` (forwardRef'd ones) without forcing the
+// caller to widen their typed props to `unknown`. The `any` is internal to
+// this helper and never leaks into consumers' inferred component types —
+// the return type is `T`, so the original prop typing is preserved.
+export function tagComponent<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends React.ComponentType<any> | React.ForwardRefExoticComponent<any>,
+>(component: T, tag: ComponentTag): T {
   (component as unknown as Tagged)[COMPONENT_TAG] = tag;
   return component;
 }
