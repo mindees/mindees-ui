@@ -2,14 +2,22 @@ packages:
   - 'packages/*'
   - 'apps/*'
 
-allowBuilds:
-  esbuild: set this to true or false
-  msgpackr-extract: set this to true or false
-  sharp: set this to true or false
+# pnpm 11 stopped reading the `pnpm` field from root package.json; the
+# `pnpm-workspace.yaml` is the only home for these settings now.
+# https://pnpm.io/settings
+onlyBuiltDependencies:
+  - esbuild
+  - msgpackr-extract
+  - sharp
+  - '@swc/core'
 
-# onlyBuiltDependencies and overrides live in root package.json under "pnpm"
-# so pnpm 11 honours them on CI (the workspace yaml location was being
-# ignored by `pnpm install --frozen-lockfile`).
+# Some Expo SDK 56 sub-deps pin @types/react ^19.0.0; React Native 0.85 and
+# @types/react-dom 19.2.x want ^19.2.0. Force a single copy so the workspace
+# doesn't see two React type definitions (manifests as TS2786 "cannot be
+# used as a JSX component" when consuming @mindees/ui from apps/example).
+overrides:
+  '@types/react': '~19.2.15'
+
 minimumReleaseAgeExclude:
   - '@typescript-eslint/eslint-plugin@8.60.0'
   - '@typescript-eslint/parser@8.60.0'

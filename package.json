@@ -59,16 +59,5 @@
     "*.{json,md,mdx,yml,yaml}": [
       "prettier --write"
     ]
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "msgpackr-extract",
-      "sharp",
-      "@swc/core"
-    ],
-    "overrides": {
-      "@types/react": "~19.2.15"
-    }
   }
 }
