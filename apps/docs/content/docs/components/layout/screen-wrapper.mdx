@@ -1,0 +1,54 @@
+---
+title: ScreenWrapper
+description: The recommended app-screen root — safe-area edges, themed background, optional scroll and keyboard avoidance.
+---
+
+`ScreenWrapper` is the opinionated screen container. It combines a `SafeAreaView`, a themed background, an optional `ScrollView`, an optional `KeyboardAvoidingView`, and a status bar style matching the current colour scheme. Reach for it as the root of every screen in your app.
+
+## Import
+
+```tsx
+import { ScreenWrapper } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ScreenWrapper padding="md">
+  <Heading>Profile</Heading>
+  <Text>Hello there.</Text>
+</ScreenWrapper>
+```
+
+Long form with scroll and keyboard avoidance:
+
+```tsx
+<ScreenWrapper scroll avoidKeyboard padding="md" background="surface">
+  <TextField label="Name" />
+  <TextField label="Email" />
+  <Button>Save</Button>
+</ScreenWrapper>
+```
+
+Disable specific safe-area edges:
+
+```tsx
+<ScreenWrapper edges={['top', 'left', 'right']}>
+  <Content />
+</ScreenWrapper>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `edges` | `readonly ('top' \| 'right' \| 'bottom' \| 'left')[]` | `['top', 'right', 'bottom', 'left']` | Edges to inset for the safe-area. Pass `[]` to disable. |
+| `background` | `'canvas' \| 'surface' \| 'subtle' \| 'elevated'` | `'canvas'` | Semantic theme background. |
+| `scroll` | `boolean` | `false` | Wrap the content in a `ScrollView`. |
+| `avoidKeyboard` | `boolean` | `false` | Add a `KeyboardAvoidingView` above the content (iOS padding / Android height). |
+| `padding` | `SpaceToken \| number` | — | Outer padding around content. |
+| `scrollViewProps` | `Omit<ScrollViewProps, 'children'>` | — | Props forwarded to the inner `ScrollView` when `scroll` is true. |
+
+## Accessibility
+
+Renders a `StatusBar` whose `barStyle` matches the active colour scheme. The inner `SafeAreaView` inherits accessibility from the underlying RN View — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

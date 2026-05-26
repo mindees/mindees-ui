@@ -1,0 +1,38 @@
+---
+title: Grid
+description: A flexbox-based grid that wraps children into equal-width cells with token-aware row and column gaps.
+---
+
+`Grid` lays out its children into a fixed number of equal-width columns. Each child occupies one cell. For complex CSS-Grid-style layouts on React Native Web, consume the underlying `View` directly with `gridTemplateColumns`.
+
+## Import
+
+```tsx
+import { Grid } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Grid columns={3} gap="md">
+  <Card />
+  <Card />
+  <Card />
+  <Card />
+  <Card />
+  <Card />
+</Grid>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `columns` | `number` | — | Number of columns. Required. Each child occupies one column. |
+| `gap` | `SpaceToken \| number` | `'md'` | Token-based gap between cells in both axes. |
+
+All `Box` props (padding, margin, background, radius, shadow, sizing) are also supported except `asChild`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN View — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

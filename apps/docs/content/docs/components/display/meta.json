@@ -1,0 +1,4 @@
+{
+  "title": "Display",
+  "pages": ["card", "avatar", "badge", "tag", "image", "list", "accordion", "progress", "skeleton", "spinner", "stat", "rating", "timeline"]
+}

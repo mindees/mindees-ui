@@ -1,0 +1,38 @@
+---
+title: Camera
+description: A gated wrapper around the expo-camera CameraView that forwards all props and renders a fallback when the peer is missing.
+---
+
+`Camera` is a thin pass-through wrapper around the `CameraView` export of `expo-camera`. When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command instead of crashing — so capture-using screens stay buildable without the native peer.
+
+## Peer dependency
+
+```bash
+pnpm add expo-camera
+```
+
+When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command — this means you can use it conditionally without crashing.
+
+## Import
+
+```tsx
+import { Camera } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Camera style={{ flex: 1 }} facing="back" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `facing` | `'front' \| 'back'` | — | Which physical camera to use. |
+
+All remaining props are forwarded verbatim to `expo-camera`'s `CameraView`, so the full API (`zoom`, `flash`, `onBarcodeScanned`, `barcodeScannerSettings`, ref-based capture, etc.) is available.
+
+## Accessibility
+
+The camera surface is a live visual feed. Provide an `accessibilityLabel` on the wrapping container describing what the user is capturing, request camera permission with a clear rationale string, and pair capture flows with a non-camera fallback (file picker, manual entry) wherever possible.

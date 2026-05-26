@@ -1,0 +1,58 @@
+---
+title: Stack
+description: Token-aware flex stacks with deterministic auto-spacing — Stack (column), HStack (row), VStack (column).
+---
+
+`Stack`, `HStack`, and `VStack` are the workhorse layout primitives. They share one implementation from a `makeStack` factory and differ only in their default orientation. Each pair of children receives a deterministic gap from the Layout Intelligence Layer based on their component tags, so a `Heading` next to a `Text` gets a different gap than two adjacent `Card`s.
+
+## Import
+
+```tsx
+import { Stack, HStack, VStack } from '@mindees/ui';
+```
+
+## Usage
+
+Vertical stack (default orientation `column`):
+
+```tsx
+<Stack gap="md" align="stretch">
+  <Heading>Title</Heading>
+  <Text>Body copy</Text>
+</Stack>
+```
+
+Horizontal stack:
+
+```tsx
+<HStack gap="sm" align="center" justify="space-between">
+  <Text>Label</Text>
+  <Button>Action</Button>
+</HStack>
+```
+
+Explicit vertical stack (identical to `Stack`, communicates intent):
+
+```tsx
+<VStack gap="lg">
+  <Card />
+  <Card />
+</VStack>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `gap` | `SpaceToken \| number` | `'md'` | Default gap between children. Auto-spacing rules apply per pair. |
+| `disableAutoSpacing` | `boolean` | `false` | Skip the deterministic per-pair gap multipliers and use a uniform `gap`. |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Cross-axis alignment. |
+| `justify` | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'start'` | Main-axis alignment. |
+| `orientation` | `'row' \| 'column'` | `'column'` for `Stack`/`VStack`, `'row'` for `HStack` | Override the default flex direction. |
+| `wrap` | `boolean` | `false` | Allow children to wrap onto multiple lines. |
+
+All `Box` props (padding, margin, background, radius, shadow, sizing) are also supported except `asChild`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN View — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

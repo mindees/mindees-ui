@@ -1,0 +1,46 @@
+---
+title: Tooltip
+description: Pressable-driven label bubble that appears on long-press, with controlled and uncontrolled visibility modes.
+---
+
+`Tooltip` is a label bubble that overlays a trigger via absolute positioning. Mobile platforms don't have hover, so the tooltip shows on long-press by default; pass `visible` to drive it externally.
+
+## Import
+
+```tsx
+import { Tooltip } from '@mindees/ui';
+```
+
+## Usage
+
+Uncontrolled — long-press the trigger to reveal the bubble:
+
+```tsx
+<Tooltip label="Save draft">
+  <IconButton icon="save" />
+</Tooltip>
+```
+
+Controlled — drive visibility externally (for example, after focus on web):
+
+```tsx
+const [show, setShow] = useState(false);
+
+<Tooltip label="Save draft" visible={show} placement="bottom">
+  <IconButton icon="save" onPress={() => setShow(true)} />
+</Tooltip>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `label` | `string` | — | Text shown in the bubble and used as the trigger's `accessibilityLabel`. |
+| `placement` | `'top' \| 'bottom'` | `'top'` | Position relative to the trigger. |
+| `children` | `React.ReactElement` | — | The trigger element the tooltip anchors to. |
+| `visible` | `boolean` | — | Controlled visibility; when provided, overrides the internal long-press state. |
+| `defaultVisible` | `boolean` | `false` | Initial uncontrolled visibility. |
+
+## Accessibility
+
+The trigger receives `accessibilityLabel={label}`, so screen readers announce the tooltip's text whether or not the bubble is visible. The bubble itself is marked `pointerEvents="none"` and `accessibilityRole="text"` so it doesn't intercept touches or duplicate the announcement.

@@ -1,0 +1,42 @@
+---
+title: Barcode
+description: A barcode and QR scanner built on top of the Camera wrapper with a strongly-typed onScanned callback.
+---
+
+`Barcode` is a thin convenience layer over `Camera` that routes the underlying `onBarcodeScanned` event into a strongly-typed `onScanned` callback. Because it composes `Camera`, it inherits the same peer requirement: when the peer isn't installed, `Camera` renders a `MissingPeer` fallback with the exact install command instead of crashing.
+
+## Peer dependency
+
+```bash
+pnpm add expo-camera
+```
+
+When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command — this means you can use it conditionally without crashing.
+
+## Import
+
+```tsx
+import { Barcode } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Barcode
+  types={['qr', 'ean13']}
+  onScanned={({ type, data }) => console.log(type, data)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onScanned` | `(result: { type: string; data: string }) => void` | — | Fires once per detected symbol with its type and decoded data. |
+| `types` | `readonly ('qr' \| 'ean13' \| 'ean8' \| 'code128' \| 'code39' \| 'upc_a' \| 'upc_e' \| 'pdf417' \| 'datamatrix')[]` | all | Restrict scanning to specific symbologies. |
+
+Any remaining props are forwarded to the underlying `Camera` (and through it to `expo-camera`'s `CameraView`).
+
+## Accessibility
+
+Scanning is a sighted-only viewfinder activity. Provide an `accessibilityLabel` on the surrounding container describing what the user should aim at, and pair the scanner with a non-camera fallback (manual code entry) where possible.

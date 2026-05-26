@@ -1,0 +1,37 @@
+---
+title: TopBar
+description: App-level header with leading, title, and trailing slots — iOS-style centred title by default.
+---
+
+`TopBar` is the screen-level navigation header. It provides a fixed 56-dp row with a leading slot (typically a back button), a title with optional subtitle, and a trailing slot for actions. The title centres between the slots by default.
+
+## Import
+
+```tsx
+import { TopBar } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TopBar
+  title="Inbox"
+  subtitle="12 unread"
+  leading={<IconButton icon={<ChevronLeftIcon />} onPress={goBack} />}
+  trailing={<IconButton icon={<MoreIcon />} onPress={openMenu} />}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `title` | `string` | — | Primary header text, rendered as a level-5 `Heading`, single line. |
+| `subtitle` | `string` | — | Smaller caption below the title, single line. |
+| `leading` | `ReactNode` | — | Slot at the start of the bar; reserves a 40-dp minimum width. |
+| `trailing` | `ReactNode` | — | Slot at the end of the bar; reserves a 40-dp minimum width. |
+| `centerTitle` | `boolean` | `true` | Centre the title between slots (iOS convention). Set to `false` for a leading-aligned title. |
+
+## Accessibility
+
+The container has `accessibilityRole="header"` so screen readers announce it as the screen's heading region. Compose the leading and trailing slots with components that already carry their own roles and labels (e.g. `IconButton` with `accessibilityLabel`). The title and subtitle are clipped to one line each via `numberOfLines={1}`.

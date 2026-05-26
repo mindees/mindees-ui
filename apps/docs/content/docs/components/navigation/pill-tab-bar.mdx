@@ -1,0 +1,82 @@
+---
+title: PillTabBar
+description: Modern pill-style tab bar with segmented, floating, dock, and glass variants for switching between top-level views.
+---
+
+`PillTabBar` is a fully controlled tab bar designed for 2026-era UIs. One component renders four distinct chrome styles via the `variant` prop, sharing the same items API. Pass `items`, the active `value`, and an `onValueChange` callback.
+
+## Import
+
+```tsx
+import { PillTabBar } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const items = [
+  { value: 'home', label: 'Home' },
+  { value: 'search', label: 'Search' },
+  { value: 'profile', label: 'Profile', badge: 3 },
+];
+
+<PillTabBar items={items} value={value} onValueChange={setValue} />
+```
+
+## Variants
+
+### `segmented`
+
+Apple-style segmented control: a single rounded container with an animated sliding pill behind the active tab.
+
+```tsx
+<PillTabBar variant="segmented" items={items} value={value} onValueChange={setValue} />
+```
+
+### `floating`
+
+Material-You-ish capsule. The container is elevated and the active item gets a solid accent background.
+
+```tsx
+<PillTabBar variant="floating" items={items} value={value} onValueChange={setValue} />
+```
+
+### `dock`
+
+Bottom navigation bar. Icons stack above labels; the active item gets a rounded accent pill.
+
+```tsx
+<PillTabBar variant="dock" items={items} value={value} onValueChange={setValue} />
+```
+
+### `glass`
+
+Translucent floating bar with a soft border and shadow. No native blur peer required.
+
+```tsx
+<PillTabBar variant="glass" items={items} value={value} onValueChange={setValue} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `items` | `readonly PillTabItem[]` | — | Tab definitions. See item shape below. |
+| `value` | `string` | — | Active item value. |
+| `onValueChange` | `(next: string) => void` | — | Fired when the user selects a new item. |
+| `variant` | `'segmented' \| 'floating' \| 'dock' \| 'glass'` | `'segmented'` | Visual chrome. |
+| `accent` | `string` | `tokens.colors.action.primary` | Override the active-state accent colour. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls padding and text size. |
+
+### `PillTabItem`
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `string` | — | Unique identifier for the item. |
+| `label` | `string` | — | Visible text label. If omitted, the icon stands alone. |
+| `icon` | `ReactNode` | — | Icon rendered above the label in `dock`, before it elsewhere. |
+| `badge` | `string \| number` | — | Optional badge content; renders as a dot when omitted. |
+
+## Accessibility
+
+The container uses `accessibilityRole="tablist"` and each item is `accessibilityRole="tab"` with `accessibilityState={{ selected }}`. The `dock` variant also sets `accessibilityLabel` from the item label so icon-only docks remain announceable. The `segmented` variant respects the user's reduce-motion setting and snaps the active pill instead of animating when enabled.

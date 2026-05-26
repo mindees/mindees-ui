@@ -1,0 +1,43 @@
+---
+title: Breadcrumb
+description: Trail of links that shows the user's location in a hierarchy, with the current page rendered as plain text.
+---
+
+`Breadcrumb` renders a horizontal trail from `items`. All but the last item are interactive `Link`s — the final item is treated as the current page and rendered as bold static text. The list wraps onto multiple lines when space is tight.
+
+## Import
+
+```tsx
+import { Breadcrumb } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: 'Home', onPress: () => nav.push('/') },
+    { label: 'Library', href: '/library' },
+    { label: 'Components' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `items` | `readonly BreadcrumbItem[]` | — | Ordered list from root to current page. |
+| `separator` | `string` | `'/'` | Single character drawn between items. |
+
+### `BreadcrumbItem`
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `label` | `string` | — | Visible text for the crumb. |
+| `href` | `string` | — | Web-style URL for the underlying `Link`. |
+| `onPress` | `() => void` | — | Native press handler for the underlying `Link`. |
+
+## Accessibility
+
+Intermediate crumbs delegate to `Link`, which carries the correct accessibility role on each platform. The final crumb is announced via its `accessibilityLabel` so assistive tech reads the current page. Separators are marked `accessibilityElementsHidden` so they aren't spoken between items.

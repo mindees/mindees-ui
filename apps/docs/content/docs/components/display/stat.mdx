@@ -1,0 +1,38 @@
+---
+title: Stat
+description: Compact metric block with a muted label, prominent value, optional delta indicator, and supporting description text.
+---
+
+`Stat` displays a single key figure such as revenue, daily active users, or task count. It composes a small muted label, a level-3 heading value, an optional delta line, and an optional description into a tightly spaced column.
+
+## Import
+
+```tsx
+import { Stat } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Stat
+  label="Active users"
+  value="12,480"
+  delta={{ value: '+8.4% vs last week', tone: 'success' }}
+  description="Updated 2 minutes ago"
+/>
+
+<Stat label="Revenue" value={<Heading level={2}>$42.1k</Heading>} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `label` | `string` | — | Muted caption rendered above the value. Required. |
+| `value` | `ReactNode` | — | The primary metric. Strings render as a level-3 `Heading`; nodes render as-is. |
+| `delta` | `{ value: string; tone?: 'success' \| 'danger' \| 'muted' }` | — | Optional change indicator. `tone` defaults to `'muted'`. |
+| `description` | `string` | — | Optional supporting caption rendered below the delta. |
+
+## Accessibility
+
+`Stat` is non-semantic at the wrapper level (`accessibilityRole="none"`). Screen readers traverse the label, value, delta, and description as sibling text nodes — provide the metric's name in the `label` prop so the relationship is clear when announced.

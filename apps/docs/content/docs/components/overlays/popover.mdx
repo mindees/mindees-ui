@@ -1,0 +1,56 @@
+---
+title: Popover
+description: Lightweight anchored panel that floats above or below a trigger element using absolute positioning.
+---
+
+`Popover` is a non-modal anchored panel that overlays a trigger using absolute positioning. Use it for menus, pickers, and contextual content that should sit visually attached to its trigger.
+
+## Import
+
+```tsx
+import { Popover } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [open, setOpen] = useState(false);
+
+return (
+  <Popover
+    visible={open}
+    onClose={() => setOpen(false)}
+    placement="bottom"
+    trigger={<Button onPress={() => setOpen(true)}>Options</Button>}
+  >
+    <Text>Popover contents</Text>
+  </Popover>
+);
+```
+
+Above the trigger:
+
+```tsx
+<Popover
+  visible={open}
+  onClose={close}
+  placement="top"
+  trigger={<Button onPress={open}>Info</Button>}
+>
+  <Text>Hint text</Text>
+</Popover>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `visible` | `boolean` | — | Controls whether the panel is shown. |
+| `onClose` | `() => void` | — | Called when the panel itself is pressed. |
+| `placement` | `'top' \| 'bottom'` | `'bottom'` | Position relative to the trigger. |
+| `trigger` | `React.ReactElement` | — | The element the popover anchors to; rendered inline. |
+| `children` | `React.ReactNode` | — | Popover panel contents. |
+
+## Accessibility
+
+The popover is a non-modal floating panel — assistive tech reads the trigger and the panel as siblings. Provide an `accessibilityLabel` on your trigger element to describe what opening the popover does. Press anywhere on the panel to dismiss it via `onClose`.

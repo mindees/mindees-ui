@@ -1,0 +1,33 @@
+---
+title: Pagination
+description: Compact numeric pager with first, last, sibling pages, and ellipsis collapsing for long ranges.
+---
+
+`Pagination` renders numbered page buttons with smart ellipsis. It always shows the first and last page, the current page, and `siblingCount` pages on either side. The active page gets the accent fill; tapping any number fires `onPageChange`.
+
+## Import
+
+```tsx
+import { Pagination } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [page, setPage] = useState(1);
+
+<Pagination total={42} page={page} onPageChange={setPage} siblingCount={1} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `total` | `number` | — | Total number of pages. Must be at least 1. |
+| `page` | `number` | — | The currently active page, 1-indexed. |
+| `onPageChange` | `(next: number) => void` | — | Fired when the user taps a page number. |
+| `siblingCount` | `number` | `1` | Number of pages to show on each side of the active page. |
+
+## Accessibility
+
+Each page button is `accessibilityRole="button"` with `accessibilityState={{ selected }}` and an `accessibilityLabel` of `"Page N"`. Ellipsis cells are non-interactive `View`s, so screen readers skip past them rather than announcing the gap symbol.

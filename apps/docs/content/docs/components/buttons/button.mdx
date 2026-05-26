@@ -1,0 +1,69 @@
+---
+title: Button
+description: The standard tappable action — supports solid, outline, ghost, and link variants with five semantic tones.
+---
+
+`Button` is the workhorse action control. It renders a `Pressable` with token-driven sizing, a tone-aware color treatment, optional leading and trailing slots, and a built-in loading spinner. When nested inside a `ButtonGroup`, it picks up the group's `variant` and `size` and merges its corner radii so adjacent buttons share borders cleanly.
+
+## Import
+
+```tsx
+import { Button } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Button onPress={handleSave}>Save changes</Button>
+```
+
+With leading and trailing slots and a loading state:
+
+```tsx
+<Button
+  variant="solid"
+  tone="primary"
+  leading={<Icon name="check" />}
+  loading={isSubmitting}
+  onPress={submit}
+>
+  Submit
+</Button>
+```
+
+## Variants
+
+```tsx
+<Button variant="solid" tone="primary">Solid</Button>
+<Button variant="outline" tone="primary">Outline</Button>
+<Button variant="ghost" tone="primary">Ghost</Button>
+<Button variant="link" tone="primary">Link</Button>
+```
+
+Semantic tones (`primary`, `neutral`, `success`, `danger`, `warning`) compose with any variant:
+
+```tsx
+<Button variant="solid" tone="danger">Delete</Button>
+<Button variant="outline" tone="success">Approve</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `'solid' \| 'outline' \| 'ghost' \| 'link'` | `'solid'` (or inherited from `ButtonGroup`) | Visual treatment. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` (or inherited from `ButtonGroup`) | Controls height, horizontal padding, and label type scale. |
+| `tone` | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'primary'` | Semantic color role used to resolve background, border, and text color. |
+| `loading` | `boolean` | `false` | Replaces the label with a spinner and implicitly disables the button. |
+| `disabled` | `boolean` | `loading` | Disables press handling and dims the button to 50% opacity. |
+| `fullWidth` | `boolean` | `false` | Stretches the button to fill its container's main axis. |
+| `leading` | `ReactNode` | — | Node rendered before the label (e.g. icon). |
+| `trailing` | `ReactNode` | — | Node rendered after the label. |
+| `asChild` | `boolean` | `false` | Render the underlying behavior into a single child element instead of a `Pressable`. |
+| `children` | `ReactNode` | — | Label content. Plain strings are wrapped in the themed `Text` component. |
+
+Inherits all `PressableProps` except `children` (e.g. `onPress`, `onLongPress`, `accessibilityLabel`).
+
+## Accessibility
+
+`Button` sets `accessibilityRole="button"` and reports `accessibilityState={{ disabled, busy }}` so screen readers announce both the disabled and loading conditions. The default `md` size renders at a 44pt minimum height to meet platform tap-target guidance — keep `sm` for dense toolbars where surrounding hit area compensates. When `loading` is true, press handlers are suppressed automatically so accidental double-submits are avoided. On web, focus rings come from the underlying `Pressable` and follow the host platform's focus styles.

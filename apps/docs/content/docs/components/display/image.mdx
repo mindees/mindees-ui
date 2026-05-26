@@ -1,0 +1,36 @@
+---
+title: Image
+description: Thin wrapper over React Native Image that accepts a string URL or ImageSourcePropType through a unified src prop and forwards the rest.
+---
+
+`Image` is a minimal abstraction over RN's `Image`. It accepts either a URL string or a standard `ImageSourcePropType` via a single `src` prop and forwards every other prop directly. Future releases may swap in `expo-image` when present, without an API change.
+
+## Import
+
+```tsx
+import { Image } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Image
+  src="https://example.com/hero.png"
+  style={{ width: 240, height: 160 }}
+  resizeMode="cover"
+/>
+
+<Image src={require('./local.png')} style={{ width: 64, height: 64 }} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `src` | `string \| ImageSourcePropType` | — | URL string (converted to `{ uri }`) or a standard RN image source. If omitted, an empty `{ uri: '' }` source is used. |
+
+All other props from RN's `ImageProps` are accepted except the original `source` and `src` keys, which are replaced by the unified `src` prop above. This includes `style`, `resizeMode`, `onLoad`, `onError`, `accessibilityLabel`, and any other passthrough props.
+
+## Accessibility
+
+Pass `accessibilityLabel` describing the image's content, or `accessibilityRole="image"` if you want explicit semantics. Decorative images should set `accessible={false}` so screen readers skip them.

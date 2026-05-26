@@ -1,0 +1,37 @@
+---
+title: Label
+description: Short emphatic text for field labels and tags — tight line-height by default for compact UI.
+---
+
+`Label` is a preset of `Text` that defaults to the `label` step of the modular type scale, which uses a tight line-height. Reach for it when labelling form fields, badges, tabs, or any short emphatic snippet that should sit close to its target.
+
+## Import
+
+```tsx
+import { Label } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Label weight="semibold">Email address</Label>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `TextStyleName` | `'label'` | Named text style from the modular type scale. |
+| `tone` | `TextTone` | `'primary'` | Semantic colour token. |
+| `weight` | `FontWeightToken` | — | Overrides the variant's default font weight. |
+| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
+| `italic` | `boolean` | `false` | Renders italic. |
+| `underline` | `boolean` | `false` | Adds an underline decoration. |
+| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. |
+| `fontFamily` | `string` | theme system font | Overrides the font family. |
+
+Any remaining RN `TextProps` are forwarded to the underlying `Text`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN Text — pass `accessibilityLabel`, `accessibilityRole`, etc. via props. For form labels, prefer wiring up the input's `accessibilityLabelledBy` to a `nativeID` on the label.

@@ -1,0 +1,46 @@
+---
+title: MapView
+description: A gated wrapper around react-native-maps that forwards all props and renders a fallback when the peer is missing.
+---
+
+`MapView` is a thin pass-through wrapper around `react-native-maps`. When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command instead of crashing — so you can build map-ready screens without forcing every consumer to install the native peer.
+
+## Peer dependency
+
+```bash
+pnpm add react-native-maps
+```
+
+When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command — this means you can use it conditionally without crashing.
+
+## Import
+
+```tsx
+import { MapView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<MapView
+  style={{ flex: 1 }}
+  initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `initialRegion` | `{ latitude: number; longitude: number; latitudeDelta: number; longitudeDelta: number }` | — | Region the map opens on. |
+
+All other props are forwarded verbatim to the `react-native-maps` `MapView`, so its full API (markers, overlays, providers, gestures) is available.
+
+## Accessibility
+
+Maps are visual surfaces. Provide an `accessibilityLabel` on the wrapping container summarising the region or pins shown, and offer a non-map alternative (textual address, list of places) so non-sighted users can reach the same information.

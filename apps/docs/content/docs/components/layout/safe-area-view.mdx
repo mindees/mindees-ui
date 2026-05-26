@@ -1,0 +1,42 @@
+---
+title: SafeAreaView
+description: A themed wrapper around react-native-safe-area-context's SafeAreaView with a token-aware background.
+---
+
+`SafeAreaView` extends the `SafeAreaView` from `react-native-safe-area-context` with a semantic background prop that reads from your theme tokens. Use it as a lightweight screen container when you don't need scrolling or keyboard avoidance — otherwise reach for `ScreenWrapper`.
+
+## Import
+
+```tsx
+import { SafeAreaView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SafeAreaView background="canvas">
+  <Stack padding="md">
+    <Heading>Welcome</Heading>
+  </Stack>
+</SafeAreaView>
+```
+
+Disable the background colour:
+
+```tsx
+<SafeAreaView background={null}>
+  <CustomBackdrop />
+</SafeAreaView>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `background` | `'canvas' \| 'surface' \| 'subtle' \| 'elevated' \| null` | `'canvas'` | Semantic theme background. Pass `null` to skip the background fill. |
+
+All `SafeAreaViewProps` from `react-native-safe-area-context` (including `edges`) are forwarded.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN View — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

@@ -1,0 +1,39 @@
+---
+title: QRCode
+description: A themed QR code renderer gated behind the react-native-qrcode-svg peer with a graceful fallback.
+---
+
+`QRCode` is a thin theme-aware wrapper around `react-native-qrcode-svg`. When the peer isn't installed, the component renders a `MissingPeer` notice with the exact install command instead of crashing — so you can ship code that references it without forcing every consumer to install the peer.
+
+## Peer dependency
+
+```bash
+pnpm add react-native-qrcode-svg
+```
+
+When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command — this means you can use it conditionally without crashing.
+
+## Import
+
+```tsx
+import { QRCode } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<QRCode value="https://mindees.dev" size={240} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `string` | — | The string encoded into the QR matrix. Required. |
+| `size` | `number` | `200` | Edge length of the rendered QR in dp. |
+| `color` | `string` | `tokens.colors.text.primary` | Foreground module colour. |
+| `backgroundColor` | `string` | `tokens.colors.background.canvas` | Background fill colour. |
+
+## Accessibility
+
+The peer renders a static SVG. Wrap the `QRCode` in a `View` with `accessibilityLabel` describing the encoded payload (for example, `"QR code to mindees.dev"`) so screen readers can announce its purpose.

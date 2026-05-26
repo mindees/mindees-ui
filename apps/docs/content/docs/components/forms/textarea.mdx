@@ -1,0 +1,43 @@
+---
+title: Textarea
+description: A multi-line text input built on Input, with a configurable row count and top-aligned text.
+---
+
+`Textarea` is `Input` rendered in multiline mode. It forces `multiline`, defaults the visible row count to 4, and aligns text to the top of the box so long entries grow downwards in the natural reading direction. Every other `Input` feature — sizes, leading or trailing slots, invalid border colour, `FormField` auto-wiring — still applies.
+
+## Import
+
+```tsx
+import { Textarea } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Textarea
+  value={notes}
+  onChangeText={setNotes}
+  placeholder="Add notes…"
+  rows={6}
+/>
+```
+
+Inside a `FormField` for label, helper, and error:
+
+```tsx
+<FormField label="Description" description="Markdown is supported.">
+  <Textarea value={desc} onChangeText={setDesc} />
+</FormField>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `rows` | `number` | `4` | Number of visible text lines. Forwarded to `numberOfLines` unless `numberOfLines` is set explicitly. |
+
+Inherits all `InputProps` except `multiline` (always true). That includes `size`, `leading`, `trailing`, `invalid`, `disabled`, plus every `TextInputProps` value.
+
+## Accessibility
+
+Because `Textarea` is just `Input` in multiline mode, it picks up the same `FormField` wiring through `useFormFieldA11y`: when the surrounding `FormField` provides a label, helper, or error, the textarea gets `accessibilityLabelledBy` and `accessibilityDescribedBy` plus `aria-invalid` and `aria-required` for free. For free-standing usage, pass `accessibilityLabel` and `accessibilityHint` directly. The `textAlignVertical="top"` default also benefits screen-reader users who navigate the box by line, since the caret starts where the text starts.

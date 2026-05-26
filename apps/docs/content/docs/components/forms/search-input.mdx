@@ -1,0 +1,48 @@
+---
+title: SearchInput
+description: A search-styled input with a leading magnifier icon, a clear button that appears while typing, and search semantics.
+---
+
+`SearchInput` is `Input` preset for search experiences. It renders a `SearchIcon` in the leading slot, an inline clear button in the trailing slot whenever `value` is non-empty, defaults the placeholder to `"Search…"`, sets `returnKeyType="search"`, and reports `accessibilityRole="search"` so screen readers announce it correctly. Pass `onClear` to be notified when the user taps the clear button.
+
+## Import
+
+```tsx
+import { SearchInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SearchInput
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search products"
+/>
+```
+
+With an external clear hook (e.g. to also reset filters):
+
+```tsx
+<SearchInput
+  value={query}
+  onChangeText={setQuery}
+  onClear={() => {
+    setQuery('');
+    resetFilters();
+  }}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `hideIcon` | `boolean` | `false` | Hides the leading magnifier icon. |
+| `onClear` | `() => void` | — | Called after the inline clear button is pressed. The input also calls `onChangeText('')`. |
+
+Inherits all `InputProps` except `leading` and `trailing` (occupied by the icon and clear button). That includes `size`, `invalid`, `disabled`, plus every `TextInputProps` value — notably `value`, `onChangeText`, and `placeholder`.
+
+## Accessibility
+
+The root input is given `accessibilityRole="search"`, which surfaces as the `search` ARIA role on web and the appropriate trait on iOS. The clear button is a `Pressable` with `accessibilityRole="button"` and `accessibilityLabel="Clear search"`. When nested inside a `FormField`, `SearchInput` still inherits `accessibilityLabelledBy`, `accessibilityDescribedBy`, `aria-invalid`, and `aria-required` through `useFormFieldA11y` — useful for labelled filter bars or compound search affordances.

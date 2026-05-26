@@ -1,0 +1,56 @@
+---
+title: Toast
+description: Bottom-anchored status message with tone variants, auto-dismiss timer, and a screen-reader announcement on show.
+---
+
+`Toast` is a transient status message anchored to the bottom of the screen. It announces itself to assistive tech on show — assertively for the `danger` tone, politely otherwise — and fades using the token motion curve.
+
+## Import
+
+```tsx
+import { Toast } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <>
+    <Button onPress={() => setVisible(true)}>Save</Button>
+    <Toast
+      visible={visible}
+      message="Changes saved"
+      tone="success"
+      onDismiss={() => setVisible(false)}
+    />
+  </>
+);
+```
+
+Persistent (no auto-dismiss) — set `duration` to `0`:
+
+```tsx
+<Toast
+  visible={visible}
+  message="Upload in progress"
+  tone="info"
+  duration={0}
+  onDismiss={dismiss}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `visible` | `boolean` | — | Controls whether the toast is shown. |
+| `message` | `string` | — | The text rendered and announced to assistive tech. |
+| `tone` | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Visual tone and announcement priority (`danger` is announced assertively). |
+| `onDismiss` | `() => void` | — | Called when the auto-dismiss timer elapses. |
+| `duration` | `number` | `4000` | Auto-dismiss timeout in milliseconds. Set to `0` to disable. |
+
+## Accessibility
+
+The toast renders with `accessibilityRole="alert"` and `accessibilityLiveRegion="polite"`, and additionally fires an announcement via the library's announcer hook on every show. `danger` toasts use the `assertive` priority so they interrupt other announcements; all other tones use `polite`. The fade animation is skipped when reduce motion is enabled.

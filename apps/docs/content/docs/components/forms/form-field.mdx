@@ -1,0 +1,45 @@
+---
+title: FormField
+description: Wraps any input with a label, helper description, and error message, auto-wiring accessibility relationships.
+---
+
+`FormField` is the structural wrapper that turns a bare input into a fully labelled, helper-augmented, error-aware form row. It renders the label, the child input, and either the description or error caption in a vertical stack, and publishes a `FormFieldContext` so any nested input (read via `useFormFieldA11y`) automatically picks up `accessibilityLabelledBy`, `accessibilityDescribedBy`, `aria-invalid`, `aria-required`, and the disabled flag without you having to wire them by hand.
+
+## Import
+
+```tsx
+import { FormField, Input } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<FormField label="Email" description="We'll never share it." required>
+  <Input value={email} onChangeText={setEmail} keyboardType="email-address" />
+</FormField>
+```
+
+With an error message — the description is hidden and the input picks up the invalid state automatically:
+
+```tsx
+<FormField label="Password" error="Must be at least 8 characters">
+  <PasswordInput value={pw} onChangeText={setPw} />
+</FormField>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `label` | `string` | — | Visible label rendered above the input. Appended with ` *` when `required` is true. |
+| `description` | `string` | — | Helper text shown below the input. Hidden while `error` is present. |
+| `error` | `string` | — | Error caption shown below the input. Marks the field invalid in context. |
+| `required` | `boolean` | `false` | Appends an asterisk to the label and exposes `aria-required` on nested inputs. |
+| `disabled` | `boolean` | `false` | Propagated to nested inputs through context. Does not visually dim the wrapper itself. |
+| `children` | `ReactNode` | — | The input (or composite) the field wraps. |
+
+Inherits all `ViewProps` for layout and styling of the outer container.
+
+## Accessibility
+
+`FormField` mints a unique id and derives `${id}-label`, `${id}-desc`, and `${id}-err` for the label, description, and error nodes respectively. Inputs that call `useFormFieldA11y()` receive an `accessibilityLabelledBy` pointing at the label id and an `accessibilityDescribedBy` that concatenates description and error ids while invalid. On web this surfaces as native `aria-labelledby` / `aria-describedby`; on iOS and Android the same ids are exposed through React Native's accessibility props so VoiceOver and TalkBack read the label, then the helper or error, when the input gains focus.

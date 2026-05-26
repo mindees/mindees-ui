@@ -1,0 +1,36 @@
+---
+title: Card
+description: Surface container with elevation, outline, or filled variants and density-aware padding that propagates to children via context.
+---
+
+`Card` is the standard surface primitive in MindeesUI. It renders a padded, rounded container and publishes its `variant`, `density`, and `interactive` state through `CardContext` so nested components can adapt without prop drilling.
+
+## Import
+
+```tsx
+import { Card } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Card variant="elevated" density="comfortable" onPress={() => navigate('detail')}>
+  <Heading level={4}>Title</Heading>
+  <Text>Body content.</Text>
+</Card>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `'elevated' \| 'outlined' \| 'filled'` | `'elevated'` | Surface treatment. `elevated` applies a medium shadow, `outlined` draws a 1-dp border, `filled` uses a subtle background. |
+| `density` | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Internal padding scale. Passed through `CardContext` to descendants. |
+| `interactive` | `boolean` | `false` | Renders the card as a `Pressable` even without `onPress`, signalling tap affordance. |
+| `onPress` | `() => void` | — | Tap handler. When set, the card renders as a `Pressable` with `accessibilityRole="button"`. |
+| `children` | `ReactNode` | — | Card contents. |
+| `style` | `ViewStyle` | — | Style overrides merged after computed surface styles. |
+
+## Accessibility
+
+Pressable cards expose `accessibilityRole="button"`. Static cards are plain views — apply `accessibilityLabel` via `style`-adjacent props on a wrapping element if the card represents a single semantic unit.

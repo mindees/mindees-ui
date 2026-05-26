@@ -1,0 +1,34 @@
+---
+title: ZStack
+description: Z-axis stack that overlays children at the same point — useful for badges over avatars or gradients over images.
+---
+
+`ZStack` overlays its children on the Z-axis. The first child establishes the container size; subsequent children are absolutely positioned to fill it. Reach for `ZStack` when you need a badge, gradient, or status pip layered over a base element.
+
+## Import
+
+```tsx
+import { ZStack } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ZStack align="end" justify="end">
+  <Avatar source={user.avatar} />
+  <Badge tone="success" />
+</ZStack>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'center'` | Cross-axis (vertical) alignment of overlaid children. |
+| `justify` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'center'` | Main-axis alignment of overlaid children. |
+
+All `Box` props (padding, margin, background, radius, shadow, sizing) are also supported except `asChild`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN View — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

@@ -1,0 +1,58 @@
+---
+title: List
+description: Vertical list container with density and divider context that styles each ListItem row with leading, trailing, title, and description slots.
+---
+
+`List` is a context provider that sets shared density, divider, and interactivity defaults for its child `ListItem` rows. `ListItem` is the row primitive — it composes leading, trailing, title, and description slots into a flex row with a tap-friendly minimum height.
+
+## Import
+
+```tsx
+import { List, ListItem } from '@mindees/ui';
+```
+
+## Usage — List container
+
+```tsx
+<List density="comfortable" dividers interactive>
+  <ListItem title="Profile" onPress={() => navigate('Profile')} />
+  <ListItem title="Notifications" onPress={() => navigate('Notifications')} />
+  <ListItem title="Sign out" onPress={signOut} />
+</List>
+```
+
+## Usage — ListItem with slots
+
+```tsx
+<ListItem
+  leading={<Avatar name="Ada Lovelace" size="sm" />}
+  title="Ada Lovelace"
+  description="ada@example.com"
+  trailing={<Badge tone="success">Online</Badge>}
+  onPress={() => openProfile('ada')}
+/>
+```
+
+### List props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `density` | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Vertical padding scale applied to each `ListItem` through context. |
+| `dividers` | `boolean` | `true` | Renders a 1-dp subtle border under every row. |
+| `interactive` | `boolean` | `false` | Causes rows without their own `onPress` to render as `Pressable`. |
+| `children` | `ReactNode` | — | One or more `ListItem` elements. |
+
+### ListItem props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `title` | `ReactNode` | — | Primary label. Strings get styled `medium` weight; nodes render as-is. |
+| `description` | `ReactNode` | — | Secondary text beneath the title. Strings render as muted captions. |
+| `leading` | `ReactNode` | — | Element rendered before the text block — avatar, icon, or checkbox. |
+| `trailing` | `ReactNode` | — | Element rendered after the text block — badge, chevron, or switch. |
+| `onPress` | `() => void` | — | Tap handler. When set (or when the parent `List` is `interactive`), the row renders as a `Pressable`. |
+| `disabled` | `boolean` | `false` | Reduces opacity and blocks the press handler. |
+
+## Accessibility
+
+`List` uses `accessibilityRole="list"`. Pressable rows expose `accessibilityRole="button"`; static rows use `accessibilityRole="none"` so they don't introduce empty group nodes. Rows are 44 dp tall minimum to satisfy hit-target guidance.

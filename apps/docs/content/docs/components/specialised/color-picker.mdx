@@ -1,0 +1,33 @@
+---
+title: ColorPicker
+description: A zero-dependency swatch grid for selecting a hex colour from a small palette.
+---
+
+`ColorPicker` is a minimum-deps swatch picker — no peer installation required. It renders a wrapping row of round, pressable swatches and reports the chosen hex string through `onChange`. For a full hue wheel, consume the optional peer `@thebylito/react-native-wheel-color-picker` directly.
+
+## Import
+
+```tsx
+import { ColorPicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [color, setColor] = useState('#3b82f6');
+
+<ColorPicker value={color} onChange={setColor} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `string` | — | Currently selected hex colour. Matched against the swatch list. |
+| `onChange` | `(next: string) => void` | — | Called with the hex of the pressed swatch. |
+| `swatches` | `readonly string[]` | 12-swatch default ramp | Palette of selectable hex strings. |
+| `size` | `number` | `32` | Diameter of each swatch in dp. |
+
+## Accessibility
+
+Each swatch is a `button` labelled `"Choose colour <hex>"` and reports its picked state via `accessibilityState.selected`, so VoiceOver and TalkBack announce the active swatch correctly.

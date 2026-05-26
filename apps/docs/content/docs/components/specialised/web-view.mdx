@@ -1,0 +1,42 @@
+---
+title: WebView
+description: A gated wrapper around react-native-webview that forwards all props and renders a fallback when the peer is missing.
+---
+
+`WebView` is a thin pass-through wrapper around the named `WebView` export from `react-native-webview`. When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command instead of crashing — so screens that embed web content stay buildable without the native peer.
+
+## Peer dependency
+
+```bash
+pnpm add react-native-webview
+```
+
+When the peer isn't installed, the component renders a `MissingPeer` fallback with the exact install command — this means you can use it conditionally without crashing.
+
+## Import
+
+```tsx
+import { WebView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<WebView
+  source={{ uri: 'https://mindees.dev' }}
+  onMessage={(event) => console.log(event.nativeEvent.data)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `source` | `{ uri: string } \| { html: string }` | — | URL or inline HTML to load. Required. |
+| `onMessage` | `(event: { nativeEvent: { data: string } }) => void` | — | Receives `postMessage` payloads from the page. |
+
+All other props are forwarded verbatim to `react-native-webview`'s `WebView`, so its full API (injectedJavaScript, navigation handlers, scaling, etc.) is available.
+
+## Accessibility
+
+Loaded pages bring their own accessibility tree. Provide an `accessibilityLabel` on the wrapping container summarising the embedded content, and prefer accessible HTML inside any inline `html` source — semantic landmarks, headings, and form labels carry through to the device screen reader.

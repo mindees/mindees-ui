@@ -1,0 +1,37 @@
+---
+title: Kbd
+description: Keyboard-key visualisation — a bordered keycap with a slight bottom shadow for documenting shortcuts.
+---
+
+`Kbd` renders short text inside a small bordered "keycap" with a slightly thicker bottom border to read as a physical key. Use it for keyboard shortcuts in docs, help UI, and command palettes. Text is rendered in the `caption` variant in a platform-appropriate monospace family.
+
+## Import
+
+```tsx
+import { Kbd } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Text>Press <Kbd>⌘</Kbd> + <Kbd>K</Kbd> to open the palette.</Text>
+```
+
+## Props
+
+`Kbd` has no own props beyond the inherited `Text` props. Variant and font family are locked (`caption` + monospace); everything else passes through.
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `tone` | `TextTone` | `'primary'` | Semantic colour token for the keycap text. |
+| `weight` | `FontWeightToken` | — | Overrides the default font weight. |
+| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
+| `italic` | `boolean` | `false` | Renders italic. |
+| `underline` | `boolean` | `false` | Adds an underline decoration. |
+| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. |
+
+Any remaining RN `TextProps` are forwarded to the underlying `Text`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN Text. For shortcut documentation, prefer announcing the full shortcut via `accessibilityLabel` on a wrapping element (e.g. "Command K") rather than relying on screen readers to interpret the individual keycaps.

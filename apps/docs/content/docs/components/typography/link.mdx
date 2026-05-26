@@ -1,0 +1,33 @@
+---
+title: Link
+description: Tappable inline link with link tone and underline — opens an external URL via React Native Linking.
+---
+
+`Link` renders text inside a `Pressable`, applies the `link` tone and an underline, and opens the supplied `href` via `Linking.openURL` when tapped. Use it for inline navigation to external URLs or as a custom-handler trigger via `onPress`.
+
+## Import
+
+```tsx
+import { Link } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Link href="https://mindees.dev">Read the docs</Link>
+<Link onPress={handleTap} hideUnderline>Custom action</Link>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `href` | `string` | — | External URL. When set, tapping opens it via `Linking.openURL`. Failures are swallowed. |
+| `onPress` | `() => void` | — | Called when the link is pressed. Runs before `href` is opened. |
+| `hideUnderline` | `boolean` | `false` | Hides the default underline. |
+
+All `Text` props except `tone` and `underline` (locked to `'link'` / on by default) are forwarded — `variant`, `weight`, `align`, `italic`, `strikethrough`, `fontFamily`, and the underlying RN `TextProps`.
+
+## Accessibility
+
+Defaults `accessibilityRole` to `link`. Provide an `accessibilityLabel` when the link text alone isn't descriptive enough on its own (e.g. "Read more" links).

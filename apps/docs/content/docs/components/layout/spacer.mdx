@@ -1,0 +1,47 @@
+---
+title: Spacer
+description: A flex spacer that fills remaining space, or a fixed gap when sized with a token or dp number.
+---
+
+`Spacer` is a non-interactive view that either fills the available space (when `size` is omitted) or reserves a fixed gap on one axis. Use it inside an `HStack` or `VStack` to push content apart, or as a one-off fixed gap when auto-spacing isn't enough.
+
+## Import
+
+```tsx
+import { Spacer } from '@mindees/ui';
+```
+
+## Usage
+
+Fill remaining space:
+
+```tsx
+<HStack>
+  <Text>Left</Text>
+  <Spacer />
+  <Text>Right</Text>
+</HStack>
+```
+
+Fixed gap:
+
+```tsx
+<VStack>
+  <Text>Above</Text>
+  <Spacer size="lg" />
+  <Text>Below</Text>
+</VStack>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `size` | `SpaceToken \| number` | — | Fixed size in dp or a named token. Omit for `flex: 1` (fills remaining space). |
+| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | Direction used when `size` is provided. |
+
+Any remaining `ViewProps` are forwarded to the underlying `View`.
+
+## Accessibility
+
+`Spacer` sets `pointerEvents="none"` and has no interactive role — screen readers ignore it by default.

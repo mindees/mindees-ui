@@ -1,0 +1,37 @@
+---
+title: Caption
+description: Auxiliary text — smaller and quieter than body, intended for metadata, hints, and supporting copy.
+---
+
+`Caption` is a preset of `Text` that defaults to the `caption` step of the modular type scale. Use it for image captions, helper text, timestamps, and other secondary content that should recede from the main copy.
+
+## Import
+
+```tsx
+import { Caption } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Caption tone="muted">Updated 5 minutes ago</Caption>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `TextStyleName` | `'caption'` | Named text style from the modular type scale. |
+| `tone` | `TextTone` | `'primary'` | Semantic colour token. Pair with `'muted'` for typical caption copy. |
+| `weight` | `FontWeightToken` | — | Overrides the variant's default font weight. |
+| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
+| `italic` | `boolean` | `false` | Renders italic. |
+| `underline` | `boolean` | `false` | Adds an underline decoration. |
+| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. |
+| `fontFamily` | `string` | theme system font | Overrides the font family. |
+
+Any remaining RN `TextProps` are forwarded to the underlying `Text`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN Text — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

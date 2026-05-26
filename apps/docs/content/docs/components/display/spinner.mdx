@@ -1,0 +1,33 @@
+---
+title: Spinner
+description: Thin wrapper around the native ActivityIndicator with token-aware tones and three discrete size steps mapped to platform sizes.
+---
+
+`Spinner` wraps RN's `ActivityIndicator` and replaces its untyped `color` and `size` props with token-aware variants. All other `ActivityIndicatorProps` are forwarded directly.
+
+## Import
+
+```tsx
+import { Spinner } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Spinner size="md" tone="primary" />
+
+<Spinner size="lg" tone="inverse" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Maps to RN sizing — `sm` and `md` use `'small'`, `lg` uses `'large'`. |
+| `tone` | `'primary' \| 'inverse' \| 'muted'` | `'primary'` | Colour token. `inverse` for dark surfaces, `muted` for secondary contexts. |
+
+All other props from RN's `ActivityIndicatorProps` are accepted except `color` and `size`, which are replaced by `tone` and the discrete `size` scale above.
+
+## Accessibility
+
+`Spinner` sets `accessibilityLabel="Loading"`. Announce more specific context (e.g. "Loading messages") on a parent if the spinner is part of a larger loading state.

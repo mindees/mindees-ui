@@ -1,0 +1,108 @@
+---
+title: Components overview
+description: ~60 accessible React Native components for the New Architecture, grouped by purpose. Layout, typography, forms, buttons, overlays, navigation, display, and specialised.
+---
+
+MindeesUI ships ~60 components across 8 categories. Every component is type-safe, accessible by default, and composable through the [Layout Intelligence Layer](/docs/architecture).
+
+## Layout
+
+Composition primitives. Use these as the structural backbone of every screen.
+
+- [Box](/docs/components/layout/box) — base primitive with size, padding, margin, background, border, radius, shadow
+- [Stack, HStack, VStack](/docs/components/layout/stack) — auto-spacing rows and columns
+- [ZStack](/docs/components/layout/zstack) — overlapping layers
+- [Grid](/docs/components/layout/grid) — responsive multi-column layouts
+- [Divider](/docs/components/layout/divider) — horizontal or vertical rule
+- [Spacer](/docs/components/layout/spacer) — flexible blank space
+- [SafeAreaView](/docs/components/layout/safe-area-view) — respects notches and home indicators
+- [ScreenWrapper](/docs/components/layout/screen-wrapper) — top-level screen container
+
+## Typography
+
+Text primitives with semantic role and consistent rhythm.
+
+- [Text](/docs/components/typography/text) — body and inline text
+- [Heading](/docs/components/typography/heading) — h1–h6 with semantic levels
+- [Caption](/docs/components/typography/caption) — small descriptive text
+- [Label](/docs/components/typography/label) — form labels and tags
+- [Link](/docs/components/typography/link) — accessible navigation links
+- [Code](/docs/components/typography/code) — inline monospace text
+- [Kbd](/docs/components/typography/kbd) — keyboard shortcut rendering
+
+## Forms
+
+Form controls with built-in accessibility wiring via `useFormFieldA11y`.
+
+- [FormField](/docs/components/forms/form-field) — wraps inputs with label, help, error
+- [Input](/docs/components/forms/input) — single-line text input
+- [Textarea](/docs/components/forms/textarea) — multi-line text input
+- [PasswordInput](/docs/components/forms/password-input) — masked input with reveal toggle
+- [SearchInput](/docs/components/forms/search-input) — input with search affordances
+- [Checkbox, CheckboxGroup](/docs/components/forms/checkbox) — boolean and multi-select
+- [Radio, RadioGroup](/docs/components/forms/radio) — single-select group
+- [Switch](/docs/components/forms/switch) — on/off toggle
+
+## Buttons
+
+Pressable affordances. Variant, size, and tone are tokenised.
+
+- [Button](/docs/components/buttons/button) — primary actionable element
+- [IconButton](/docs/components/buttons/icon-button) — icon-only button with accessible label
+- [FAB](/docs/components/buttons/fab) — floating action button
+- [ButtonGroup](/docs/components/buttons/button-group) — joined or spaced cluster
+
+## Overlays
+
+Layers rendered above the page through the `PortalProvider`.
+
+- [Modal](/docs/components/overlays/modal) — centered focus-trapped dialog
+- [BottomSheet](/docs/components/overlays/bottom-sheet) — sliding panel from below
+- [Drawer](/docs/components/overlays/drawer) — slide-in side panel
+- [Popover](/docs/components/overlays/popover) — anchored floating panel
+- [Tooltip](/docs/components/overlays/tooltip) — short hover/long-press hint
+- [Toast](/docs/components/overlays/toast) — transient feedback message
+- [Alert](/docs/components/overlays/alert) — inline messaging block
+- [ActionSheet](/docs/components/overlays/action-sheet) — bottom action menu
+
+## Navigation
+
+Cross-screen and intra-screen navigation patterns.
+
+- [Tabs](/docs/components/navigation/tabs) — segmented page switcher
+- [PillTabBar](/docs/components/navigation/pill-tab-bar) — 2026-style pill tab bar (segmented / floating / dock / glass)
+- [TopBar](/docs/components/navigation/top-bar) — screen header with leading/trailing slots
+- [Breadcrumb](/docs/components/navigation/breadcrumb) — hierarchical path
+- [Pagination](/docs/components/navigation/pagination) — page selector
+- [Stepper](/docs/components/navigation/stepper) — multi-step flow indicator
+
+## Display
+
+Content presentation — cards, lists, indicators, media.
+
+- [Card](/docs/components/display/card) — surface for grouped content
+- [Avatar, AvatarGroup](/docs/components/display/avatar) — circular user image
+- [Badge](/docs/components/display/badge) — small numeric or dot indicator
+- [Tag, Chip](/docs/components/display/tag) — label or interactive pill
+- [Image](/docs/components/display/image) — accessible image with fallback
+- [List, ListItem](/docs/components/display/list) — vertical list
+- [Accordion](/docs/components/display/accordion) — collapsible sections
+- [Progress](/docs/components/display/progress) — linear or circular progress
+- [Skeleton](/docs/components/display/skeleton) — content placeholder
+- [Spinner](/docs/components/display/spinner) — indeterminate loader
+- [Stat](/docs/components/display/stat) — labelled metric
+- [Rating](/docs/components/display/rating) — star rating
+- [Timeline](/docs/components/display/timeline) — chronological list
+
+## Specialised
+
+Gated peers — each renders a `MissingPeer` fallback with the install command when its peer dependency isn't present.
+
+- [CodeBlock](/docs/components/specialised/code-block) — syntax-highlighted code
+- [ColorPicker](/docs/components/specialised/color-picker) — zero-dep hue/saturation picker
+- [QRCode](/docs/components/specialised/qr-code) — QR generator
+- [Barcode](/docs/components/specialised/barcode) — 1D barcode generator
+- [MapView](/docs/components/specialised/map-view) — gated `react-native-maps` wrapper
+- [SignaturePad](/docs/components/specialised/signature-pad) — gated `react-native-signature-canvas` wrapper
+- [WebView](/docs/components/specialised/web-view) — gated `react-native-webview` wrapper
+- [Camera](/docs/components/specialised/camera) — gated `react-native-vision-camera` wrapper

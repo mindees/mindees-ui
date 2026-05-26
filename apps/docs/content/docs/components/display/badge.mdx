@@ -1,0 +1,32 @@
+---
+title: Badge
+description: Small pill-shaped status indicator with semantic tones and solid, subtle, or outline variants for counts, labels, and statuses.
+---
+
+`Badge` is a compact, non-interactive label used for counts, statuses, or short attribute markers. It sits inline with text and uses semantic tone tokens so success, warning, and danger states stay consistent across the app.
+
+## Import
+
+```tsx
+import { Badge } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Badge tone="success" variant="subtle">Active</Badge>
+<Badge tone="danger" variant="solid">3</Badge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `tone` | `'neutral' \| 'primary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'neutral'` | Semantic colour family pulled from theme status tokens. |
+| `variant` | `'solid' \| 'subtle' \| 'outline'` | `'subtle'` | `solid` uses the strong tone, `subtle` uses the muted tint, `outline` is transparent with a coloured border. |
+| `size` | `'sm' \| 'md'` | `'sm'` | Controls horizontal padding and text variant (`caption` for `sm`, `label` for `md`). |
+| `children` | `ReactNode` | — | Badge contents — typically a short string or number. |
+
+## Accessibility
+
+`Badge` renders with `accessibilityRole="text"`. Place it next to the element it describes so screen readers announce the status in context, or include the status in the parent control's `accessibilityLabel`.

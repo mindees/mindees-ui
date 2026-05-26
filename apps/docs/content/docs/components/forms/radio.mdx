@@ -1,0 +1,72 @@
+---
+title: Radio
+description: A single-select option control. Use Radio inside a RadioGroup to coordinate exclusive selection across multiple options.
+---
+
+`Radio` represents one option in an exclusive single-select set. It must be rendered inside a `RadioGroup`, which owns the selected value and emits changes — a bare `Radio` will warn in development that its selection state is unwired. The group sets the active value, dispatches changes, supplies a `name`, and can disable every child at once.
+
+## Import
+
+```tsx
+import { Radio, RadioGroup } from '@mindees/ui';
+```
+
+## Usage
+
+### Radio
+
+```tsx
+<Radio value="email" label="Email" />
+```
+
+A `Radio` reads its selected state from the surrounding `RadioGroup`; it does not accept an `onChange` of its own.
+
+### RadioGroup
+
+```tsx
+<RadioGroup
+  name="contact-method"
+  value={method}
+  onValueChange={setMethod}
+>
+  <Radio value="email" label="Email" />
+  <Radio value="sms" label="SMS" />
+  <Radio value="push" label="Push notifications" />
+</RadioGroup>
+```
+
+Uncontrolled with a default selection:
+
+```tsx
+<RadioGroup name="size" defaultValue="md">
+  <Radio value="sm" label="Small" />
+  <Radio value="md" label="Medium" />
+  <Radio value="lg" label="Large" />
+</RadioGroup>
+```
+
+## Props
+
+### Radio props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `string` | — | The key this radio represents within its `RadioGroup`. Required. |
+| `disabled` | `boolean` | inherited from `RadioGroup` | Suppresses presses and drops opacity to 50%. |
+| `label` | `ReactNode` | — | Optional label rendered to the right; strings are wrapped in the themed `Text` component. |
+| `accessibilityLabel` | `string` | — | Override label for assistive tech when no visible `label` is provided. |
+
+### RadioGroup props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `name` | `string` | — | Logical name for the group. Required; surfaced through context to children. |
+| `value` | `string` | — | Controlled selected value. When set, the component is controlled. |
+| `defaultValue` | `string` | — | Initial selected value when uncontrolled. |
+| `onValueChange` | `(next: string) => void` | — | Called with the newly selected value when any child is pressed. |
+| `disabled` | `boolean` | `false` | Disables every child radio at once through context. |
+| `children` | `ReactNode` | — | `Radio` children whose selection the group coordinates. |
+
+## Accessibility
+
+`Radio` is a `Pressable` with `accessibilityRole="radio"` and `accessibilityState={{ checked, disabled }}` so each option announces whether it is the currently chosen one. The wrapping `RadioGroup` exposes `accessibilityRole="radiogroup"`, giving screen readers the standard container semantics — VoiceOver and TalkBack will announce "1 of 3" style positions automatically. As with `Checkbox`, the visible label is part of the same `Pressable`, so users with motor impairments can tap anywhere on the row. If you omit `label`, set `accessibilityLabel` so the option remains announceable.

@@ -1,0 +1,44 @@
+---
+title: Timeline
+description: Vertical activity feed with a coloured dot, connecting rail, optional time and description, and per-item semantic tone.
+---
+
+`Timeline` renders an array of events as a vertical sequence. Each row shows a small status dot, a connecting rail to the next item, and a stack of title, optional time, and optional description. The dot colour reflects the item's `tone`.
+
+## Import
+
+```tsx
+import { Timeline } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Timeline
+  items={[
+    { title: 'Order placed', time: '09:12', tone: 'primary' },
+    { title: 'Packed', time: '11:48', description: 'Warehouse A' },
+    { title: 'Shipped', time: '14:20', tone: 'success' },
+    { title: 'Delayed', time: '—', tone: 'warning', description: 'Carrier rerouting' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `items` | `readonly TimelineItem[]` | — | Ordered list of events. Top to bottom matches chronological order. Required. |
+
+### `TimelineItem` shape
+
+| Field | Type | Default | Description |
+| ----- | ---- | ------- | ----------- |
+| `title` | `ReactNode` | — | Primary label. Strings render as medium-weight text; nodes render as-is. |
+| `time` | `string` | — | Optional timestamp rendered as a muted caption below the title. |
+| `description` | `ReactNode` | — | Optional supporting text. Strings render as secondary captions. |
+| `tone` | `'neutral' \| 'success' \| 'warning' \| 'danger' \| 'primary'` | `'neutral'` | Status dot colour. `neutral` uses the strong border token. |
+
+## Accessibility
+
+The outer container uses `accessibilityRole="list"`. Each row is non-semantic at the wrapper level so screen readers traverse the title, time, and description text in order. Tone is conveyed visually only — include status context in the `title` or `description` when it carries meaning.

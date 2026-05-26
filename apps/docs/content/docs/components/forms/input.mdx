@@ -1,0 +1,51 @@
+---
+title: Input
+description: A themed single-line text input with leading and trailing slots, three sizes, and automatic FormField wiring.
+---
+
+`Input` is the base text input every other Forms component composes on top of. It wraps `TextInput` with token-driven sizing, a bordered container, optional `leading` and `trailing` slots for icons or affixes, and an invalid-aware border colour. When rendered inside a `FormField`, it reads the surrounding context and exposes the right `accessibilityLabelledBy`, `aria-invalid`, and `aria-required` automatically.
+
+## Import
+
+```tsx
+import { Input } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Input
+  value={name}
+  onChangeText={setName}
+  placeholder="Full name"
+/>
+```
+
+With a leading icon, a clear button, and a forced invalid state:
+
+```tsx
+<Input
+  size="lg"
+  leading={<MailIcon size={18} />}
+  trailing={<Pressable onPress={clear}><CloseIcon size={16} /></Pressable>}
+  invalid
+  value={email}
+  onChangeText={setEmail}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls the minimum height (36 / 44 / 52). |
+| `leading` | `ReactNode` | — | Node rendered inside the input on the leading edge — typically an icon or prefix. |
+| `trailing` | `ReactNode` | — | Node rendered inside the input on the trailing edge — typically an icon or clear button. |
+| `invalid` | `boolean` | inherited from `FormField` | Forces the error border colour outside of a `FormField`. |
+| `disabled` | `boolean` | inherited from `FormField` | Drops the input to 60% opacity and sets `editable={false}`. |
+
+Inherits all `TextInputProps` except `editable` (controlled via `disabled`). That includes `value`, `onChangeText`, `placeholder`, `keyboardType`, `autoCapitalize`, `autoCorrect`, `secureTextEntry`, `multiline`, and the rest.
+
+## Accessibility
+
+`Input` calls `useFormFieldA11y` and, when a `FormField` ancestor is present, sets the input's `nativeID` to the field's id and forwards `accessibilityLabelledBy` to the label. The `aria-invalid` and `aria-required` props mirror the context's invalid and required flags. Outside a `FormField`, supply your own `accessibilityLabel` and (optionally) `accessibilityHint` — they are passed straight through to `TextInput`. `placeholderTextColor` defaults to the theme's muted text colour so the placeholder remains AA-legible against the surface.

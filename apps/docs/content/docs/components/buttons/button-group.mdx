@@ -1,0 +1,50 @@
+---
+title: ButtonGroup
+description: Cluster related buttons so they share variant, size, and merged corners — horizontal or vertical, attached or spaced.
+---
+
+`ButtonGroup` lets you treat a row or column of `Button`s as a single visual unit. It broadcasts a default `size` and `variant` to its children through context, and when `attached` is true, its children's corner radii are merged so only the outer corners of the group remain rounded. Per-child overrides still win — set `variant` or `size` on an individual `Button` and it will override the group's defaults.
+
+## Import
+
+```tsx
+import { ButtonGroup, Button } from '@mindees/ui';
+```
+
+## Usage
+
+Horizontal attached group (the default):
+
+```tsx
+<ButtonGroup variant="outline">
+  <Button onPress={pickDay}>Day</Button>
+  <Button onPress={pickWeek}>Week</Button>
+  <Button onPress={pickMonth}>Month</Button>
+</ButtonGroup>
+```
+
+Vertical, detached (each button keeps its own rounded corners):
+
+```tsx
+<ButtonGroup orientation="vertical" attached={false} size="lg">
+  <Button variant="solid">Primary</Button>
+  <Button variant="outline">Secondary</Button>
+  <Button variant="ghost">Tertiary</Button>
+</ButtonGroup>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Flex direction of the cluster. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Default `size` broadcast to child `Button`s. Per-button overrides win. |
+| `variant` | `'solid' \| 'outline' \| 'ghost' \| 'link'` | `'solid'` | Default `variant` broadcast to child `Button`s. Per-button overrides win. |
+| `attached` | `boolean` | `true` | When true, children render flush and only the outer corners of the group keep their radius. |
+| `children` | `ReactNode` | — | One or more `Button` elements. |
+
+Inherits all `ViewProps`.
+
+## Accessibility
+
+`ButtonGroup` is a visual container only — it sets `accessibilityRole="none"` so assistive tech treats it as a passthrough and reads each child `Button` on its own. That means group semantics like "tab list" or "radio group" are deliberately not implied — if you need those, set the appropriate `accessibilityRole` and `accessibilityState` on the children yourself. Because the children remain individual buttons, focus order, hit targets, and disabled announcements come from the `Button` component unchanged.

@@ -1,0 +1,45 @@
+---
+title: Stepper
+description: Progress indicator for multi-step flows, rendering completed, current, and upcoming steps with titles.
+---
+
+`Stepper` visualises a linear sequence. Steps before `current` show a success check, the step at `current` is highlighted with the accent colour, and later steps are muted. Render it horizontally for desktop-style wizards or vertically for mobile checkout flows.
+
+## Import
+
+```tsx
+import { Stepper } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Stepper
+  current={1}
+  steps={[
+    { title: 'Cart', description: '3 items' },
+    { title: 'Shipping', description: 'Address & method' },
+    { title: 'Payment' },
+    { title: 'Review' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `steps` | `readonly StepperStep[]` | — | Ordered list of steps to render. |
+| `current` | `number` | — | Zero-based index of the active step. Indices below this render as complete. |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout axis. Horizontal stretches each step to equal width. |
+
+### `StepperStep`
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `title` | `string` | — | Step label rendered next to the dot. |
+| `description` | `string` | — | Optional caption below the title. |
+
+## Accessibility
+
+The container uses `accessibilityRole="none"` and relies on the visible text to convey order and state — pair it with an `accessibilityLabel` on a parent container (for example `"Step 2 of 4, Shipping"`) when the flow needs an explicit announcement. Completed steps render a `CheckIcon` with semantic success colouring; active and upcoming steps render the step number.

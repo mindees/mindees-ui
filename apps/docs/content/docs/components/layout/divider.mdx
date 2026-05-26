@@ -1,0 +1,47 @@
+---
+title: Divider
+description: A themed horizontal or vertical separator line with token-aware tone, inset, and thickness.
+---
+
+`Divider` renders a thin line between content. It reads its colour from the theme's border tokens so it stays consistent across light and dark modes. Use `inset` to pull the line away from the parent edges.
+
+## Import
+
+```tsx
+import { Divider } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Stack gap="md">
+  <Text>First section</Text>
+  <Divider />
+  <Text>Second section</Text>
+</Stack>
+```
+
+Vertical divider with inset:
+
+```tsx
+<HStack>
+  <Text>Left</Text>
+  <Divider orientation="vertical" inset={8} tone="strong" />
+  <Text>Right</Text>
+</HStack>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout axis of the line. |
+| `tone` | `'subtle' \| 'default' \| 'strong'` | `'subtle'` | Border colour key. |
+| `inset` | `number` | `0` | Inset from the parent edges, in dp. |
+| `thickness` | `number` | `1` | Line thickness in dp. |
+
+Any remaining `ViewProps` are forwarded to the underlying `View`.
+
+## Accessibility
+
+`accessibilityRole` defaults to `'none'` so screen readers skip the line; override via props if you need a different role.

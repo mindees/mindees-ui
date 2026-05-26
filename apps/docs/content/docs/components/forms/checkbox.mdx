@@ -1,0 +1,76 @@
+---
+title: Checkbox
+description: A boolean toggle with optional label and indeterminate state, plus a CheckboxGroup wrapper for multi-select lists.
+---
+
+`Checkbox` is a tappable boolean control that supports controlled and uncontrolled usage, an indeterminate visual state for tri-state UIs, and an optional label whose tap area extends across the row. `CheckboxGroup` is an opt-in wrapper that tracks a set of selected keys when you want a multi-select group rather than independent checkboxes.
+
+## Import
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@mindees/ui';
+```
+
+## Usage
+
+### Checkbox
+
+```tsx
+<Checkbox
+  checked={accepted}
+  onChange={setAccepted}
+  label="I accept the terms"
+/>
+```
+
+Indeterminate, e.g. for a "select all" header row:
+
+```tsx
+<Checkbox
+  checked={allSelected}
+  indeterminate={someSelected && !allSelected}
+  onChange={toggleAll}
+  label="Select all"
+/>
+```
+
+### CheckboxGroup
+
+```tsx
+<CheckboxGroup
+  value={picked}
+  onValueChange={setPicked}
+>
+  <Checkbox label="Email" onChange={(v) => toggle('email', v)} checked={picked.includes('email')} />
+  <Checkbox label="SMS" onChange={(v) => toggle('sms', v)} checked={picked.includes('sms')} />
+  <Checkbox label="Push" onChange={(v) => toggle('push', v)} checked={picked.includes('push')} />
+</CheckboxGroup>
+```
+
+## Props
+
+### Checkbox props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `checked` | `boolean` | — | Controlled checked state. When set, the component is controlled. |
+| `defaultChecked` | `boolean` | `false` | Initial state when used uncontrolled. |
+| `indeterminate` | `boolean` | `false` | Renders a horizontal bar instead of a check, and reports `checked: 'mixed'` to assistive tech. |
+| `disabled` | `boolean` | `false` | Suppresses presses and drops opacity to 50%. |
+| `onChange` | `(checked: boolean) => void` | — | Called with the next boolean state when the user toggles the box. |
+| `label` | `ReactNode` | — | Optional label rendered to the right; strings are wrapped in the themed `Text` component. |
+| `accessibilityLabel` | `string` | — | Override label for assistive tech when no visible `label` is provided. |
+
+### CheckboxGroup props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `readonly string[]` | — | Controlled list of checked item keys. |
+| `defaultValue` | `readonly string[]` | `[]` | Initial selected keys when uncontrolled. |
+| `onValueChange` | `(next: readonly string[]) => void` | — | Called with the next selection whenever a child toggles. |
+| `disabled` | `boolean` | `false` | Marks the entire group disabled; exposed through context for children that opt in. |
+| `children` | `ReactNode` | — | `Checkbox` children whose selection the group coordinates. |
+
+## Accessibility
+
+`Checkbox` is a `Pressable` with `accessibilityRole="checkbox"` and `accessibilityState={{ checked, disabled }}` — where `checked` is `'mixed'` when `indeterminate` is true, so VoiceOver and TalkBack announce the tri-state correctly. The label is part of the same `Pressable`, so the visible label doubles as the tap target. Outside a `FormField`, supply `accessibilityLabel` when you do not render a visible `label`. `CheckboxGroup` exposes its container as `accessibilityRole="none"` so the group itself is structural, leaving each child to announce its own state.

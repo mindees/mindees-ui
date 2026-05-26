@@ -1,0 +1,4 @@
+{
+  "title": "Specialised",
+  "pages": ["code-block", "color-picker", "qr-code", "barcode", "map-view", "signature-pad", "web-view", "camera"]
+}

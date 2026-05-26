@@ -1,0 +1,59 @@
+---
+title: ActionSheet
+description: Bottom-sheet menu of pressable rows with destructive styling, an optional title, and a built-in Cancel row.
+---
+
+`ActionSheet` is a bottom-anchored menu built on top of `BottomSheet`. Each item is a tappable row that fires its `onPress` and then closes the sheet; destructive items are rendered in the danger tone.
+
+## Import
+
+```tsx
+import { ActionSheet } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <>
+    <Button onPress={() => setVisible(true)}>More</Button>
+    <ActionSheet
+      visible={visible}
+      onClose={() => setVisible(false)}
+      title="File actions"
+      items={[
+        { label: 'Share', onPress: share },
+        { label: 'Rename', onPress: rename },
+        { label: 'Delete', onPress: remove, destructive: true },
+      ]}
+    />
+  </>
+);
+```
+
+Without the built-in cancel row:
+
+```tsx
+<ActionSheet
+  visible={visible}
+  onClose={close}
+  items={items}
+  showCancel={false}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `visible` | `boolean` | — | Controls whether the sheet is shown. |
+| `onClose` | `() => void` | — | Called after any row tap and on backdrop press. |
+| `title` | `string` | — | Optional muted caption rendered above the rows. |
+| `items` | `readonly ActionSheetItem[]` | — | Row definitions. Each item is `{ label, onPress, destructive? }`. |
+| `showCancel` | `boolean` | `true` | Append a "Cancel" row that just calls `onClose`. |
+
+## Accessibility
+
+Wraps `BottomSheet`, so the platform back gesture closes the sheet. Each row is a `Pressable` with `accessibilityRole="button"` and a minimum height of 44 dp to meet touch-target guidance. Destructive rows are visually styled via the danger tone — consider adding an `accessibilityHint` on the surrounding trigger to clarify the destructive consequence to screen-reader users.

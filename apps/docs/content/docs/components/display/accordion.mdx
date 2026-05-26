@@ -1,0 +1,42 @@
+---
+title: Accordion
+description: Single collapsible section with a chevron-led header and body, supporting both controlled and uncontrolled open state.
+---
+
+`Accordion` is a single expand/collapse section. It supports both uncontrolled (`defaultOpen`) and controlled (`open` + `onOpenChange`) state and exposes the expanded state to screen readers through `accessibilityState`.
+
+## Import
+
+```tsx
+import { Accordion } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Accordion title="Shipping details" defaultOpen>
+  <Text>Orders ship within 1–2 business days.</Text>
+</Accordion>
+```
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Accordion title="Advanced" open={open} onOpenChange={setOpen}>
+  <Text>Controlled body content.</Text>
+</Accordion>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `title` | `ReactNode` | — | Header content. Strings render as semibold `Text`; nodes render as-is. |
+| `children` | `ReactNode` | — | Body content shown when expanded. |
+| `defaultOpen` | `boolean` | `false` | Initial open state when uncontrolled. |
+| `open` | `boolean` | — | Controlled open state. When set, internal state is ignored. |
+| `onOpenChange` | `(next: boolean) => void` | — | Fires whenever the user toggles the header. |
+
+## Accessibility
+
+The header is a `Pressable` with `accessibilityRole="button"` and `accessibilityState.expanded` reflecting the current open state. The chevron icon swaps between right (collapsed) and down (expanded) for a redundant visual cue.

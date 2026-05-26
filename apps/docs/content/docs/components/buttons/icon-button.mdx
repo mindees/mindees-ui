@@ -1,0 +1,45 @@
+---
+title: IconButton
+description: A compact circular pressable that wraps a single icon, sized for comfortable touch and equipped with required a11y label.
+---
+
+`IconButton` is the right choice when an action is best represented by an icon alone — toolbar controls, card actions, dismiss buttons. It renders a circular `Pressable` with token-driven sizing, three visual variants, and a built-in 8pt `hitSlop` so even the smallest variant remains comfortably tappable. Because there is no visible text, `accessibilityLabel` is required.
+
+## Import
+
+```tsx
+import { IconButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<IconButton accessibilityLabel="Close dialog" onPress={close}>
+  <Icon name="x" />
+</IconButton>
+```
+
+## Variants
+
+```tsx
+<IconButton variant="solid"   tone="primary" accessibilityLabel="Add"><Icon name="plus" /></IconButton>
+<IconButton variant="outline" tone="neutral" accessibilityLabel="Edit"><Icon name="pencil" /></IconButton>
+<IconButton variant="ghost"   tone="danger"  accessibilityLabel="Delete"><Icon name="trash" /></IconButton>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `'solid' \| 'outline' \| 'ghost'` | `'ghost'` | Visual treatment. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Diameter of the circular hit area — 32, 40, or 48 pt. |
+| `tone` | `'primary' \| 'neutral' \| 'danger'` | `'neutral'` | Semantic color role for background, border, and icon color. |
+| `disabled` | `boolean` | `false` | Disables press handling and dims to 50% opacity. |
+| `accessibilityLabel` | `string` | — required | Spoken label for screen readers. |
+| `children` | `ReactElement` | — required | Exactly one icon element. |
+
+Inherits all `PressableProps` except `children` (e.g. `onPress`, `onLongPress`).
+
+## Accessibility
+
+`accessibilityLabel` is a required prop because the visible content (an icon) carries no text for assistive technology to read. `IconButton` sets `accessibilityRole="button"` and reports `accessibilityState={{ disabled }}`. An 8pt `hitSlop` is applied unconditionally so the `sm` size (32pt) still meets a 48pt effective tap target. Prefer descriptive labels that include the verb and object — for example `"Delete comment"` rather than just `"Delete"` — so screen-reader users hear the same intent sighted users see in context.

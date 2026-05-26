@@ -1,0 +1,51 @@
+---
+title: Drawer
+description: Side-anchored panel that slides in from the left or right, with token-driven motion and a tappable scrim.
+---
+
+`Drawer` is a side-anchored overlay typically used for navigation menus or filter panels. It slides in from the configured edge using the token motion curve and respects the user's reduce-motion preference.
+
+## Import
+
+```tsx
+import { Drawer } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [open, setOpen] = useState(false);
+
+return (
+  <>
+    <Button onPress={() => setOpen(true)}>Menu</Button>
+    <Drawer visible={open} onClose={() => setOpen(false)} side="left">
+      <Heading level={3}>Navigation</Heading>
+      <Text>Drawer contents</Text>
+    </Drawer>
+  </>
+);
+```
+
+Right-side drawer with a fixed-width panel:
+
+```tsx
+<Drawer visible={open} onClose={close} side="right" width={320}>
+  {/* contents */}
+</Drawer>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `visible` | `boolean` | — | Controls whether the drawer is shown. |
+| `onClose` | `() => void` | — | Called on backdrop press (when `dismissible`) and on the platform back gesture. |
+| `side` | `'left' \| 'right'` | `'left'` | Edge the drawer slides in from. |
+| `width` | `number \| string` | `'80%'` | Drawer panel width — dp number or percentage string. |
+| `dismissible` | `boolean` | `true` | When `false`, backdrop taps are ignored. |
+| `children` | `React.ReactNode` | — | Drawer contents. |
+
+## Accessibility
+
+Built on React Native's `Modal`, so the platform back gesture calls `onClose` and assistive tech treats the drawer as a modal layer. The slide animation is skipped when reduce motion is enabled. Taps on the panel body do not propagate to the backdrop, so interactive children remain operable.

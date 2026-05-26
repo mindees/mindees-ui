@@ -1,0 +1,35 @@
+---
+title: CodeBlock
+description: A themed, monospaced, scrollable code container with optional line numbers and soft wrapping.
+---
+
+`CodeBlock` renders multi-line source code in a themed surface using the platform monospace family. The Phase 6 ship is zero-dep — no peer install is required to use it. A real syntax-highlighting peer such as `react-native-syntax-highlighter` can layer on top in Phase 7 without breaking the public API.
+
+## Import
+
+```tsx
+import { CodeBlock } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<CodeBlock
+  code={`function greet(name) {\n  return 'Hello, ' + name;\n}`}
+  language="ts"
+  showLineNumbers
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `code` | `string` | — | The source string to render. Newlines split into lines. |
+| `language` | `string` | — | Language hint. Used today for the a11y label and honoured by the Phase 7 syntax wrapper. |
+| `showLineNumbers` | `boolean` | `false` | Render a left gutter with 1-indexed line numbers. |
+| `wrap` | `boolean` | `false` | Wrap long lines instead of horizontally scrolling. |
+
+## Accessibility
+
+The container exposes `accessibilityRole="text"` with a label of `"<language> code"` (or `"Code"` when no language is set). Line-number gutter cells are hidden from assistive tech so the spoken content matches the source code.

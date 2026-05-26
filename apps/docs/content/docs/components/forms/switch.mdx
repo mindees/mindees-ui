@@ -1,0 +1,44 @@
+---
+title: Switch
+description: A themed wrapper over React Native's Switch with token-driven colours and an overridable accent.
+---
+
+`Switch` is a thin themed wrapper around React Native's built-in `Switch`. It picks the on-track colour from `theme.colors.action.primary`, the off-track and iOS background colour from the default border token, and the thumb from the surface colour. Pass `accent` to override the on-state colour for a single switch without reaching for the theme.
+
+## Import
+
+```tsx
+import { Switch } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Switch
+  value={enabled}
+  onValueChange={setEnabled}
+/>
+```
+
+With a custom accent colour and disabled state:
+
+```tsx
+<Switch
+  value={enabled}
+  onValueChange={setEnabled}
+  accent="#22c55e"
+  disabled
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `accent` | `string` | `theme.colors.action.primary` | Overrides the on-state track colour for this switch. |
+
+Inherits all `SwitchProps` from React Native except `thumbColor` and `trackColor` (resolved from theme tokens). That includes `value`, `onValueChange`, `disabled`, `ios_backgroundColor` (already defaulted), and the rest.
+
+## Accessibility
+
+`Switch` sets `accessibilityRole="switch"`, which surfaces as the appropriate ARIA role on web and the matching trait on iOS so VoiceOver and TalkBack announce "on" / "off" and respect the two-finger swap gesture. Any `accessibilityLabel` you pass is forwarded straight through to the underlying control. Unlike `Input`-family components, `Switch` does not call `useFormFieldA11y` — when you wrap a switch in a `FormField`, set the field's `label` so the visible text remains the source of truth, and add an explicit `accessibilityLabel` on the `Switch` to mirror it for assistive tech.

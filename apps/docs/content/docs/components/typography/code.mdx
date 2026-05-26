@@ -1,0 +1,31 @@
+---
+title: Code
+description: Monospace text for code — inline pill by default, or block-style when inline is set to false.
+---
+
+`Code` renders text in a platform-appropriate monospace family using the `code` step of the modular type scale. By default it wraps the text in a subtle-background pill for inline code; set `inline={false}` to render bare monospace text for code blocks.
+
+## Import
+
+```tsx
+import { Code } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Text>Run <Code>pnpm install</Code> to start.</Text>
+<Code inline={false}>const x = 1;</Code>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `inline` | `boolean` | `true` | When true, wraps the text in a subtle-background pill. Set false for block-style code. |
+
+All `Text` props except `variant` and `fontFamily` (locked to `code` / monospace) are forwarded — `tone`, `weight`, `align`, `italic`, `underline`, `strikethrough`, and the underlying RN `TextProps`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN Text — pass `accessibilityLabel`, `accessibilityRole`, etc. via props. Consider setting `accessibilityLabel` to a more readable form when the code contains punctuation that doesn't read well aloud.

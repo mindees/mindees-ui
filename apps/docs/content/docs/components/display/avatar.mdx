@@ -1,0 +1,48 @@
+---
+title: Avatar
+description: User avatar with image source, initials fallback, size scale, and circle or square shape, plus a stacked AvatarGroup with overflow counting.
+---
+
+`Avatar` renders a profile image with a graceful fallback to derived initials when no source is provided. `AvatarGroup` overlaps a row of avatars and collapses overflow into a `+N` chip.
+
+## Import
+
+```tsx
+import { Avatar, AvatarGroup } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Avatar src="https://i.pravatar.cc/80" name="Ada Lovelace" size="md" />
+```
+
+```tsx
+<AvatarGroup max={3}>
+  <Avatar name="Ada Lovelace" />
+  <Avatar name="Grace Hopper" />
+  <Avatar name="Katherine Johnson" />
+  <Avatar name="Hedy Lamarr" />
+</AvatarGroup>
+```
+
+### Avatar props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `src` | `string \| { uri: string }` | — | Image URL string or RN image source. When omitted or empty, initials render. |
+| `initials` | `string` | — | Explicit fallback text. Overrides the value derived from `name`. |
+| `name` | `string` | — | Full name used to derive two-letter initials and to populate `accessibilityLabel`. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Fixed pixel sizing — 24, 32, 40, 56, 80 dp respectively. |
+| `shape` | `'circle' \| 'square'` | `'circle'` | Circle uses a half-side radius. Square uses the `md` radius token. |
+
+### AvatarGroup props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `max` | `number` | `4` | Maximum avatars to display. Remaining children collapse into a `+N` indicator. |
+| `children` | `ReactNode` | — | `Avatar` elements to stack. Order is left-to-right; later items overlap earlier ones via negative margin. |
+
+## Accessibility
+
+`Avatar` uses `accessibilityRole="image"` and labels itself with `name` (falling back to "Avatar"). `AvatarGroup` itself is non-semantic so screen readers traverse each contained avatar individually.

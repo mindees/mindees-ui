@@ -1,0 +1,39 @@
+---
+title: Text
+description: The base typography primitive — tone, weight, alignment, and decoration driven by the modular type scale.
+---
+
+`Text` is the foundational typography component in MindeesUI. It wraps React Native's `Text`, resolves a named variant from the modular type scale, and exposes semantic tone and weight tokens. Use it for body copy and anywhere you need consistent typographic rhythm.
+
+## Import
+
+```tsx
+import { Text } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Text variant="body" tone="secondary" weight="semibold">
+  Hello, MindeesUI
+</Text>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `variant` | `TextStyleName` | `'body'` | Named text style from the modular type scale (e.g. `body`, `caption`, `label`, `h1`–`h6`, `code`). |
+| `tone` | `'primary' \| 'secondary' \| 'muted' \| 'inverse' \| 'link' \| 'onAccent' \| 'success' \| 'danger' \| 'warning' \| 'info'` | `'primary'` | Semantic colour token. |
+| `weight` | `FontWeightToken` | — | Overrides the variant's default font weight. |
+| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
+| `italic` | `boolean` | `false` | Renders italic. |
+| `underline` | `boolean` | `false` | Adds an underline decoration. |
+| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. Combines with `underline`. |
+| `fontFamily` | `string` | theme system font | Overrides the font family. |
+
+Any remaining `TextProps` from React Native are forwarded to the underlying `Text`.
+
+## Accessibility
+
+Inherits accessibility from the underlying RN Text — pass `accessibilityLabel`, `accessibilityRole`, etc. via props.

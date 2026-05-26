@@ -1,0 +1,36 @@
+---
+title: Rating
+description: Star rating control with configurable maximum, tappable selection, optional read-only mode, and adjustable star size in dp.
+---
+
+`Rating` renders a row of stars representing a value from 0 to `max`. Each unfilled star is a `Pressable` that calls `onChange` with its 1-based position; pass `readOnly` to render the same row as static display.
+
+## Import
+
+```tsx
+import { Rating } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [score, setScore] = useState(3);
+
+<Rating value={score} onChange={setScore} />
+
+<Rating value={4.5} max={5} readOnly size={16} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `number` | — | Current value in the range 0 to `max`. Stars with index `< value` render filled. Required. |
+| `max` | `number` | `5` | Total number of stars to render. |
+| `onChange` | `(next: number) => void` | — | Fires with the 1-based star index when the user taps. Ignored when `readOnly` is true. |
+| `readOnly` | `boolean` | `false` | Disables interaction. Stars render as static views without press handlers. |
+| `size` | `number` | `20` | Font size of each star glyph in dp. |
+
+## Accessibility
+
+The container exposes `accessibilityRole="adjustable"` with `accessibilityValue={{ min: 0, max, now: value }}`. Each interactive star is its own button labelled "Rate N of M". Star glyphs are hidden from screen readers individually so announcements come from the buttons, not duplicate text nodes.

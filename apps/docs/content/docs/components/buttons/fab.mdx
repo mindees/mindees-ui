@@ -1,0 +1,50 @@
+---
+title: FAB
+description: A floating action button — a circular elevated pressable for the screen's primary action, designed to be positioned by the caller.
+---
+
+`FAB` represents the single most important action on a screen — compose a message, add an item, start a workout. It renders a circular `Pressable` with a primary or neutral fill and a large elevation shadow (`shadow.lg`) so it reads as floating above content. Positioning is intentionally left to the caller — wrap the `FAB` in an absolutely-positioned container (or a layout primitive like `SafeAreaView`) to place it where your design system dictates.
+
+## Import
+
+```tsx
+import { FAB } from '@mindees/ui';
+```
+
+## Usage
+
+Typical bottom-right placement using an absolute-positioned wrapper:
+
+```tsx
+<View style={{ position: 'absolute', right: 16, bottom: 16 }}>
+  <FAB accessibilityLabel="Compose message" onPress={compose}>
+    <Icon name="plus" />
+  </FAB>
+</View>
+```
+
+Larger neutral variant:
+
+```tsx
+<FAB size="lg" tone="neutral" accessibilityLabel="Record" onPress={record}>
+  <Icon name="mic" />
+</FAB>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `size` | `'md' \| 'lg'` | `'md'` | Diameter of the circle — 56 or 72 pt. |
+| `tone` | `'primary' \| 'neutral'` | `'primary'` | Background color role; `neutral` resolves to the elevated surface token. |
+| `disabled` | `boolean` | `false` | Disables press handling and dims to 50% opacity. |
+| `accessibilityLabel` | `string` | — required | Spoken label for screen readers. |
+| `children` | `ReactElement` | — required | Exactly one icon element. |
+
+Inherits all `PressableProps` except `children`.
+
+The component does **not** apply its own positioning — there is no `position` prop. Wrap `FAB` in a positioned container (absolute, sticky, or via your navigation layout slots).
+
+## Accessibility
+
+Because the FAB has no visible text, `accessibilityLabel` is required and should describe the action ("Compose message", not "Plus"). `accessibilityRole="button"` is set, and `accessibilityState={{ disabled }}` is reported. At 56pt minimum, both sizes comfortably exceed platform tap-target minimums. When placing the FAB over scrollable content, ensure it does not obstruct the bottom-most interactive elements — use `SafeAreaView` insets so the button clears system gesture areas on iOS and Android.

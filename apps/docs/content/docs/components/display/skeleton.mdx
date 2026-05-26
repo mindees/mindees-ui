@@ -1,0 +1,37 @@
+---
+title: Skeleton
+description: Animated placeholder block with token-aware radius and a gentle opacity pulse that respects the user reduce-motion preference.
+---
+
+`Skeleton` renders a neutral placeholder block while real content loads. It pulses between 50% and 100% opacity on a 700 ms curve and automatically stops animating when the user has reduce-motion enabled.
+
+## Import
+
+```tsx
+import { Skeleton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Stack gap="xs">
+  <Skeleton width="60%" height={20} radius="sm" />
+  <Skeleton width="100%" height={14} />
+  <Skeleton width="85%" height={14} />
+</Stack>
+
+<Skeleton width={48} height={48} radius="pill" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `width` | `number \| string` | `'100%'` | Block width. Accepts numeric dp or any RN-compatible string (percent, etc.). |
+| `height` | `number \| string` | `16` | Block height. Same accepted formats as `width`. |
+| `radius` | `RadiusToken \| 'pill' \| number` | `'sm'` | Border radius token (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `pill`) or a raw dp value. |
+| `style` | `ViewStyle` | — | Additional style merged after the computed block. |
+
+## Accessibility
+
+Skeletons are hidden from screen readers via `accessibilityElementsHidden` and `importantForAccessibility="no-hide-descendants"` so loading placeholders don't add noise. Announce the loading state on a parent element if needed.

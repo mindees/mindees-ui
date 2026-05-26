@@ -1,0 +1,50 @@
+---
+title: BottomSheet
+description: Lightweight bottom-anchored sheet with token-driven animation, configurable height, and dismiss-on-backdrop.
+---
+
+`BottomSheet` is a minimum-deps bottom-anchored panel for simple show/dismiss flows. For full pan-gesture snapping (multiple stops, blur backdrop, content-aware sizing) consume `@gorhom/bottom-sheet` directly — this implementation favours zero peer-deps and predictable behaviour.
+
+## Import
+
+```tsx
+import { BottomSheet } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <>
+    <Button onPress={() => setVisible(true)}>Show sheet</Button>
+    <BottomSheet visible={visible} onClose={() => setVisible(false)} height="60%">
+      <Heading level={3}>Filters</Heading>
+      <Text>Sheet contents go here.</Text>
+    </BottomSheet>
+  </>
+);
+```
+
+Auto-height (sized to content):
+
+```tsx
+<BottomSheet visible={visible} onClose={close} height="auto">
+  <Text>Short content</Text>
+</BottomSheet>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `visible` | `boolean` | — | Controls whether the sheet is shown. |
+| `onClose` | `() => void` | — | Called on backdrop press (when `dismissible`) and on the platform back gesture. |
+| `dismissible` | `boolean` | `true` | When `false`, backdrop taps are ignored. |
+| `height` | `number \| string \| 'auto'` | `'60%'` | Sheet height — dp number, percentage string, or `'auto'` to size to content. |
+| `children` | `React.ReactNode` | — | Sheet contents (a drag handle is rendered above them). |
+
+## Accessibility
+
+Built on React Native's `Modal`, so the platform back gesture calls `onClose` and assistive tech treats the sheet as a modal layer. The animated slide-in honours reduce-motion (the transform is skipped when enabled). The drag handle is decorative — taps on the sheet body are stopped from bubbling to the backdrop.

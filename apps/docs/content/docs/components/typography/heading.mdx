@@ -1,0 +1,31 @@
+---
+title: Heading
+description: Semantic heading from h1 to h6 — picks the matching type-scale step and sets the header accessibility role.
+---
+
+`Heading` is a thin wrapper over `Text` that maps a semantic `level` (1–6) to the matching `h1`–`h6` step in the modular type scale. It also defaults `accessibilityRole` to `header` so screen readers can navigate by landmark.
+
+## Import
+
+```tsx
+import { Heading } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Heading level={1}>Page title</Heading>
+<Heading level={3} tone="secondary">Section</Heading>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `level` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | `2` | Semantic heading level. Drives the type-scale step (`h1`–`h6`). |
+
+All `Text` props except `variant` are forwarded — `tone`, `weight`, `align`, `italic`, `underline`, `strikethrough`, `fontFamily`, and the underlying RN `TextProps`.
+
+## Accessibility
+
+Defaults `accessibilityRole` to `header`. Pass a different `accessibilityRole` to override, or supply an `accessibilityLabel` when the rendered text isn't the right announce string.
