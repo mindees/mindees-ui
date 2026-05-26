@@ -53,6 +53,7 @@ export type ComponentTag =
   | 'Popover'
   // navigation
   | 'Tabs'
+  | 'PillTabBar'
   | 'TopBar'
   | 'Breadcrumb'
   | 'Pagination'

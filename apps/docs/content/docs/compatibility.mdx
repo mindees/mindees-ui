@@ -1,0 +1,51 @@
+---
+title: Compatibility
+description: Peer dependency matrix and supported React Native + Expo SDK versions for MindeesUI. New Architecture only.
+---
+
+# Compatibility
+
+MindeesUI is **New Architecture only** (Fabric + JSI + TurboModules + Bridgeless). It supports the **latest stable Expo SDK and one previous**.
+
+## Target runtimes
+
+| Runtime      | Min     | Recommended | Notes                      |
+| ------------ | ------- | ----------- | -------------------------- |
+| Node.js      | 20.x    | 22.x LTS    | required for the toolchain |
+| React        | 19.1    | 19.2.6      |                            |
+| React Native | 0.83.x  | 0.85.3      | New Arch only              |
+| Expo SDK     | 55      | 56          | both supported in CI       |
+| iOS          | 15.1+   | 17+         | matches RN 0.85 baseline   |
+| Android      | API 24+ | API 34+     | edge-to-edge default       |
+
+## Peer dependencies
+
+Pinned versions verified live against npm. The library declares loose peer ranges; the table is the validated set.
+
+| Package                          | Verified | Required by                          |
+| -------------------------------- | -------- | ------------------------------------ |
+| `react-native-reanimated`        | 4.3.1    | animations, transitions              |
+| `react-native-gesture-handler`   | 2.31.2   | press / pan / swipe                  |
+| `@shopify/flash-list`            | 2.3.1    | long lists                           |
+| `react-native-unistyles`         | 3.2.4    | styling engine                       |
+| `react-native-nitro-modules`     | 0.35.7   | required by Unistyles                |
+| `react-native-edge-to-edge`      | 1.8.1    | required by Unistyles                |
+| `react-native-safe-area-context` | 5.8.0    | SafeAreaView, ScreenWrapper          |
+| `react-native-screens`           | 4.25.2   | optional; example app uses it        |
+| `react-native-svg`               | 15.15.5  | Icon, Avatar, ColorPicker            |
+| `@gorhom/bottom-sheet`           | 5.2.14   | optional; BottomSheet wraps it later |
+
+## Optional peers (Phase 6 specialised components)
+
+These are only required if you use the matching component. The wrapper renders a clearly-labeled fallback when missing.
+
+| Peer                            | Used by                |
+| ------------------------------- | ---------------------- |
+| `expo-image`                    | future `Image` upgrade |
+| `expo-haptics`                  | gated haptics          |
+| `expo-blur`                     | overlay backdrops      |
+| `expo-camera`                   | `Camera`, `Barcode`    |
+| `react-native-qrcode-svg`       | `QRCode`               |
+| `react-native-maps`             | `MapView`              |
+| `react-native-webview`          | `WebView`              |
+| `react-native-signature-canvas` | `SignaturePad`         |

@@ -1,0 +1,112 @@
+---
+title: Layout Intelligence Layer
+description: How MindeesUI components introspect their children and auto-adjust spacing, sizing, alignment, accessibility roles, and styling. Every rule is deterministic, documented, and overridable — never AI magic.
+---
+
+# Layout Intelligence Layer (LIL)
+
+The **deterministic engine** that makes _"drop children in and it looks right"_ work in MindeesUI. Every behavior is a typed function of its inputs. Same children + same parent context = same output, always.
+
+## Principles
+
+1. **Deterministic.** No model. No probabilistic anything. Pure typed functions.
+2. **Documented.** Every rule is listed below and matched 1:1 to a test case.
+3. **Overridable.** Every inferred prop can be set explicitly. Override always wins.
+4. **Tree-shakeable.** Small modules; pay only for the heuristics you trigger.
+5. **No runtime cost when idle.** Heuristics run during parent render — never on UI thread, never in a worklet.
+
+## Slot / `asChild`
+
+Radix-style prop-merging slot. `<Slot {...parent}><Child /></Slot>` returns the child with merged props — no extra wrapping `View`.
+
+| Prop family          | Merge rule                                                               |
+| -------------------- | ------------------------------------------------------------------------ |
+| `onX` event handlers | child first, then parent (parent skipped if `evt.defaultPrevented`)      |
+| `style`              | array (`[parentStyle, childStyle]`); RN flattens, child wins on conflict |
+| `className` (web)    | concatenated                                                             |
+| `ref`                | both forwarded via `mergeRefs`                                           |
+| any other prop       | child wins                                                               |
+
+Components opt in via `asChild`:
+
+```tsx
+function Trigger({ asChild, ...rest }: AsChildProps<PressableProps>) {
+  const Comp = asChild ? Slot : Pressable;
+  return <Comp {...rest} />;
+}
+```
+
+## Tagged components
+
+Every MindeesUI component carries a `Symbol.for('@mindees/ui:component-tag')` so parents can identify children even across module realms.
+
+```ts
+import { tagComponent, getComponentTag, isTaggedAs } from '@mindees/ui';
+
+const MyButton = tagComponent(function MyButton() { /* ... */ }, 'Button');
+
+getComponentTag(<MyButton />);      // 'Button'
+isTaggedAs(<MyButton />, 'Button'); // true
+```
+
+## Child introspection
+
+`flattenChildren` collapses fragments and arrays; `describeChildren` returns positional slots `{ element, tag, index, isFirst, isLast }`. Parents iterate these to round outer corners, hide last dividers, etc. — without re-rendering children.
+
+```ts
+import { describeChildren } from '@mindees/ui';
+const slots = describeChildren(children);
+// [{ element, tag, index, isFirst, isLast }, ...]
+```
+
+## Intrinsic sizing
+
+`width` and `height` accept `IntrinsicSize = 'fill' | 'hug' | number | '${number}%'`:
+
+| Input   | Maps to                                        |
+| ------- | ---------------------------------------------- |
+| `fill`  | `{ flexGrow: 1, flexShrink: 1, flexBasis: 0 }` |
+| `hug`   | `{ flexShrink: 0 }` (intrinsic content size)   |
+| number  | `width: N` or `height: N`                      |
+| `${N}%` | `width: 'N%'` or `height: 'N%'`                |
+
+## Auto-spacing rules
+
+`Stack` / `HStack` / `VStack` take a base `gap` token, then apply a per-pair rule for `(prev, next)`:
+
+| Rule      | Multiplier | Triggered by                                                         |
+| --------- | ---------- | -------------------------------------------------------------------- |
+| `tighter` | × 0.25     | Heading ↔ Caption / Label (eyebrow text)                             |
+| `tight`   | × 0.5      | Text → Text (continuous prose)                                       |
+| `base`    | × 1        | anything else                                                        |
+| `loose`   | × 1.5      | Heading → Text (hierarchy break); content → Button (trailing action) |
+| `looser`  | × 2        | (reserved for section breaks)                                        |
+
+## Specialised contexts
+
+Each compound parent publishes a typed context describing only what its children need:
+
+| Context              | Provided by                   | Read by                                            |
+| -------------------- | ----------------------------- | -------------------------------------------------- |
+| `ButtonGroupContext` | `ButtonGroup`                 | `Button`, `IconButton` (corner-merging, size sync) |
+| `ListContext`        | `List`                        | `ListItem` (density, dividers)                     |
+| `StackContext`       | `Stack` / `HStack` / `VStack` | direct children (axis-aware spacing)               |
+| `FormFieldContext`   | `FormField`                   | `Input`, `Label`, `HelperText` (a11y wiring)       |
+| `CardContext`        | `Card`                        | `Card.Header` / `.Body` / `.Footer`                |
+
+Components without a wrapping parent fall back to sensible defaults — no missing-context throws.
+
+## Responsive + density
+
+`useResponsive(value)` resolves a `ResponsiveValue<T>` (scalar or `{ xs?, sm?, md?, lg?, xl?, '2xl'? }`) against the current width. `resolveResponsive(value, width)` is the pure-function variant for component-internal use.
+
+```ts
+const padding = useResponsive({ xs: 'sm', md: 'lg', xl: '2xl' });
+```
+
+## A11y auto-wiring
+
+- `FormField` issues stable ids; `useFormFieldA11y` reads them for ready-to-spread `accessibilityLabelledBy` + `accessibilityDescribedBy`.
+- Compound display components emit grouping roles automatically.
+- Every animation gates on `useReduceMotion`.
+- Explicit overrides always win over inferred values.

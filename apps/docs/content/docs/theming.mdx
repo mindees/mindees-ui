@@ -1,0 +1,106 @@
+---
+title: Theming
+description: ThemeProvider, createTheme, dark mode, high contrast, and custom brand themes for MindeesUI. Tokens cover colour, typography, spacing, radii, shadows, motion, breakpoints, z-index, and density.
+---
+
+# Theming
+
+MindeesUI ships **four themes out of the box** — `lightTheme`, `darkTheme`, `highContrastLightTheme`, `highContrastDarkTheme` — plus `createTheme()` for fully custom brands.
+
+## `ThemeProvider`
+
+Wrap your app once. Listens to the OS for colour-scheme changes, reduce-motion, and high-contrast preferences.
+
+```tsx
+import { ThemeProvider } from '@mindees/ui';
+
+<ThemeProvider mode="auto">
+  {' '}
+  {/* 'auto' | 'light' | 'dark' */}
+  {/* app */}
+</ThemeProvider>;
+```
+
+| Prop                | Type                          | Default                  | Description                   |
+| ------------------- | ----------------------------- | ------------------------ | ----------------------------- |
+| `mode`              | `'auto' \| 'light' \| 'dark'` | `'auto'`                 | follows OS in auto            |
+| `light`             | `Theme`                       | `lightTheme`             | theme used in light mode      |
+| `dark`              | `Theme`                       | `darkTheme`              | theme used in dark mode       |
+| `highContrastLight` | `Theme`                       | `highContrastLightTheme` | when OS reports high-contrast |
+| `highContrastDark`  | `Theme`                       | `highContrastDarkTheme`  | likewise in dark              |
+
+## `createTheme`
+
+```ts
+import { createTheme } from '@mindees/ui';
+
+const brand = createTheme({
+  name: 'brand',
+  colorScheme: 'light',
+  contrast: 'normal', // 'normal' | 'high'
+  density: 'comfortable', // 'compact' | 'comfortable' | 'spacious'
+  colors: {
+    action: { primary: '#ff00aa', primaryHover: '#e6009a' },
+    text: { primary: '#1a1a1a' },
+  },
+});
+```
+
+Override granularity: any leaf of `SemanticColors` is overridable.
+
+## Hooks
+
+```tsx
+import { useTheme, useTokens, useReduceMotion } from '@mindees/ui';
+
+function Card() {
+  const t = useTokens();
+  const reduceMotion = useReduceMotion();
+  return (
+    <View
+      style={{
+        padding: t.space.lg,
+        backgroundColor: t.colors.background.surface,
+        borderRadius: t.radii.lg,
+      }}
+    />
+  );
+}
+```
+
+Used outside a `<ThemeProvider>`, hooks return `lightTheme` — keeps Storybook stories renderable without setup.
+
+## Tokens
+
+Every styling decision goes through a named token. See [`@mindees/tokens`](https://www.npmjs.com/package/@mindees/tokens):
+
+- **Color**: 12-step scales (gray / blue / green / red / yellow / orange) in light + dark, plus semantic mappings (`background.canvas`, `text.primary`, `action.primary`, `status.success`, etc.) and high-contrast variants.
+- **Typography**: `2xs`–`6xl` size scale; named text styles (`display`, `h1`–`h6`, `body`, `label`, `caption`, `overline`, `code`).
+- **Spacing**: 4-point scale (`none` → `7xl`).
+- **Radii**: `none` → `3xl`, `pill`, `full`.
+- **Shadows**: iOS shadow\* + Android elevation in one resolver.
+- **Motion**: Doherty-Threshold-aware durations + named easings.
+- **Breakpoints**: `xs`–`2xl` for responsive layouts.
+- **Z-index**: named layers so overlays never collide.
+- **Density**: `compact` / `comfortable` / `spacious`.
+
+## Dark mode
+
+`ThemeProvider mode="auto"` follows the OS automatically (`Appearance.addChangeListener`). Force a fixed scheme by passing `mode="light"` or `mode="dark"`.
+
+## High-contrast mode
+
+Honored automatically when the OS reports `prefers-contrast: more` (or platform equivalent). Ships separate high-contrast palettes that push contrast ratios above WCAG 2.2 AAA.
+
+## Custom Unistyles config
+
+The library configures Unistyles for you via `configureUnistyles()`. To use a custom theme:
+
+```ts
+import { configureUnistyles, createTheme } from '@mindees/ui';
+const brand = createTheme({ name: 'brand', colorScheme: 'light', colors: { ... } });
+configureUnistyles({
+  themes: { light: brand, dark: brand },
+  adaptiveThemes: true,
+});
+```

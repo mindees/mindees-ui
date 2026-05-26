@@ -15,12 +15,16 @@ import { Timeline } from '../Display/Timeline';
 import { Breadcrumb } from '../Nav/Breadcrumb';
 import { Pagination } from '../Nav/Pagination';
 import { Stepper } from '../Nav/Stepper';
+import { PillTabBar } from '../Nav/PillTabBar';
 import { Tabs } from '../Nav/Tabs';
 import { TopBar } from '../Nav/TopBar';
 
 describe('Phase 5 — tag identity', () => {
   it('nav tags', () => {
     expect(getComponentTag(<Tabs />)).toBe('Tabs');
+    expect(
+      getComponentTag(<PillTabBar items={[]} value="" onValueChange={() => undefined} />),
+    ).toBe('PillTabBar');
     expect(getComponentTag(<TopBar />)).toBe('TopBar');
     expect(getComponentTag(<Breadcrumb items={[]} />)).toBe('Breadcrumb');
     expect(getComponentTag(<Pagination total={10} page={1} onPageChange={() => undefined} />)).toBe(

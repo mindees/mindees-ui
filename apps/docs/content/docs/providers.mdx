@@ -1,0 +1,52 @@
+---
+title: Providers
+description: ThemeProvider, PortalProvider, ErrorBoundary — the three root-level providers MindeesUI needs. Lightweight, dependency-free, and designed for the New Architecture.
+---
+
+# Providers
+
+## `<ThemeProvider>`
+
+Required for any component that uses theme tokens. See [Theming](./theming) for full prop reference.
+
+## `<PortalProvider>` + `<Portal>`
+
+Lightweight, dependency-free portals with named z-ordered hosts. Overlays (Modal, BottomSheet, Toast, Tooltip, Popover) route through these so they always stack predictably above content.
+
+```tsx
+import { PortalProvider, Portal } from '@mindees/ui';
+
+// Near the app root
+<PortalProvider hosts={['modal', 'bottom-sheet', 'popover', 'tooltip', 'toast']}>
+  {/* app */}
+</PortalProvider>
+
+// Anywhere in the tree
+<Portal host="modal">
+  <View>...</View>
+</Portal>
+```
+
+Default host order (back → front): `modal`, `bottom-sheet`, `popover`, `tooltip`, `toast`. Pass your own array to override.
+
+## `<ErrorBoundary>`
+
+Class-based React error boundary with a `retry` callback and customisable fallback.
+
+```tsx
+import { ErrorBoundary } from '@mindees/ui';
+
+<ErrorBoundary
+  onError={(error, info) => logToService(error, info)}
+  fallback={(error, retry) => (
+    <View>
+      <Text>{error.message}</Text>
+      <Button onPress={retry}>Try again</Button>
+    </View>
+  )}
+>
+  {/* tree */}
+</ErrorBoundary>;
+```
+
+The default fallback (when `fallback` is omitted) renders a clear "Something went wrong" view with the error message and an alert role for screen readers.

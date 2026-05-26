@@ -1,0 +1,148 @@
+---
+title: Installation
+description: Install MindeesUI in an Expo SDK 55 / 56 app, a bare React Native CLI project, or a Next.js + React Native Web setup. Babel, Metro, Unistyles, and provider wiring covered end-to-end.
+---
+
+# Installation
+
+## Expo SDK 55 / 56
+
+```sh
+pnpm add @mindees/ui @mindees/tokens @mindees/icons
+
+pnpm add react-native-reanimated react-native-gesture-handler react-native-unistyles \
+  react-native-nitro-modules react-native-edge-to-edge react-native-safe-area-context \
+  react-native-screens react-native-svg @shopify/flash-list
+```
+
+Optional gated peers (install only if you use the matching component):
+
+```sh
+pnpm add expo-image expo-haptics expo-blur expo-camera
+pnpm add react-native-qrcode-svg react-native-webview react-native-maps
+```
+
+## Bare React Native CLI
+
+```sh
+npm install @mindees/ui @mindees/tokens @mindees/icons
+npm install react-native-reanimated react-native-gesture-handler react-native-unistyles \
+  react-native-nitro-modules react-native-edge-to-edge react-native-safe-area-context \
+  react-native-screens react-native-svg @shopify/flash-list
+
+cd ios && pod install && cd ..
+```
+
+## React Native Web (Next.js)
+
+```js
+// next.config.mjs
+export default {
+  transpilePackages: [
+    '@mindees/ui',
+    '@mindees/tokens',
+    '@mindees/icons',
+    'react-native-web',
+    'react-native-reanimated',
+    'react-native-gesture-handler',
+    '@shopify/flash-list',
+  ],
+};
+```
+
+## Babel
+
+Reanimated v4 needs its Babel plugin **last**:
+
+```js
+// babel.config.js  (Expo)
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin'],
+  };
+};
+```
+
+## Metro (monorepo)
+
+```js
+// metro.config.js
+const { getDefaultConfig } = require('expo/metro-config');
+const path = require('node:path');
+
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, '../..');
+
+const config = getDefaultConfig(projectRoot);
+config.watchFolders = [workspaceRoot];
+config.resolver.nodeModulesPaths = [
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
+];
+config.resolver.disableHierarchicalLookup = true;
+
+module.exports = config;
+```
+
+## Configure Unistyles
+
+Call `configureUnistyles()` once near your app root **before** any component renders:
+
+```ts
+// App.tsx
+import { configureUnistyles } from '@mindees/ui';
+configureUnistyles();
+```
+
+Custom themes or breakpoints:
+
+```ts
+import { configureUnistyles, createTheme } from '@mindees/ui';
+
+const brand = createTheme({
+  name: 'brand',
+  colorScheme: 'light',
+  colors: { action: { primary: '#ff00aa' } },
+});
+
+configureUnistyles({
+  themes: { light: brand, dark: brand },
+  adaptiveThemes: true,
+});
+```
+
+## Wrap your app
+
+```tsx
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, PortalProvider, ErrorBoundary } from '@mindees/ui';
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <ThemeProvider mode="auto">
+          <PortalProvider>
+            <ErrorBoundary>{/* screens */}</ErrorBoundary>
+          </PortalProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+With **Expo Router**, the same wrapping goes in `app/_layout.tsx`.
+
+## Verify
+
+```sh
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+If you see `[ERR_PNPM_IGNORED_BUILDS]` on install, run `pnpm install --frozen-lockfile --ignore-scripts` followed by `pnpm rebuild esbuild msgpackr-extract sharp`. See [CI gotchas](https://github.com/mindees/mindees-ui/blob/main/docs/CONTRIBUTING.md) for context.

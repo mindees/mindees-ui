@@ -1,33 +1,83 @@
 ---
 title: Getting Started
-description: Install MindeesUI and ship your first screen in minutes.
+description: MindeesUI is a universal React Native + Expo component library for the New Architecture. Drop children in; the Layout Intelligence Layer handles spacing, sizing, alignment, accessibility, and styling automatically.
 ---
 
 # Getting Started
 
-MindeesUI is a universal React Native component library for **Expo SDK 55 & 56** (React Native 0.83 & 0.85), New Architecture only. Drop components in; the Layout Intelligence Layer handles spacing, sizing, alignment, and accessibility.
+**MindeesUI** is a universal **React Native** + **Expo** UI component library for the **New Architecture** (Fabric + JSI + TurboModules + Bridgeless). Ships on **iOS, Android, and React Native Web** from one codebase, with **TypeScript strict types, WCAG 2.2 AA accessibility, Reanimated v4 UI-thread animations, and Unistyles v3 zero-re-render theming**.
+
+The differentiator is a **deterministic Layout Intelligence Layer**: components introspect their children and auto-adjust spacing, sizing, alignment, accessibility roles, and styling. Every rule is documented and overridable — never a black box.
 
 ## Install
 
 ```sh
 pnpm add @mindees/ui @mindees/tokens @mindees/icons
-pnpm add react-native-reanimated react-native-gesture-handler \
-  react-native-unistyles react-native-nitro-modules react-native-edge-to-edge \
-  react-native-safe-area-context react-native-svg @shopify/flash-list
+
+# New-Architecture peers
+pnpm add react-native-reanimated react-native-gesture-handler react-native-unistyles \
+  react-native-nitro-modules react-native-edge-to-edge react-native-safe-area-context \
+  react-native-svg @shopify/flash-list
 ```
+
+Full setup walkthrough: [Installation](./installation).
 
 ## Wrap your app
 
 ```tsx
-import { ThemeProvider, PortalProvider, ErrorBoundary } from '@mindees/ui';
+import { ThemeProvider, PortalProvider, ErrorBoundary, configureUnistyles } from '@mindees/ui';
+
+configureUnistyles();
 
 export default function App() {
   return (
     <ThemeProvider mode="auto">
       <PortalProvider>
-        <ErrorBoundary>{/* your app */}</ErrorBoundary>
+        <ErrorBoundary>{/* your screens */}</ErrorBoundary>
       </PortalProvider>
     </ThemeProvider>
   );
 }
 ```
+
+## Build a screen
+
+```tsx
+import { ScreenWrapper, Stack, Heading, Text, Button, FormField, Input, Card } from '@mindees/ui';
+
+export function SignInScreen() {
+  return (
+    <ScreenWrapper padding="lg" scroll avoidKeyboard>
+      <Stack gap="md">
+        <Heading level={1}>Welcome back</Heading>
+        <Text tone="muted">Sign in to continue.</Text>
+
+        <Card variant="outlined">
+          <Stack gap="md">
+            <FormField label="Email" required>
+              <Input keyboardType="email-address" autoCapitalize="none" />
+            </FormField>
+            <FormField label="Password" required>
+              <Input secureTextEntry />
+            </FormField>
+            <Button variant="primary" fullWidth>
+              Sign in
+            </Button>
+          </Stack>
+        </Card>
+      </Stack>
+    </ScreenWrapper>
+  );
+}
+```
+
+That snippet exercises the **Layout Intelligence Layer**: the `Stack` reads its children's tags (`Heading`, `Text`, `Card`) and applies the appropriate per-pair gap. `FormField` publishes a `FormFieldContext` so `Input` automatically wires `accessibilityLabelledBy`. `Card` densities + variants flow through context to nested children.
+
+## What's next
+
+- [Installation](./installation) — full setup for Expo / bare RN / RN Web
+- [Compatibility](./compatibility) — peer matrix + supported SDK versions
+- [Architecture](./architecture) — the Layout Intelligence Layer rules
+- [Theming](./theming) — `createTheme`, dark mode, high contrast, custom brands
+- [Providers](./providers) — `ThemeProvider`, `PortalProvider`, `ErrorBoundary`
+- [Components](./components) — ~60 components organised by domain

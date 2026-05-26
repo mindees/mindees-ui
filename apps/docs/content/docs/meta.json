@@ -1,4 +1,13 @@
 {
   "title": "Documentation",
-  "pages": ["index"]
+  "pages": [
+    "index",
+    "installation",
+    "compatibility",
+    "architecture",
+    "theming",
+    "providers",
+    "---Components---",
+    "components"
+  ]
 }
