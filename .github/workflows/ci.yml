@@ -117,7 +117,11 @@ jobs:
     name: release (changesets)
     runs-on: ubuntu-latest
     needs: quality
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Only run on main pushes when the repo owner has opted in to publishing.
+    # Set `gh variable set PUBLISH_ENABLED --body true` once NPM_TOKEN (or
+    # npm OIDC trusted publishing) is configured. Until then the job is
+    # skipped so every push stays green.
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.PUBLISH_ENABLED == 'true'
     permissions:
       contents: write
       pull-requests: write
