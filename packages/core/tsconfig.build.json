@@ -4,7 +4,14 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    // Build emits this package's `.d.ts` files into a clean per-package layout.
+    "rootDir": "./src",
+    "outDir": "./lib/typescript",
+    // Workspace siblings resolve via node_modules during build (pnpm symlinks
+    // → packages/<pkg>/lib/typescript/...). Dev `paths` in tsconfig.json point
+    // at source for IDE feedback; clearing here forces declaration resolution.
+    "paths": {}
   },
   "exclude": [
     "lib",

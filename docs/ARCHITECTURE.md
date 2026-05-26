@@ -22,13 +22,13 @@ API: `tagComponent`, `getComponentTag`, `isTaggedAs`.
 
 Radix-style prop-merging slot. `<Slot {...parent}><Child /></Slot>` returns the Child with merged props:
 
-| Prop family | Merge rule |
-|---|---|
-| `onX` event handlers | child first, then parent (parent skipped if `evt.defaultPrevented`) |
-| `style` | array (`[parentStyle, childStyle]`); RN flattens, child wins on conflict |
-| `className` (web) | concatenated |
-| `ref` | both forwarded via `mergeRefs` |
-| any other prop | child wins |
+| Prop family          | Merge rule                                                               |
+| -------------------- | ------------------------------------------------------------------------ |
+| `onX` event handlers | child first, then parent (parent skipped if `evt.defaultPrevented`)      |
+| `style`              | array (`[parentStyle, childStyle]`); RN flattens, child wins on conflict |
+| `className` (web)    | concatenated                                                             |
+| `ref`                | both forwarded via `mergeRefs`                                           |
+| any other prop       | child wins                                                               |
 
 Components opt into this with `asChild`: `function Trigger({ asChild, ...rest }) { const Comp = asChild ? Slot : Pressable; return <Comp {...rest} />; }`.
 
@@ -40,13 +40,13 @@ Components opt into this with `asChild`: `function Trigger({ asChild, ...rest })
 
 Stack/HStack/VStack take a base `gap` token, then for each consecutive pair `(prev, next)` apply a deterministic rule:
 
-| Rule | Multiplier | Triggered by |
-|---|---|---|
-| `tighter` | × 0.25 | Heading↔Caption/Label (eyebrow text group) |
-| `tight` | × 0.5 | Text→Text (continuous prose) |
-| `base` | × 1 | anything else |
-| `loose` | × 1.5 | Heading→Text (hierarchy break); content→Button (trailing action) |
-| `looser` | × 2 | (reserved for section breaks) |
+| Rule      | Multiplier | Triggered by                                                     |
+| --------- | ---------- | ---------------------------------------------------------------- |
+| `tighter` | × 0.25     | Heading↔Caption/Label (eyebrow text group)                       |
+| `tight`   | × 0.5      | Text→Text (continuous prose)                                     |
+| `base`    | × 1        | anything else                                                    |
+| `loose`   | × 1.5      | Heading→Text (hierarchy break); content→Button (trailing action) |
+| `looser`  | × 2        | (reserved for section breaks)                                    |
 
 Implemented in `spacing-rules.ts`. Each row has a test in `__tests__/spacing-rules.test.ts`.
 
@@ -54,12 +54,12 @@ Implemented in `spacing-rules.ts`. Each row has a test in `__tests__/spacing-rul
 
 `width` and `height` accept `IntrinsicSize = 'fill' | 'hug' | number | '${number}%'`:
 
-| Input | Maps to |
-|---|---|
-| `fill` | `{ flexGrow: 1, flexShrink: 1, flexBasis: 0 }` |
-| `hug` | `{ flexShrink: 0 }` (intrinsic content size) |
-| number | `width: N` or `height: N` |
-| `${N}%` | `width: 'N%'` or `height: 'N%'` |
+| Input   | Maps to                                        |
+| ------- | ---------------------------------------------- |
+| `fill`  | `{ flexGrow: 1, flexShrink: 1, flexBasis: 0 }` |
+| `hug`   | `{ flexShrink: 0 }` (intrinsic content size)   |
+| number  | `width: N` or `height: N`                      |
+| `${N}%` | `width: 'N%'` or `height: 'N%'`                |
 
 Implemented in `sizing.ts`. Tested in `__tests__/sizing.test.ts`.
 
@@ -67,13 +67,13 @@ Implemented in `sizing.ts`. Tested in `__tests__/sizing.test.ts`.
 
 Each compound parent provides a typed context describing only what its children need. Children read whichever contexts apply, and components without a wrapping parent fall back to sensible defaults.
 
-| Context | Provided by | Read by |
-|---|---|---|
-| `ButtonGroupContext` | `ButtonGroup` | `Button`, `IconButton` (corner-merging, size sync) |
-| `ListContext` | `List` | `ListItem` (density, dividers) |
-| `StackContext` | `Stack`/`HStack`/`VStack` | direct children (axis-aware spacing) |
-| `FormFieldContext` | `FormField` | `Input`, `Label`, `HelperText`, `ErrorMessage` (a11y wiring) |
-| `CardContext` | `Card` | `Card.Header`, `Card.Body`, `Card.Footer` (density, variant) |
+| Context              | Provided by               | Read by                                                      |
+| -------------------- | ------------------------- | ------------------------------------------------------------ |
+| `ButtonGroupContext` | `ButtonGroup`             | `Button`, `IconButton` (corner-merging, size sync)           |
+| `ListContext`        | `List`                    | `ListItem` (density, dividers)                               |
+| `StackContext`       | `Stack`/`HStack`/`VStack` | direct children (axis-aware spacing)                         |
+| `FormFieldContext`   | `FormField`               | `Input`, `Label`, `HelperText`, `ErrorMessage` (a11y wiring) |
+| `CardContext`        | `Card`                    | `Card.Header`, `Card.Body`, `Card.Footer` (density, variant) |
 
 ### Responsive + density
 

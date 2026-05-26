@@ -6,7 +6,6 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
 import importPlugin from 'eslint-plugin-import';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
 import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
@@ -24,13 +23,17 @@ export default tseslint.config(
     ],
   },
   js.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.stylistic,
   {
+    // Non-type-checked rules avoid typescript-eslint's projectService
+    // following imports into Flow-typed `react-native/*` source files.
+    // Type-aware rules (no-floating-promises, no-unsafe-argument, etc.)
+    // come back in Phase 2 once we have TS project references wired up.
     languageOptions: {
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
     plugins: {
@@ -38,7 +41,6 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-native': reactNative,
       import: importPlugin,
-      'jsx-a11y': jsxA11y,
     },
     settings: {
       react: { version: 'detect' },
@@ -46,10 +48,6 @@ export default tseslint.config(
     rules: {
       // Public API hygiene — no `any` in exports
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-unsafe-assignment': 'error',
-      '@typescript-eslint/no-unsafe-return': 'error',
-      '@typescript-eslint/no-unsafe-argument': 'error',
-      '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },

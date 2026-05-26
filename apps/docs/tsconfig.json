@@ -7,17 +7,13 @@
     "noEmit": true,
     "allowJs": true,
     "incremental": true,
+    "declaration": false,
+    "declarationMap": false,
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".source/**/*"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".source/**/*"],
   "exclude": ["node_modules", ".next", ".turbo"]
 }

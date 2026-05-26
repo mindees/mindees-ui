@@ -6,12 +6,12 @@ We don't claim "100% optimized". We claim measurable budgets that CI enforces, w
 
 ### Bundle size (gzipped equivalent)
 
-| Subpath | Budget | Source |
-|---|---|---|
-| `@mindees/ui` (full barrel) | 80 KB | grows as Phases 2–6 land |
-| `@mindees/ui/theme` | 16 KB | |
-| `@mindees/ui/layout-intelligence` | 16 KB | |
-| `@mindees/ui/providers` | 12 KB | |
+| Subpath                           | Budget | Source                   |
+| --------------------------------- | ------ | ------------------------ |
+| `@mindees/ui` (full barrel)       | 80 KB  | grows as Phases 2–6 land |
+| `@mindees/ui/theme`               | 16 KB  |                          |
+| `@mindees/ui/layout-intelligence` | 16 KB  |                          |
+| `@mindees/ui/providers`           | 12 KB  |                          |
 
 Per-component budgets land alongside each component in Phase 2+. Enforced by `scripts/check-bundle-budget.mjs` in CI.
 

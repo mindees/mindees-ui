@@ -84,7 +84,9 @@ export function tagComponent<T extends React.ComponentType<unknown>>(
   return component;
 }
 
-export function getComponentTag(element: React.ReactElement | null | undefined): ComponentTag | undefined {
+export function getComponentTag(
+  element: React.ReactElement | null | undefined,
+): ComponentTag | undefined {
   if (!element || !React.isValidElement(element)) return undefined;
   const type = element.type as unknown;
   if (type && (typeof type === 'function' || typeof type === 'object')) {

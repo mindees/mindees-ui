@@ -1,0 +1,25 @@
+# Build outputs (regenerated; don't lint or format)
+**/lib/
+**/dist/
+**/build/
+**/.turbo/
+**/.next/
+**/.source/
+**/.expo/
+**/.contentlayer/
+**/coverage/
+**/storybook-static/
+
+# Lockfiles
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Native
+**/ios/Pods/
+**/android/.gradle/
+**/android/build/
+
+# Misc
+**/*.tsbuildinfo
+**/node_modules/

@@ -30,24 +30,12 @@
     },
     "lint": {
       "outputs": [],
-      "inputs": [
-        "src/**",
-        "test/**",
-        "eslint.config.*",
-        ".eslintrc.*",
-        "package.json"
-      ]
+      "inputs": ["src/**", "test/**", "eslint.config.*", ".eslintrc.*", "package.json"]
     },
     "test": {
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"],
-      "inputs": [
-        "src/**",
-        "test/**",
-        "jest.config.*",
-        "jest.setup.*",
-        "package.json"
-      ]
+      "inputs": ["src/**", "test/**", "jest.config.*", "jest.setup.*", "package.json"]
     },
     "test:coverage": {
       "dependsOn": ["^build"],

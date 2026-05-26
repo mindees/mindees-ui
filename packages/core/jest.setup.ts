@@ -1,15 +1,19 @@
-import '@testing-library/jest-native/extend-expect';
+// jest-native's `extend-expect` is deprecated; @testing-library/react-native
+// v13+ ships its matchers built-in, so the import is no longer required.
+//
+// This file is loaded via `setupFiles`, which runs *before* the testing
+// framework is installed — Jest globals like `beforeAll` are not yet defined
+// here, but `jest.mock(...)` works because the `jest` global is available
+// from module load.
 
-// React Native mocks for tests that don't need the native bridge
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper', () => ({}));
-
-// Reanimated worklets — use the official mock
+// Reanimated worklets — the project's official Jest mock.
 jest.mock('react-native-reanimated', () =>
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   require('react-native-reanimated/mock'),
 );
 
-// Gesture Handler in tests
+// Gesture Handler — replace with plain Views so tree rendering doesn't need
+// any native handlers.
 jest.mock('react-native-gesture-handler', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const View = require('react-native').View;
@@ -20,19 +24,6 @@ jest.mock('react-native-gesture-handler', () => {
     LongPressGestureHandler: View,
     State: {},
     Directions: {},
-    gestureHandlerRootHOC: (x: unknown) => x,
+    gestureHandlerRootHOC: <T>(x: T): T => x,
   };
-});
-
-// Silence the legacy interop warning that fires inside RN test renderer
-const originalError = console.error;
-beforeAll(() => {
-  console.error = (...args: unknown[]) => {
-    const msg = String(args[0] ?? '');
-    if (msg.includes('not wrapped in act')) return;
-    originalError(...args);
-  };
-});
-afterAll(() => {
-  console.error = originalError;
 });

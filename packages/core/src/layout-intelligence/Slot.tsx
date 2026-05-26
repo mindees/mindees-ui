@@ -24,7 +24,7 @@ type AnyProps = Record<string, unknown> & {
   children?: React.ReactNode;
 };
 
-function mergeRefs<T>(...refs: ReadonlyArray<AnyRef<T> | Falsy>): React.RefCallback<T> {
+function mergeRefs<T>(...refs: readonly (AnyRef<T> | Falsy)[]): React.RefCallback<T> {
   return (value) => {
     for (const ref of refs) {
       if (!ref) continue;
@@ -86,8 +86,12 @@ export const Slot = React.forwardRef<unknown, SlotProps>(function Slot(props, fo
     }
     return null;
   }
-  const childProps = children.props as AnyProps;
-  const childRef = (children as React.ReactElement & { ref?: AnyRef<unknown> }).ref;
+  const childProps = children.props as AnyProps & { ref?: AnyRef<unknown> };
+  // React 19 promoted `ref` to a regular prop; reading `element.ref` triggers
+  // a deprecation warning. Prefer props.ref and fall back to the legacy
+  // element-level property only for back-compat with React 18 trees.
+  const childRef =
+    childProps.ref ?? (children as React.ReactElement & { ref?: AnyRef<unknown> }).ref;
   const merged = mergeProps(slotProps, childProps);
   merged.ref = mergeRefs(forwardedRef, childRef);
   return React.cloneElement(children, merged);

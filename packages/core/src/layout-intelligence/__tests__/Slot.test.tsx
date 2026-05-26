@@ -1,6 +1,6 @@
+import { render, fireEvent } from '@testing-library/react-native';
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { render, fireEvent } from '@testing-library/react-native';
 
 import { Slot } from '../Slot';
 
@@ -47,7 +47,11 @@ describe('Slot', () => {
         </Pressable>
       </Slot>,
     );
-    fireEvent.press(getByTestId('p'));
+    // RN's fireEvent.press dispatches handlers without an event arg by default;
+    // pass an explicit event-like object so the child's `defaultPrevented`
+    // signal has somewhere to land. Documented as a web-DOM-style escape
+    // hatch — RN press handlers don't get a preventDefault by default.
+    fireEvent.press(getByTestId('p'), { defaultPrevented: false });
     expect(onPressChild).toHaveBeenCalledTimes(1);
     expect(onPressParent).not.toHaveBeenCalled();
   });
@@ -69,7 +73,7 @@ describe('Slot', () => {
       </Slot>,
     );
     const v = getByTestId('v');
-    const styles = (v.props.style as readonly unknown[]);
+    const styles = v.props.style as readonly unknown[];
     expect(Array.isArray(styles)).toBe(true);
     expect(styles).toContainEqual({ padding: 8 });
     expect(styles).toContainEqual({ backgroundColor: 'red' });

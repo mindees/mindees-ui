@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import 'fumadocs-ui/style.css';
 
 export const metadata = {
@@ -10,10 +10,16 @@ export const metadata = {
   openGraph: {
     type: 'website',
     siteName: 'MindeesUI',
+    images: [{ url: '/opengraph-image.png', width: 1024, height: 1024, alt: 'MindeesUI' }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: {
+    card: 'summary_large_image',
+    images: [{ url: '/twitter-image.png', alt: 'MindeesUI' }],
+  },
   alternates: { canonical: '/' },
   robots: { index: true, follow: true },
+  // app/icon.png and app/apple-icon.png are picked up automatically by
+  // Next.js's file-based metadata convention — no explicit `icons` entry needed.
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

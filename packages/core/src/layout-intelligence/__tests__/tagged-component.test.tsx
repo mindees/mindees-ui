@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-import {
-  COMPONENT_TAG,
-  getComponentTag,
-  isTaggedAs,
-  tagComponent,
-} from '../tagged-component';
+import { COMPONENT_TAG, getComponentTag, isTaggedAs, tagComponent } from '../tagged-component';
 
 const Btn = tagComponent(function Btn(): React.ReactElement {
   return <View />;

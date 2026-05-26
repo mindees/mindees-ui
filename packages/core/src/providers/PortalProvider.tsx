@@ -9,7 +9,7 @@ import { View, StyleSheet } from 'react-native';
 // Why our own instead of `@gorhom/portal`: zero peer-dep cost, full control
 // over named hosts + per-host z-index ordering using our `zIndex` token.
 
-type PortalEntry = { readonly key: string; readonly node: React.ReactNode };
+interface PortalEntry { readonly key: string; readonly node: React.ReactNode }
 type PortalState = Record<string, PortalEntry[]>;
 
 interface PortalContextValue {
@@ -89,8 +89,11 @@ export function Portal({ children, host = 'modal', portalKey }: PortalProps): nu
   const idRef = React.useRef<string>(portalKey ?? `portal-${Math.random().toString(36).slice(2)}`);
   React.useEffect(() => {
     if (!ctx) return undefined;
-    ctx.mount(host, idRef.current, children);
-    return () => ctx.unmount(host, idRef.current);
+    // Capture the id locally so the cleanup function references a stable
+    // value (idRef.current could be reassigned between mount and unmount).
+    const id = idRef.current;
+    ctx.mount(host, id, children);
+    return () => ctx.unmount(host, id);
   }, [ctx, host, children]);
   return null;
 }

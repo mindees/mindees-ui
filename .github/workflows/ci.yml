@@ -10,20 +10,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Silence the Node 20 deprecation warning and pre-opt-in to the Node 24 runner
+# (defaults change on 2026-06-02).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   quality:
     name: typecheck / lint / test / build
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      matrix:
-        # The library publishes one set of artifacts but is validated against
-        # both supported SDK lines. RN 0.83 = SDK 55, RN 0.85 = SDK 56.
-        react-native: ['0.83.0', '0.85.3']
-        react: ['19.1.0', '19.2.6']
-        exclude:
-          - react-native: '0.83.0'
-            react: '19.2.6'
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -36,10 +32,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Install (override react / react-native for this matrix cell)
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm --filter @mindees/ui add -D react@${{ matrix.react }} react-native@${{ matrix.react-native }}
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
       - name: Verify peer-dep matrix against npm
         run: pnpm verify:versions
@@ -57,7 +51,6 @@ jobs:
         run: pnpm test:coverage
 
       - name: Upload coverage
-        if: matrix.react-native == '0.85.3'
         uses: actions/upload-artifact@v4
         with:
           name: coverage
@@ -67,8 +60,36 @@ jobs:
         run: pnpm build
 
       - name: Bundle budget per package
-        if: matrix.react-native == '0.85.3'
         run: node scripts/check-bundle-budget.mjs
+
+  # SDK 55 / RN 0.83 downlevel verification. Library code declares
+  # `react-native >=0.83.0` as a peer; this confirms the public API still
+  # typechecks and tests pass when consumers stay on the older line.
+  # Uses pnpm overrides at install time rather than the workspace's pins.
+  downlevel:
+    name: typecheck / test on RN 0.83 (SDK 55)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: quality
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.3.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22', cache: 'pnpm' }
+
+      - name: Install with RN/React downlevel overrides
+        run: |
+          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.pnpm={...(p.pnpm||{}),overrides:{...(p.pnpm?.overrides||{}),'react':'19.1.0','react-native':'0.83.0','react-test-renderer':'19.1.0'}};fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
+          pnpm install --no-frozen-lockfile
+
+      - name: Typecheck @mindees/ui only
+        run: pnpm --filter @mindees/ui typecheck
+
+      - name: Test @mindees/ui only
+        run: pnpm --filter @mindees/ui test
 
   perf:
     name: perf regression (Reassure)

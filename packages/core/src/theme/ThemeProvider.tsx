@@ -43,8 +43,10 @@ export function ThemeProvider({
   mode: modeProp = 'auto',
 }: ThemeProviderProps): React.ReactElement {
   const [mode, setMode] = React.useState<ThemeMode>(modeProp);
-  const [systemScheme, setSystemScheme] = React.useState<RNColorScheme>(() =>
-    Appearance.getColorScheme(),
+  // RN's Appearance.getColorScheme() can return null *or* undefined depending
+  // on the platform's headless / first-call state, so widen the state type.
+  const [systemScheme, setSystemScheme] = React.useState<RNColorScheme | undefined>(
+    () => Appearance.getColorScheme() ?? undefined,
   );
   const [reduceMotion, setReduceMotion] = React.useState(false);
   const [highContrast, setHighContrast] = React.useState(false);

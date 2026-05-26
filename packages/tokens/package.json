@@ -6,69 +6,119 @@
   "sideEffects": false,
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
-  "types": "./lib/typescript/src/index.d.ts",
+  "types": "./lib/typescript/commonjs/index.d.ts",
   "react-native": "./src/index.ts",
   "source": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./lib/typescript/src/index.d.ts",
       "react-native": "./src/index.ts",
-      "import": "./lib/module/index.js",
-      "require": "./lib/commonjs/index.js"
+      "import": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      }
     },
     "./color": {
-      "types": "./lib/typescript/src/color.d.ts",
       "react-native": "./src/color.ts",
-      "import": "./lib/module/color.js",
-      "require": "./lib/commonjs/color.js"
+      "import": {
+        "types": "./lib/typescript/module/color.d.ts",
+        "default": "./lib/module/color.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/color.d.ts",
+        "default": "./lib/commonjs/color.js"
+      }
     },
     "./typography": {
-      "types": "./lib/typescript/src/typography.d.ts",
       "react-native": "./src/typography.ts",
-      "import": "./lib/module/typography.js",
-      "require": "./lib/commonjs/typography.js"
+      "import": {
+        "types": "./lib/typescript/module/typography.d.ts",
+        "default": "./lib/module/typography.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/typography.d.ts",
+        "default": "./lib/commonjs/typography.js"
+      }
     },
     "./spacing": {
-      "types": "./lib/typescript/src/spacing.d.ts",
       "react-native": "./src/spacing.ts",
-      "import": "./lib/module/spacing.js",
-      "require": "./lib/commonjs/spacing.js"
+      "import": {
+        "types": "./lib/typescript/module/spacing.d.ts",
+        "default": "./lib/module/spacing.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/spacing.d.ts",
+        "default": "./lib/commonjs/spacing.js"
+      }
     },
     "./radii": {
-      "types": "./lib/typescript/src/radii.d.ts",
       "react-native": "./src/radii.ts",
-      "import": "./lib/module/radii.js",
-      "require": "./lib/commonjs/radii.js"
+      "import": {
+        "types": "./lib/typescript/module/radii.d.ts",
+        "default": "./lib/module/radii.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/radii.d.ts",
+        "default": "./lib/commonjs/radii.js"
+      }
     },
     "./shadows": {
-      "types": "./lib/typescript/src/shadows.d.ts",
       "react-native": "./src/shadows.ts",
-      "import": "./lib/module/shadows.js",
-      "require": "./lib/commonjs/shadows.js"
+      "import": {
+        "types": "./lib/typescript/module/shadows.d.ts",
+        "default": "./lib/module/shadows.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/shadows.d.ts",
+        "default": "./lib/commonjs/shadows.js"
+      }
     },
     "./motion": {
-      "types": "./lib/typescript/src/motion.d.ts",
       "react-native": "./src/motion.ts",
-      "import": "./lib/module/motion.js",
-      "require": "./lib/commonjs/motion.js"
+      "import": {
+        "types": "./lib/typescript/module/motion.d.ts",
+        "default": "./lib/module/motion.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/motion.d.ts",
+        "default": "./lib/commonjs/motion.js"
+      }
     },
     "./breakpoints": {
-      "types": "./lib/typescript/src/breakpoints.d.ts",
       "react-native": "./src/breakpoints.ts",
-      "import": "./lib/module/breakpoints.js",
-      "require": "./lib/commonjs/breakpoints.js"
+      "import": {
+        "types": "./lib/typescript/module/breakpoints.d.ts",
+        "default": "./lib/module/breakpoints.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/breakpoints.d.ts",
+        "default": "./lib/commonjs/breakpoints.js"
+      }
     },
     "./z-index": {
-      "types": "./lib/typescript/src/z-index.d.ts",
       "react-native": "./src/z-index.ts",
-      "import": "./lib/module/z-index.js",
-      "require": "./lib/commonjs/z-index.js"
+      "import": {
+        "types": "./lib/typescript/module/z-index.d.ts",
+        "default": "./lib/module/z-index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/z-index.d.ts",
+        "default": "./lib/commonjs/z-index.js"
+      }
     },
     "./density": {
-      "types": "./lib/typescript/src/density.d.ts",
       "react-native": "./src/density.ts",
-      "import": "./lib/module/density.js",
-      "require": "./lib/commonjs/density.js"
+      "import": {
+        "types": "./lib/typescript/module/density.d.ts",
+        "default": "./lib/module/density.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/density.d.ts",
+        "default": "./lib/commonjs/density.js"
+      }
     }
   },
   "files": [
@@ -82,12 +132,15 @@
     "build": "bob build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
     "clean": "rm -rf lib .turbo"
   },
+  "peerDependencies": {
+    "react-native": ">=0.83.0"
+  },
   "devDependencies": {
-    "react-native-builder-bob": "^0.41.0"
+    "react-native": "0.85.3",
+    "react-native-builder-bob": "^0.41.0",
+    "typescript": "^5.6.3"
   },
   "publishConfig": {
     "access": "public"
@@ -96,9 +149,24 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      ["commonjs", { "esm": true }],
-      ["module", { "esm": true }],
-      ["typescript", { "project": "tsconfig.build.json", "esm": true }]
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ]
   }
 }

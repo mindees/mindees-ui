@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mindees/mindees-ui/main/mindees-logo.png" alt="MindeesUI" width="96" height="96" />
+</p>
+
 # @mindees/tokens
 
 Design tokens for MindeesUI: colour scales + semantic mappings, typography, spacing, radii, shadows, motion, breakpoints, z-index, and density.

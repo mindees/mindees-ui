@@ -32,7 +32,10 @@ export interface SizeProps {
 //   `N%`   -> axis dimension = 'N%'
 //
 // Test: `sizing.test.ts` covers every input/axis combination.
-export function resolveSizeToStyle(size: IntrinsicSize | undefined, axis: 'width' | 'height'): FlexStyle {
+export function resolveSizeToStyle(
+  size: IntrinsicSize | undefined,
+  axis: 'width' | 'height',
+): FlexStyle {
   if (size === undefined) return {};
   if (size === 'fill') {
     return { flexGrow: 1, flexShrink: 1, flexBasis: 0 } satisfies FlexStyle;

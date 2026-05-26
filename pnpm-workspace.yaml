@@ -1,3 +1,27 @@
 packages:
   - 'packages/*'
   - 'apps/*'
+onlyBuiltDependencies:
+  - esbuild
+  - msgpackr-extract
+  - sharp
+  - '@swc/core'
+
+# Resolution overrides:
+# Some Expo SDK 56 sub-deps pin @types/react ^19.0.0, but react-native 0.85
+# and @types/react-dom 19.2.x want ^19.2.0. Force a single modern copy so the
+# whole workspace shares one definition and TS doesn't see two Reacts.
+overrides:
+  '@types/react': '~19.2.15'
+minimumReleaseAgeExclude:
+  - '@typescript-eslint/eslint-plugin@8.60.0'
+  - '@typescript-eslint/parser@8.60.0'
+  - '@typescript-eslint/project-service@8.60.0'
+  - '@typescript-eslint/scope-manager@8.60.0'
+  - '@typescript-eslint/tsconfig-utils@8.60.0'
+  - '@typescript-eslint/type-utils@8.60.0'
+  - '@typescript-eslint/types@8.60.0'
+  - '@typescript-eslint/typescript-estree@8.60.0'
+  - '@typescript-eslint/utils@8.60.0'
+  - '@typescript-eslint/visitor-keys@8.60.0'
+  - typescript-eslint@8.60.0

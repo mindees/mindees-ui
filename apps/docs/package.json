@@ -8,23 +8,22 @@
     "build": "fumadocs-mdx && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "next lint",
-    "test": "jest --passWithNoTests",
+    "lint": "eslint \"./app/**/*.{ts,tsx}\" \"./source.config.ts\"",
     "clean": "rm -rf .next .source .turbo"
   },
   "dependencies": {
     "fumadocs-core": "^16.9.1",
-    "fumadocs-mdx": "^11.0.0",
-    "fumadocs-ui": "^15.0.0",
-    "next": "^15.0.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "fumadocs-mdx": "^15.0.8",
+    "fumadocs-ui": "^16.9.1",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.10.0",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
+    "@types/react": "~19.2.15",
+    "@types/react-dom": "~19.2.1",
     "typescript": "^5.6.3"
   }
 }

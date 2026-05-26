@@ -6,23 +6,38 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "scheme": "mindeesui",
+    "icon": "./assets/images/icon.png",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "dev.mindees.example"
     },
     "android": {
       "package": "dev.mindees.example",
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
       "bundler": "metro",
-      "output": "static"
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
     "experiments": {
       "typedRoutes": true
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
     ]
   }
 }

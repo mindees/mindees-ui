@@ -1,14 +1,17 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./lib/typescript",
+    // Dev typecheck is no-emit: rootDir / outDir live only in tsconfig.build.json
+    // so bob's typescript target gets a clean per-package output layout. Here we
+    // let `paths` resolve to sibling source for fast IDE feedback.
     "types": ["jest", "node"],
     "paths": {
       "@mindees/tokens": ["../tokens/src"],
       "@mindees/tokens/*": ["../tokens/src/*"]
     }
   },
+  // Dev/lint tsconfig includes tests + jest.setup so typescript-eslint's
+  // projectService can resolve them. The build tsconfig excludes them.
   "include": ["src/**/*", "jest.setup.ts"],
-  "exclude": ["lib", "**/*.test.ts", "**/*.test.tsx"]
+  "exclude": ["lib"]
 }

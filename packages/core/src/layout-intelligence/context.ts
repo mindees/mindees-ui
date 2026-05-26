@@ -12,9 +12,15 @@ export interface ButtonGroupContextValue {
   readonly variant: 'solid' | 'outline' | 'ghost' | 'link';
   readonly attached: boolean;
   /** Position helpers for the LIL to round outer corners / merge borders. */
-  readonly position: { readonly index: number; readonly isFirst: boolean; readonly isLast: boolean };
+  readonly position: {
+    readonly index: number;
+    readonly isFirst: boolean;
+    readonly isLast: boolean;
+  };
 }
-export const ButtonGroupContext = React.createContext<ButtonGroupContextValue | undefined>(undefined);
+export const ButtonGroupContext = React.createContext<ButtonGroupContextValue | undefined>(
+  undefined,
+);
 
 // --- List ---------------------------------------------------------------
 export interface ListContextValue {

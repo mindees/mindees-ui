@@ -11,12 +11,7 @@ export interface ShadowSpec {
   readonly elevation: number;
 }
 
-const make = (
-  height: number,
-  radius: number,
-  opacity: number,
-  elevation: number,
-): ShadowSpec => ({
+const make = (height: number, radius: number, opacity: number, elevation: number): ShadowSpec => ({
   shadowColor: '#000000',
   shadowOffset: { width: 0, height },
   shadowOpacity: opacity,

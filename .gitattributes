@@ -1,0 +1,23 @@
+# Force LF line endings for all text files. Project's Prettier config sets
+# endOfLine: 'lf', and Metro/builder-bob tooling expects LF. This silences
+# the CRLF warnings on Windows clones without touching working-tree files.
+* text=auto eol=lf
+
+# Binary files Git should never try to diff or normalize.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+
+# Lockfiles are generated; don't show in PR diffs by default and don't try
+# to merge them automatically.
+pnpm-lock.yaml -diff merge=binary

@@ -21,15 +21,7 @@ const Txt = tagComponent(function Txt(): React.ReactElement {
 
 describe('flattenChildren', () => {
   it('drops null / undefined / boolean / strings / numbers', () => {
-    const out = flattenChildren([
-      null,
-      undefined,
-      false,
-      true,
-      'hi',
-      42,
-      <View key="v" />,
-    ]);
+    const out = flattenChildren([null, undefined, false, true, 'hi', 42, <View key="v" />]);
     expect(out).toHaveLength(1);
   });
 
@@ -59,7 +51,7 @@ describe('describeChildren', () => {
     expect(slots.map((s) => s.isLast)).toEqual([false, false, true]);
   });
 
-  it('attaches each child\'s tag', () => {
+  it("attaches each child's tag", () => {
     const slots = describeChildren([<Btn key="a" />, <Hdr key="b" />, <View key="c" />]);
     expect(slots.map((s) => s.tag)).toEqual(['Button', 'Heading', undefined]);
   });
@@ -67,10 +59,7 @@ describe('describeChildren', () => {
 
 describe('findFirstByTag / countByTag', () => {
   it('finds first by tag', () => {
-    const found = findFirstByTag(
-      [<View key="v" />, <Btn key="a" />, <Btn key="b" />],
-      'Button',
-    );
+    const found = findFirstByTag([<View key="v" />, <Btn key="a" />, <Btn key="b" />], 'Button');
     expect(found).toBeDefined();
   });
 

@@ -15,16 +15,22 @@ export interface IconDefinition {
 }
 
 // Factory used by every icon module. Keeps the surface tiny and consistent.
-export function createIcon(definition: IconDefinition): React.ForwardRefExoticComponent<
-  IconProps & React.RefAttributes<Svg>
-> {
+export function createIcon(
+  definition: IconDefinition,
+): React.ForwardRefExoticComponent<IconProps & React.RefAttributes<Svg>> {
   const Icon = React.forwardRef<Svg, IconProps>(function Icon(
     { size = 24, color = 'currentColor', ...rest },
     ref,
   ) {
     return (
       <Svg ref={ref} width={size} height={size} viewBox={definition.viewBox} fill="none" {...rest}>
-        <Path d={definition.path} stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+        <Path
+          d={definition.path}
+          stroke={color}
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </Svg>
     );
   });

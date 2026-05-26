@@ -26,7 +26,8 @@ const BODY_TEXT: readonly ComponentTag[] = ['Text'];
 const INTERACTIVE: readonly ComponentTag[] = ['Button', 'IconButton', 'Input', 'Select', 'Switch'];
 
 const isHeading = (t?: ComponentTag): boolean => t !== undefined && HEADINGS.includes(t);
-const isSecondaryText = (t?: ComponentTag): boolean => t !== undefined && SECONDARY_TEXT.includes(t);
+const isSecondaryText = (t?: ComponentTag): boolean =>
+  t !== undefined && SECONDARY_TEXT.includes(t);
 const isBodyText = (t?: ComponentTag): boolean => t !== undefined && BODY_TEXT.includes(t);
 const isInteractive = (t?: ComponentTag): boolean => t !== undefined && INTERACTIVE.includes(t);
 
@@ -37,7 +38,10 @@ const isInteractive = (t?: ComponentTag): boolean => t !== undefined && INTERACT
 // 3. Body text following body text reads as continuous prose → tight gap.
 // 4. A trailing interactive group (button row) after content gets the loose gap.
 // 5. Anything → anything: base gap (the user-supplied value).
-export function resolveGapRule(prev: ComponentTag | undefined, next: ComponentTag | undefined): GapRule {
+export function resolveGapRule(
+  prev: ComponentTag | undefined,
+  next: ComponentTag | undefined,
+): GapRule {
   if (isHeading(prev) && isSecondaryText(next)) return 'tighter';
   if (isSecondaryText(prev) && isHeading(next)) return 'tighter';
   if (isHeading(prev) && isBodyText(next)) return 'loose';
