@@ -1,6 +1,6 @@
 {
   "name": "@mindees/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer.",
   "keywords": [
     "react-native",
@@ -126,6 +126,28 @@
       "require": {
         "types": "./lib/typescript/commonjs/providers/index.d.ts",
         "default": "./lib/commonjs/providers/index.js"
+      }
+    },
+    "./styling": {
+      "react-native": "./src/styling/index.ts",
+      "import": {
+        "types": "./lib/typescript/module/styling/index.d.ts",
+        "default": "./lib/module/styling/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/styling/index.d.ts",
+        "default": "./lib/commonjs/styling/index.js"
+      }
+    },
+    "./a11y": {
+      "react-native": "./src/a11y/index.ts",
+      "import": {
+        "types": "./lib/typescript/module/a11y/index.d.ts",
+        "default": "./lib/module/a11y/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/a11y/index.d.ts",
+        "default": "./lib/commonjs/a11y/index.js"
       }
     }
   },
