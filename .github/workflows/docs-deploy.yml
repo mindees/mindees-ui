@@ -1,0 +1,72 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/docs/**'
+      - 'packages/**'
+      - '.github/workflows/docs-deploy.yml'
+  workflow_dispatch:
+
+# Allow only one concurrent deployment; new pushes cancel an in-flight one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  build:
+    name: Build static docs site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.3.0 }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install (no scripts, then rebuild allow-listed natives)
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm rebuild esbuild msgpackr-extract sharp
+
+      - name: Build library packages (docs builds against the workspace)
+        run: pnpm --filter @mindees/ui --filter @mindees/tokens --filter @mindees/icons build
+
+      - name: Build docs site (static export)
+        env:
+          # Strip `/<repo>` prefix only when the site is hosted at the
+          # default GitHub-Pages URL. Override (or unset) for custom domains.
+          DOCS_BASE_PATH: /mindees-ui
+        run: pnpm --filter @mindees/docs build
+
+      - name: Add .nojekyll (so Pages serves _next folder)
+        run: touch apps/docs/out/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
