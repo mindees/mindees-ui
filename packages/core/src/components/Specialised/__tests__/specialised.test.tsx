@@ -32,9 +32,13 @@ describe('Phase 6 — tag identity + gated peers', () => {
     // should render the MissingPeer fallback rather than crashing. The peer
     // name appears in both the label and the install instruction, so use
     // getAllByText to assert at least one match.
-    expect(render(<QRCode value="x" />).getAllByText(/react-native-qrcode-svg/).length).toBeGreaterThan(0);
     expect(
-      render(<WebView source={{ uri: 'https://example.com' }} />).getAllByText(/react-native-webview/).length,
+      render(<QRCode value="x" />).getAllByText(/react-native-qrcode-svg/).length,
+    ).toBeGreaterThan(0);
+    expect(
+      render(<WebView source={{ uri: 'https://example.com' }} />).getAllByText(
+        /react-native-webview/,
+      ).length,
     ).toBeGreaterThan(0);
     expect(render(<MapView />).getAllByText(/react-native-maps/).length).toBeGreaterThan(0);
     expect(render(<Camera />).getAllByText(/expo-camera/).length).toBeGreaterThan(0);
