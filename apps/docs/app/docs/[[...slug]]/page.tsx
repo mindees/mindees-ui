@@ -18,9 +18,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const page = source.getPage(slug);
   if (!page) return {};
+  const path = slug && slug.length > 0 ? `/docs/${slug.join('/')}` : '/docs';
   return {
     title: page.data.title,
     description: page.data.description,
+    alternates: { canonical: path },
   };
 }
 

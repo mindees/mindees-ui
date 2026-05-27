@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'MindeesUI — Universal React Native CLI + Expo component library',
   description:
     'Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. ~60 accessible components for the New Architecture.',
+  alternates: { canonical: '/' },
 };
 
 const features = [

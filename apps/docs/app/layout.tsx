@@ -2,12 +2,13 @@ import type { ReactNode } from 'react';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import 'fumadocs-ui/style.css';
 import './globals.css';
+import { SITE_URL, SHOULD_INDEX } from '@/lib/site';
 
 export const metadata = {
   title: { default: 'MindeesUI', template: '%s · MindeesUI' },
   description:
     'Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. ~60 accessible components for the New Architecture.',
-  metadataBase: new URL('https://mindees.dev'),
+  metadataBase: new URL(SITE_URL),
   keywords: [
     'react-native',
     'expo',
@@ -35,8 +36,9 @@ export const metadata = {
     card: 'summary_large_image',
     images: [{ url: '/twitter-image.png', alt: 'MindeesUI' }],
   },
-  alternates: { canonical: '/' },
-  robots: { index: true, follow: true },
+  robots: SHOULD_INDEX
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 const jsonLd = {
@@ -51,7 +53,7 @@ const jsonLd = {
       programmingLanguage: 'TypeScript',
       runtimePlatform: ['React Native', 'Expo', 'React Native Web'],
       license: 'https://github.com/mindees/mindees-ui/blob/main/LICENSE',
-      url: 'https://mindees.dev',
+      url: SITE_URL,
       sameAs: [
         'https://www.npmjs.com/package/@mindees/ui',
         'https://www.npmjs.com/package/@mindees/tokens',
@@ -62,11 +64,12 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       name: 'MindeesUI',
-      url: 'https://mindees.dev',
-      description: 'Documentation for MindeesUI — universal React Native + Expo component library.',
+      url: SITE_URL,
+      description:
+        'Documentation for MindeesUI — universal React Native + Expo component library.',
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://mindees.dev/docs?q={search_term_string}',
+        target: `${SITE_URL}/docs?q={search_term_string}`,
         'query-input': 'required name=search_term_string',
       },
     },
