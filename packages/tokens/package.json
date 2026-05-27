@@ -49,6 +49,15 @@
     "mindees-ui"
   ],
   "license": "MIT",
+  "homepage": "https://mindees-ui.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mindees/mindees-ui.git",
+    "directory": "packages/tokens"
+  },
+  "bugs": {
+    "url": "https://github.com/mindees/mindees-ui/issues"
+  },
   "sideEffects": false,
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",

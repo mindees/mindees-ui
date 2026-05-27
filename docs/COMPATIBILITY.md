@@ -18,16 +18,16 @@ MindeesUI v1 supports the latest stable Expo SDK and one previous, on the New Ar
 
 > **What the spec assumed vs reality:** the original brief assumed SDK 55 = latest stable and SDK 56 = upcoming. As of 2026-05-26, **SDK 56 (Expo 56.0.4) is the latest stable** and SDK 55 is n-1. SDK 57 exists only as a canary build and is not yet a v1 target.
 
-## Peer dependencies (verified 2026-05-26)
+## Peer dependencies (verified 2026-05-28)
 
 These are the _known-good_ versions resolved from the npm registry on the verification date. Peer ranges in each package's `package.json` are slightly wider to accommodate patch releases; CI installs the locked versions in `pnpm-lock.yaml`.
 
 | Package                          | Verified version | New Arch    | Required by                                                             |
 | -------------------------------- | ---------------- | ----------- | ----------------------------------------------------------------------- |
-| `react-native-reanimated`        | 4.3.1            | ✅ worklets | layout-intelligence transitions, animated primitives, Unistyles runtime |
+| `react-native-reanimated`        | 4.4.0            | ✅ worklets | layout-intelligence transitions, animated primitives, Unistyles runtime |
 | `react-native-gesture-handler`   | 2.31.2           | ✅          | Pressable hit-slop, BottomSheet, Drawer, Tabs swipes                    |
 | `@shopify/flash-list`            | 2.3.1            | ✅ v2       | every long-list component, FlatList wrapper fallback                    |
-| `react-native-unistyles`         | 3.2.4            | ✅ Nitro    | styling engine (abstracted behind `createStyles`)                       |
+| `react-native-unistyles`         | 3.2.5            | ✅ Nitro    | styling engine (abstracted behind `createStyles`)                       |
 | `react-native-nitro-modules`     | latest           | ✅          | required by Unistyles 3                                                 |
 | `react-native-edge-to-edge`      | latest           | ✅          | required by Unistyles 3                                                 |
 | `react-native-safe-area-context` | 5.8.0            | ✅          | SafeAreaView, ScreenWrapper, top/bottom insets                          |
