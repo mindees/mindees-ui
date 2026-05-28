@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mindees.dev">
+  <a href="https://mindees-ui.vercel.app">
     <img src="https://raw.githubusercontent.com/mindees/mindees-ui/main/mindees-logo.png" alt="MindeesUI — universal React Native and Expo component library with a deterministic Layout Intelligence Layer" width="160" height="160" />
   </a>
 </p>
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="https://mindees.dev"><b>Documentation</b></a> ·
+  <a href="https://mindees-ui.vercel.app"><b>Documentation</b></a> ·
   <a href="https://github.com/mindees/mindees-ui"><b>GitHub</b></a> ·
   <a href="https://github.com/mindees/mindees-ui/blob/main/docs/ARCHITECTURE.md"><b>Architecture</b></a> ·
   <a href="https://github.com/mindees/mindees-ui/blob/main/docs/ROADMAP.md"><b>Roadmap</b></a>
@@ -212,11 +212,11 @@ const brand = createTheme({
 
 ## Documentation
 
-- [Getting Started](https://mindees.dev/docs)
-- [Installation](https://mindees.dev/docs/installation)
-- [Architecture & Layout Intelligence Layer](https://mindees.dev/docs/architecture)
-- [Theming](https://mindees.dev/docs/theming)
-- [Providers](https://mindees.dev/docs/providers)
+- [Getting Started](https://mindees-ui.vercel.app/docs)
+- [Installation](https://mindees-ui.vercel.app/docs/installation)
+- [Architecture & Layout Intelligence Layer](https://mindees-ui.vercel.app/docs/architecture)
+- [Theming](https://mindees-ui.vercel.app/docs/theming)
+- [Providers](https://mindees-ui.vercel.app/docs/providers)
 - [Compatibility Matrix](https://github.com/mindees/mindees-ui/blob/main/docs/COMPATIBILITY.md)
 - [Performance Budgets](https://github.com/mindees/mindees-ui/blob/main/docs/PERFORMANCE.md)
 - [Contributing](https://github.com/mindees/mindees-ui/blob/main/docs/CONTRIBUTING.md)

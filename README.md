@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mindees.dev">
+  <a href="https://mindees-ui.vercel.app">
     <img src="./mindees-logo.png" alt="MindeesUI — universal React Native and Expo component library with a deterministic Layout Intelligence Layer" width="160" height="160" />
   </a>
 </p>
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <a href="https://mindees.dev"><b>Documentation</b></a> ·
-  <a href="https://mindees.dev/docs"><b>Components</b></a> ·
+  <a href="https://mindees-ui.vercel.app"><b>Documentation</b></a> ·
+  <a href="https://mindees-ui.vercel.app/docs/components"><b>Components</b></a> ·
   <a href="./docs/ARCHITECTURE.md"><b>Architecture</b></a> ·
   <a href="./docs/ROADMAP.md"><b>Roadmap</b></a> ·
   <a href="https://github.com/mindees/mindees-ui/discussions"><b>Discussions</b></a>

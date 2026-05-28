@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mindees.dev">
+  <a href="https://mindees-ui.vercel.app">
     <img src="https://raw.githubusercontent.com/mindees/mindees-ui/main/mindees-logo.png" alt="MindeesUI — SVG icon library for React Native and Expo" width="120" height="120" />
   </a>
 </p>
