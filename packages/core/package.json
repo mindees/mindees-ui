@@ -214,6 +214,9 @@
     "expo-camera": {
       "optional": true
     },
+    "expo-document-picker": {
+      "optional": true
+    },
     "expo-haptics": {
       "optional": true
     },

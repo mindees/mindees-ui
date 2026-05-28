@@ -4,8 +4,12 @@ import { getComponentTag } from '../../../layout-intelligence/tagged-component';
 import { Autocomplete } from '../Autocomplete';
 import { Checkbox } from '../Checkbox';
 import { CurrencyInput } from '../CurrencyInput';
+import { DatePicker } from '../DatePicker';
+import { DateRangePicker } from '../DateRangePicker';
 import { EmailInput } from '../EmailInput';
+import { FilePicker } from '../FilePicker';
 import { FormField } from '../FormField';
+import { ImagePicker } from '../ImagePicker';
 import { Input } from '../Input';
 import { MultiSelect } from '../MultiSelect';
 import { NumberInput } from '../NumberInput';
@@ -18,6 +22,7 @@ import { Select } from '../Select';
 import { Slider } from '../Slider';
 import { Switch } from '../Switch';
 import { TagInput } from '../TagInput';
+import { TimePicker } from '../TimePicker';
 
 describe('Phase 3 forms — smoke', () => {
   it('every form primitive carries its tag', () => {
@@ -155,5 +160,30 @@ describe('Advanced form primitives — smoke', () => {
     expect(() => render(<TagInput value={['one', 'two']} />)).not.toThrow();
     expect(() => render(<Slider value={0.5} min={0} max={1} step={0.1} />)).not.toThrow();
     expect(() => render(<RangeSlider value={[0.2, 0.8]} min={0} max={1} />)).not.toThrow();
+  });
+});
+
+describe('Form picker primitives — smoke', () => {
+  it('every picker primitive carries its tag', () => {
+    expect(getComponentTag(<DatePicker />)).toBe('DatePicker');
+    expect(getComponentTag(<DateRangePicker />)).toBe('DateRangePicker');
+    expect(getComponentTag(<TimePicker />)).toBe('TimePicker');
+    expect(getComponentTag(<FilePicker />)).toBe('FilePicker');
+    expect(getComponentTag(<ImagePicker />)).toBe('ImagePicker');
+  });
+
+  it('each picker primitive renders without throwing', () => {
+    expect(() => render(<DatePicker value={new Date(2026, 4, 28)} />)).not.toThrow();
+    expect(() =>
+      render(
+        <DateRangePicker value={{ start: new Date(2026, 4, 1), end: new Date(2026, 4, 28) }} />,
+      ),
+    ).not.toThrow();
+    expect(() => render(<TimePicker value={{ hour: 9, minute: 30 }} />)).not.toThrow();
+    expect(() => render(<TimePicker value={{ hour: 14, minute: 5 }} use24Hour />)).not.toThrow();
+    // expo-document-picker / expo-image-picker are not installed in tests, so
+    // both render the MissingPeer fallback — which must not throw.
+    expect(() => render(<FilePicker />)).not.toThrow();
+    expect(() => render(<ImagePicker />)).not.toThrow();
   });
 });
