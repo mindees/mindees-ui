@@ -1,6 +1,6 @@
 {
   "name": "@mindees/icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tree-shakeable SVG icon library for React Native and Expo, built on react-native-svg. Every icon is a named export; New Architecture ready; iOS, Android, and React Native Web.",
   "keywords": [
     "react-native-icons",
