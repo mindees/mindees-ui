@@ -24,18 +24,18 @@ const [open, setOpen] = useState(false);
 
 <Accordion title="Advanced" open={open} onOpenChange={setOpen}>
   <Text>Controlled body content.</Text>
-</Accordion>
+</Accordion>;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `title` | `ReactNode` | — | Header content. Strings render as semibold `Text`; nodes render as-is. |
-| `children` | `ReactNode` | — | Body content shown when expanded. |
-| `defaultOpen` | `boolean` | `false` | Initial open state when uncontrolled. |
-| `open` | `boolean` | — | Controlled open state. When set, internal state is ignored. |
-| `onOpenChange` | `(next: boolean) => void` | — | Fires whenever the user toggles the header. |
+| Prop           | Type                      | Default | Description                                                            |
+| -------------- | ------------------------- | ------- | ---------------------------------------------------------------------- |
+| `title`        | `ReactNode`               | —       | Header content. Strings render as semibold `Text`; nodes render as-is. |
+| `children`     | `ReactNode`               | —       | Body content shown when expanded.                                      |
+| `defaultOpen`  | `boolean`                 | `false` | Initial open state when uncontrolled.                                  |
+| `open`         | `boolean`                 | —       | Controlled open state. When set, internal state is ignored.            |
+| `onOpenChange` | `(next: boolean) => void` | —       | Fires whenever the user toggles the header.                            |
 
 ## Accessibility
 

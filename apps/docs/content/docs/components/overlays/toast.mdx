@@ -43,13 +43,13 @@ Persistent (no auto-dismiss) — set `duration` to `0`:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `visible` | `boolean` | — | Controls whether the toast is shown. |
-| `message` | `string` | — | The text rendered and announced to assistive tech. |
-| `tone` | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Visual tone and announcement priority (`danger` is announced assertively). |
-| `onDismiss` | `() => void` | — | Called when the auto-dismiss timer elapses. |
-| `duration` | `number` | `4000` | Auto-dismiss timeout in milliseconds. Set to `0` to disable. |
+| Prop        | Type                                           | Default  | Description                                                                |
+| ----------- | ---------------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| `visible`   | `boolean`                                      | —        | Controls whether the toast is shown.                                       |
+| `message`   | `string`                                       | —        | The text rendered and announced to assistive tech.                         |
+| `tone`      | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Visual tone and announcement priority (`danger` is announced assertively). |
+| `onDismiss` | `() => void`                                   | —        | Called when the auto-dismiss timer elapses.                                |
+| `duration`  | `number`                                       | `4000`   | Auto-dismiss timeout in milliseconds. Set to `0` to disable.               |
 
 ## Accessibility
 

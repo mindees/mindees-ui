@@ -29,14 +29,14 @@ With an error message — the description is hidden and the input picks up the i
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `label` | `string` | — | Visible label rendered above the input. Appended with ` *` when `required` is true. |
-| `description` | `string` | — | Helper text shown below the input. Hidden while `error` is present. |
-| `error` | `string` | — | Error caption shown below the input. Marks the field invalid in context. |
-| `required` | `boolean` | `false` | Appends an asterisk to the label and exposes `aria-required` on nested inputs. |
-| `disabled` | `boolean` | `false` | Propagated to nested inputs through context. Does not visually dim the wrapper itself. |
-| `children` | `ReactNode` | — | The input (or composite) the field wraps. |
+| Prop          | Type        | Default | Description                                                                            |
+| ------------- | ----------- | ------- | -------------------------------------------------------------------------------------- |
+| `label`       | `string`    | —       | Visible label rendered above the input. Appended with ` *` when `required` is true.    |
+| `description` | `string`    | —       | Helper text shown below the input. Hidden while `error` is present.                    |
+| `error`       | `string`    | —       | Error caption shown below the input. Marks the field invalid in context.               |
+| `required`    | `boolean`   | `false` | Appends an asterisk to the label and exposes `aria-required` on nested inputs.         |
+| `disabled`    | `boolean`   | `false` | Propagated to nested inputs through context. Does not visually dim the wrapper itself. |
+| `children`    | `ReactNode` | —       | The input (or composite) the field wraps.                                              |
 
 Inherits all `ViewProps` for layout and styling of the outer container.
 

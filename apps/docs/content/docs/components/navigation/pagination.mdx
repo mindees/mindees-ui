@@ -16,17 +16,17 @@ import { Pagination } from '@mindees/ui';
 ```tsx
 const [page, setPage] = useState(1);
 
-<Pagination total={42} page={page} onPageChange={setPage} siblingCount={1} />
+<Pagination total={42} page={page} onPageChange={setPage} siblingCount={1} />;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `total` | `number` | — | Total number of pages. Must be at least 1. |
-| `page` | `number` | — | The currently active page, 1-indexed. |
-| `onPageChange` | `(next: number) => void` | — | Fired when the user taps a page number. |
-| `siblingCount` | `number` | `1` | Number of pages to show on each side of the active page. |
+| Prop           | Type                     | Default | Description                                              |
+| -------------- | ------------------------ | ------- | -------------------------------------------------------- |
+| `total`        | `number`                 | —       | Total number of pages. Must be at least 1.               |
+| `page`         | `number`                 | —       | The currently active page, 1-indexed.                    |
+| `onPageChange` | `(next: number) => void` | —       | Fired when the user taps a page number.                  |
+| `siblingCount` | `number`                 | `1`     | Number of pages to show on each side of the active page. |
 
 ## Accessibility
 

@@ -26,18 +26,18 @@ import { Timeline } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `items` | `readonly TimelineItem[]` | — | Ordered list of events. Top to bottom matches chronological order. Required. |
+| Prop    | Type                      | Default | Description                                                                  |
+| ------- | ------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `items` | `readonly TimelineItem[]` | —       | Ordered list of events. Top to bottom matches chronological order. Required. |
 
 ### `TimelineItem` shape
 
-| Field | Type | Default | Description |
-| ----- | ---- | ------- | ----------- |
-| `title` | `ReactNode` | — | Primary label. Strings render as medium-weight text; nodes render as-is. |
-| `time` | `string` | — | Optional timestamp rendered as a muted caption below the title. |
-| `description` | `ReactNode` | — | Optional supporting text. Strings render as secondary captions. |
-| `tone` | `'neutral' \| 'success' \| 'warning' \| 'danger' \| 'primary'` | `'neutral'` | Status dot colour. `neutral` uses the strong border token. |
+| Field         | Type                                                           | Default     | Description                                                              |
+| ------------- | -------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ |
+| `title`       | `ReactNode`                                                    | —           | Primary label. Strings render as medium-weight text; nodes render as-is. |
+| `time`        | `string`                                                       | —           | Optional timestamp rendered as a muted caption below the title.          |
+| `description` | `ReactNode`                                                    | —           | Optional supporting text. Strings render as secondary captions.          |
+| `tone`        | `'neutral' \| 'success' \| 'warning' \| 'danger' \| 'primary'` | `'neutral'` | Status dot colour. `neutral` uses the strong border token.               |
 
 ## Accessibility
 

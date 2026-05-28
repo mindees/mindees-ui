@@ -35,23 +35,23 @@ import { List, ListItem } from '@mindees/ui';
 
 ### List props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `density` | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Vertical padding scale applied to each `ListItem` through context. |
-| `dividers` | `boolean` | `true` | Renders a 1-dp subtle border under every row. |
-| `interactive` | `boolean` | `false` | Causes rows without their own `onPress` to render as `Pressable`. |
-| `children` | `ReactNode` | — | One or more `ListItem` elements. |
+| Prop          | Type                                       | Default         | Description                                                        |
+| ------------- | ------------------------------------------ | --------------- | ------------------------------------------------------------------ |
+| `density`     | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Vertical padding scale applied to each `ListItem` through context. |
+| `dividers`    | `boolean`                                  | `true`          | Renders a 1-dp subtle border under every row.                      |
+| `interactive` | `boolean`                                  | `false`         | Causes rows without their own `onPress` to render as `Pressable`.  |
+| `children`    | `ReactNode`                                | —               | One or more `ListItem` elements.                                   |
 
 ### ListItem props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `title` | `ReactNode` | — | Primary label. Strings get styled `medium` weight; nodes render as-is. |
-| `description` | `ReactNode` | — | Secondary text beneath the title. Strings render as muted captions. |
-| `leading` | `ReactNode` | — | Element rendered before the text block — avatar, icon, or checkbox. |
-| `trailing` | `ReactNode` | — | Element rendered after the text block — badge, chevron, or switch. |
-| `onPress` | `() => void` | — | Tap handler. When set (or when the parent `List` is `interactive`), the row renders as a `Pressable`. |
-| `disabled` | `boolean` | `false` | Reduces opacity and blocks the press handler. |
+| Prop          | Type         | Default | Description                                                                                           |
+| ------------- | ------------ | ------- | ----------------------------------------------------------------------------------------------------- |
+| `title`       | `ReactNode`  | —       | Primary label. Strings get styled `medium` weight; nodes render as-is.                                |
+| `description` | `ReactNode`  | —       | Secondary text beneath the title. Strings render as muted captions.                                   |
+| `leading`     | `ReactNode`  | —       | Element rendered before the text block — avatar, icon, or checkbox.                                   |
+| `trailing`    | `ReactNode`  | —       | Element rendered after the text block — badge, chevron, or switch.                                    |
+| `onPress`     | `() => void` | —       | Tap handler. When set (or when the parent `List` is `interactive`), the row renders as a `Pressable`. |
+| `disabled`    | `boolean`    | `false` | Reduces opacity and blocks the press handler.                                                         |
 
 ## Accessibility
 

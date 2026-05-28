@@ -24,11 +24,7 @@ A `Radio` reads its selected state from the surrounding `RadioGroup`; it does no
 ### RadioGroup
 
 ```tsx
-<RadioGroup
-  name="contact-method"
-  value={method}
-  onValueChange={setMethod}
->
+<RadioGroup name="contact-method" value={method} onValueChange={setMethod}>
   <Radio value="email" label="Email" />
   <Radio value="sms" label="SMS" />
   <Radio value="push" label="Push notifications" />
@@ -49,23 +45,23 @@ Uncontrolled with a default selection:
 
 ### Radio props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | The key this radio represents within its `RadioGroup`. Required. |
-| `disabled` | `boolean` | inherited from `RadioGroup` | Suppresses presses and drops opacity to 50%. |
-| `label` | `ReactNode` | — | Optional label rendered to the right; strings are wrapped in the themed `Text` component. |
-| `accessibilityLabel` | `string` | — | Override label for assistive tech when no visible `label` is provided. |
+| Prop                 | Type        | Default                     | Description                                                                               |
+| -------------------- | ----------- | --------------------------- | ----------------------------------------------------------------------------------------- |
+| `value`              | `string`    | —                           | The key this radio represents within its `RadioGroup`. Required.                          |
+| `disabled`           | `boolean`   | inherited from `RadioGroup` | Suppresses presses and drops opacity to 50%.                                              |
+| `label`              | `ReactNode` | —                           | Optional label rendered to the right; strings are wrapped in the themed `Text` component. |
+| `accessibilityLabel` | `string`    | —                           | Override label for assistive tech when no visible `label` is provided.                    |
 
 ### RadioGroup props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `name` | `string` | — | Logical name for the group. Required; surfaced through context to children. |
-| `value` | `string` | — | Controlled selected value. When set, the component is controlled. |
-| `defaultValue` | `string` | — | Initial selected value when uncontrolled. |
-| `onValueChange` | `(next: string) => void` | — | Called with the newly selected value when any child is pressed. |
-| `disabled` | `boolean` | `false` | Disables every child radio at once through context. |
-| `children` | `ReactNode` | — | `Radio` children whose selection the group coordinates. |
+| Prop            | Type                     | Default | Description                                                                 |
+| --------------- | ------------------------ | ------- | --------------------------------------------------------------------------- |
+| `name`          | `string`                 | —       | Logical name for the group. Required; surfaced through context to children. |
+| `value`         | `string`                 | —       | Controlled selected value. When set, the component is controlled.           |
+| `defaultValue`  | `string`                 | —       | Initial selected value when uncontrolled.                                   |
+| `onValueChange` | `(next: string) => void` | —       | Called with the newly selected value when any child is pressed.             |
+| `disabled`      | `boolean`                | `false` | Disables every child radio at once through context.                         |
+| `children`      | `ReactNode`              | —       | `Radio` children whose selection the group coordinates.                     |
 
 ## Accessibility
 

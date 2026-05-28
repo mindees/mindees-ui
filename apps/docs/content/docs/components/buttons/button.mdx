@@ -49,18 +49,18 @@ Semantic tones (`primary`, `neutral`, `success`, `danger`, `warning`) compose wi
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `variant` | `'solid' \| 'outline' \| 'ghost' \| 'link'` | `'solid'` (or inherited from `ButtonGroup`) | Visual treatment. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` (or inherited from `ButtonGroup`) | Controls height, horizontal padding, and label type scale. |
-| `tone` | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'primary'` | Semantic color role used to resolve background, border, and text color. |
-| `loading` | `boolean` | `false` | Replaces the label with a spinner and implicitly disables the button. |
-| `disabled` | `boolean` | `loading` | Disables press handling and dims the button to 50% opacity. |
-| `fullWidth` | `boolean` | `false` | Stretches the button to fill its container's main axis. |
-| `leading` | `ReactNode` | — | Node rendered before the label (e.g. icon). |
-| `trailing` | `ReactNode` | — | Node rendered after the label. |
-| `asChild` | `boolean` | `false` | Render the underlying behavior into a single child element instead of a `Pressable`. |
-| `children` | `ReactNode` | — | Label content. Plain strings are wrapped in the themed `Text` component. |
+| Prop        | Type                                                           | Default                                     | Description                                                                          |
+| ----------- | -------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `variant`   | `'solid' \| 'outline' \| 'ghost' \| 'link'`                    | `'solid'` (or inherited from `ButtonGroup`) | Visual treatment.                                                                    |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                         | `'md'` (or inherited from `ButtonGroup`)    | Controls height, horizontal padding, and label type scale.                           |
+| `tone`      | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'primary'`                                 | Semantic color role used to resolve background, border, and text color.              |
+| `loading`   | `boolean`                                                      | `false`                                     | Replaces the label with a spinner and implicitly disables the button.                |
+| `disabled`  | `boolean`                                                      | `loading`                                   | Disables press handling and dims the button to 50% opacity.                          |
+| `fullWidth` | `boolean`                                                      | `false`                                     | Stretches the button to fill its container's main axis.                              |
+| `leading`   | `ReactNode`                                                    | —                                           | Node rendered before the label (e.g. icon).                                          |
+| `trailing`  | `ReactNode`                                                    | —                                           | Node rendered after the label.                                                       |
+| `asChild`   | `boolean`                                                      | `false`                                     | Render the underlying behavior into a single child element instead of a `Pressable`. |
+| `children`  | `ReactNode`                                                    | —                                           | Label content. Plain strings are wrapped in the themed `Text` component.             |
 
 Inherits all `PressableProps` except `children` (e.g. `onPress`, `onLongPress`, `accessibilityLabel`).
 

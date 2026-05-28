@@ -22,14 +22,14 @@ import { Card } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `variant` | `'elevated' \| 'outlined' \| 'filled'` | `'elevated'` | Surface treatment. `elevated` applies a medium shadow, `outlined` draws a 1-dp border, `filled` uses a subtle background. |
-| `density` | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Internal padding scale. Passed through `CardContext` to descendants. |
-| `interactive` | `boolean` | `false` | Renders the card as a `Pressable` even without `onPress`, signalling tap affordance. |
-| `onPress` | `() => void` | — | Tap handler. When set, the card renders as a `Pressable` with `accessibilityRole="button"`. |
-| `children` | `ReactNode` | — | Card contents. |
-| `style` | `ViewStyle` | — | Style overrides merged after computed surface styles. |
+| Prop          | Type                                       | Default         | Description                                                                                                               |
+| ------------- | ------------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `variant`     | `'elevated' \| 'outlined' \| 'filled'`     | `'elevated'`    | Surface treatment. `elevated` applies a medium shadow, `outlined` draws a 1-dp border, `filled` uses a subtle background. |
+| `density`     | `'compact' \| 'comfortable' \| 'spacious'` | `'comfortable'` | Internal padding scale. Passed through `CardContext` to descendants.                                                      |
+| `interactive` | `boolean`                                  | `false`         | Renders the card as a `Pressable` even without `onPress`, signalling tap affordance.                                      |
+| `onPress`     | `() => void`                               | —               | Tap handler. When set, the card renders as a `Pressable` with `accessibilityRole="button"`.                               |
+| `children`    | `ReactNode`                                | —               | Card contents.                                                                                                            |
+| `style`       | `ViewStyle`                                | —               | Style overrides merged after computed surface styles.                                                                     |
 
 ## Accessibility
 

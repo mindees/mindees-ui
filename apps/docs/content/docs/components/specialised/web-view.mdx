@@ -30,10 +30,10 @@ import { WebView } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `source` | `{ uri: string } \| { html: string }` | — | URL or inline HTML to load. Required. |
-| `onMessage` | `(event: { nativeEvent: { data: string } }) => void` | — | Receives `postMessage` payloads from the page. |
+| Prop        | Type                                                 | Default | Description                                    |
+| ----------- | ---------------------------------------------------- | ------- | ---------------------------------------------- |
+| `source`    | `{ uri: string } \| { html: string }`                | —       | URL or inline HTML to load. Required.          |
+| `onMessage` | `(event: { nativeEvent: { data: string } }) => void` | —       | Receives `postMessage` payloads from the page. |
 
 All other props are forwarded verbatim to `react-native-webview`'s `WebView`, so its full API (injectedJavaScript, navigation handlers, scaling, etc.) is available.
 

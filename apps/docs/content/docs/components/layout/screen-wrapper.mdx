@@ -40,14 +40,14 @@ Disable specific safe-area edges:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `edges` | `readonly ('top' \| 'right' \| 'bottom' \| 'left')[]` | `['top', 'right', 'bottom', 'left']` | Edges to inset for the safe-area. Pass `[]` to disable. |
-| `background` | `'canvas' \| 'surface' \| 'subtle' \| 'elevated'` | `'canvas'` | Semantic theme background. |
-| `scroll` | `boolean` | `false` | Wrap the content in a `ScrollView`. |
-| `avoidKeyboard` | `boolean` | `false` | Add a `KeyboardAvoidingView` above the content (iOS padding / Android height). |
-| `padding` | `SpaceToken \| number` | — | Outer padding around content. |
-| `scrollViewProps` | `Omit<ScrollViewProps, 'children'>` | — | Props forwarded to the inner `ScrollView` when `scroll` is true. |
+| Prop              | Type                                                  | Default                              | Description                                                                    |
+| ----------------- | ----------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| `edges`           | `readonly ('top' \| 'right' \| 'bottom' \| 'left')[]` | `['top', 'right', 'bottom', 'left']` | Edges to inset for the safe-area. Pass `[]` to disable.                        |
+| `background`      | `'canvas' \| 'surface' \| 'subtle' \| 'elevated'`     | `'canvas'`                           | Semantic theme background.                                                     |
+| `scroll`          | `boolean`                                             | `false`                              | Wrap the content in a `ScrollView`.                                            |
+| `avoidKeyboard`   | `boolean`                                             | `false`                              | Add a `KeyboardAvoidingView` above the content (iOS padding / Android height). |
+| `padding`         | `SpaceToken \| number`                                | —                                    | Outer padding around content.                                                  |
+| `scrollViewProps` | `Omit<ScrollViewProps, 'children'>`                   | —                                    | Props forwarded to the inner `ScrollView` when `scroll` is true.               |
 
 ## Accessibility
 

@@ -19,11 +19,7 @@ const [visible, setVisible] = useState(false);
 return (
   <>
     <Button onPress={() => setVisible(true)}>Open</Button>
-    <Modal
-      visible={visible}
-      onClose={() => setVisible(false)}
-      accessibilityLabel="Confirm action"
-    >
+    <Modal visible={visible} onClose={() => setVisible(false)} accessibilityLabel="Confirm action">
       <Heading level={3}>Title</Heading>
       <Text>Body copy</Text>
     </Modal>
@@ -41,14 +37,14 @@ Full-bleed (non-centered) panel — anchors content to the bottom edge:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `visible` | `boolean` | — | Controls whether the modal is shown. |
-| `onClose` | `() => void` | — | Called on backdrop press (when `dismissible`) and on the platform back gesture. |
-| `dismissible` | `boolean` | `true` | When `false`, backdrop taps are ignored. |
-| `centered` | `boolean` | `true` | Centered panel (max 480 dp); otherwise content fills the screen and aligns to the bottom. |
-| `accessibilityLabel` | `string` | — | Label announced to assistive tech when the modal opens. |
-| `children` | `React.ReactNode` | — | Modal contents. |
+| Prop                 | Type              | Default | Description                                                                               |
+| -------------------- | ----------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `visible`            | `boolean`         | —       | Controls whether the modal is shown.                                                      |
+| `onClose`            | `() => void`      | —       | Called on backdrop press (when `dismissible`) and on the platform back gesture.           |
+| `dismissible`        | `boolean`         | `true`  | When `false`, backdrop taps are ignored.                                                  |
+| `centered`           | `boolean`         | `true`  | Centered panel (max 480 dp); otherwise content fills the screen and aligns to the bottom. |
+| `accessibilityLabel` | `string`          | —       | Label announced to assistive tech when the modal opens.                                   |
+| `children`           | `React.ReactNode` | —       | Modal contents.                                                                           |
 
 ## Accessibility
 

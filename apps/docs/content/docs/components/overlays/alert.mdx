@@ -43,13 +43,13 @@ Custom actions — last one is the primary:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `visible` | `boolean` | — | Controls whether the alert is shown. |
-| `onClose` | `() => void` | — | Called on backdrop press and used as the default OK action when `actions` is omitted. |
-| `title` | `string` | — | Heading rendered inside the alert; also used as the modal's `accessibilityLabel`. |
-| `description` | `string` | — | Optional secondary copy below the title. |
-| `actions` | `readonly AlertAction[]` | `[{ label: 'OK', onPress: onClose }]` | Action buttons. Each `AlertAction` is `{ label, onPress?, tone? }`. The last action is rendered as solid; the rest as ghost. |
+| Prop          | Type                     | Default                               | Description                                                                                                                  |
+| ------------- | ------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `visible`     | `boolean`                | —                                     | Controls whether the alert is shown.                                                                                         |
+| `onClose`     | `() => void`             | —                                     | Called on backdrop press and used as the default OK action when `actions` is omitted.                                        |
+| `title`       | `string`                 | —                                     | Heading rendered inside the alert; also used as the modal's `accessibilityLabel`.                                            |
+| `description` | `string`                 | —                                     | Optional secondary copy below the title.                                                                                     |
+| `actions`     | `readonly AlertAction[]` | `[{ label: 'OK', onPress: onClose }]` | Action buttons. Each `AlertAction` is `{ label, onPress?, tone? }`. The last action is rendered as solid; the rest as ghost. |
 
 ## Accessibility
 

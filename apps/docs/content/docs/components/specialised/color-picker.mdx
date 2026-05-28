@@ -16,17 +16,17 @@ import { ColorPicker } from '@mindees/ui';
 ```tsx
 const [color, setColor] = useState('#3b82f6');
 
-<ColorPicker value={color} onChange={setColor} />
+<ColorPicker value={color} onChange={setColor} />;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | Currently selected hex colour. Matched against the swatch list. |
-| `onChange` | `(next: string) => void` | — | Called with the hex of the pressed swatch. |
-| `swatches` | `readonly string[]` | 12-swatch default ramp | Palette of selectable hex strings. |
-| `size` | `number` | `32` | Diameter of each swatch in dp. |
+| Prop       | Type                     | Default                | Description                                                     |
+| ---------- | ------------------------ | ---------------------- | --------------------------------------------------------------- |
+| `value`    | `string`                 | —                      | Currently selected hex colour. Matched against the swatch list. |
+| `onChange` | `(next: string) => void` | —                      | Called with the hex of the pressed swatch.                      |
+| `swatches` | `readonly string[]`      | 12-swatch default ramp | Palette of selectable hex strings.                              |
+| `size`     | `number`                 | `32`                   | Diameter of each swatch in dp.                                  |
 
 ## Accessibility
 

@@ -133,9 +133,8 @@ export default function Home() {
             <p className="section-eyebrow">Composable</p>
             <h2 className="section-title">Stacks that space themselves.</h2>
             <p className="section-sub">
-              The Layout Intelligence Layer reads child types — a Heading next to a Label gets
-              tight spacing; an Input next to a Button gets loose. No more manually tuning every
-              margin.
+              The Layout Intelligence Layer reads child types — a Heading next to a Label gets tight
+              spacing; an Input next to a Button gets loose. No more manually tuning every margin.
             </p>
             <Link href="/docs/architecture" className="btn btn-secondary">
               Read the architecture →
@@ -215,13 +214,7 @@ export function `}
 
         <div className="link-grid">
           {links.map((l) => (
-            <a
-              key={l.name}
-              href={l.href}
-              className="link-card"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a key={l.name} href={l.href} className="link-card" target="_blank" rel="noreferrer">
               <div>
                 <div className="link-card-name">{l.name}</div>
                 <div className="link-card-sub">{l.sub}</div>

@@ -16,11 +16,7 @@ import { Checkbox, CheckboxGroup } from '@mindees/ui';
 ### Checkbox
 
 ```tsx
-<Checkbox
-  checked={accepted}
-  onChange={setAccepted}
-  label="I accept the terms"
-/>
+<Checkbox checked={accepted} onChange={setAccepted} label="I accept the terms" />
 ```
 
 Indeterminate, e.g. for a "select all" header row:
@@ -37,10 +33,7 @@ Indeterminate, e.g. for a "select all" header row:
 ### CheckboxGroup
 
 ```tsx
-<CheckboxGroup
-  value={picked}
-  onValueChange={setPicked}
->
+<CheckboxGroup value={picked} onValueChange={setPicked}>
   <Checkbox label="Email" onChange={(v) => toggle('email', v)} checked={picked.includes('email')} />
   <Checkbox label="SMS" onChange={(v) => toggle('sms', v)} checked={picked.includes('sms')} />
   <Checkbox label="Push" onChange={(v) => toggle('push', v)} checked={picked.includes('push')} />
@@ -51,25 +44,25 @@ Indeterminate, e.g. for a "select all" header row:
 
 ### Checkbox props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `checked` | `boolean` | — | Controlled checked state. When set, the component is controlled. |
-| `defaultChecked` | `boolean` | `false` | Initial state when used uncontrolled. |
-| `indeterminate` | `boolean` | `false` | Renders a horizontal bar instead of a check, and reports `checked: 'mixed'` to assistive tech. |
-| `disabled` | `boolean` | `false` | Suppresses presses and drops opacity to 50%. |
-| `onChange` | `(checked: boolean) => void` | — | Called with the next boolean state when the user toggles the box. |
-| `label` | `ReactNode` | — | Optional label rendered to the right; strings are wrapped in the themed `Text` component. |
-| `accessibilityLabel` | `string` | — | Override label for assistive tech when no visible `label` is provided. |
+| Prop                 | Type                         | Default | Description                                                                                    |
+| -------------------- | ---------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `checked`            | `boolean`                    | —       | Controlled checked state. When set, the component is controlled.                               |
+| `defaultChecked`     | `boolean`                    | `false` | Initial state when used uncontrolled.                                                          |
+| `indeterminate`      | `boolean`                    | `false` | Renders a horizontal bar instead of a check, and reports `checked: 'mixed'` to assistive tech. |
+| `disabled`           | `boolean`                    | `false` | Suppresses presses and drops opacity to 50%.                                                   |
+| `onChange`           | `(checked: boolean) => void` | —       | Called with the next boolean state when the user toggles the box.                              |
+| `label`              | `ReactNode`                  | —       | Optional label rendered to the right; strings are wrapped in the themed `Text` component.      |
+| `accessibilityLabel` | `string`                     | —       | Override label for assistive tech when no visible `label` is provided.                         |
 
 ### CheckboxGroup props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `readonly string[]` | — | Controlled list of checked item keys. |
-| `defaultValue` | `readonly string[]` | `[]` | Initial selected keys when uncontrolled. |
-| `onValueChange` | `(next: readonly string[]) => void` | — | Called with the next selection whenever a child toggles. |
-| `disabled` | `boolean` | `false` | Marks the entire group disabled; exposed through context for children that opt in. |
-| `children` | `ReactNode` | — | `Checkbox` children whose selection the group coordinates. |
+| Prop            | Type                                | Default | Description                                                                        |
+| --------------- | ----------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `value`         | `readonly string[]`                 | —       | Controlled list of checked item keys.                                              |
+| `defaultValue`  | `readonly string[]`                 | `[]`    | Initial selected keys when uncontrolled.                                           |
+| `onValueChange` | `(next: readonly string[]) => void` | —       | Called with the next selection whenever a child toggles.                           |
+| `disabled`      | `boolean`                           | `false` | Marks the entire group disabled; exposed through context for children that opt in. |
+| `children`      | `ReactNode`                         | —       | `Checkbox` children whose selection the group coordinates.                         |
 
 ## Accessibility
 

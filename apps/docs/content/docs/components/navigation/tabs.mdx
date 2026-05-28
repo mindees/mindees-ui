@@ -18,11 +18,19 @@ import { Tabs, TabList, Tab, TabPanel } from '@mindees/ui';
   <TabList>
     <Tab value="overview">Overview</Tab>
     <Tab value="activity">Activity</Tab>
-    <Tab value="settings" disabled>Settings</Tab>
+    <Tab value="settings" disabled>
+      Settings
+    </Tab>
   </TabList>
-  <TabPanel value="overview"><Text>Overview content</Text></TabPanel>
-  <TabPanel value="activity"><Text>Activity content</Text></TabPanel>
-  <TabPanel value="settings"><Text>Settings content</Text></TabPanel>
+  <TabPanel value="overview">
+    <Text>Overview content</Text>
+  </TabPanel>
+  <TabPanel value="activity">
+    <Text>Activity content</Text>
+  </TabPanel>
+  <TabPanel value="settings">
+    <Text>Settings content</Text>
+  </TabPanel>
 </Tabs>
 ```
 
@@ -30,34 +38,34 @@ import { Tabs, TabList, Tab, TabPanel } from '@mindees/ui';
 
 ### `Tabs`
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | Controlled active tab value. |
-| `defaultValue` | `string` | `''` | Initial active value when uncontrolled. |
-| `onValueChange` | `(next: string) => void` | — | Fired whenever the active tab changes. |
-| `children` | `ReactNode` | — | Tab parts (`TabList`, `TabPanel`). |
+| Prop            | Type                     | Default | Description                             |
+| --------------- | ------------------------ | ------- | --------------------------------------- |
+| `value`         | `string`                 | —       | Controlled active tab value.            |
+| `defaultValue`  | `string`                 | `''`    | Initial active value when uncontrolled. |
+| `onValueChange` | `(next: string) => void` | —       | Fired whenever the active tab changes.  |
+| `children`      | `ReactNode`              | —       | Tab parts (`TabList`, `TabPanel`).      |
 
 ### `TabList`
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `scrollable` | `boolean` | `false` | Render inside a horizontal `ScrollView` for overflow. |
-| `children` | `ReactNode` | — | One or more `Tab` elements. |
+| Prop         | Type        | Default | Description                                           |
+| ------------ | ----------- | ------- | ----------------------------------------------------- |
+| `scrollable` | `boolean`   | `false` | Render inside a horizontal `ScrollView` for overflow. |
+| `children`   | `ReactNode` | —       | One or more `Tab` elements.                           |
 
 ### `Tab`
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | Identifier matched against the active `Tabs` value. |
-| `children` | `ReactNode` | — | Label content rendered inside the tab. |
-| `disabled` | `boolean` | `false` | Prevents activation and dims the tab. |
+| Prop       | Type        | Default | Description                                         |
+| ---------- | ----------- | ------- | --------------------------------------------------- |
+| `value`    | `string`    | —       | Identifier matched against the active `Tabs` value. |
+| `children` | `ReactNode` | —       | Label content rendered inside the tab.              |
+| `disabled` | `boolean`   | `false` | Prevents activation and dims the tab.               |
 
 ### `TabPanel`
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | Renders children only when this matches the active tab. |
-| `children` | `ReactNode` | — | Panel content. |
+| Prop       | Type        | Default | Description                                             |
+| ---------- | ----------- | ------- | ------------------------------------------------------- |
+| `value`    | `string`    | —       | Renders children only when this matches the active tab. |
+| `children` | `ReactNode` | —       | Panel content.                                          |
 
 ## Accessibility
 

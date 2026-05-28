@@ -36,23 +36,18 @@ return (
 Without the built-in cancel row:
 
 ```tsx
-<ActionSheet
-  visible={visible}
-  onClose={close}
-  items={items}
-  showCancel={false}
-/>
+<ActionSheet visible={visible} onClose={close} items={items} showCancel={false} />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `visible` | `boolean` | — | Controls whether the sheet is shown. |
-| `onClose` | `() => void` | — | Called after any row tap and on backdrop press. |
-| `title` | `string` | — | Optional muted caption rendered above the rows. |
-| `items` | `readonly ActionSheetItem[]` | — | Row definitions. Each item is `{ label, onPress, destructive? }`. |
-| `showCancel` | `boolean` | `true` | Append a "Cancel" row that just calls `onClose`. |
+| Prop         | Type                         | Default | Description                                                       |
+| ------------ | ---------------------------- | ------- | ----------------------------------------------------------------- |
+| `visible`    | `boolean`                    | —       | Controls whether the sheet is shown.                              |
+| `onClose`    | `() => void`                 | —       | Called after any row tap and on backdrop press.                   |
+| `title`      | `string`                     | —       | Optional muted caption rendered above the rows.                   |
+| `items`      | `readonly ActionSheetItem[]` | —       | Row definitions. Each item is `{ label, onPress, destructive? }`. |
+| `showCancel` | `boolean`                    | `true`  | Append a "Cancel" row that just calls `onClose`.                  |
 
 ## Accessibility
 

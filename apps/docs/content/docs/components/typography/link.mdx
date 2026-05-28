@@ -20,11 +20,11 @@ import { Link } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `href` | `string` | — | External URL. When set, tapping opens it via `Linking.openURL`. Failures are swallowed. |
-| `onPress` | `() => void` | — | Called when the link is pressed. Runs before `href` is opened. |
-| `hideUnderline` | `boolean` | `false` | Hides the default underline. |
+| Prop            | Type         | Default | Description                                                                             |
+| --------------- | ------------ | ------- | --------------------------------------------------------------------------------------- |
+| `href`          | `string`     | —       | External URL. When set, tapping opens it via `Linking.openURL`. Failures are swallowed. |
+| `onPress`       | `() => void` | —       | Called when the link is pressed. Runs before `href` is opened.                          |
+| `hideUnderline` | `boolean`    | `false` | Hides the default underline.                                                            |
 
 All `Text` props except `tone` and `underline` (locked to `'link'` / on by default) are forwarded — `variant`, `weight`, `align`, `italic`, `strikethrough`, `fontFamily`, and the underlying RN `TextProps`.
 

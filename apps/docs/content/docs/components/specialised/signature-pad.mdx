@@ -22,18 +22,15 @@ import { SignaturePad } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<SignaturePad
-  onSign={(dataUri) => save(dataUri)}
-  onClear={() => console.log('cleared')}
-/>
+<SignaturePad onSign={(dataUri) => save(dataUri)} onClear={() => console.log('cleared')} />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `onSign` | `(signatureDataUri: string) => void` | — | Called with a base64 PNG data URI when the user confirms the signature. |
-| `onClear` | `() => void` | — | Called when the canvas is cleared. |
+| Prop      | Type                                 | Default | Description                                                             |
+| --------- | ------------------------------------ | ------- | ----------------------------------------------------------------------- |
+| `onSign`  | `(signatureDataUri: string) => void` | —       | Called with a base64 PNG data URI when the user confirms the signature. |
+| `onClear` | `() => void`                         | —       | Called when the canvas is cleared.                                      |
 
 All remaining props are forwarded to `react-native-signature-canvas`, so its full configuration surface (pen colour, background, descriptionText, etc.) is available.
 

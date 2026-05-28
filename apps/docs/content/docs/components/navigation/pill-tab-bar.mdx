@@ -20,7 +20,7 @@ const items = [
   { value: 'profile', label: 'Profile', badge: 3 },
 ];
 
-<PillTabBar items={items} value={value} onValueChange={setValue} />
+<PillTabBar items={items} value={value} onValueChange={setValue} />;
 ```
 
 ## Variants
@@ -59,23 +59,23 @@ Translucent floating bar with a soft border and shadow. No native blur peer requ
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `items` | `readonly PillTabItem[]` | — | Tab definitions. See item shape below. |
-| `value` | `string` | — | Active item value. |
-| `onValueChange` | `(next: string) => void` | — | Fired when the user selects a new item. |
-| `variant` | `'segmented' \| 'floating' \| 'dock' \| 'glass'` | `'segmented'` | Visual chrome. |
-| `accent` | `string` | `tokens.colors.action.primary` | Override the active-state accent colour. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls padding and text size. |
+| Prop            | Type                                             | Default                        | Description                              |
+| --------------- | ------------------------------------------------ | ------------------------------ | ---------------------------------------- |
+| `items`         | `readonly PillTabItem[]`                         | —                              | Tab definitions. See item shape below.   |
+| `value`         | `string`                                         | —                              | Active item value.                       |
+| `onValueChange` | `(next: string) => void`                         | —                              | Fired when the user selects a new item.  |
+| `variant`       | `'segmented' \| 'floating' \| 'dock' \| 'glass'` | `'segmented'`                  | Visual chrome.                           |
+| `accent`        | `string`                                         | `tokens.colors.action.primary` | Override the active-state accent colour. |
+| `size`          | `'sm' \| 'md' \| 'lg'`                           | `'md'`                         | Controls padding and text size.          |
 
 ### `PillTabItem`
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `string` | — | Unique identifier for the item. |
-| `label` | `string` | — | Visible text label. If omitted, the icon stands alone. |
-| `icon` | `ReactNode` | — | Icon rendered above the label in `dock`, before it elsewhere. |
-| `badge` | `string \| number` | — | Optional badge content; renders as a dot when omitted. |
+| Prop    | Type               | Default | Description                                                   |
+| ------- | ------------------ | ------- | ------------------------------------------------------------- |
+| `value` | `string`           | —       | Unique identifier for the item.                               |
+| `label` | `string`           | —       | Visible text label. If omitted, the icon stands alone.        |
+| `icon`  | `ReactNode`        | —       | Icon rendered above the label in `dock`, before it elsewhere. |
+| `badge` | `string \| number` | —       | Optional badge content; renders as a dot when omitted.        |
 
 ## Accessibility
 

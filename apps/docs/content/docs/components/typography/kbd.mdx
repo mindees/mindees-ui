@@ -14,21 +14,23 @@ import { Kbd } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<Text>Press <Kbd>⌘</Kbd> + <Kbd>K</Kbd> to open the palette.</Text>
+<Text>
+  Press <Kbd>⌘</Kbd> + <Kbd>K</Kbd> to open the palette.
+</Text>
 ```
 
 ## Props
 
 `Kbd` has no own props beyond the inherited `Text` props. Variant and font family are locked (`caption` + monospace); everything else passes through.
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `tone` | `TextTone` | `'primary'` | Semantic colour token for the keycap text. |
-| `weight` | `FontWeightToken` | — | Overrides the default font weight. |
-| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
-| `italic` | `boolean` | `false` | Renders italic. |
-| `underline` | `boolean` | `false` | Adds an underline decoration. |
-| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. |
+| Prop            | Type                     | Default     | Description                                |
+| --------------- | ------------------------ | ----------- | ------------------------------------------ |
+| `tone`          | `TextTone`               | `'primary'` | Semantic colour token for the keycap text. |
+| `weight`        | `FontWeightToken`        | —           | Overrides the default font weight.         |
+| `align`         | `TextStyle['textAlign']` | —           | Horizontal text alignment.                 |
+| `italic`        | `boolean`                | `false`     | Renders italic.                            |
+| `underline`     | `boolean`                | `false`     | Adds an underline decoration.              |
+| `strikethrough` | `boolean`                | `false`     | Adds a line-through decoration.            |
 
 Any remaining RN `TextProps` are forwarded to the underlying `Text`.
 

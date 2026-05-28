@@ -42,14 +42,14 @@ Explicit vertical stack (identical to `Stack`, communicates intent):
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `gap` | `SpaceToken \| number` | `'md'` | Default gap between children. Auto-spacing rules apply per pair. |
-| `disableAutoSpacing` | `boolean` | `false` | Skip the deterministic per-pair gap multipliers and use a uniform `gap`. |
-| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Cross-axis alignment. |
-| `justify` | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'start'` | Main-axis alignment. |
-| `orientation` | `'row' \| 'column'` | `'column'` for `Stack`/`VStack`, `'row'` for `HStack` | Override the default flex direction. |
-| `wrap` | `boolean` | `false` | Allow children to wrap onto multiple lines. |
+| Prop                 | Type                                                                                  | Default                                               | Description                                                              |
+| -------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------ |
+| `gap`                | `SpaceToken \| number`                                                                | `'md'`                                                | Default gap between children. Auto-spacing rules apply per pair.         |
+| `disableAutoSpacing` | `boolean`                                                                             | `false`                                               | Skip the deterministic per-pair gap multipliers and use a uniform `gap`. |
+| `align`              | `'start' \| 'center' \| 'end' \| 'stretch'`                                           | `'stretch'`                                           | Cross-axis alignment.                                                    |
+| `justify`            | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'start'`                                             | Main-axis alignment.                                                     |
+| `orientation`        | `'row' \| 'column'`                                                                   | `'column'` for `Stack`/`VStack`, `'row'` for `HStack` | Override the default flex direction.                                     |
+| `wrap`               | `boolean`                                                                             | `false`                                               | Allow children to wrap onto multiple lines.                              |
 
 All `Box` props (padding, margin, background, radius, shadow, sizing) are also supported except `asChild`.
 

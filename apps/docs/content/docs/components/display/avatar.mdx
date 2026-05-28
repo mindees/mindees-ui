@@ -28,20 +28,20 @@ import { Avatar, AvatarGroup } from '@mindees/ui';
 
 ### Avatar props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `src` | `string \| { uri: string }` | — | Image URL string or RN image source. When omitted or empty, initials render. |
-| `initials` | `string` | — | Explicit fallback text. Overrides the value derived from `name`. |
-| `name` | `string` | — | Full name used to derive two-letter initials and to populate `accessibilityLabel`. |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Fixed pixel sizing — 24, 32, 40, 56, 80 dp respectively. |
-| `shape` | `'circle' \| 'square'` | `'circle'` | Circle uses a half-side radius. Square uses the `md` radius token. |
+| Prop       | Type                                   | Default    | Description                                                                        |
+| ---------- | -------------------------------------- | ---------- | ---------------------------------------------------------------------------------- |
+| `src`      | `string \| { uri: string }`            | —          | Image URL string or RN image source. When omitted or empty, initials render.       |
+| `initials` | `string`                               | —          | Explicit fallback text. Overrides the value derived from `name`.                   |
+| `name`     | `string`                               | —          | Full name used to derive two-letter initials and to populate `accessibilityLabel`. |
+| `size`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'`     | Fixed pixel sizing — 24, 32, 40, 56, 80 dp respectively.                           |
+| `shape`    | `'circle' \| 'square'`                 | `'circle'` | Circle uses a half-side radius. Square uses the `md` radius token.                 |
 
 ### AvatarGroup props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `max` | `number` | `4` | Maximum avatars to display. Remaining children collapse into a `+N` indicator. |
-| `children` | `ReactNode` | — | `Avatar` elements to stack. Order is left-to-right; later items overlap earlier ones via negative margin. |
+| Prop       | Type        | Default | Description                                                                                               |
+| ---------- | ----------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| `max`      | `number`    | `4`     | Maximum avatars to display. Remaining children collapse into a `+N` indicator.                            |
+| `children` | `ReactNode` | —       | `Avatar` elements to stack. Order is left-to-right; later items overlap earlier ones via negative margin. |
 
 ## Accessibility
 

@@ -25,9 +25,9 @@ import { Image } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `src` | `string \| ImageSourcePropType` | — | URL string (converted to `{ uri }`) or a standard RN image source. If omitted, an empty `{ uri: '' }` source is used. |
+| Prop  | Type                            | Default | Description                                                                                                           |
+| ----- | ------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
+| `src` | `string \| ImageSourcePropType` | —       | URL string (converted to `{ uri }`) or a standard RN image source. If omitted, an empty `{ uri: '' }` source is used. |
 
 All other props from RN's `ImageProps` are accepted except the original `source` and `src` keys, which are replaced by the unified `src` prop above. This includes `style`, `resizeMode`, `onLoad`, `onError`, `accessibilityLabel`, and any other passthrough props.
 

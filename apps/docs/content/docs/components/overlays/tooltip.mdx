@@ -28,18 +28,18 @@ const [show, setShow] = useState(false);
 
 <Tooltip label="Save draft" visible={show} placement="bottom">
   <IconButton icon="save" onPress={() => setShow(true)} />
-</Tooltip>
+</Tooltip>;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `label` | `string` | — | Text shown in the bubble and used as the trigger's `accessibilityLabel`. |
-| `placement` | `'top' \| 'bottom'` | `'top'` | Position relative to the trigger. |
-| `children` | `React.ReactElement` | — | The trigger element the tooltip anchors to. |
-| `visible` | `boolean` | — | Controlled visibility; when provided, overrides the internal long-press state. |
-| `defaultVisible` | `boolean` | `false` | Initial uncontrolled visibility. |
+| Prop             | Type                 | Default | Description                                                                    |
+| ---------------- | -------------------- | ------- | ------------------------------------------------------------------------------ |
+| `label`          | `string`             | —       | Text shown in the bubble and used as the trigger's `accessibilityLabel`.       |
+| `placement`      | `'top' \| 'bottom'`  | `'top'` | Position relative to the trigger.                                              |
+| `children`       | `React.ReactElement` | —       | The trigger element the tooltip anchors to.                                    |
+| `visible`        | `boolean`            | —       | Controlled visibility; when provided, overrides the internal long-press state. |
+| `defaultVisible` | `boolean`            | `false` | Initial uncontrolled visibility.                                               |
 
 ## Accessibility
 

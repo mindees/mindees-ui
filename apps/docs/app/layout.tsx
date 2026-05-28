@@ -36,9 +36,7 @@ export const metadata = {
     card: 'summary_large_image',
     images: [{ url: '/twitter-image.png', alt: 'MindeesUI' }],
   },
-  robots: SHOULD_INDEX
-    ? { index: true, follow: true }
-    : { index: false, follow: false },
+  robots: SHOULD_INDEX ? { index: true, follow: true } : { index: false, follow: false },
 };
 
 const jsonLd = {
@@ -65,8 +63,7 @@ const jsonLd = {
       '@type': 'WebSite',
       name: 'MindeesUI',
       url: SITE_URL,
-      description:
-        'Documentation for MindeesUI — universal React Native + Expo component library.',
+      description: 'Documentation for MindeesUI — universal React Native + Expo component library.',
       potentialAction: {
         '@type': 'SearchAction',
         target: `${SITE_URL}/docs?q={search_term_string}`,

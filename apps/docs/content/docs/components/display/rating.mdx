@@ -23,13 +23,13 @@ const [score, setScore] = useState(3);
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `number` | — | Current value in the range 0 to `max`. Stars with index `< value` render filled. Required. |
-| `max` | `number` | `5` | Total number of stars to render. |
-| `onChange` | `(next: number) => void` | — | Fires with the 1-based star index when the user taps. Ignored when `readOnly` is true. |
-| `readOnly` | `boolean` | `false` | Disables interaction. Stars render as static views without press handlers. |
-| `size` | `number` | `20` | Font size of each star glyph in dp. |
+| Prop       | Type                     | Default | Description                                                                                |
+| ---------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------ |
+| `value`    | `number`                 | —       | Current value in the range 0 to `max`. Stars with index `< value` render filled. Required. |
+| `max`      | `number`                 | `5`     | Total number of stars to render.                                                           |
+| `onChange` | `(next: number) => void` | —       | Fires with the 1-based star index when the user taps. Ignored when `readOnly` is true.     |
+| `readOnly` | `boolean`                | `false` | Disables interaction. Stars render as static views without press handlers.                 |
+| `size`     | `number`                 | `20`    | Font size of each star glyph in dp.                                                        |
 
 ## Accessibility
 

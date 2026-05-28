@@ -14,11 +14,7 @@ import { Input } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<Input
-  value={name}
-  onChangeText={setName}
-  placeholder="Full name"
-/>
+<Input value={name} onChangeText={setName} placeholder="Full name" />
 ```
 
 With a leading icon, a clear button, and a forced invalid state:
@@ -27,7 +23,11 @@ With a leading icon, a clear button, and a forced invalid state:
 <Input
   size="lg"
   leading={<MailIcon size={18} />}
-  trailing={<Pressable onPress={clear}><CloseIcon size={16} /></Pressable>}
+  trailing={
+    <Pressable onPress={clear}>
+      <CloseIcon size={16} />
+    </Pressable>
+  }
   invalid
   value={email}
   onChangeText={setEmail}
@@ -36,13 +36,13 @@ With a leading icon, a clear button, and a forced invalid state:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls the minimum height (36 / 44 / 52). |
-| `leading` | `ReactNode` | — | Node rendered inside the input on the leading edge — typically an icon or prefix. |
-| `trailing` | `ReactNode` | — | Node rendered inside the input on the trailing edge — typically an icon or clear button. |
-| `invalid` | `boolean` | inherited from `FormField` | Forces the error border colour outside of a `FormField`. |
-| `disabled` | `boolean` | inherited from `FormField` | Drops the input to 60% opacity and sets `editable={false}`. |
+| Prop       | Type                   | Default                    | Description                                                                              |
+| ---------- | ---------------------- | -------------------------- | ---------------------------------------------------------------------------------------- |
+| `size`     | `'sm' \| 'md' \| 'lg'` | `'md'`                     | Controls the minimum height (36 / 44 / 52).                                              |
+| `leading`  | `ReactNode`            | —                          | Node rendered inside the input on the leading edge — typically an icon or prefix.        |
+| `trailing` | `ReactNode`            | —                          | Node rendered inside the input on the trailing edge — typically an icon or clear button. |
+| `invalid`  | `boolean`              | inherited from `FormField` | Forces the error border colour outside of a `FormField`.                                 |
+| `disabled` | `boolean`              | inherited from `FormField` | Drops the input to 60% opacity and sets `editable={false}`.                              |
 
 Inherits all `TextInputProps` except `editable` (controlled via `disabled`). That includes `value`, `onChangeText`, `placeholder`, `keyboardType`, `autoCapitalize`, `autoCorrect`, `secureTextEntry`, `multiline`, and the rest.
 

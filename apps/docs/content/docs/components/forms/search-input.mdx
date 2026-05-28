@@ -14,11 +14,7 @@ import { SearchInput } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<SearchInput
-  value={query}
-  onChangeText={setQuery}
-  placeholder="Search products"
-/>
+<SearchInput value={query} onChangeText={setQuery} placeholder="Search products" />
 ```
 
 With an external clear hook (e.g. to also reset filters):
@@ -36,10 +32,10 @@ With an external clear hook (e.g. to also reset filters):
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `hideIcon` | `boolean` | `false` | Hides the leading magnifier icon. |
-| `onClear` | `() => void` | — | Called after the inline clear button is pressed. The input also calls `onChangeText('')`. |
+| Prop       | Type         | Default | Description                                                                               |
+| ---------- | ------------ | ------- | ----------------------------------------------------------------------------------------- |
+| `hideIcon` | `boolean`    | `false` | Hides the leading magnifier icon.                                                         |
+| `onClear`  | `() => void` | —       | Called after the inline clear button is pressed. The input also calls `onChangeText('')`. |
 
 Inherits all `InputProps` except `leading` and `trailing` (occupied by the icon and clear button). That includes `size`, `invalid`, `disabled`, plus every `TextInputProps` value — notably `value`, `onChangeText`, and `placeholder`.
 

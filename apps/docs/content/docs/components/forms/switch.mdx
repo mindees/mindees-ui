@@ -14,27 +14,19 @@ import { Switch } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<Switch
-  value={enabled}
-  onValueChange={setEnabled}
-/>
+<Switch value={enabled} onValueChange={setEnabled} />
 ```
 
 With a custom accent colour and disabled state:
 
 ```tsx
-<Switch
-  value={enabled}
-  onValueChange={setEnabled}
-  accent="#22c55e"
-  disabled
-/>
+<Switch value={enabled} onValueChange={setEnabled} accent="#22c55e" disabled />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
+| Prop     | Type     | Default                       | Description                                          |
+| -------- | -------- | ----------------------------- | ---------------------------------------------------- |
 | `accent` | `string` | `theme.colors.action.primary` | Overrides the on-state track colour for this switch. |
 
 Inherits all `SwitchProps` from React Native except `thumbColor` and `trackColor` (resolved from theme tokens). That includes `value`, `onValueChange`, `disabled`, `ios_backgroundColor` (already defaulted), and the rest.

@@ -14,12 +14,7 @@ import { Textarea } from '@mindees/ui';
 ## Usage
 
 ```tsx
-<Textarea
-  value={notes}
-  onChangeText={setNotes}
-  placeholder="Add notes…"
-  rows={6}
-/>
+<Textarea value={notes} onChangeText={setNotes} placeholder="Add notes…" rows={6} />
 ```
 
 Inside a `FormField` for label, helper, and error:
@@ -32,9 +27,9 @@ Inside a `FormField` for label, helper, and error:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `rows` | `number` | `4` | Number of visible text lines. Forwarded to `numberOfLines` unless `numberOfLines` is set explicitly. |
+| Prop   | Type     | Default | Description                                                                                          |
+| ------ | -------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| `rows` | `number` | `4`     | Number of visible text lines. Forwarded to `numberOfLines` unless `numberOfLines` is set explicitly. |
 
 Inherits all `InputProps` except `multiline` (always true). That includes `size`, `leading`, `trailing`, `invalid`, `disabled`, plus every `TextInputProps` value.
 

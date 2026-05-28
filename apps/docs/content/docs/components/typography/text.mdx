@@ -21,16 +21,16 @@ import { Text } from '@mindees/ui';
 
 ## Props
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `variant` | `TextStyleName` | `'body'` | Named text style from the modular type scale (e.g. `body`, `caption`, `label`, `h1`–`h6`, `code`). |
-| `tone` | `'primary' \| 'secondary' \| 'muted' \| 'inverse' \| 'link' \| 'onAccent' \| 'success' \| 'danger' \| 'warning' \| 'info'` | `'primary'` | Semantic colour token. |
-| `weight` | `FontWeightToken` | — | Overrides the variant's default font weight. |
-| `align` | `TextStyle['textAlign']` | — | Horizontal text alignment. |
-| `italic` | `boolean` | `false` | Renders italic. |
-| `underline` | `boolean` | `false` | Adds an underline decoration. |
-| `strikethrough` | `boolean` | `false` | Adds a line-through decoration. Combines with `underline`. |
-| `fontFamily` | `string` | theme system font | Overrides the font family. |
+| Prop            | Type                                                                                                                       | Default           | Description                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------- |
+| `variant`       | `TextStyleName`                                                                                                            | `'body'`          | Named text style from the modular type scale (e.g. `body`, `caption`, `label`, `h1`–`h6`, `code`). |
+| `tone`          | `'primary' \| 'secondary' \| 'muted' \| 'inverse' \| 'link' \| 'onAccent' \| 'success' \| 'danger' \| 'warning' \| 'info'` | `'primary'`       | Semantic colour token.                                                                             |
+| `weight`        | `FontWeightToken`                                                                                                          | —                 | Overrides the variant's default font weight.                                                       |
+| `align`         | `TextStyle['textAlign']`                                                                                                   | —                 | Horizontal text alignment.                                                                         |
+| `italic`        | `boolean`                                                                                                                  | `false`           | Renders italic.                                                                                    |
+| `underline`     | `boolean`                                                                                                                  | `false`           | Adds an underline decoration.                                                                      |
+| `strikethrough` | `boolean`                                                                                                                  | `false`           | Adds a line-through decoration. Combines with `underline`.                                         |
+| `fontFamily`    | `string`                                                                                                                   | theme system font | Overrides the font family.                                                                         |
 
 Any remaining `TextProps` from React Native are forwarded to the underlying `Text`.
 

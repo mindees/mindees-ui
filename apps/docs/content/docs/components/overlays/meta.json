@@ -1,4 +1,13 @@
 {
   "title": "Overlays",
-  "pages": ["modal", "bottom-sheet", "drawer", "popover", "tooltip", "toast", "alert", "action-sheet"]
+  "pages": [
+    "modal",
+    "bottom-sheet",
+    "drawer",
+    "popover",
+    "tooltip",
+    "toast",
+    "alert",
+    "action-sheet"
+  ]
 }
