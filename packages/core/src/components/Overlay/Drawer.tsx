@@ -1,3 +1,4 @@
+import { resolveShadow } from '@mindees/tokens';
 import * as React from 'react';
 import {
   Animated,
@@ -8,8 +9,6 @@ import {
   type View,
   type ViewStyle,
 } from 'react-native';
-
-import { resolveShadow } from '@mindees/tokens';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useReduceMotion, useTokens } from '../../theme/ThemeProvider';

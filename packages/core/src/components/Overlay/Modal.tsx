@@ -1,3 +1,4 @@
+import { resolveShadow } from '@mindees/tokens';
 import * as React from 'react';
 import {
   Modal as RNModal,
@@ -6,8 +7,6 @@ import {
   type View,
   type ViewStyle,
 } from 'react-native';
-
-import { resolveShadow } from '@mindees/tokens';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens, useReduceMotion } from '../../theme/ThemeProvider';

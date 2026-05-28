@@ -2,6 +2,7 @@ import * as React from 'react';
 import { type View } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
+
 import { Camera } from './Camera';
 
 export interface BarcodeScanResult {

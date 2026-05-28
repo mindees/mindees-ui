@@ -5,11 +5,15 @@ import { Accordion } from '../Display/Accordion';
 import { ActivityLog } from '../Display/ActivityLog';
 import { Avatar, AvatarGroup } from '../Display/Avatar';
 import { Badge } from '../Display/Badge';
+import { Calendar } from '../Display/Calendar';
 import { Card } from '../Display/Card';
+import { Carousel } from '../Display/Carousel';
+import { DataGrid } from '../Display/DataGrid';
 import { DescriptionList } from '../Display/DescriptionList';
 import { DetailView } from '../Display/DetailView';
 import { Feed } from '../Display/Feed';
 import { Image } from '../Display/Image';
+import { ImageGallery } from '../Display/ImageGallery';
 import { KeyValueRow } from '../Display/KeyValueRow';
 import { KPICard } from '../Display/KPICard';
 import { List, ListItem } from '../Display/List';
@@ -22,10 +26,11 @@ import { Stat } from '../Display/Stat';
 import { Table } from '../Display/Table';
 import { Chip, Tag } from '../Display/Tag';
 import { Timeline } from '../Display/Timeline';
+import { TreeView } from '../Display/TreeView';
 import { Breadcrumb } from '../Nav/Breadcrumb';
 import { Pagination } from '../Nav/Pagination';
-import { Stepper } from '../Nav/Stepper';
 import { PillTabBar } from '../Nav/PillTabBar';
+import { Stepper } from '../Nav/Stepper';
 import { Tabs } from '../Nav/Tabs';
 import { TopBar } from '../Nav/TopBar';
 
@@ -119,5 +124,51 @@ describe('Phase 5 — data-display primitives', () => {
     expect(() => render(<Pill tone="success">Done</Pill>)).not.toThrow();
     expect(() => render(<Feed items={feedItems} />)).not.toThrow();
     expect(() => render(<ActivityLog items={logItems} />)).not.toThrow();
+  });
+});
+
+describe('Phase 5 — data-display primitives (wave 1b)', () => {
+  const gridColumns = [
+    { key: 'name', title: 'Name', sortable: true },
+    { key: 'qty', title: 'Qty', width: 80, sortable: true },
+  ];
+  const gridData = [
+    { name: 'Apples', qty: 4 },
+    { name: 'Pears', qty: 2 },
+    { name: 'Cherries', qty: 9 },
+  ];
+  const galleryImages = [
+    { uri: 'https://example.com/a.jpg', alt: 'A' },
+    { uri: 'https://example.com/b.jpg', alt: 'B' },
+  ];
+  const treeData = [
+    {
+      id: 'root',
+      label: 'Root',
+      children: [
+        { id: 'child-1', label: 'Child 1' },
+        { id: 'child-2', label: 'Child 2', children: [{ id: 'grandchild', label: 'Grandchild' }] },
+      ],
+    },
+  ];
+
+  it('carries the correct tags', () => {
+    expect(getComponentTag(<DataGrid columns={[]} data={[]} />)).toBe('DataGrid');
+    expect(getComponentTag(<Carousel items={[]} renderItem={() => null} />)).toBe('Carousel');
+    expect(getComponentTag(<ImageGallery images={[]} />)).toBe('ImageGallery');
+    expect(getComponentTag(<TreeView data={[]} />)).toBe('TreeView');
+    expect(getComponentTag(<Calendar />)).toBe('Calendar');
+  });
+
+  it('renders without throwing', () => {
+    expect(() => render(<DataGrid columns={gridColumns} data={gridData} />)).not.toThrow();
+    expect(() =>
+      render(<Carousel items={gridData} renderItem={(item) => <Card>{item.name}</Card>} />),
+    ).not.toThrow();
+    expect(() => render(<ImageGallery images={galleryImages} columns={2} />)).not.toThrow();
+    expect(() => render(<TreeView data={treeData} defaultExpanded={['root']} />)).not.toThrow();
+    expect(() => render(<Calendar value={new Date(2024, 1, 29)} />)).not.toThrow();
+    // Leap-day + month-boundary guard: Feb 2024 (leap) renders 29 days.
+    expect(() => render(<Calendar defaultMonth={new Date(2024, 1, 1)} />)).not.toThrow();
   });
 });

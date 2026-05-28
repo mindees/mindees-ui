@@ -1,7 +1,6 @@
+import { ChevronDownIcon, ChevronRightIcon } from '@mindees/icons';
 import * as React from 'react';
 import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
-
-import { ChevronDownIcon, ChevronRightIcon } from '@mindees/icons';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';

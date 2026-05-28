@@ -3,6 +3,7 @@ import { type View } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
+
 import { MissingPeer, tryLoadPeer } from './optionalPeer';
 
 export interface QRCodeProps {

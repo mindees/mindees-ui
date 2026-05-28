@@ -1,7 +1,6 @@
+import { CheckIcon } from '@mindees/icons';
 import * as React from 'react';
 import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
-
-import { CheckIcon } from '@mindees/icons';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';

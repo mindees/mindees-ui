@@ -4,6 +4,7 @@ import { Pressable, type TextInput } from 'react-native';
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
+
 import { Input, type InputProps } from './Input';
 
 export interface PasswordInputProps extends Omit<InputProps, 'secureTextEntry' | 'trailing'> {

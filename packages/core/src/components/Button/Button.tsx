@@ -34,7 +34,15 @@ export interface ButtonOwnProps {
   readonly children?: React.ReactNode;
 }
 
-export type ButtonProps = AsChildProps<ButtonOwnProps & Omit<PressableProps, 'children'>>;
+/**
+ * Button props without the `asChild` polymorphism. Presets that always render a
+ * real Button (RetryButton, CopyButton, …) extend this so their prop types stay
+ * a single object type — `interface … extends ButtonProps` is invalid because
+ * `ButtonProps` is a discriminated union.
+ */
+export type ButtonBaseProps = ButtonOwnProps & Omit<PressableProps, 'children'>;
+
+export type ButtonProps = AsChildProps<ButtonBaseProps>;
 
 const SIZE_MAP: Record<ButtonSize, { height: number; padX: number; fontSize: number }> = {
   sm: { height: 36, padX: 12, fontSize: 14 },
@@ -95,6 +103,19 @@ function toneColors(
     border: 'transparent',
     text: accent,
   };
+}
+
+/**
+ * Resolves the text/icon color a Button would use for a given variant + tone.
+ * Shared with Button presets (e.g. RetryButton, DownloadButton) so glyph
+ * affordances rendered in the `leading`/`trailing` slots match the label color.
+ */
+export function resolveButtonTextColor(
+  tokens: ReturnType<typeof useTokens>,
+  variant: ButtonVariant,
+  tone: ButtonTone,
+): string {
+  return toneColors(tokens, tone, variant).text;
 }
 
 function ButtonImpl(props: ButtonProps, ref: React.Ref<View>): React.ReactElement {

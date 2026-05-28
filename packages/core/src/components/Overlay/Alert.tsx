@@ -7,6 +7,7 @@ import { ButtonGroup } from '../Button/ButtonGroup';
 import { Stack } from '../Stack/Stack';
 import { Heading } from '../Text/Heading';
 import { Text } from '../Text/Text';
+
 import { Modal } from './Modal';
 
 export interface AlertAction {

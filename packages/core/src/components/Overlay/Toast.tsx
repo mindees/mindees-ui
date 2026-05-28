@@ -1,7 +1,6 @@
+import { resolveShadow } from '@mindees/tokens';
 import * as React from 'react';
 import { Animated, Easing, type StyleProp, type View, type ViewStyle } from 'react-native';
-
-import { resolveShadow } from '@mindees/tokens';
 
 import { useAnnouncer } from '../../a11y/useAnnouncer';
 import { tagComponent } from '../../layout-intelligence/tagged-component';

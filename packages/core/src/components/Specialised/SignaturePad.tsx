@@ -2,6 +2,7 @@ import * as React from 'react';
 import { type View } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
+
 import { MissingPeer, tryLoadPeer } from './optionalPeer';
 
 export interface SignaturePadProps {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { type TextInput } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
+
 import { Input, type InputProps } from './Input';
 
 export interface TextareaProps extends Omit<InputProps, 'multiline'> {

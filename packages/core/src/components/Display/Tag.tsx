@@ -1,7 +1,6 @@
+import { CloseIcon } from '@mindees/icons';
 import * as React from 'react';
 import { Pressable, View, type ViewStyle } from 'react-native';
-
-import { CloseIcon } from '@mindees/icons';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';

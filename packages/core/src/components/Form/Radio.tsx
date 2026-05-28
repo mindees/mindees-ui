@@ -37,7 +37,6 @@ const RadioImpl = React.forwardRef<View, RadioProps>(function Radio(props, ref) 
   const { value, disabled: disabledProp, label, accessibilityLabel, style, ...rest } = props;
   const ctx = React.useContext(RadioGroupContext);
   if (!ctx && process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line no-console
     console.warn('<Radio> rendered without a parent <RadioGroup>; selection state is unwired.');
   }
   const disabled = disabledProp ?? ctx?.disabled ?? false;

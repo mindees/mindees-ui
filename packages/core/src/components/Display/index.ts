@@ -19,3 +19,8 @@ export * from './DescriptionList';
 export * from './Pill';
 export * from './Feed';
 export * from './ActivityLog';
+export * from './DataGrid';
+export * from './Carousel';
+export * from './ImageGallery';
+export * from './TreeView';
+export * from './Calendar';

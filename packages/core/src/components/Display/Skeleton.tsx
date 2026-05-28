@@ -1,7 +1,6 @@
+import { type RadiusToken, radii } from '@mindees/tokens';
 import * as React from 'react';
 import { Animated, Easing, type View, type ViewProps, type ViewStyle } from 'react-native';
-
-import { type RadiusToken, radii } from '@mindees/tokens';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useReduceMotion, useTokens } from '../../theme/ThemeProvider';

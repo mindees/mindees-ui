@@ -1,10 +1,10 @@
+import { CloseIcon, SearchIcon } from '@mindees/icons';
 import * as React from 'react';
 import { Pressable, type TextInput } from 'react-native';
 
-import { CloseIcon, SearchIcon } from '@mindees/icons';
-
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
+
 import { Input, type InputProps } from './Input';
 
 export interface SearchInputProps extends Omit<InputProps, 'leading' | 'trailing'> {

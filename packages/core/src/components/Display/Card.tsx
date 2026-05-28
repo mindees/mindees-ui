@@ -1,7 +1,6 @@
+import { resolveShadow } from '@mindees/tokens';
 import * as React from 'react';
 import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
-
-import { resolveShadow } from '@mindees/tokens';
 
 import { CardContext, type CardContextValue } from '../../layout-intelligence/context';
 import { tagComponent } from '../../layout-intelligence/tagged-component';
