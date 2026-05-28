@@ -1,15 +1,25 @@
+import { render } from '@testing-library/react-native';
+
 import { getComponentTag } from '../../layout-intelligence/tagged-component';
 import { Accordion } from '../Display/Accordion';
+import { ActivityLog } from '../Display/ActivityLog';
 import { Avatar, AvatarGroup } from '../Display/Avatar';
 import { Badge } from '../Display/Badge';
 import { Card } from '../Display/Card';
+import { DescriptionList } from '../Display/DescriptionList';
+import { DetailView } from '../Display/DetailView';
+import { Feed } from '../Display/Feed';
 import { Image } from '../Display/Image';
+import { KeyValueRow } from '../Display/KeyValueRow';
+import { KPICard } from '../Display/KPICard';
 import { List, ListItem } from '../Display/List';
+import { Pill } from '../Display/Pill';
 import { Progress } from '../Display/Progress';
 import { Rating } from '../Display/Rating';
 import { Skeleton } from '../Display/Skeleton';
 import { Spinner } from '../Display/Spinner';
 import { Stat } from '../Display/Stat';
+import { Table } from '../Display/Table';
 import { Chip, Tag } from '../Display/Tag';
 import { Timeline } from '../Display/Timeline';
 import { Breadcrumb } from '../Nav/Breadcrumb';
@@ -58,5 +68,56 @@ describe('Phase 5 — tag identity', () => {
     expect(getComponentTag(<Stat label="x" value="y" />)).toBe('Stat');
     expect(getComponentTag(<Rating value={3} />)).toBe('Rating');
     expect(getComponentTag(<Timeline items={[]} />)).toBe('Timeline');
+  });
+});
+
+describe('Phase 5 — data-display primitives', () => {
+  const columns = [
+    { key: 'name', title: 'Name' },
+    { key: 'qty', title: 'Qty', width: 80 },
+  ];
+  const tableData = [
+    { name: 'Apples', qty: 4 },
+    { name: 'Pears', qty: 2 },
+  ];
+  const detailItems = [
+    { label: 'Status', value: 'Active' },
+    { label: 'Owner', value: 'Sam' },
+  ];
+  const descriptionItems = [
+    { term: 'Latency', description: 'Time to first byte' },
+    { term: 'Throughput', description: 'Requests per second' },
+  ];
+  const feedItems = [
+    { id: '1', title: 'Posted update', timestamp: '2m', body: 'Shipped the release', name: 'Ada' },
+    { id: '2', title: 'Closed ticket', timestamp: '5m', body: 'Resolved the bug', name: 'Lin' },
+  ];
+  const logItems = [
+    { time: '09:00', text: 'Build started' },
+    { time: '09:05', text: 'Build passed' },
+  ];
+
+  it('carries the correct tags', () => {
+    expect(getComponentTag(<Table columns={[]} data={[]} />)).toBe('Table');
+    expect(getComponentTag(<KPICard label="Revenue" value="$1k" />)).toBe('KPICard');
+    expect(getComponentTag(<DetailView items={[]} />)).toBe('DetailView');
+    expect(getComponentTag(<KeyValueRow label="k" value="v" />)).toBe('KeyValueRow');
+    expect(getComponentTag(<DescriptionList items={[]} />)).toBe('DescriptionList');
+    expect(getComponentTag(<Pill>label</Pill>)).toBe('Pill');
+    expect(getComponentTag(<Feed items={[]} />)).toBe('Feed');
+    expect(getComponentTag(<ActivityLog items={[]} />)).toBe('ActivityLog');
+  });
+
+  it('renders without throwing', () => {
+    expect(() => render(<Table columns={columns} data={tableData} />)).not.toThrow();
+    expect(() =>
+      render(<KPICard label="Revenue" value="$1,240" delta={{ value: '+12%', direction: 'up' }} />),
+    ).not.toThrow();
+    expect(() => render(<DetailView items={detailItems} />)).not.toThrow();
+    expect(() => render(<KeyValueRow label="Email" value="a@b.com" />)).not.toThrow();
+    expect(() => render(<DescriptionList items={descriptionItems} />)).not.toThrow();
+    expect(() => render(<Pill tone="success">Done</Pill>)).not.toThrow();
+    expect(() => render(<Feed items={feedItems} />)).not.toThrow();
+    expect(() => render(<ActivityLog items={logItems} />)).not.toThrow();
   });
 });

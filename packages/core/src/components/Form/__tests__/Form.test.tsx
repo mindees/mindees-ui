@@ -1,17 +1,23 @@
 import { fireEvent, render } from '@testing-library/react-native';
 
 import { getComponentTag } from '../../../layout-intelligence/tagged-component';
+import { Autocomplete } from '../Autocomplete';
 import { Checkbox } from '../Checkbox';
 import { CurrencyInput } from '../CurrencyInput';
 import { EmailInput } from '../EmailInput';
 import { FormField } from '../FormField';
 import { Input } from '../Input';
+import { MultiSelect } from '../MultiSelect';
 import { NumberInput } from '../NumberInput';
 import { OTPInput } from '../OTPInput';
 import { PhoneInput } from '../PhoneInput';
 import { PINInput } from '../PINInput';
 import { Radio, RadioGroup } from '../Radio';
+import { RangeSlider } from '../RangeSlider';
+import { Select } from '../Select';
+import { Slider } from '../Slider';
 import { Switch } from '../Switch';
+import { TagInput } from '../TagInput';
 
 describe('Phase 3 forms — smoke', () => {
   it('every form primitive carries its tag', () => {
@@ -119,5 +125,35 @@ describe('Input primitives — smoke', () => {
     );
     fireEvent.changeText(getByDisplayValue('123'), '1234');
     expect(onComplete).toHaveBeenCalledWith('1234');
+  });
+});
+
+describe('Advanced form primitives — smoke', () => {
+  const options = [
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Cherry', value: 'cherry' },
+  ];
+
+  it('every advanced form primitive carries its tag', () => {
+    expect(getComponentTag(<Select options={options} />)).toBe('Select');
+    expect(getComponentTag(<MultiSelect options={options} />)).toBe('MultiSelect');
+    expect(getComponentTag(<Autocomplete options={options} />)).toBe('Autocomplete');
+    expect(getComponentTag(<TagInput />)).toBe('TagInput');
+    expect(getComponentTag(<Slider />)).toBe('Slider');
+    expect(getComponentTag(<RangeSlider />)).toBe('RangeSlider');
+  });
+
+  it('each advanced form primitive renders without throwing', () => {
+    expect(() => render(<Select options={options} placeholder="Pick one" />)).not.toThrow();
+    expect(() =>
+      render(<MultiSelect options={options} value={['apple']} showChips />),
+    ).not.toThrow();
+    expect(() =>
+      render(<Autocomplete options={options} value="ap" placeholder="Type…" />),
+    ).not.toThrow();
+    expect(() => render(<TagInput value={['one', 'two']} />)).not.toThrow();
+    expect(() => render(<Slider value={0.5} min={0} max={1} step={0.1} />)).not.toThrow();
+    expect(() => render(<RangeSlider value={[0.2, 0.8]} min={0} max={1} />)).not.toThrow();
   });
 });
