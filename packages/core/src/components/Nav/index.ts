@@ -4,3 +4,7 @@ export * from './TopBar';
 export * from './Breadcrumb';
 export * from './Pagination';
 export * from './Stepper';
+export * from './BottomNavigation';
+export * from './UserMenu';
+export * from './SettingsMenu';
+export * from './GlobalSearch';

@@ -205,6 +205,9 @@
     "@shopify/flash-list": {
       "optional": true
     },
+    "expo-av": {
+      "optional": true
+    },
     "expo-blur": {
       "optional": true
     },
@@ -218,6 +221,15 @@
       "optional": true
     },
     "expo-image-picker": {
+      "optional": true
+    },
+    "expo-video": {
+      "optional": true
+    },
+    "lottie-react-native": {
+      "optional": true
+    },
+    "react-native-pdf": {
       "optional": true
     }
   },

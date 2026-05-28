@@ -8,14 +8,20 @@ import { ActionSheet } from '../ActionSheet';
 import { Alert } from '../Alert';
 import { Banner } from '../Banner';
 import { BottomSheet } from '../BottomSheet';
+import { CommandPalette, type Command } from '../CommandPalette';
 import { ConfirmationDialog } from '../ConfirmationDialog';
 import { ContextMenu } from '../ContextMenu';
 import { Dialog } from '../Dialog';
 import { Drawer } from '../Drawer';
 import { DropdownMenu, type MenuItem } from '../DropdownMenu';
+import { FullscreenOverlay } from '../FullscreenOverlay';
+import { HoverCard } from '../HoverCard';
+import { Lightbox } from '../Lightbox';
+import { MegaMenu, type MegaMenuSection } from '../MegaMenu';
 import { Modal } from '../Modal';
 import { Notification } from '../Notification';
 import { Popover } from '../Popover';
+import { SidePanel } from '../SidePanel';
 import { Snackbar } from '../Snackbar';
 import { Toast } from '../Toast';
 import { Tooltip } from '../Tooltip';
@@ -174,6 +180,115 @@ describe('overlays-extra — renders without throwing', () => {
           </ContextMenu>,
         ),
       ),
+    ).not.toThrow();
+  });
+});
+
+describe('overlays-final — tag identity', () => {
+  it('carries the right tag for each final overlay primitive', () => {
+    expect(getComponentTag(<SidePanel visible={false} onClose={noop} />)).toBe('SidePanel');
+    expect(getComponentTag(<Lightbox visible={false} onClose={noop} images={[]} />)).toBe(
+      'Lightbox',
+    );
+    expect(getComponentTag(<FullscreenOverlay visible={false} onClose={noop} />)).toBe(
+      'FullscreenOverlay',
+    );
+    expect(
+      getComponentTag(
+        <HoverCard trigger={<RNText>hover</RNText>} content={<RNText>card</RNText>} />,
+      ),
+    ).toBe('HoverCard');
+    expect(getComponentTag(<MegaMenu trigger={<RNText>open</RNText>} sections={[]} />)).toBe(
+      'MegaMenu',
+    );
+    expect(getComponentTag(<CommandPalette visible={false} onClose={noop} commands={[]} />)).toBe(
+      'CommandPalette',
+    );
+  });
+});
+
+describe('overlays-final — renders without throwing', () => {
+  let timingSpy: jest.SpyInstance;
+  beforeAll(() => {
+    timingSpy = jest.spyOn(Animated, 'timing').mockReturnValue({
+      start: noop,
+      stop: noop,
+      reset: noop,
+    } as unknown as Animated.CompositeAnimation);
+  });
+  afterAll(() => {
+    timingSpy.mockRestore();
+  });
+
+  const wrap = (ui: React.ReactElement): React.ReactElement => <ThemeProvider>{ui}</ThemeProvider>;
+
+  it('SidePanel (visible)', () => {
+    expect(() =>
+      render(
+        wrap(
+          <SidePanel visible onClose={noop} side="right">
+            <RNText>panel</RNText>
+          </SidePanel>,
+        ),
+      ),
+    ).not.toThrow();
+  });
+
+  it('Lightbox (visible, multiple images)', () => {
+    expect(() =>
+      render(
+        wrap(
+          <Lightbox
+            visible
+            onClose={noop}
+            images={[{ uri: 'https://example.com/a.png' }, { uri: 'https://example.com/b.png' }]}
+            index={1}
+          />,
+        ),
+      ),
+    ).not.toThrow();
+  });
+
+  it('FullscreenOverlay (visible)', () => {
+    expect(() =>
+      render(
+        wrap(
+          <FullscreenOverlay visible onClose={noop}>
+            <RNText>content</RNText>
+          </FullscreenOverlay>,
+        ),
+      ),
+    ).not.toThrow();
+  });
+
+  it('HoverCard', () => {
+    expect(() =>
+      render(
+        wrap(
+          <HoverCard trigger={<RNText>Hover me</RNText>} content={<RNText>Card body</RNText>} />,
+        ),
+      ),
+    ).not.toThrow();
+  });
+
+  it('MegaMenu', () => {
+    const sections: readonly MegaMenuSection[] = [
+      { title: 'Products', items: [{ label: 'Phones', onPress: noop }] },
+      { title: 'Support', items: [{ label: 'Docs', onPress: noop }] },
+    ];
+    expect(() =>
+      render(wrap(<MegaMenu trigger={<RNText>Menu</RNText>} sections={sections} />)),
+    ).not.toThrow();
+  });
+
+  it('CommandPalette (visible, grouped)', () => {
+    const commands: readonly Command[] = [
+      { id: 'new', label: 'New File', onRun: noop, group: 'File' },
+      { id: 'open', label: 'Open File', onRun: noop, group: 'File' },
+      { id: 'help', label: 'Help', onRun: noop },
+    ];
+    expect(() =>
+      render(wrap(<CommandPalette visible onClose={noop} commands={commands} />)),
     ).not.toThrow();
   });
 });
