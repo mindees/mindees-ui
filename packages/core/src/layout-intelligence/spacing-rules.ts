@@ -23,20 +23,30 @@ const GAP_MULTIPLIER: Record<GapRule, number> = {
 const HEADINGS: readonly ComponentTag[] = ['Heading'];
 const SECONDARY_TEXT: readonly ComponentTag[] = ['Caption', 'Label'];
 const BODY_TEXT: readonly ComponentTag[] = ['Text'];
-const INTERACTIVE: readonly ComponentTag[] = ['Button', 'IconButton', 'Input', 'Select', 'Switch'];
+// "Actions" are tappable commands (a button row). They are deliberately
+// distinct from form *controls* (Input/Select/Switch/Checkbox/Radio): a
+// trailing action after content should get extra separation, but stacked form
+// controls should keep the base rhythm. Conflating the two (the previous
+// `INTERACTIVE` set) made `Input → Button` resolve to `base` instead of
+// `loose`, because the rule's `!isAction(prev)` guard saw the Input as an
+// action and short-circuited.
+const ACTIONS: readonly ComponentTag[] = ['Button', 'IconButton', 'FAB', 'ButtonGroup'];
 
 const isHeading = (t?: ComponentTag): boolean => t !== undefined && HEADINGS.includes(t);
 const isSecondaryText = (t?: ComponentTag): boolean =>
   t !== undefined && SECONDARY_TEXT.includes(t);
 const isBodyText = (t?: ComponentTag): boolean => t !== undefined && BODY_TEXT.includes(t);
-const isInteractive = (t?: ComponentTag): boolean => t !== undefined && INTERACTIVE.includes(t);
+const isAction = (t?: ComponentTag): boolean => t !== undefined && ACTIONS.includes(t);
 
 // Heuristic rules, evaluated in order; the first match wins.
 //
 // 1. Heading directly above a Caption/Label is a "tight group" (eyebrow text) → tighter gap.
+//    (and the reverse: a Caption/Label eyebrow directly above a Heading)
 // 2. Heading above body text creates strong visual hierarchy → looser gap.
 // 3. Body text following body text reads as continuous prose → tight gap.
-// 4. A trailing interactive group (button row) after content gets the loose gap.
+// 4. A trailing action (button row) after non-action content gets the loose gap.
+//    Requires a real predecessor — a leading action with nothing before it
+//    does not trigger this.
 // 5. Anything → anything: base gap (the user-supplied value).
 export function resolveGapRule(
   prev: ComponentTag | undefined,
@@ -46,7 +56,7 @@ export function resolveGapRule(
   if (isSecondaryText(prev) && isHeading(next)) return 'tighter';
   if (isHeading(prev) && isBodyText(next)) return 'loose';
   if (isBodyText(prev) && isBodyText(next)) return 'tight';
-  if (!isInteractive(prev) && isInteractive(next)) return 'loose';
+  if (prev !== undefined && !isAction(prev) && isAction(next)) return 'loose';
   return 'base';
 }
 

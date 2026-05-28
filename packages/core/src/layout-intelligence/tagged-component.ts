@@ -81,6 +81,7 @@ export type ComponentTag =
   // specialised / utility
   | 'EmptyState'
   | 'ScreenWrapper'
+  | 'SafeAreaView'
   | 'CodeBlock'
   | 'QRCode'
   | 'Barcode'

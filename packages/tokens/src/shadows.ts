@@ -33,10 +33,22 @@ export type ShadowToken = keyof typeof shadows;
 
 // Resolves a token to platform-correct style props. Use this from components
 // rather than spreading the spec directly so we can tune per-platform later.
+//
+// - Android: `elevation` (the iOS shadow* props are ignored by the platform).
+// - Web (React Native Web): `boxShadow` — RNW does not implement the iOS
+//   shadow* props, so without this branch every elevated surface renders flat.
+// - iOS: the native shadow* props.
 export const resolveShadow = (token: ShadowToken): ViewStyle => {
   const s = shadows[token];
   if (Platform.OS === 'android') {
     return { elevation: s.elevation };
+  }
+  if (Platform.OS === 'web') {
+    if (token === 'none') return { boxShadow: 'none' };
+    const { width, height } = s.shadowOffset;
+    return {
+      boxShadow: `${width}px ${height}px ${s.shadowRadius}px rgba(0, 0, 0, ${s.shadowOpacity})`,
+    } as ViewStyle;
   }
   return {
     shadowColor: s.shadowColor,

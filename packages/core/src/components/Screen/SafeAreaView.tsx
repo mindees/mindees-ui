@@ -32,5 +32,5 @@ SafeAreaViewImpl.displayName = 'SafeAreaView';
 // without a forwardable ref, so the forwarded ref is intentionally ignored.
 export const SafeAreaView = tagComponent(
   SafeAreaViewImpl as unknown as React.ComponentType<MindeesSafeAreaViewProps>,
-  'ScreenWrapper',
+  'SafeAreaView',
 );

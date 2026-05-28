@@ -83,6 +83,14 @@ TagImpl.displayName = 'Tag';
 
 export const Tag = tagComponent(TagImpl, 'Tag');
 
-// Chip is identical to Tag — alias for the naming convention some design
-// systems prefer. Same instance + tag (re-tagging would mutate Tag too).
-export const Chip = Tag;
+// Chip renders identical UI to Tag (some design systems prefer the name), but
+// it is its OWN tagged component so the Layout Intelligence Layer can tell a
+// Chip from a Tag. It must be a distinct instance — re-tagging the shared
+// TagImpl would mutate Tag's tag too.
+const ChipImpl = React.forwardRef<View, TagProps>(function Chip(props, ref) {
+  return <TagImpl ref={ref} {...props} />;
+});
+
+ChipImpl.displayName = 'Chip';
+
+export const Chip = tagComponent(ChipImpl, 'Chip');

@@ -45,8 +45,9 @@ describe('Phase 5 — tag identity', () => {
     ).toBe('AvatarGroup');
     expect(getComponentTag(<Badge>x</Badge>)).toBe('Badge');
     expect(getComponentTag(<Tag>x</Tag>)).toBe('Tag');
-    // Chip is an alias for Tag — same instance, same tag.
-    expect(getComponentTag(<Chip>x</Chip>)).toBe('Tag');
+    // Chip renders Tag's UI but is its own tagged component so the Layout
+    // Intelligence Layer can distinguish the two.
+    expect(getComponentTag(<Chip>x</Chip>)).toBe('Chip');
     expect(getComponentTag(<Image />)).toBe('Image');
     expect(getComponentTag(<List />)).toBe('List');
     expect(getComponentTag(<ListItem title="x" />)).toBe('ListItem');
