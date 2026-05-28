@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, type PressableProps, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { CheckIcon } from '@mindees/icons';
 
@@ -7,7 +7,10 @@ import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<
+  PressableProps,
+  'onPress' | 'disabled' | 'accessibilityLabel' | 'style'
+> {
   readonly checked?: boolean;
   readonly defaultChecked?: boolean;
   readonly indeterminate?: boolean;
@@ -16,6 +19,8 @@ export interface CheckboxProps {
   /** Label rendered to the right of the checkbox; tap area covers the label too. */
   readonly label?: React.ReactNode;
   readonly accessibilityLabel?: string;
+  /** Style applied to the pressable row container. Caller value wins. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const CheckboxImpl = React.forwardRef<View, CheckboxProps>(function Checkbox(props, ref) {
@@ -27,6 +32,8 @@ const CheckboxImpl = React.forwardRef<View, CheckboxProps>(function Checkbox(pro
     onChange,
     label,
     accessibilityLabel,
+    style,
+    ...rest
   } = props;
   const isControlled = checked !== undefined;
   const [internal, setInternal] = React.useState(defaultChecked ?? false);
@@ -70,8 +77,9 @@ const CheckboxImpl = React.forwardRef<View, CheckboxProps>(function Checkbox(pro
       }}
       accessibilityLabel={accessibilityLabel}
       hitSlop={8}
-      style={rowStyle}
+      style={[rowStyle, style]}
       disabled={disabled}
+      {...rest}
     >
       <View style={boxStyle}>
         {indeterminate ? (

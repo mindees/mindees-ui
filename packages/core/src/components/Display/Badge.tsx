@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -8,11 +8,12 @@ import { Text } from '../Text/Text';
 export type BadgeTone = 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type BadgeVariant = 'solid' | 'subtle' | 'outline';
 
-export interface BadgeProps {
+export interface BadgeProps extends Omit<ViewProps, 'style'> {
   readonly tone?: BadgeTone;
   readonly variant?: BadgeVariant;
   readonly size?: 'sm' | 'md';
   readonly children?: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 function toneColors(
@@ -59,10 +60,10 @@ function toneColors(
 }
 
 const BadgeImpl = React.forwardRef<View, BadgeProps>(function Badge(props, ref) {
-  const { tone = 'neutral', variant = 'subtle', size = 'sm', children } = props;
+  const { tone = 'neutral', variant = 'subtle', size = 'sm', children, style, ...rest } = props;
   const tokens = useTokens();
   const c = toneColors(tokens, tone, variant);
-  const style: ViewStyle = {
+  const badgeStyle: ViewStyle = {
     paddingHorizontal: size === 'sm' ? tokens.space['2xs'] : tokens.space.xs,
     paddingVertical: 1,
     backgroundColor: c.bg,
@@ -72,7 +73,7 @@ const BadgeImpl = React.forwardRef<View, BadgeProps>(function Badge(props, ref) 
     alignSelf: 'flex-start',
   };
   return (
-    <View ref={ref} accessibilityRole="text" style={style}>
+    <View ref={ref} accessibilityRole="text" style={[badgeStyle, style]} {...rest}>
       <Text
         variant={size === 'sm' ? 'caption' : 'label'}
         weight="semibold"

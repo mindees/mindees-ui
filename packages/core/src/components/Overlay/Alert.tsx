@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type View } from 'react-native';
+import { type StyleProp, type View, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { Button, type ButtonTone } from '../Button/Button';
@@ -22,14 +22,23 @@ export interface AlertProps {
   readonly description?: string;
   /** Action buttons rendered at the bottom. Last is the primary. Defaults to a single OK action. */
   readonly actions?: readonly AlertAction[];
+  /** Style applied to the elevated dialog panel (not the backdrop/scrim). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const AlertImpl = React.forwardRef<View, AlertProps>(function Alert(props, _ref) {
-  const { visible, onClose, title, description, actions } = props;
+const AlertImpl = React.forwardRef<View, AlertProps>(function Alert(props, ref) {
+  const { visible, onClose, title, description, actions, style } = props;
   const resolvedActions: readonly AlertAction[] = actions ?? [{ label: 'OK', onPress: onClose }];
 
   return (
-    <Modal visible={visible} onClose={onClose} centered accessibilityLabel={title}>
+    <Modal
+      ref={ref}
+      visible={visible}
+      onClose={onClose}
+      centered
+      accessibilityLabel={title}
+      style={style}
+    >
       <Stack gap="sm">
         <Heading level={3}>{title}</Heading>
         {description ? <Text tone="secondary">{description}</Text> : null}

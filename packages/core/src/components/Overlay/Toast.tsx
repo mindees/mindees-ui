@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Easing, type View, type ViewStyle } from 'react-native';
+import { Animated, Easing, type StyleProp, type View, type ViewStyle } from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -17,10 +17,12 @@ export interface ToastProps {
   readonly onDismiss?: () => void;
   /** Auto-dismiss after N ms. Set to 0 to disable. Defaults to 4000. */
   readonly duration?: number;
+  /** Style applied to the toast surface. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const ToastImpl = React.forwardRef<View, ToastProps>(function Toast(props, _ref) {
-  const { visible, message, tone = 'info', onDismiss, duration = 4000 } = props;
+const ToastImpl = React.forwardRef<View, ToastProps>(function Toast(props, ref) {
+  const { visible, message, tone = 'info', onDismiss, duration = 4000, style } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
   const announce = useAnnouncer();
@@ -73,7 +75,8 @@ const ToastImpl = React.forwardRef<View, ToastProps>(function Toast(props, _ref)
 
   return (
     <Animated.View
-      style={[wrap, { opacity }]}
+      ref={ref}
+      style={[wrap, style, { opacity }]}
       accessibilityLiveRegion="polite"
       accessibilityRole="alert"
     >

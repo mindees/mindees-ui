@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import {
+  Pressable,
+  type PressableProps,
+  View,
+  type StyleProp,
+  type ViewProps,
+  type ViewStyle,
+} from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -14,15 +21,20 @@ interface RadioGroupContextValue {
 
 const RadioGroupContext = React.createContext<RadioGroupContextValue | undefined>(undefined);
 
-export interface RadioProps {
+export interface RadioProps extends Omit<
+  PressableProps,
+  'onPress' | 'disabled' | 'accessibilityLabel' | 'style'
+> {
   readonly value: string;
   readonly disabled?: boolean;
   readonly label?: React.ReactNode;
   readonly accessibilityLabel?: string;
+  /** Style applied to the pressable row container. Caller value wins. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const RadioImpl = React.forwardRef<View, RadioProps>(function Radio(props, ref) {
-  const { value, disabled: disabledProp, label, accessibilityLabel } = props;
+  const { value, disabled: disabledProp, label, accessibilityLabel, style, ...rest } = props;
   const ctx = React.useContext(RadioGroupContext);
   if (!ctx && process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line no-console
@@ -52,7 +64,8 @@ const RadioImpl = React.forwardRef<View, RadioProps>(function Radio(props, ref) 
       onPress={() => !disabled && ctx?.onValueChange(value)}
       disabled={disabled}
       hitSlop={8}
-      style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.space.xs }}
+      style={[{ flexDirection: 'row', alignItems: 'center', gap: tokens.space.xs }, style]}
+      {...rest}
     >
       <View style={ringStyle}>
         {selected ? (
@@ -82,17 +95,28 @@ RadioImpl.displayName = 'Radio';
 export const Radio = tagComponent(RadioImpl, 'Radio');
 
 // ---------- RadioGroup ----------------------------------------------------
-export interface RadioGroupProps {
+export interface RadioGroupProps extends Omit<ViewProps, 'style'> {
   readonly value?: string;
   readonly defaultValue?: string;
   readonly onValueChange?: (next: string) => void;
   readonly name: string;
   readonly disabled?: boolean;
   readonly children?: React.ReactNode;
+  /** Style applied to the group container. Caller value wins. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const RadioGroupImpl = React.forwardRef<View, RadioGroupProps>(function RadioGroup(props, ref) {
-  const { value, defaultValue, onValueChange, name, disabled = false, children } = props;
+  const {
+    value,
+    defaultValue,
+    onValueChange,
+    name,
+    disabled = false,
+    children,
+    style,
+    ...rest
+  } = props;
   const isControlled = value !== undefined;
   const [internal, setInternal] = React.useState<string | undefined>(defaultValue);
   const resolved = isControlled ? value : internal;
@@ -112,7 +136,7 @@ const RadioGroupImpl = React.forwardRef<View, RadioGroupProps>(function RadioGro
 
   return (
     <RadioGroupContext.Provider value={ctx}>
-      <View ref={ref} accessibilityRole="radiogroup">
+      <View ref={ref} accessibilityRole="radiogroup" style={style} {...rest}>
         {children}
       </View>
     </RadioGroupContext.Provider>

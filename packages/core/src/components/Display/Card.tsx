@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -7,13 +7,13 @@ import { CardContext, type CardContextValue } from '../../layout-intelligence/co
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 
-export interface CardProps {
+export interface CardProps extends Omit<ViewProps, 'style'> {
   readonly variant?: 'elevated' | 'outlined' | 'filled';
   readonly density?: 'compact' | 'comfortable' | 'spacious';
   readonly interactive?: boolean;
   readonly onPress?: () => void;
   readonly children?: React.ReactNode;
-  readonly style?: ViewStyle;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const CardImpl = React.forwardRef<View, CardProps>(function Card(props, ref) {
@@ -24,6 +24,7 @@ const CardImpl = React.forwardRef<View, CardProps>(function Card(props, ref) {
     onPress,
     children,
     style,
+    ...rest
   } = props;
   const tokens = useTokens();
   const ctx: CardContextValue = { variant, density, interactive };
@@ -44,11 +45,17 @@ const CardImpl = React.forwardRef<View, CardProps>(function Card(props, ref) {
   };
   const node =
     onPress || interactive ? (
-      <Pressable ref={ref} onPress={onPress} accessibilityRole="button" style={[cardStyle, style]}>
+      <Pressable
+        ref={ref}
+        onPress={onPress}
+        accessibilityRole="button"
+        style={[cardStyle, style]}
+        {...rest}
+      >
         {children}
       </Pressable>
     ) : (
-      <View ref={ref} style={[cardStyle, style]}>
+      <View ref={ref} style={[cardStyle, style]} {...rest}>
         {children}
       </View>
     );

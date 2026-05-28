@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 
-export interface ProgressProps {
+export interface ProgressProps extends Omit<ViewProps, 'style'> {
   /** 0–1. Omit / pass `null` for indeterminate. */
   readonly value?: number | null;
   readonly tone?: 'primary' | 'success' | 'warning' | 'danger';
   readonly height?: number;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const ProgressImpl = React.forwardRef<View, ProgressProps>(function Progress(props, ref) {
-  const { value, tone = 'primary', height = 8 } = props;
+  const { value, tone = 'primary', height = 8, style, ...rest } = props;
   const tokens = useTokens();
   const clamped = value === null || value === undefined ? null : Math.min(1, Math.max(0, value));
   const accent =
@@ -45,7 +46,8 @@ const ProgressImpl = React.forwardRef<View, ProgressProps>(function Progress(pro
           ? { text: 'Loading' }
           : { now: Math.round(clamped * 100), min: 0, max: 100 }
       }
-      style={trackStyle}
+      style={[trackStyle, style]}
+      {...rest}
     >
       <View style={fillStyle} />
     </View>

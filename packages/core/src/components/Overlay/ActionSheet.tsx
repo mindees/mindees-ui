@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, type View, type ViewStyle } from 'react-native';
+import { Pressable, type StyleProp, type View, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -20,10 +20,12 @@ export interface ActionSheetProps {
   readonly items: readonly ActionSheetItem[];
   /** Show a "Cancel" row that just calls `onClose`. Default true. */
   readonly showCancel?: boolean;
+  /** Style applied to the elevated sheet surface (not the backdrop/scrim). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const ActionSheetImpl = React.forwardRef<View, ActionSheetProps>(function ActionSheet(props, _ref) {
-  const { visible, onClose, title, items, showCancel = true } = props;
+const ActionSheetImpl = React.forwardRef<View, ActionSheetProps>(function ActionSheet(props, ref) {
+  const { visible, onClose, title, items, showCancel = true, style } = props;
   const tokens = useTokens();
 
   const rowStyle: ViewStyle = {
@@ -33,7 +35,7 @@ const ActionSheetImpl = React.forwardRef<View, ActionSheetProps>(function Action
   };
 
   return (
-    <BottomSheet visible={visible} onClose={onClose} height="auto">
+    <BottomSheet ref={ref} visible={visible} onClose={onClose} height="auto" style={style}>
       <Stack gap="2xs">
         {title ? (
           <Text variant="caption" tone="muted">

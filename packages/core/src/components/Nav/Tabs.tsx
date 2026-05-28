@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Pressable, ScrollView, type View, type ViewStyle } from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  View,
+  type PressableProps,
+  type StyleProp,
+  type ViewProps,
+  type ViewStyle,
+} from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -11,15 +19,16 @@ interface TabsContextValue {
 }
 const TabsContext = React.createContext<TabsContextValue | undefined>(undefined);
 
-export interface TabsProps {
+export interface TabsProps extends ViewProps {
   readonly value?: string;
   readonly defaultValue?: string;
   readonly onValueChange?: (next: string) => void;
   readonly children?: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const TabsImpl = React.forwardRef<View, TabsProps>(function Tabs(props, _ref) {
-  const { value, defaultValue, onValueChange, children } = props;
+const TabsImpl = React.forwardRef<View, TabsProps>(function Tabs(props, ref) {
+  const { value, defaultValue, onValueChange, children, style, ...rest } = props;
   const [internal, setInternal] = React.useState(defaultValue ?? '');
   const resolved = value ?? internal;
   const setValue = React.useCallback(
@@ -30,7 +39,13 @@ const TabsImpl = React.forwardRef<View, TabsProps>(function Tabs(props, _ref) {
     [value, onValueChange],
   );
   const ctx = React.useMemo(() => ({ value: resolved, setValue }), [resolved, setValue]);
-  return <TabsContext.Provider value={ctx}>{children}</TabsContext.Provider>;
+  return (
+    <TabsContext.Provider value={ctx}>
+      <View ref={ref} style={style} {...rest}>
+        {children}
+      </View>
+    </TabsContext.Provider>
+  );
 });
 
 TabsImpl.displayName = 'Tabs';
@@ -38,12 +53,18 @@ TabsImpl.displayName = 'Tabs';
 export const Tabs = tagComponent(TabsImpl, 'Tabs');
 
 // ---- TabList -----------------------------------------------------------
-export interface TabListProps {
+export interface TabListProps extends ViewProps {
   readonly scrollable?: boolean;
   readonly children?: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-export function TabList({ scrollable = false, children }: TabListProps): React.ReactElement {
+export function TabList({
+  scrollable = false,
+  children,
+  style,
+  ...rest
+}: TabListProps): React.ReactElement {
   const tokens = useTokens();
   const listStyle: ViewStyle = {
     flexDirection: 'row',
@@ -58,30 +79,39 @@ export function TabList({ scrollable = false, children }: TabListProps): React.R
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={listStyle}
+        style={style}
+        {...rest}
       >
         {children}
       </ScrollView>
     );
   }
   return (
-    <Pressable accessibilityRole="tablist" style={listStyle}>
+    <Pressable accessibilityRole="tablist" style={[listStyle, style]} {...rest}>
       {children}
     </Pressable>
   );
 }
 
 // ---- Tab ---------------------------------------------------------------
-export interface TabProps {
+export interface TabProps extends Omit<PressableProps, 'style' | 'disabled'> {
   readonly value: string;
   readonly children: React.ReactNode;
   readonly disabled?: boolean;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-export function Tab({ value, children, disabled = false }: TabProps): React.ReactElement {
+export function Tab({
+  value,
+  children,
+  disabled = false,
+  style,
+  ...rest
+}: TabProps): React.ReactElement {
   const ctx = React.useContext(TabsContext);
   const tokens = useTokens();
   const active = ctx?.value === value;
-  const style: ViewStyle = {
+  const tabStyle: ViewStyle = {
     paddingHorizontal: tokens.space.md,
     paddingVertical: tokens.space.sm,
     borderBottomWidth: 2,
@@ -94,7 +124,8 @@ export function Tab({ value, children, disabled = false }: TabProps): React.Reac
       accessibilityState={{ selected: active, disabled }}
       onPress={() => !disabled && ctx?.setValue(value)}
       disabled={disabled}
-      style={style}
+      style={[tabStyle, style]}
+      {...rest}
     >
       <Text tone={active ? 'link' : 'secondary'} weight={active ? 'semibold' : 'regular'}>
         {children}
@@ -104,13 +135,23 @@ export function Tab({ value, children, disabled = false }: TabProps): React.Reac
 }
 
 // ---- TabPanel ----------------------------------------------------------
-export interface TabPanelProps {
+export interface TabPanelProps extends ViewProps {
   readonly value: string;
   readonly children?: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-export function TabPanel({ value, children }: TabPanelProps): React.ReactElement | null {
+export function TabPanel({
+  value,
+  children,
+  style,
+  ...rest
+}: TabPanelProps): React.ReactElement | null {
   const ctx = React.useContext(TabsContext);
   if (ctx?.value !== value) return null;
-  return <>{children}</>;
+  return (
+    <View accessibilityRole="none" style={style} {...rest}>
+      {children}
+    </View>
+  );
 }

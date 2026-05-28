@@ -1,24 +1,32 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { ListContext, useListContext } from '../../layout-intelligence/context';
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
 
-export interface ListProps {
+export interface ListProps extends Omit<ViewProps, 'style'> {
   readonly density?: 'compact' | 'comfortable' | 'spacious';
   readonly dividers?: boolean;
   readonly interactive?: boolean;
   readonly children?: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const ListImpl = React.forwardRef<View, ListProps>(function List(props, ref) {
-  const { density = 'comfortable', dividers = true, interactive = false, children } = props;
+  const {
+    density = 'comfortable',
+    dividers = true,
+    interactive = false,
+    children,
+    style,
+    ...rest
+  } = props;
   const ctx = { density, dividers, interactive };
   return (
     <ListContext.Provider value={ctx}>
-      <View ref={ref} accessibilityRole="list">
+      <View ref={ref} accessibilityRole="list" style={style} {...rest}>
         {children}
       </View>
     </ListContext.Provider>
@@ -30,17 +38,27 @@ ListImpl.displayName = 'List';
 export const List = tagComponent(ListImpl, 'List');
 
 // ---- ListItem ----------------------------------------------------------
-export interface ListItemProps {
+export interface ListItemProps extends Omit<ViewProps, 'style'> {
   readonly title: React.ReactNode;
   readonly description?: React.ReactNode;
   readonly leading?: React.ReactNode;
   readonly trailing?: React.ReactNode;
   readonly onPress?: () => void;
   readonly disabled?: boolean;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const ListItemImpl = React.forwardRef<View, ListItemProps>(function ListItem(props, ref) {
-  const { title, description, leading, trailing, onPress, disabled = false } = props;
+  const {
+    title,
+    description,
+    leading,
+    trailing,
+    onPress,
+    disabled = false,
+    style,
+    ...rest
+  } = props;
   const ctx = useListContext();
   const tokens = useTokens();
   const verticalPad =
@@ -49,7 +67,7 @@ const ListItemImpl = React.forwardRef<View, ListItemProps>(function ListItem(pro
       : ctx?.density === 'spacious'
         ? tokens.space.lg
         : tokens.space.md;
-  const style: ViewStyle = {
+  const itemStyle: ViewStyle = {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: tokens.space.md,
@@ -91,14 +109,15 @@ const ListItemImpl = React.forwardRef<View, ListItemProps>(function ListItem(pro
         onPress={onPress}
         disabled={disabled}
         accessibilityRole="button"
-        style={style}
+        style={[itemStyle, style]}
+        {...rest}
       >
         {inner}
       </Pressable>
     );
   }
   return (
-    <View ref={ref} accessibilityRole="none" style={style}>
+    <View ref={ref} accessibilityRole="none" style={[itemStyle, style]} {...rest}>
       {inner}
     </View>
   );

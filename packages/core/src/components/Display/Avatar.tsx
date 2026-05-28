@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Image as RNImage, View, type ViewStyle } from 'react-native';
+import {
+  Image as RNImage,
+  View,
+  type StyleProp,
+  type ViewProps,
+  type ViewStyle,
+} from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -7,7 +13,7 @@ import { Text } from '../Text/Text';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface AvatarProps {
+export interface AvatarProps extends Omit<ViewProps, 'style'> {
   /** Image source URL or RN ImageSourcePropType. */
   readonly src?: string | { uri: string };
   /** Two-letter fallback rendered when no src or src fails. */
@@ -15,6 +21,7 @@ export interface AvatarProps {
   readonly name?: string;
   readonly size?: AvatarSize;
   readonly shape?: 'circle' | 'square';
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const SIZE_MAP: Record<AvatarSize, number> = {
@@ -33,7 +40,7 @@ function deriveInitials(name: string): string {
 }
 
 const AvatarImpl = React.forwardRef<View, AvatarProps>(function Avatar(props, ref) {
-  const { src, initials, name, size = 'md', shape = 'circle' } = props;
+  const { src, initials, name, size = 'md', shape = 'circle', style, ...rest } = props;
   const tokens = useTokens();
   const dim = SIZE_MAP[size];
   const radius = shape === 'circle' ? dim / 2 : tokens.radii.md;
@@ -49,7 +56,13 @@ const AvatarImpl = React.forwardRef<View, AvatarProps>(function Avatar(props, re
   };
   const source = typeof src === 'string' ? { uri: src } : src;
   return (
-    <View ref={ref} accessibilityRole="image" accessibilityLabel={name ?? 'Avatar'} style={wrap}>
+    <View
+      ref={ref}
+      accessibilityRole="image"
+      accessibilityLabel={name ?? 'Avatar'}
+      style={[wrap, style]}
+      {...rest}
+    >
       {source ? (
         <RNImage source={source} style={{ width: dim, height: dim }} />
       ) : (
@@ -66,13 +79,14 @@ AvatarImpl.displayName = 'Avatar';
 export const Avatar = tagComponent(AvatarImpl, 'Avatar');
 
 // ---- AvatarGroup ------------------------------------------------------
-export interface AvatarGroupProps {
+export interface AvatarGroupProps extends Omit<ViewProps, 'style' | 'children'> {
   readonly max?: number;
   readonly children: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const AvatarGroupImpl = React.forwardRef<View, AvatarGroupProps>(function AvatarGroup(props, ref) {
-  const { max = 4, children } = props;
+  const { max = 4, children, style, ...rest } = props;
   const tokens = useTokens();
   const arr = React.Children.toArray(children);
   const shown = arr.slice(0, max);
@@ -82,7 +96,8 @@ const AvatarGroupImpl = React.forwardRef<View, AvatarGroupProps>(function Avatar
     <View
       ref={ref}
       accessibilityRole="none"
-      style={{ flexDirection: 'row', marginLeft: -tokens.space['2xs'] }}
+      style={[{ flexDirection: 'row', marginLeft: -tokens.space['2xs'] }, style]}
+      {...rest}
     >
       {shown.map((child, i) => (
         <View key={i} style={{ marginLeft: -tokens.space['2xs'] }}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -12,14 +12,15 @@ export interface BreadcrumbItem {
   readonly onPress?: () => void;
 }
 
-export interface BreadcrumbProps {
+export interface BreadcrumbProps extends ViewProps {
   readonly items: readonly BreadcrumbItem[];
   /** Single-character separator. Defaults to `/`. */
   readonly separator?: string;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const BreadcrumbImpl = React.forwardRef<View, BreadcrumbProps>(function Breadcrumb(props, ref) {
-  const { items, separator = '/' } = props;
+  const { items, separator = '/', style, ...rest } = props;
   const tokens = useTokens();
   const row: ViewStyle = {
     flexDirection: 'row',
@@ -29,7 +30,7 @@ const BreadcrumbImpl = React.forwardRef<View, BreadcrumbProps>(function Breadcru
   };
   const lastIndex = items.length - 1;
   return (
-    <View ref={ref} accessibilityRole="none" style={row}>
+    <View ref={ref} accessibilityRole="none" style={[row, style]} {...rest}>
       {items.map((item, i) => {
         const isLast = i === lastIndex;
         return (

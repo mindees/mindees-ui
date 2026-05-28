@@ -15,7 +15,7 @@ const SIZE_MAP: Record<NonNullable<SpinnerProps['size']>, 'small' | 'large'> = {
   lg: 'large',
 };
 
-const SpinnerImpl = React.forwardRef<View, SpinnerProps>(function Spinner(props, _ref) {
+const SpinnerImpl = React.forwardRef<View, SpinnerProps>(function Spinner(props, ref) {
   const { size = 'md', tone = 'primary', ...rest } = props;
   const tokens = useTokens();
   const color =
@@ -25,7 +25,13 @@ const SpinnerImpl = React.forwardRef<View, SpinnerProps>(function Spinner(props,
         ? tokens.colors.text.muted
         : tokens.colors.action.primary;
   return (
-    <ActivityIndicator accessibilityLabel="Loading" size={SIZE_MAP[size]} color={color} {...rest} />
+    <ActivityIndicator
+      ref={ref}
+      accessibilityLabel="Loading"
+      size={SIZE_MAP[size]}
+      color={color}
+      {...rest}
+    />
   );
 });
 

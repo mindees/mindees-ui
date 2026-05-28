@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -12,10 +12,12 @@ export interface PopoverProps {
   readonly placement?: 'top' | 'bottom';
   readonly trigger: React.ReactElement;
   readonly children?: React.ReactNode;
+  /** Style applied to the elevated popover panel. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const PopoverImpl = React.forwardRef<View, PopoverProps>(function Popover(props, _ref) {
-  const { visible, onClose, placement = 'bottom', trigger, children } = props;
+const PopoverImpl = React.forwardRef<View, PopoverProps>(function Popover(props, ref) {
+  const { visible, onClose, placement = 'bottom', trigger, children, style } = props;
   const tokens = useTokens();
 
   const wrap: ViewStyle = { position: 'relative', alignSelf: 'flex-start' };
@@ -38,9 +40,10 @@ const PopoverImpl = React.forwardRef<View, PopoverProps>(function Popover(props,
       {trigger}
       {visible ? (
         <Pressable
+          ref={ref}
           accessibilityRole="none"
           onPress={onClose}
-          style={[panel, { left: undefined, right: undefined, alignSelf: 'flex-start' }]}
+          style={[panel, { left: undefined, right: undefined, alignSelf: 'flex-start' }, style]}
         >
           {children}
         </Pressable>

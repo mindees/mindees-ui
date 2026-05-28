@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -12,17 +12,18 @@ export interface TimelineItem {
   readonly tone?: 'neutral' | 'success' | 'warning' | 'danger' | 'primary';
 }
 
-export interface TimelineProps {
+export interface TimelineProps extends Omit<ViewProps, 'style'> {
   readonly items: readonly TimelineItem[];
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const TimelineImpl = React.forwardRef<View, TimelineProps>(function Timeline(props, ref) {
-  const { items } = props;
+  const { items, style, ...rest } = props;
   const tokens = useTokens();
   const lastIndex = items.length - 1;
 
   return (
-    <View ref={ref} accessibilityRole="list">
+    <View ref={ref} accessibilityRole="list" style={style} {...rest}>
       {items.map((item, i) => {
         const dotColor =
           item.tone === 'success'

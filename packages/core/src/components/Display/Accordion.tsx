@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { ChevronDownIcon, ChevronRightIcon } from '@mindees/icons';
 
@@ -7,16 +7,17 @@ import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
 
-export interface AccordionProps {
+export interface AccordionProps extends Omit<ViewProps, 'style'> {
   readonly title: React.ReactNode;
   readonly children?: React.ReactNode;
   readonly defaultOpen?: boolean;
   readonly open?: boolean;
   readonly onOpenChange?: (next: boolean) => void;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const AccordionImpl = React.forwardRef<View, AccordionProps>(function Accordion(props, ref) {
-  const { title, children, defaultOpen = false, open, onOpenChange } = props;
+  const { title, children, defaultOpen = false, open, onOpenChange, style, ...rest } = props;
   const [internal, setInternal] = React.useState(defaultOpen);
   const isOpen = open ?? internal;
   const tokens = useTokens();
@@ -39,7 +40,7 @@ const AccordionImpl = React.forwardRef<View, AccordionProps>(function Accordion(
   };
 
   return (
-    <View ref={ref} accessibilityRole="none">
+    <View ref={ref} accessibilityRole="none" style={style} {...rest}>
       <Pressable
         accessibilityRole="button"
         accessibilityState={{ expanded: isOpen }}

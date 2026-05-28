@@ -5,6 +5,8 @@ import {
   Pressable,
   View,
   type LayoutChangeEvent,
+  type StyleProp,
+  type ViewProps,
   type ViewStyle,
 } from 'react-native';
 
@@ -25,7 +27,7 @@ export interface PillTabItem {
   readonly badge?: string | number;
 }
 
-export interface PillTabBarProps {
+export interface PillTabBarProps extends ViewProps {
   readonly items: readonly PillTabItem[];
   readonly value: string;
   readonly onValueChange: (next: string) => void;
@@ -45,6 +47,7 @@ export interface PillTabBarProps {
   /** Override the accent colour. Defaults to `theme.colors.action.primary`. */
   readonly accent?: string;
   readonly size?: 'sm' | 'md' | 'lg';
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const SIZE_MAP: Record<
@@ -57,7 +60,16 @@ const SIZE_MAP: Record<
 };
 
 const PillTabBarImpl = React.forwardRef<View, PillTabBarProps>(function PillTabBar(props, ref) {
-  const { items, value, onValueChange, variant = 'segmented', accent, size = 'md' } = props;
+  const {
+    items,
+    value,
+    onValueChange,
+    variant = 'segmented',
+    accent,
+    size = 'md',
+    style,
+    ...rest
+  } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
   const accentColor = accent ?? tokens.colors.action.primary;
@@ -74,6 +86,8 @@ const PillTabBarImpl = React.forwardRef<View, PillTabBarProps>(function PillTabB
         sizing={sizing}
         reduceMotion={reduceMotion}
         tokens={tokens}
+        style={style}
+        {...rest}
       />
     );
   }
@@ -88,6 +102,8 @@ const PillTabBarImpl = React.forwardRef<View, PillTabBarProps>(function PillTabB
         accent={accentColor}
         sizing={sizing}
         tokens={tokens}
+        style={style}
+        {...rest}
       />
     );
   }
@@ -103,6 +119,8 @@ const PillTabBarImpl = React.forwardRef<View, PillTabBarProps>(function PillTabB
       sizing={sizing}
       tokens={tokens}
       glass={variant === 'glass'}
+      style={style}
+      {...rest}
     />
   );
 });
@@ -113,20 +131,31 @@ export const PillTabBar = tagComponent(PillTabBarImpl, 'PillTabBar');
 
 // ---------- Variants -----------------------------------------------------
 
-interface VariantProps {
+interface VariantProps extends ViewProps {
   readonly items: readonly PillTabItem[];
   readonly value: string;
   readonly onValueChange: (next: string) => void;
   readonly accent: string;
   readonly sizing: (typeof SIZE_MAP)[keyof typeof SIZE_MAP];
   readonly tokens: ReturnType<typeof useTokens>;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const Segmented = React.forwardRef<View, VariantProps & { readonly reduceMotion: boolean }>(
   function Segmented(props, ref) {
     // `accent` is unused in segmented (the sliding pill uses surface, not accent);
     // ignored on purpose via underscore prefix to satisfy noUnusedLocals.
-    const { items, value, onValueChange, accent: _accent, sizing, tokens, reduceMotion } = props;
+    const {
+      items,
+      value,
+      onValueChange,
+      accent: _accent,
+      sizing,
+      tokens,
+      reduceMotion,
+      style,
+      ...rest
+    } = props;
     const [widths, setWidths] = React.useState<number[]>(() => items.map(() => 0));
     const slide = React.useRef(new Animated.Value(0)).current;
 
@@ -158,7 +187,7 @@ const Segmented = React.forwardRef<View, VariantProps & { readonly reduceMotion:
     const activeWidth = widths[activeIndex] ?? 0;
 
     return (
-      <View ref={ref} accessibilityRole="tablist" style={trackStyle}>
+      <View ref={ref} accessibilityRole="tablist" style={[trackStyle, style]} {...rest}>
         <Animated.View
           pointerEvents="none"
           style={{
@@ -211,7 +240,7 @@ const Segmented = React.forwardRef<View, VariantProps & { readonly reduceMotion:
 
 const Floating = React.forwardRef<View, VariantProps & { readonly glass: boolean }>(
   function Floating(props, ref) {
-    const { items, value, onValueChange, accent, sizing, tokens, glass } = props;
+    const { items, value, onValueChange, accent, sizing, tokens, glass, style, ...rest } = props;
     const containerStyle: ViewStyle = {
       flexDirection: 'row',
       gap: 4,
@@ -224,7 +253,7 @@ const Floating = React.forwardRef<View, VariantProps & { readonly glass: boolean
       ...resolveShadow(glass ? 'md' : 'sm'),
     };
     return (
-      <View ref={ref} accessibilityRole="tablist" style={containerStyle}>
+      <View ref={ref} accessibilityRole="tablist" style={[containerStyle, style]} {...rest}>
         {items.map((item) => {
           const active = item.value === value;
           return (
@@ -264,7 +293,7 @@ const Floating = React.forwardRef<View, VariantProps & { readonly glass: boolean
 );
 
 const Dock = React.forwardRef<View, VariantProps>(function Dock(props, ref) {
-  const { items, value, onValueChange, accent, sizing, tokens } = props;
+  const { items, value, onValueChange, accent, sizing, tokens, style, ...rest } = props;
   const dockStyle: ViewStyle = {
     flexDirection: 'row',
     paddingHorizontal: tokens.space.md,
@@ -275,7 +304,7 @@ const Dock = React.forwardRef<View, VariantProps>(function Dock(props, ref) {
     justifyContent: 'space-around',
   };
   return (
-    <View ref={ref} accessibilityRole="tablist" style={dockStyle}>
+    <View ref={ref} accessibilityRole="tablist" style={[dockStyle, style]} {...rest}>
       {items.map((item) => {
         const active = item.value === value;
         return (

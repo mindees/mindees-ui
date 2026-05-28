@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
 
-export interface PaginationProps {
+export interface PaginationProps extends ViewProps {
   readonly total: number;
   readonly page: number;
   readonly onPageChange: (next: number) => void;
   /** Pages to show on each side of the current page. Defaults to 1. */
   readonly siblingCount?: number;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 function buildRange(total: number, page: number, sibling: number): readonly (number | '...')[] {
@@ -26,7 +27,7 @@ function buildRange(total: number, page: number, sibling: number): readonly (num
 }
 
 const PaginationImpl = React.forwardRef<View, PaginationProps>(function Pagination(props, ref) {
-  const { total, page, onPageChange, siblingCount = 1 } = props;
+  const { total, page, onPageChange, siblingCount = 1, style, ...rest } = props;
   const tokens = useTokens();
   const pages = buildRange(total, page, siblingCount);
 
@@ -39,12 +40,10 @@ const PaginationImpl = React.forwardRef<View, PaginationProps>(function Paginati
     borderRadius: tokens.radii.md,
   };
 
+  const containerStyle: ViewStyle = { flexDirection: 'row', gap: tokens.space['2xs'] };
+
   return (
-    <View
-      ref={ref}
-      accessibilityRole="none"
-      style={{ flexDirection: 'row', gap: tokens.space['2xs'] }}
-    >
+    <View ref={ref} accessibilityRole="none" style={[containerStyle, style]} {...rest}>
       {pages.map((p, i) => {
         if (p === '...') {
           return (

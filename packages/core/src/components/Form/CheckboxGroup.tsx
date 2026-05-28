@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 
@@ -13,13 +13,15 @@ export const CheckboxGroupContext = React.createContext<CheckboxGroupContextValu
   undefined,
 );
 
-export interface CheckboxGroupProps {
+export interface CheckboxGroupProps extends Omit<ViewProps, 'style'> {
   /** Controlled list of checked item keys. */
   readonly value?: readonly string[];
   readonly defaultValue?: readonly string[];
   readonly onValueChange?: (next: readonly string[]) => void;
   readonly disabled?: boolean;
   readonly children?: React.ReactNode;
+  /** Style applied to the group container. Caller value wins. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 /**
@@ -30,7 +32,15 @@ export interface CheckboxGroupProps {
  */
 const CheckboxGroupImpl = React.forwardRef<View, CheckboxGroupProps>(
   function CheckboxGroup(props, ref) {
-    const { value, defaultValue, onValueChange, disabled = false, children } = props;
+    const {
+      value,
+      defaultValue,
+      onValueChange,
+      disabled = false,
+      children,
+      style,
+      ...rest
+    } = props;
     const isControlled = value !== undefined;
     const [internal, setInternal] = React.useState<readonly string[]>(defaultValue ?? []);
     const resolved = isControlled ? value : internal;
@@ -52,7 +62,7 @@ const CheckboxGroupImpl = React.forwardRef<View, CheckboxGroupProps>(
 
     return (
       <CheckboxGroupContext.Provider value={ctx}>
-        <View ref={ref} accessibilityRole="none">
+        <View ref={ref} accessibilityRole="none" style={style} {...rest}>
           {children}
         </View>
       </CheckboxGroupContext.Provider>

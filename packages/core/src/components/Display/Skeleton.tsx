@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { Animated, Easing, type View, type ViewStyle } from 'react-native';
+import { Animated, Easing, type View, type ViewProps, type ViewStyle } from 'react-native';
 
 import { type RadiusToken, radii } from '@mindees/tokens';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useReduceMotion, useTokens } from '../../theme/ThemeProvider';
 
-export interface SkeletonProps {
+export interface SkeletonProps extends Omit<ViewProps, 'style'> {
   readonly width?: number | string;
   readonly height?: number | string;
   readonly radius?: RadiusToken | 'pill' | number;
   readonly style?: ViewStyle;
 }
 
-const SkeletonImpl = React.forwardRef<View, SkeletonProps>(function Skeleton(props, _ref) {
-  const { width = '100%', height = 16, radius = 'sm', style } = props;
+const SkeletonImpl = React.forwardRef<View, SkeletonProps>(function Skeleton(props, ref) {
+  const { width = '100%', height = 16, radius = 'sm', style, ...rest } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
   const pulse = React.useRef(new Animated.Value(0.5)).current;
@@ -52,9 +52,11 @@ const SkeletonImpl = React.forwardRef<View, SkeletonProps>(function Skeleton(pro
 
   return (
     <Animated.View
+      ref={ref}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
       style={[block, { opacity: pulse }, style]}
+      {...rest}
     />
   );
 });

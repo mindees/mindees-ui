@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -14,6 +14,8 @@ export interface TooltipProps {
   /** Override the show state (controlled). */
   readonly visible?: boolean;
   readonly defaultVisible?: boolean;
+  /** Style applied to the tooltip bubble surface. */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 /**
@@ -21,8 +23,8 @@ export interface TooltipProps {
  * tooltip shows on long-press / focus. The trigger element is rendered
  * untouched; the bubble overlays it via absolute positioning.
  */
-const TooltipImpl = React.forwardRef<View, TooltipProps>(function Tooltip(props, _ref) {
-  const { label, placement = 'top', children, visible, defaultVisible = false } = props;
+const TooltipImpl = React.forwardRef<View, TooltipProps>(function Tooltip(props, ref) {
+  const { label, placement = 'top', children, visible, defaultVisible = false, style } = props;
   const tokens = useTokens();
   const [internal, setInternal] = React.useState(defaultVisible);
   const isVisible = visible ?? internal;
@@ -51,7 +53,7 @@ const TooltipImpl = React.forwardRef<View, TooltipProps>(function Tooltip(props,
         {children}
       </Pressable>
       {isVisible ? (
-        <View style={bubble} accessibilityRole="text" pointerEvents="none">
+        <View ref={ref} style={[bubble, style]} accessibilityRole="text" pointerEvents="none">
           <Text variant="caption" tone="inverse">
             {label}
           </Text>

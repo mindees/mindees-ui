@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Animated, Easing, Modal as RNModal, Pressable, View, type ViewStyle } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Modal as RNModal,
+  Pressable,
+  View,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -13,6 +21,8 @@ export interface BottomSheetProps {
   /** Sheet height. Number = dp; string = any RN DimensionValue (`'60%'`, `'auto'`). */
   readonly height?: number | `${number}%` | 'auto';
   readonly children?: React.ReactNode;
+  /** Style applied to the elevated sheet surface (not the backdrop/scrim). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 /**
@@ -21,8 +31,8 @@ export interface BottomSheetProps {
  * directly — this implementation favours zero peer-deps and predictable
  * behaviour for simple show/dismiss flows.
  */
-const BottomSheetImpl = React.forwardRef<View, BottomSheetProps>(function BottomSheet(props, _ref) {
-  const { visible, onClose, dismissible = true, height = '60%', children } = props;
+const BottomSheetImpl = React.forwardRef<View, BottomSheetProps>(function BottomSheet(props, ref) {
+  const { visible, onClose, dismissible = true, height = '60%', children, style } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
   const translateY = React.useRef(new Animated.Value(0)).current;
@@ -66,8 +76,8 @@ const BottomSheetImpl = React.forwardRef<View, BottomSheetProps>(function Bottom
   return (
     <RNModal visible={visible} transparent onRequestClose={onClose} animationType="none">
       <Pressable style={overlay} onPress={dismissible ? onClose : undefined}>
-        <Animated.View style={[sheet, { transform: [{ translateY }] }]}>
-          <Pressable accessibilityRole="none" onPress={(e) => e.stopPropagation()}>
+        <Animated.View style={[sheet, style, { transform: [{ translateY }] }]}>
+          <Pressable ref={ref} accessibilityRole="none" onPress={(e) => e.stopPropagation()}>
             <View style={handleStyle} />
             {children}
           </Pressable>

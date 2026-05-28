@@ -1,22 +1,23 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Heading } from '../Text/Heading';
 import { Text } from '../Text/Text';
 
-export interface TopBarProps {
+export interface TopBarProps extends ViewProps {
   readonly title?: string;
   readonly subtitle?: string;
   readonly leading?: React.ReactNode;
   readonly trailing?: React.ReactNode;
   /** Center the title between leading and trailing slots (iOS convention). Defaults to true. */
   readonly centerTitle?: boolean;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const TopBarImpl = React.forwardRef<View, TopBarProps>(function TopBar(props, ref) {
-  const { title, subtitle, leading, trailing, centerTitle = true } = props;
+  const { title, subtitle, leading, trailing, centerTitle = true, style, ...rest } = props;
   const tokens = useTokens();
   const containerStyle: ViewStyle = {
     flexDirection: 'row',
@@ -30,7 +31,7 @@ const TopBarImpl = React.forwardRef<View, TopBarProps>(function TopBar(props, re
   };
 
   return (
-    <View ref={ref} accessibilityRole="header" style={containerStyle}>
+    <View ref={ref} accessibilityRole="header" style={[containerStyle, style]} {...rest}>
       <View style={{ minWidth: 40, alignItems: 'flex-start' }}>{leading}</View>
       <View
         style={{

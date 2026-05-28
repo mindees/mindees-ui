@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Modal as RNModal, Pressable, type View, type ViewStyle } from 'react-native';
+import {
+  Modal as RNModal,
+  Pressable,
+  type StyleProp,
+  type View,
+  type ViewStyle,
+} from 'react-native';
 
 import { resolveShadow } from '@mindees/tokens';
 
@@ -14,9 +20,11 @@ export interface ModalProps {
   /** Center the modal panel; otherwise content fills the screen. */
   readonly centered?: boolean;
   readonly accessibilityLabel?: string;
+  /** Style applied to the elevated panel surface (not the backdrop/scrim). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const ModalImpl = React.forwardRef<View, ModalProps>(function Modal(props, _ref) {
+const ModalImpl = React.forwardRef<View, ModalProps>(function Modal(props, ref) {
   const {
     visible,
     onClose,
@@ -24,6 +32,7 @@ const ModalImpl = React.forwardRef<View, ModalProps>(function Modal(props, _ref)
     centered = true,
     children,
     accessibilityLabel,
+    style,
   } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
@@ -58,7 +67,12 @@ const ModalImpl = React.forwardRef<View, ModalProps>(function Modal(props, _ref)
         accessibilityRole="none"
         onPress={dismissible ? onClose : undefined}
       >
-        <Pressable style={panelStyle} accessibilityRole="none" onPress={(e) => e.stopPropagation()}>
+        <Pressable
+          ref={ref}
+          style={[panelStyle, style]}
+          accessibilityRole="none"
+          onPress={(e) => e.stopPropagation()}
+        >
           {children}
         </Pressable>
       </Pressable>

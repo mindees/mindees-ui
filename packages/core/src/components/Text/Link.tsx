@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Linking, Pressable, type Text as RNText } from 'react-native';
+import { Linking, Pressable, type StyleProp, type View, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 
@@ -12,10 +12,20 @@ export interface LinkProps extends Omit<TextProps, 'tone' | 'underline'> {
   readonly onPress?: () => void;
   /** Hide the default underline. */
   readonly hideUnderline?: boolean;
+  /** Style applied to the pressable wrapper. Caller value wins. */
+  readonly wrapperStyle?: StyleProp<ViewStyle>;
 }
 
-const LinkImpl = React.forwardRef<RNText, LinkProps>(function Link(props, _ref) {
-  const { href, onPress, hideUnderline, children, accessibilityRole = 'link', ...rest } = props;
+const LinkImpl = React.forwardRef<View, LinkProps>(function Link(props, ref) {
+  const {
+    href,
+    onPress,
+    hideUnderline,
+    children,
+    accessibilityRole = 'link',
+    wrapperStyle,
+    ...rest
+  } = props;
 
   const handlePress = React.useCallback(() => {
     onPress?.();
@@ -28,7 +38,12 @@ const LinkImpl = React.forwardRef<RNText, LinkProps>(function Link(props, _ref) 
   }, [href, onPress]);
 
   return (
-    <Pressable onPress={handlePress} accessibilityRole={accessibilityRole}>
+    <Pressable
+      ref={ref}
+      onPress={handlePress}
+      accessibilityRole={accessibilityRole}
+      style={wrapperStyle}
+    >
       <Text tone="link" underline={!hideUnderline} {...rest}>
         {children}
       </Text>

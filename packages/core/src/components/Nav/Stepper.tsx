@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { CheckIcon } from '@mindees/icons';
 
@@ -12,14 +12,15 @@ export interface StepperStep {
   readonly description?: string;
 }
 
-export interface StepperProps {
+export interface StepperProps extends ViewProps {
   readonly steps: readonly StepperStep[];
   readonly current: number;
   readonly orientation?: 'horizontal' | 'vertical';
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const StepperImpl = React.forwardRef<View, StepperProps>(function Stepper(props, ref) {
-  const { steps, current, orientation = 'horizontal' } = props;
+  const { steps, current, orientation = 'horizontal', style, ...rest } = props;
   const tokens = useTokens();
   const containerStyle: ViewStyle =
     orientation === 'horizontal'
@@ -27,7 +28,7 @@ const StepperImpl = React.forwardRef<View, StepperProps>(function Stepper(props,
       : { flexDirection: 'column', gap: tokens.space.sm };
 
   return (
-    <View ref={ref} accessibilityRole="none" style={containerStyle}>
+    <View ref={ref} accessibilityRole="none" style={[containerStyle, style]} {...rest}>
       {steps.map((step, i) => {
         const done = i < current;
         const active = i === current;

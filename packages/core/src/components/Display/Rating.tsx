@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
 import { Text } from '../Text/Text';
 
-export interface RatingProps {
+export interface RatingProps extends Omit<ViewProps, 'style'> {
   /** Current value (0..max). */
   readonly value: number;
   readonly max?: number;
   readonly onChange?: (next: number) => void;
   readonly readOnly?: boolean;
   readonly size?: number;
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 const RatingImpl = React.forwardRef<View, RatingProps>(function Rating(props, ref) {
-  const { value, max = 5, onChange, readOnly = false, size = 20 } = props;
+  const { value, max = 5, onChange, readOnly = false, size = 20, style, ...rest } = props;
   const tokens = useTokens();
   const filled = tokens.colors.status.warning;
   const empty = tokens.colors.border.default;
@@ -25,7 +26,8 @@ const RatingImpl = React.forwardRef<View, RatingProps>(function Rating(props, re
       ref={ref}
       accessibilityRole="adjustable"
       accessibilityValue={{ min: 0, max, now: value }}
-      style={{ flexDirection: 'row', gap: 2 }}
+      style={[{ flexDirection: 'row', gap: 2 }, style]}
+      {...rest}
     >
       {Array.from({ length: max }).map((_, i) => {
         const star = i < value;

@@ -4,6 +4,7 @@ import {
   Easing,
   Modal as RNModal,
   Pressable,
+  type StyleProp,
   type View,
   type ViewStyle,
 } from 'react-native';
@@ -20,10 +21,20 @@ export interface DrawerProps {
   readonly width?: number | `${number}%`;
   readonly children?: React.ReactNode;
   readonly dismissible?: boolean;
+  /** Style applied to the elevated drawer panel (not the backdrop/scrim). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
-const DrawerImpl = React.forwardRef<View, DrawerProps>(function Drawer(props, _ref) {
-  const { visible, onClose, side = 'left', width = '80%', children, dismissible = true } = props;
+const DrawerImpl = React.forwardRef<View, DrawerProps>(function Drawer(props, ref) {
+  const {
+    visible,
+    onClose,
+    side = 'left',
+    width = '80%',
+    children,
+    dismissible = true,
+    style,
+  } = props;
   const tokens = useTokens();
   const reduceMotion = useReduceMotion();
   const slide = React.useRef(new Animated.Value(0)).current;
@@ -53,8 +64,8 @@ const DrawerImpl = React.forwardRef<View, DrawerProps>(function Drawer(props, _r
   return (
     <RNModal visible={visible} transparent onRequestClose={onClose} animationType="none">
       <Pressable style={overlay} onPress={dismissible ? onClose : undefined}>
-        <Animated.View style={[panel, { transform: [{ translateX: slide }] }]}>
-          <Pressable accessibilityRole="none" onPress={(e) => e.stopPropagation()}>
+        <Animated.View style={[panel, style, { transform: [{ translateX: slide }] }]}>
+          <Pressable ref={ref} accessibilityRole="none" onPress={(e) => e.stopPropagation()}>
             {children}
           </Pressable>
         </Animated.View>
