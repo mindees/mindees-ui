@@ -64,22 +64,36 @@ function StackImpl(
   const slots = describeChildren(children);
   const baseGap = typeof gap === 'number' ? gap : space[gap];
 
-  const items = slots.map((slot, i) => {
-    if (i === 0) return slot.element;
-    const prevTag = slots[i - 1]?.tag as ComponentTag | undefined;
-    const rule = disableAutoSpacing ? 'base' : resolveGapRule(prevTag, slot.tag);
-    const computed = disableAutoSpacing ? baseGap : resolveGapToken(gap, rule);
-    const spacerStyle: ViewStyle =
-      orientation === 'row' ? { width: computed } : { height: computed };
-    return (
-      <React.Fragment key={slot.element.key ?? i}>
-        {/* Inline spacer keeps the LIL's per-pair adjustment without a child wrapper.
-            A View instead of margin lets `gap`/`flex-wrap` interact naturally. */}
-        <Box style={spacerStyle} pointerEvents="none" />
-        {slot.element}
-      </React.Fragment>
-    );
-  });
+  // Auto-spacing and `justify: space-*` are mutually exclusive. The injected
+  // spacers are themselves flex items, so under `space-between/around/evenly`
+  // the distribution would allocate free space around the spacers too — giving
+  // 2N-1 distributed items instead of N and visibly wrong spacing. When the
+  // caller asks for a distribution mode, that mode provides the spacing and we
+  // render the children directly with no spacers.
+  const distributed =
+    justify === 'space-between' || justify === 'space-around' || justify === 'space-evenly';
+
+  const items = distributed
+    ? slots.map((slot) => slot.element)
+    : slots.map((slot, i) => {
+        if (i === 0) return slot.element;
+        const prevTag = slots[i - 1]?.tag as ComponentTag | undefined;
+        const rule = disableAutoSpacing ? 'base' : resolveGapRule(prevTag, slot.tag);
+        const computed = disableAutoSpacing ? baseGap : resolveGapToken(gap, rule);
+        // `pointerEvents` lives in `style` (the prop form is deprecated in RN).
+        const spacerStyle: ViewStyle =
+          orientation === 'row'
+            ? { width: computed, pointerEvents: 'none' }
+            : { height: computed, pointerEvents: 'none' };
+        return (
+          <React.Fragment key={slot.element.key ?? i}>
+            {/* Inline spacer keeps the LIL's per-pair adjustment without a child wrapper.
+                A View instead of margin lets `gap`/`flex-wrap` interact naturally. */}
+            <Box style={spacerStyle} />
+            {slot.element}
+          </React.Fragment>
+        );
+      });
 
   const ctx: StackContextValue = { orientation, align, justify };
 

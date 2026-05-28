@@ -47,16 +47,20 @@ export interface Theme {
   readonly tokens: ThemeTokens;
 }
 
-/** Non-color token overrides — shared across light/dark. */
+/** Non-color token overrides — shared across light/dark. The numeric scales
+ * accept any `number` (the base tokens are `as const`, so `Partial<typeof X>`
+ * would pin each slot to its literal value and reject real overrides). */
 export interface TokenOverrides {
-  readonly space?: Partial<typeof space>;
-  readonly radii?: Partial<typeof radii>;
-  readonly shadows?: Partial<typeof shadows>;
-  readonly textStyles?: Partial<typeof textStyles>;
-  readonly breakpoints?: Partial<typeof breakpoints>;
-  readonly zIndex?: Partial<typeof zIndex>;
-  readonly duration?: Partial<typeof duration>;
-  readonly easing?: Partial<typeof easing>;
+  readonly space?: Partial<Record<keyof typeof space, number>>;
+  readonly radii?: Partial<Record<keyof typeof radii, number>>;
+  readonly shadows?: Partial<Record<keyof typeof shadows, (typeof shadows)[keyof typeof shadows]>>;
+  readonly textStyles?: Partial<
+    Record<keyof typeof textStyles, (typeof textStyles)[keyof typeof textStyles]>
+  >;
+  readonly breakpoints?: Partial<Record<keyof typeof breakpoints, number>>;
+  readonly zIndex?: Partial<Record<keyof typeof zIndex, number>>;
+  readonly duration?: Partial<Record<keyof typeof duration, number>>;
+  readonly easing?: Partial<Record<keyof typeof easing, (typeof easing)[keyof typeof easing]>>;
 }
 
 export interface CreateThemeInput extends TokenOverrides {

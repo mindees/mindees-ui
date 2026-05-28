@@ -23,8 +23,7 @@ export interface BarcodeProps {
     | 'pdf417'
     | 'datamatrix'
   )[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly [key: string]: any;
+  readonly [key: string]: unknown;
 }
 
 /**
@@ -34,11 +33,15 @@ export interface BarcodeProps {
  */
 const BarcodeImpl = React.forwardRef<View, BarcodeProps>(function Barcode(props, _ref) {
   const { onScanned, types, ...rest } = props;
+  // `forwardRef`'s prop mapping collapses explicit members of an interface with a
+  // string index signature down to that signature's `unknown`, so re-narrow the
+  // first-party callback to its declared type at this single internal call site.
+  const onScannedFn = onScanned as BarcodeProps['onScanned'];
   return (
     <Camera
       {...rest}
       barcodeScannerSettings={types ? { barcodeTypes: types as readonly string[] } : undefined}
-      onBarcodeScanned={(event: BarcodeScanResult) => onScanned(event)}
+      onBarcodeScanned={(event: BarcodeScanResult) => onScannedFn(event)}
     />
   );
 });

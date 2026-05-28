@@ -6,8 +6,7 @@ import { MissingPeer, tryLoadPeer } from './optionalPeer';
 
 export interface MindeesCameraProps {
   readonly facing?: 'front' | 'back';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly [key: string]: any;
+  readonly [key: string]: unknown;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

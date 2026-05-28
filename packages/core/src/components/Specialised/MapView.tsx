@@ -11,8 +11,7 @@ export interface MindeesMapViewProps {
     readonly latitudeDelta: number;
     readonly longitudeDelta: number;
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly [key: string]: any;
+  readonly [key: string]: unknown;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

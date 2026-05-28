@@ -180,7 +180,7 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:perf": "reassure",
+    "test:perf": "reassure measure",
     "clean": "rm -rf lib .turbo coverage .reassure"
   },
   "dependencies": {
@@ -222,7 +222,6 @@
     }
   },
   "devDependencies": {
-    "@callstack/reassure-cli": "^1.4.1",
     "@react-native/babel-preset": "^0.85.3",
     "@react-native/jest-preset": "^0.85.3",
     "@testing-library/react-native": "^13.3.3",
@@ -233,6 +232,7 @@
     "react-native": "0.85.3",
     "react-native-builder-bob": "^0.41.0",
     "react-test-renderer": "19.2.6",
+    "reassure": "^1.4.1",
     "typescript": "^5.6.3"
   },
   "publishConfig": {

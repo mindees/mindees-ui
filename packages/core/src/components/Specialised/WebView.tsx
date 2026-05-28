@@ -7,8 +7,7 @@ import { MissingPeer, tryLoadPeer } from './optionalPeer';
 export interface MindeesWebViewProps {
   readonly source: { readonly uri: string } | { readonly html: string };
   readonly onMessage?: (event: { nativeEvent: { data: string } }) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly [key: string]: any;
+  readonly [key: string]: unknown;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -22,6 +22,21 @@ describe('resolveGapRule', () => {
     expect(resolveGapRule('Heading', 'Button')).toBe('loose');
   });
 
+  it('returns loose for a form control followed by an action (Input→Button)', () => {
+    // Regression: form controls used to share the INTERACTIVE set with actions,
+    // so the trailing-action rule short-circuited and this resolved to `base`.
+    expect(resolveGapRule('Input', 'Button')).toBe('loose');
+    expect(resolveGapRule('Select', 'Button')).toBe('loose');
+  });
+
+  it('returns base for two stacked form controls (Input→Input)', () => {
+    expect(resolveGapRule('Input', 'Input')).toBe('base');
+  });
+
+  it('does not fire the trailing-action rule for a leading action (no predecessor)', () => {
+    expect(resolveGapRule(undefined, 'Button')).toBe('base');
+  });
+
   it('returns base for unknown / unrelated combinations', () => {
     expect(resolveGapRule(undefined, undefined)).toBe('base');
     expect(resolveGapRule('Card', 'Card')).toBe('base');

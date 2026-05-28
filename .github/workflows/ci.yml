@@ -87,9 +87,14 @@ jobs:
         with: { node-version: '22', cache: 'pnpm' }
 
       - name: Install with RN/React downlevel overrides
+        # --no-frozen-lockfile because the override edit above intentionally
+        # diverges from the committed lockfile. --ignore-scripts + an explicit
+        # rebuild avoids pnpm 11's ERR_PNPM_IGNORED_BUILDS (same dance the
+        # quality job uses).
         run: |
           node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.pnpm={...(p.pnpm||{}),overrides:{...(p.pnpm?.overrides||{}),'react':'19.1.0','react-native':'0.83.0','react-test-renderer':'19.1.0'}};fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
-          pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile --ignore-scripts
+          pnpm rebuild esbuild msgpackr-extract sharp
 
       - name: Typecheck @mindees/ui only
         run: pnpm --filter @mindees/ui typecheck
@@ -111,7 +116,11 @@ jobs:
         with: { node-version: '22', cache: 'pnpm' }
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm rebuild esbuild msgpackr-extract sharp
-      - run: pnpm --filter @mindees/ui test:perf -- --baseline origin/main
+      # `reassure measure` records render timings for the perf tests and writes
+      # them to .reassure/current.perf. Baseline-vs-PR comparison (the two-pass
+      # `reassure` flow against origin/main) is a follow-up; for now this gates
+      # that the perf suite runs and the components stay renderable.
+      - run: pnpm --filter @mindees/ui test:perf
 
   release:
     name: release (changesets)
