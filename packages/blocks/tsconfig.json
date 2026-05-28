@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "paths": {
+      "@mindees/ui": ["../core/src"],
+      "@mindees/ui/*": ["../core/src/*"],
+      "@mindees/tokens": ["../tokens/src"],
+      "@mindees/tokens/*": ["../tokens/src/*"],
+      "@mindees/icons": ["../icons/src"],
+      "@mindees/icons/*": ["../icons/src/*"]
+    }
+  },
+  "include": ["src/**/*", "jest.setup.ts"],
+  "exclude": ["lib"]
+}
