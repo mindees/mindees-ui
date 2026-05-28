@@ -5,3 +5,4 @@
 // Category barrels are appended below as they land.
 export * from './auth';
 export * from './commerce';
+export * from './account';
