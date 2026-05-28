@@ -14,6 +14,9 @@ concurrency:
 # (defaults change on 2026-06-02).
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  # The core package now ships ~95 components; raise Node's heap so eslint /
+  # tsc don't OOM ("Zone Allocation failed") as the source tree grows.
+  NODE_OPTIONS: '--max-old-space-size=4096'
 
 jobs:
   quality:
