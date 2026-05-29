@@ -6,6 +6,8 @@ export interface IconProps extends Omit<SvgProps, 'children'> {
   readonly size?: number;
   /** Stroke / fill color. Defaults to `currentColor` for inheritance. */
   readonly color?: string;
+  /** Stroke width of the glyph paths. Defaults to 2. */
+  readonly strokeWidth?: number;
 }
 
 export interface IconDefinition {
@@ -19,7 +21,7 @@ export function createIcon(
   definition: IconDefinition,
 ): React.ForwardRefExoticComponent<IconProps & React.RefAttributes<Svg>> {
   const Icon = React.forwardRef<Svg, IconProps>(function Icon(
-    { size = 24, color = 'currentColor', ...rest },
+    { size = 24, color = 'currentColor', strokeWidth = 2, ...rest },
     ref,
   ) {
     return (
@@ -27,7 +29,7 @@ export function createIcon(
         <Path
           d={definition.path}
           stroke={color}
-          strokeWidth={2}
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
