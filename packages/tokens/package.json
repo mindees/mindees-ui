@@ -1,6 +1,6 @@
 {
   "name": "@mindees/tokens",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Design tokens for React Native and Expo — colour scales (semantic + high-contrast), typography, spacing, radii, shadows, motion, breakpoints, z-index, density. The foundation of MindeesUI, usable on its own.",
   "keywords": [
     "design-tokens",

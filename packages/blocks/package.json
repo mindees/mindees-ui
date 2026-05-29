@@ -1,6 +1,6 @@
 {
   "name": "@mindees/blocks",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pre-built, composable screen blocks for React Native and Expo — auth forms, dashboards, commerce, social, settings — assembled from MindeesUI primitives. Drop in, restyle with tokens, ship faster.",
   "keywords": [
     "react-native-blocks",
