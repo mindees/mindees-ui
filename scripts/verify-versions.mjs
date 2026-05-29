@@ -1,7 +1,12 @@
 #!/usr/bin/env node
-// Verifies that pinned peer-dep versions in docs/COMPATIBILITY.md are still
-// the latest on npm. Run via `pnpm verify:versions`. CI fails on drift so
-// the matrix table stays honest.
+// Reports whether the peer-dep versions documented in docs/COMPATIBILITY.md
+// are still the latest on npm. Run via `pnpm verify:versions`.
+//
+// COMPATIBILITY.md is a "verified on <date>" snapshot, and our peer ranges are
+// intentionally wide, so an upstream release is EXPECTED drift — not a build
+// error. By default this prints the drift report and exits 0 (informational).
+// Pass `--strict` (or set VERIFY_VERSIONS_STRICT=true) to fail on drift, e.g.
+// in a scheduled "are our docs stale?" check rather than the per-push gate.
 
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
@@ -35,9 +40,17 @@ for (const { name, pinnedVersion } of pinned) {
   }
 }
 
+const strict = process.argv.includes('--strict') || process.env.VERIFY_VERSIONS_STRICT === 'true';
+
 if (drift.length > 0) {
-  console.error(`\n${drift.length} package(s) drifted from docs/COMPATIBILITY.md.`);
-  console.error('Update the table and re-run, or bump the local pins.');
-  process.exit(1);
+  const msg = `\n${drift.length} package(s) drifted from docs/COMPATIBILITY.md (verified-on snapshot).`;
+  if (strict) {
+    console.error(msg);
+    console.error('Strict mode: update the table or bump the local pins, then re-run.');
+    process.exit(1);
+  }
+  console.warn(msg);
+  console.warn('Informational only — peer ranges are wide. Refresh the table when convenient.');
+  process.exit(0);
 }
 console.log('\nAll pinned versions match npm latest. ✓');
