@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Pressable, type StyleProp, TextInput, View, type ViewStyle } from 'react-native';
+import {
+  Pressable,
+  type StyleProp,
+  TextInput,
+  type TextStyle,
+  View,
+  type ViewStyle,
+} from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -30,7 +37,7 @@ const DEFAULT_LENGTH = 6;
 const DOT = '•';
 
 // Visually hidden but kept in the a11y/focus tree as the single input target.
-const HIDDEN_INPUT_STYLE: ViewStyle = { position: 'absolute', width: 1, height: 1, opacity: 0 };
+const HIDDEN_INPUT_STYLE: TextStyle = { position: 'absolute', width: 1, height: 1, opacity: 0 };
 
 /** A single hidden TextInput drives the visible boxes — only one focus target,
  * so screen readers and keyboards stay simple and predictable. */

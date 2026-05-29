@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type TextStyle, type ViewProps, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -32,7 +32,7 @@ const ActivityLogImpl = React.forwardRef<View, ActivityLogProps>(function Activi
     gap: tokens.space.sm,
     paddingVertical: tokens.space['2xs'],
   };
-  const timeColumnStyle: ViewStyle = { width: timeWidth };
+  const timeColumnStyle: TextStyle = { width: timeWidth };
   return (
     <View ref={ref} accessibilityRole="list" style={style} {...rest}>
       {items.map((item, i) => (
