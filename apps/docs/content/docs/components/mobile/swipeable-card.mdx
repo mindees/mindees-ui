@@ -1,0 +1,35 @@
+---
+title: SwipeableCard
+description: A Card that can be swiped away to dismiss, fading as it moves and firing onDismiss once it passes a configurable fraction of the screen width.
+---
+
+`SwipeableCard` extends `Card` with a swipe-to-dismiss gesture. As the user drags, the card translates and fades; releasing past the threshold animates it off-screen and fires `onDismiss`, while a shorter drag springs back to rest. It accepts every `Card` prop in addition to the dismiss controls below.
+
+## Import
+
+```tsx
+import { SwipeableCard } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SwipeableCard direction="horizontal" threshold={0.4} onDismiss={() => remove(id)}>
+  <Heading level={4}>Notification</Heading>
+  <Text>Swipe to dismiss.</Text>
+</SwipeableCard>
+```
+
+## Props
+
+| Prop        | Type                                | Default        | Description                                               |
+| ----------- | ----------------------------------- | -------------- | --------------------------------------------------------- |
+| `onDismiss` | `() => void`                        | —              | Fired once the card is swiped past the dismiss threshold. |
+| `direction` | `'left' \| 'right' \| 'horizontal'` | `'horizontal'` | Allowed dismiss direction(s).                             |
+| `threshold` | `number`                            | `0.4`          | Fraction of screen width the card must pass to dismiss.   |
+
+All `Card` props (such as `variant`, `density`, and `onPress`) are also accepted.
+
+## Accessibility
+
+The card inherits `Card`'s accessibility behaviour, including the `button` role when `onPress` is set. Because dismissal is gesture-only, pair it with an explicit action (for example a close button) so users who cannot swipe can still dismiss the content.

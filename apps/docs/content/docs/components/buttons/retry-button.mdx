@@ -1,0 +1,39 @@
+---
+title: Retry Button
+description: A button preset with a leading refresh glyph and a Retry default label for re-running a failed operation.
+---
+
+`RetryButton` is a `Button` preset that renders a leading refresh (↻) glyph and a "Retry" label by default. Use it in error states to re-run a failed operation. Wire up the retry logic through `onRetry`. It inherits base `Button` props except `children` and `onPress`.
+
+## Import
+
+```tsx
+import { RetryButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<RetryButton onRetry={refetch} />
+```
+
+With a custom label and tone:
+
+```tsx
+<RetryButton tone="neutral" variant="outline" onRetry={refetch}>
+  Try again
+</RetryButton>
+```
+
+## Props
+
+| Prop       | Type              | Default   | Description                         |
+| ---------- | ----------------- | --------- | ----------------------------------- |
+| `onRetry`  | `() => void`      | —         | Invoked when the button is pressed. |
+| `children` | `React.ReactNode` | `'Retry'` | Label text.                         |
+
+Inherits the remaining `ButtonBaseProps` (`variant`, `tone`, `size`, `leading`, etc.) except `children` and `onPress`.
+
+## Accessibility
+
+`RetryButton` is a standard `Button` with `accessibilityRole="button"` and tap-target sizing. The leading glyph is decorative — the label text carries the accessible meaning. Pair it with an `ErrorText` so screen readers hear the failure and the available recovery action together.

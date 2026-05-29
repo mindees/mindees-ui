@@ -1,0 +1,39 @@
+---
+title: Upload Button
+description: A button preset with a leading upload glyph and an Upload default label that signals an upload affordance to users.
+---
+
+`UploadButton` is a `Button` preset that renders a leading upload (↑) glyph and an "Upload" label by default. It is a visual affordance only — it performs no filesystem access. Wire up your own picker or upload logic through `onUpload`. It inherits base `Button` props except `children` and `onPress`.
+
+## Import
+
+```tsx
+import { UploadButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<UploadButton onUpload={pickFile} />
+```
+
+With a custom label:
+
+```tsx
+<UploadButton variant="outline" onUpload={pickAvatar}>
+  Choose photo
+</UploadButton>
+```
+
+## Props
+
+| Prop       | Type              | Default    | Description                         |
+| ---------- | ----------------- | ---------- | ----------------------------------- |
+| `onUpload` | `() => void`      | —          | Invoked when the button is pressed. |
+| `children` | `React.ReactNode` | `'Upload'` | Label text.                         |
+
+Inherits the remaining `ButtonBaseProps` (`variant`, `tone`, `size`, `leading`, etc.) except `children` and `onPress`.
+
+## Accessibility
+
+`UploadButton` is a standard `Button` with `accessibilityRole="button"` and tap-target sizing. The leading glyph is decorative — the label text carries the accessible meaning, so keep a descriptive label when overriding the default.

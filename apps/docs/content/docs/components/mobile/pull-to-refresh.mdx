@@ -1,0 +1,36 @@
+---
+title: PullToRefresh
+description: A ScrollView wired to a themed RefreshControl so pulling down triggers a refresh, with a tint that defaults to the primary action color on both platforms.
+---
+
+`PullToRefresh` is a `ScrollView` preconfigured with a themed `RefreshControl`. Pulling the content down shows the platform spinner and calls `onRefresh`; you drive the spinner's visibility with the `refreshing` flag. The tint applies on both iOS and Android.
+
+## Import
+
+```tsx
+import { PullToRefresh } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<PullToRefresh refreshing={loading} onRefresh={reload}>
+  <Feed items={items} />
+</PullToRefresh>
+```
+
+## Props
+
+| Prop         | Type                   | Default                 | Description                                                         |
+| ------------ | ---------------------- | ----------------------- | ------------------------------------------------------------------- |
+| `refreshing` | `boolean`              | —                       | Whether the refresh spinner is shown.                               |
+| `onRefresh`  | `() => void`           | —                       | Called when the user pulls past the refresh threshold.              |
+| `tintColor`  | `string`               | `colors.action.primary` | Spinner tint, applied via `tintColor` (iOS) and `colors` (Android). |
+| `children`   | `ReactNode`            | —                       | Scrollable content.                                                 |
+| `style`      | `StyleProp<ViewStyle>` | —                       | Style applied to the `ScrollView`.                                  |
+
+All other `ScrollView` props (except `refreshControl`) are accepted and forwarded.
+
+## Accessibility
+
+The `ScrollView` itself uses `accessibilityRole="none"`; the refresh affordance is the platform `RefreshControl`, which screen readers announce natively. Always provide an alternative refresh path for users who cannot perform the pull gesture.

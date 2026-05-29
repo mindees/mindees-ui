@@ -1,0 +1,43 @@
+---
+title: GlobalSearch
+description: Search trigger that opens a full-screen modal with an autofocused input and a scrollable, tappable results list driven by your own query handler.
+---
+
+`GlobalSearch` is an app-wide search entry point. It renders a compact search trigger that opens a modal containing an autofocused `SearchInput` and a scrollable results list. You supply results in response to the `onSearch` callback; selecting a result fires its handler and closes the overlay.
+
+## Import
+
+```tsx
+import { GlobalSearch } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<GlobalSearch
+  placeholder="Search projects…"
+  onSearch={runQuery}
+  results={results.map((r) => ({
+    key: r.id,
+    label: r.title,
+    description: r.path,
+    onPress: () => open(r.id),
+  }))}
+/>
+```
+
+## Props
+
+| Prop           | Type                      | Default        | Description                                                                          |
+| -------------- | ------------------------- | -------------- | ------------------------------------------------------------------------------------ |
+| `onSearch`     | `(query: string) => void` | —              | Called as the query changes; use it to populate `results`.                           |
+| `results`      | `GlobalSearchResult[]`    | —              | Result rows, each with `key`, `label`, optional `description`/`icon`, and `onPress`. |
+| `placeholder`  | `string`                  | `'Search…'`    | Text shown in both the trigger and the overlay input.                                |
+| `open`         | `boolean`                 | —              | Controlled open state; omit to let the component manage it.                          |
+| `onOpenChange` | `(open: boolean) => void` | —              | Called when the overlay opens or closes.                                             |
+| `emptyMessage` | `string`                  | `'No results'` | Shown in the overlay when there is a query but no results.                           |
+| `style`        | `StyleProp<ViewStyle>`    | —              | Style applied to the trigger, not the overlay.                                       |
+
+## Accessibility
+
+The trigger is `accessibilityRole="search"` labelled by the `placeholder`. Inside the modal the input is autofocused, the results scroll in a `list`, and each result is a `button` labelled by its `label`. When the query is empty the placeholder is shown; once there is a query with no matches the `emptyMessage` appears.

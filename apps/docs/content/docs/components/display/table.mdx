@@ -1,0 +1,41 @@
+---
+title: Table
+description: A horizontally scrollable data table with fixed-width columns and string or node cells.
+---
+
+`Table` renders column-driven rows inside a horizontal `ScrollView`, so wide datasets stay usable on narrow screens. Each column has a key, a title, and an optional fixed width; string and number cells are wrapped in themed `Text`, while any other node is rendered as-is.
+
+## Import
+
+```tsx
+import { Table } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Table
+  columns={[
+    { key: 'name', title: 'Name', width: 160 },
+    { key: 'role', title: 'Role' },
+  ]}
+  data={[
+    { name: 'Ada Lovelace', role: 'Engineer' },
+    { name: 'Alan Turing', role: 'Researcher' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop      | Type                                   | Default | Description                                    |
+| --------- | -------------------------------------- | ------- | ---------------------------------------------- |
+| `columns` | `readonly TableColumn[]`               | —       | Column definitions (`{ key, title, width? }`). |
+| `data`    | `readonly Record<string, ReactNode>[]` | —       | Row records keyed by column `key`.             |
+| `style`   | `StyleProp<ViewStyle>`                 | —       | Style applied to the scroll container.         |
+
+Each `TableColumn` width defaults to `120`. Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+Header cells use `accessibilityRole="header"`; body cells and container wrappers are marked `none` so the table reads as plain structured content. For complex tabular semantics, pair concise headers with cell values that read meaningfully in isolation.

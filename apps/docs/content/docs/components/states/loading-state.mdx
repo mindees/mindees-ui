@@ -1,0 +1,32 @@
+---
+title: LoadingState
+description: A centered busy indicator with an optional label, defaulting to a large full-screen spinner.
+---
+
+`LoadingState` centers a [`Spinner`](/docs/components/display/spinner) with an optional label beneath it. It defaults to a large spinner so it reads as a full-screen wait, and exposes itself as a busy progress indicator to assistive tech.
+
+## Import
+
+```tsx
+import { LoadingState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<LoadingState label="Loading your dashboard…" />
+```
+
+## Props
+
+| Prop    | Type                   | Default      | Description                     |
+| ------- | ---------------------- | ------------ | ------------------------------- |
+| `label` | `string`               | `'Loading…'` | Label shown under the spinner.  |
+| `size`  | `'sm' \| 'md' \| 'lg'` | `'lg'`       | Spinner size.                   |
+| `style` | `StyleProp<ViewStyle>` | —            | Style applied to the container. |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="progressbar"` with a busy `accessibilityState` and an `accessibilityLabel` set to `label`, so screen readers announce the wait and its purpose.

@@ -1,4 +1,21 @@
 {
   "title": "Typography",
-  "pages": ["text", "heading", "caption", "label", "link", "code", "kbd"]
+  "pages": [
+    "text",
+    "heading",
+    "caption",
+    "label",
+    "link",
+    "code",
+    "kbd",
+    "subheading",
+    "paragraph",
+    "helper-text",
+    "error-text",
+    "quote-block",
+    "mark",
+    "truncated-text",
+    "read-more",
+    "rich-text"
+  ]
 }

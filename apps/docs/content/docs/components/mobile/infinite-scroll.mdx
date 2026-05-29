@@ -1,0 +1,40 @@
+---
+title: InfiniteScroll
+description: A generic FlatList that calls onLoadMore as the list nears its end, showing a footer spinner while loading and guarding against duplicate end events.
+---
+
+`InfiniteScroll` is a typed `FlatList` for paginated data. It calls `onLoadMore` when the list nears its end, shows a footer `Spinner` while `loading` is true, and guards against the burst of end-reached events `FlatList` fires during a fast scroll so a page is requested only once per content layout.
+
+## Import
+
+```tsx
+import { InfiniteScroll } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<InfiniteScroll
+  data={items}
+  renderItem={({ item }) => <Row item={item} />}
+  onLoadMore={fetchNextPage}
+  loading={isFetchingNextPage}
+/>
+```
+
+## Props
+
+| Prop                    | Type                    | Default | Description                                                    |
+| ----------------------- | ----------------------- | ------- | -------------------------------------------------------------- |
+| `data`                  | `ItemT[]`               | —       | The list items.                                                |
+| `renderItem`            | `ListRenderItem<ItemT>` | —       | Renders each row.                                              |
+| `onLoadMore`            | `() => void`            | —       | Called when the list nears its end and is not already loading. |
+| `loading`               | `boolean`               | `false` | Whether a page is being fetched; controls the footer spinner.  |
+| `onEndReachedThreshold` | `number`                | `0.5`   | Distance from the end (0-1) that triggers `onLoadMore`.        |
+| `style`                 | `StyleProp<ViewStyle>`  | —       | Style applied to the `FlatList`.                               |
+
+All other `FlatList` props are accepted, except those the component manages (`data`, `renderItem`, `onEndReached`, and `ListFooterComponent`).
+
+## Accessibility
+
+The list uses `accessibilityRole="list"`, and each row inherits the accessibility of whatever `renderItem` returns. The footer spinner appears only while loading and is purely visual; loading state is best conveyed through the items themselves for assistive tech.

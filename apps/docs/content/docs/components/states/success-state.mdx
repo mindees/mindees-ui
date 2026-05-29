@@ -1,0 +1,38 @@
+---
+title: SuccessState
+description: A centered success screen in a positive tone with a title, description, and optional action.
+---
+
+`SuccessState` is a centered layout confirming a completed action. Its title defaults to `All done` in the success tone, with an optional description and action such as a button to continue.
+
+## Import
+
+```tsx
+import { SuccessState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SuccessState
+  title="Payment received"
+  description="Your receipt is on its way."
+  action={<Button onPress={done}>Done</Button>}
+/>
+```
+
+## Props
+
+| Prop          | Type                   | Default      | Description                                        |
+| ------------- | ---------------------- | ------------ | -------------------------------------------------- |
+| `title`       | `string`               | `'All done'` | Heading copy.                                      |
+| `description` | `string`               | —            | Supporting copy shown under the title.             |
+| `icon`        | `ReactNode`            | —            | Icon or illustration rendered above the title.     |
+| `action`      | `ReactNode`            | —            | Action node (typically a `Button`) below the copy. |
+| `style`       | `StyleProp<ViewStyle>` | —            | Style applied to the container.                    |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the confirmation reads as a single status. Pair a clear title with a description that tells the user what happens next.

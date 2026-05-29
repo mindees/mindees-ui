@@ -1,0 +1,33 @@
+---
+title: FilePreview
+description: Compact file chip showing a type badge, file name, and human-readable size, optionally tappable to open or download the underlying document.
+---
+
+`FilePreview` renders an attachment as a horizontal chip: a type badge derived from the file extension, the file name, and a human-readable size when the byte count is provided. Supplying `onPress` turns the whole chip into a button.
+
+## Import
+
+```tsx
+import { FilePreview } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<FilePreview name="quarterly-report.pdf" size={2_400_000} onPress={() => download(file)} />
+```
+
+## Props
+
+| Prop                 | Type                   | Default | Description                                                         |
+| -------------------- | ---------------------- | ------- | ------------------------------------------------------------------- |
+| `name`               | `string`               | —       | File name, shown as the title and used to derive the type badge.    |
+| `type`               | `string`               | —       | Explicit type label; defaults to the uppercased file extension.     |
+| `size`               | `number`               | —       | Size in bytes, rendered as a human-readable string (e.g. `2.4 MB`). |
+| `onPress`            | `() => void`           | —       | Tap handler; when set the chip renders as a button.                 |
+| `accessibilityLabel` | `string`               | —       | Overrides the auto-composed label.                                  |
+| `style`              | `StyleProp<ViewStyle>` | —       | Style overrides merged after the computed container.                |
+
+## Accessibility
+
+When `onPress` is set the chip is a `button`; otherwise it is `accessibilityRole="text"`. Either way it carries a composed label like `name, 2.4 MB, PDF file` unless you override `accessibilityLabel`. The type badge is hidden from assistive tech since its content is already in the label.

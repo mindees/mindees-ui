@@ -1,0 +1,36 @@
+---
+title: OTPInput
+description: A segmented one-time-code field driven by a single hidden input for predictable focus and autofill.
+---
+
+`OTPInput` renders a row of code boxes backed by one hidden `TextInput`, so there is a single focus target for keyboards and screen readers. It accepts digits only, fires `onChangeText` as the code grows, and calls `onComplete` once the code reaches `length`.
+
+## Import
+
+```tsx
+import { OTPInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<OTPInput length={6} value={code} onChangeText={setCode} onComplete={verify} />
+```
+
+## Props
+
+| Prop                 | Type                     | Default | Description                                 |
+| -------------------- | ------------------------ | ------- | ------------------------------------------- |
+| `length`             | `number`                 | `6`     | Number of code boxes.                       |
+| `value`              | `string`                 | —       | Controlled value (the full code so far).    |
+| `onChangeText`       | `(code: string) => void` | —       | Called whenever the code changes.           |
+| `onComplete`         | `(code: string) => void` | —       | Called once when the code reaches `length`. |
+| `secureTextEntry`    | `boolean`                | `false` | Mask each character with a dot.             |
+| `disabled`           | `boolean`                | `false` | Disable input and dim the boxes.            |
+| `autoFocus`          | `boolean`                | `false` | Focus the hidden input on mount.            |
+| `accessibilityLabel` | `string`                 | —       | Accessible label for the whole code field.  |
+| `style`              | `StyleProp<ViewStyle>`   | —       | Style applied to the boxes row container.   |
+
+## Accessibility
+
+The whole field is a single `Pressable` that focuses the hidden input, labelled `One-time code` (or `PIN code` when masked) unless you pass `accessibilityLabel`. The hidden input uses `textContentType="oneTimeCode"` so the platform can autofill an SMS code.

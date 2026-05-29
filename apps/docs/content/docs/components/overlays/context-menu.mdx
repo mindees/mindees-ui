@@ -1,0 +1,42 @@
+---
+title: Context Menu
+description: A long-press triggered menu of actions wrapping arbitrary children, sharing the same item model as the dropdown menu.
+---
+
+`ContextMenu` wraps any `children` so a long-press opens an anchored menu of actions. It shares the `MenuItem` model and row rendering with `DropdownMenu`, so icons, destructive tones, and disabled states behave identically. Open state can be controlled or managed internally.
+
+## Import
+
+```tsx
+import { ContextMenu } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ContextMenu
+  items={[
+    { label: 'Copy', onPress: copy },
+    { label: 'Share', onPress: share },
+    { label: 'Remove', onPress: remove, destructive: true },
+  ]}
+>
+  <Card>Long-press me</Card>
+</ContextMenu>
+```
+
+## Props
+
+| Prop             | Type                      | Default    | Description                                                         |
+| ---------------- | ------------------------- | ---------- | ------------------------------------------------------------------- |
+| `children`       | `React.ReactNode`         | —          | Element that opens the menu on long-press.                          |
+| `items`          | `readonly MenuItem[]`     | —          | Menu items (`label`, `onPress`, `icon`, `destructive`, `disabled`). |
+| `placement`      | `'top' \| 'bottom'`       | `'bottom'` | Side of the anchor the panel opens toward.                          |
+| `delayLongPress` | `number`                  | `400`      | Long-press delay in ms before the menu opens.                       |
+| `open`           | `boolean`                 | —          | Controlled open state. Omit for internal management.                |
+| `onOpenChange`   | `(open: boolean) => void` | —          | Called when the open state changes.                                 |
+| `style`          | `StyleProp<ViewStyle>`    | —          | Style applied to the elevated menu panel.                           |
+
+## Accessibility
+
+The wrapping trigger is a `Pressable` with `accessibilityRole="button"` that responds to long-press. The panel uses `accessibilityRole="menu"` and rows use `accessibilityRole="menuitem"` with disabled state reported, matching `DropdownMenu` so screen reader behavior is consistent across both surfaces.

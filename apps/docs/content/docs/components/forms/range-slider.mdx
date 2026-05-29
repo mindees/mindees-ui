@@ -1,0 +1,36 @@
+---
+title: RangeSlider
+description: A two-thumb slider for selecting a low/high range, with snapping and a normalised value pair.
+---
+
+`RangeSlider` draws two thumbs over a shared track to select a `[low, high]` pair. The nearer thumb captures each gesture, and the value is always normalised so `low <= high`. It fires `onChange` while dragging and `onChangeEnd` when the gesture ends.
+
+## Import
+
+```tsx
+import { RangeSlider } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<RangeSlider value={price} onChange={setPrice} min={0} max={500} step={10} />
+```
+
+## Props
+
+| Prop                 | Type                                | Default  | Description                                           |
+| -------------------- | ----------------------------------- | -------- | ----------------------------------------------------- |
+| `value`              | `readonly [number, number]`         | `[0, 1]` | Current `[low, high]` pair, normalised so low ≤ high. |
+| `onChange`           | `(value: [number, number]) => void` | —        | Fired continuously as a thumb is dragged.             |
+| `onChangeEnd`        | `(value: [number, number]) => void` | —        | Fired once when the drag gesture ends.                |
+| `min`                | `number`                            | `0`      | Lower bound.                                          |
+| `max`                | `number`                            | `1`      | Upper bound.                                          |
+| `step`               | `number`                            | `0`      | Step granularity; `0` means continuous.               |
+| `disabled`           | `boolean`                           | `false`  | Ignore gestures and dim the track and thumbs.         |
+| `accessibilityLabel` | `string`                            | —        | Accessible name for the range slider.                 |
+| `style`              | `StyleProp<ViewStyle>`              | —        | Style applied to the root container.                  |
+
+## Accessibility
+
+The root uses `accessibilityRole="adjustable"`, exposes the range via `accessibilityValue` (with a `"{low} to {high}"` text summary), and reflects the `disabled` state. Supply `accessibilityLabel` to name the control.

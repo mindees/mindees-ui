@@ -1,0 +1,35 @@
+---
+title: TimePicker
+description: A trigger that opens hour, minute, and period steppers in a modal, with 12- or 24-hour display.
+---
+
+`TimePicker` shows a trigger with the formatted time (or a placeholder). Tapping it opens a modal with stepper columns for hour and minute — plus an AM/PM column in 12-hour mode. Hours wrap at 24 and minutes at 60, so stepping past the bounds rolls over safely.
+
+## Import
+
+```tsx
+import { TimePicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TimePicker value={{ hour: 9, minute: 30 }} onChange={setTime} use24Hour minuteStep={5} />
+```
+
+## Props
+
+| Prop          | Type                         | Default          | Description                                      |
+| ------------- | ---------------------------- | ---------------- | ------------------------------------------------ |
+| `value`       | `TimeValue`                  | —                | Selected `{ hour, minute }`; `hour` is 0–23.     |
+| `onChange`    | `(value: TimeValue) => void` | —                | Fires whenever the hour or minute changes.       |
+| `placeholder` | `string`                     | `'Select time…'` | Shown on the trigger when no time is selected.   |
+| `use24Hour`   | `boolean`                    | `false`          | Render the dial and label in 24-hour time.       |
+| `minuteStep`  | `number`                     | `1`              | Step size for the minute stepper.                |
+| `disabled`    | `boolean`                    | inherited        | Force a disabled state outside of a `FormField`. |
+| `invalid`     | `boolean`                    | inherited        | Force an invalid state outside of a `FormField`. |
+| `style`       | `StyleProp<ViewStyle>`       | —                | Style applied to the trigger container.          |
+
+## Accessibility
+
+The trigger is a `button` with `disabled`/`expanded` state and forwards `FormField` labelling. Each stepper exposes increase/decrease buttons labelled by column (`Increase hour`, `Decrease minute`, and so on), and the modal is labelled `Pick a time`.

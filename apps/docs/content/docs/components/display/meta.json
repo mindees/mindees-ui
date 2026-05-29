@@ -13,6 +13,19 @@
     "spinner",
     "stat",
     "rating",
-    "timeline"
+    "timeline",
+    "pill",
+    "table",
+    "data-grid",
+    "key-value-row",
+    "description-list",
+    "detail-view",
+    "kpi-card",
+    "feed",
+    "activity-log",
+    "calendar",
+    "carousel",
+    "image-gallery",
+    "tree-view"
   ]
 }

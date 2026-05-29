@@ -1,0 +1,68 @@
+---
+title: Blocks
+description: 74 pre-built accessible screen blocks composed from MindeesUI primitives. Pure UI, props-driven, restyled with your theme tokens across seven categories.
+---
+
+`@mindees/blocks` is a companion package to `@mindees/ui`: a library of 74 ready-to-drop **screen blocks** — login forms, product cards, chat lists, dashboards, full screens, and more — each assembled from MindeesUI primitives.
+
+Blocks save you the wiring while keeping you in control. They are not opinionated widgets that own your data or your network layer; they are styled compositions you customise entirely through props and theme tokens.
+
+## Install
+
+```bash
+pnpm add @mindees/blocks @mindees/ui
+```
+
+`@mindees/ui` is a peer dependency — blocks render its `Box`, `Button`, `FormField`, `Card`, and other primitives, so it must be installed and wrapped in a `MindeesProvider`.
+
+## Philosophy
+
+- **Pure UI.** Blocks never fetch, mutate, persist, or talk to a navigation library. There is no network, no storage, no global state inside a block.
+- **Props-driven.** All data flows in through props; all actions flow out through callbacks (`onSubmit`, `onPress`, `onChange`, …). Map your domain models onto each block's lightweight UI shapes and pass them down.
+- **Composed from primitives.** Every block is just MindeesUI primitives arranged for you. Nothing renders that you could not have assembled by hand.
+- **Restyle with tokens.** Blocks inherit your theme, so spacing, colour, radius, and typography stay consistent. Each block also accepts a `style` prop for one-off overrides.
+- **Accessible by default.** Error messages announce to assistive tech, controls expose roles and labels, and the underlying primitives carry their built-in a11y wiring.
+
+## Categories
+
+### Auth
+
+Authentication flows — sign in, sign up, recovery, verification, and session.
+
+- [Auth blocks](/docs/blocks/auth) — LoginForm, SignupForm, ForgotPasswordForm, ResetPasswordForm, OTPVerification, SocialLoginButtons, LogoutConfirmation, SessionExpiredModal
+
+### Commerce
+
+Storefront and checkout building blocks.
+
+- [Commerce blocks](/docs/blocks/commerce) — ProductCard, ProductGrid, ProductDetails, PriceDisplay, DiscountBadge, ReviewsList, AddToCartButton, CartItem, CartSummary, CheckoutForm, AddressForm, OrderSummary, OrderStatus, CouponInput
+
+### Account
+
+Profile, settings, billing, and account-management blocks.
+
+- [Account blocks](/docs/blocks/account) — ProfileCard, ProfileEditor, AvatarUploader, AccountSettings, PrivacySettings, SecuritySettings, PasswordChangeForm, SubscriptionCard, BillingDetails, PaymentMethods, InvoiceList, DeleteAccountFlow
+
+### Social
+
+Messaging, comments, and engagement blocks.
+
+- [Social blocks](/docs/blocks/social) — ChatList, ChatBubble, MessageComposer, VoiceMessage, TypingIndicator, ReadReceipt, NotificationItem, CommentBox, CommentsList, LikeButton, ReactionButton, FollowButton, ReportContentModal
+
+### Dashboard
+
+Admin and analytics blocks.
+
+- [Dashboard blocks](/docs/blocks/dashboard) — AnalyticsCards, AuditLog, RoleSelector, PermissionMatrix, SystemStatusPanel, Filters, SortControl, BulkActions, UserManagementTable, AdminLayout
+
+### Web
+
+Responsive web and PWA surfaces.
+
+- [Web blocks](/docs/blocks/web) — CookieBanner, ResponsiveNavbar, WebFooter, PWAInstallPrompt
+
+### Screens
+
+Full-page screen compositions.
+
+- [Screen blocks](/docs/blocks/screens) — HomeScreen, DashboardScreen, DetailsScreen, SettingsScreen, ProfileScreen, NotificationsScreen, SearchResultsScreen, OnboardingScreen, WalkthroughScreens, HelpScreen, NotFoundScreen, UnauthorizedScreen, NoInternetScreen, PricingScreen

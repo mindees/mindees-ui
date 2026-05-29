@@ -5,7 +5,45 @@ description: ThemeProvider, createTheme, dark mode, high contrast, and custom br
 
 # Theming
 
-MindeesUI ships **four themes out of the box** — `lightTheme`, `darkTheme`, `highContrastLightTheme`, `highContrastDarkTheme` — plus `createTheme()` for fully custom brands.
+MindeesUI ships **four themes out of the box** — `lightTheme`, `darkTheme`, `highContrastLightTheme`, `highContrastDarkTheme` — plus `createThemes()` to rebrand the whole app from a single colour and `createTheme()` for fully custom control.
+
+## Theme in one line: `createThemes`
+
+The fastest way to rebrand. Give a brand colour for light and dark; MindeesUI generates a matched theme pair and **derives the hover/active shades and a readable on-accent text colour for you**.
+
+```tsx
+import { createThemes, ThemeProvider } from '@mindees/ui';
+
+const { light, dark } = createThemes({
+  name: 'acme',
+  light: { brand: '#6d28d9' },
+  dark: { brand: '#a78bfa' },
+});
+
+export default function App() {
+  return (
+    <ThemeProvider light={light} dark={dark}>
+      {/* app */}
+    </ThemeProvider>
+  );
+}
+```
+
+That single `brand` colour drives buttons, links, focus rings, selected states, and the `status.info` accent. Optionally pass `success` / `danger` / `warning` (subtle variants are derived), `density`, `contrast`, or any non-colour token override.
+
+### Copy-edit template
+
+`themeTemplate` is a ready-to-edit starting point — change the colours, pass it to `createThemes`, done:
+
+```tsx
+import { createThemes, themeTemplate } from '@mindees/ui';
+
+const { light, dark } = createThemes({
+  ...themeTemplate,
+  light: { ...themeTemplate.light, brand: '#0ea5e9' },
+  dark: { ...themeTemplate.dark, brand: '#38bdf8' },
+});
+```
 
 ## `ThemeProvider`
 
@@ -46,7 +84,9 @@ const brand = createTheme({
 });
 ```
 
-Override granularity: any leaf of `SemanticColors` is overridable.
+Override granularity: any leaf of `SemanticColors` is overridable (deep-merged onto the base), and you can override **every token category** too — `space`, `radii`, `shadows`, `textStyles`, `breakpoints`, `zIndex`, `duration`, `easing`. Setting `density` actually scales the spacing rhythm (`compact` tightens, `spacious` loosens), grid-aligned.
+
+For most apps, prefer [`createThemes`](#theme-in-one-line-createthemes) — it wraps `createTheme` and derives the accent shades for you.
 
 ## Hooks
 

@@ -1,0 +1,45 @@
+---
+title: Split Button
+description: A primary action joined to a dropdown of secondary actions, rendered as a single control with shared adjacent borders.
+---
+
+`SplitButton` pairs a primary `Button` with an attached dropdown toggle that opens a menu of secondary `items`. The two read as one joined control — the primary button squares its trailing corners and the toggle squares its leading corners. The toggle composes `DropdownMenu` for the secondary actions.
+
+## Import
+
+```tsx
+import { SplitButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SplitButton
+  onPress={save}
+  items={[
+    { label: 'Save as draft', onPress: saveDraft },
+    { label: 'Save and close', onPress: saveAndClose },
+  ]}
+>
+  Save
+</SplitButton>
+```
+
+## Props
+
+| Prop                     | Type                                                           | Default          | Description                                      |
+| ------------------------ | -------------------------------------------------------------- | ---------------- | ------------------------------------------------ |
+| `children`               | `React.ReactNode`                                              | —                | Primary action label.                            |
+| `onPress`                | `() => void`                                                   | —                | Primary action handler.                          |
+| `items`                  | `readonly MenuItem[]`                                          | —                | Secondary actions shown in the dropdown menu.    |
+| `variant`                | `'solid' \| 'outline' \| 'ghost' \| 'link'`                    | `'solid'`        | Visual treatment of both halves.                 |
+| `size`                   | `'sm' \| 'md' \| 'lg'`                                         | `'md'`           | Controls height, padding, and chevron size.      |
+| `tone`                   | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'primary'`      | Semantic color role.                             |
+| `disabled`               | `boolean`                                                      | `false`          | Disables both the primary action and the toggle. |
+| `menuAccessibilityLabel` | `string`                                                       | `'More actions'` | Accessible label for the dropdown toggle.        |
+| `placement`              | `'top' \| 'bottom'`                                            | `'bottom'`       | Side the dropdown menu opens toward.             |
+| `style`                  | `StyleProp<ViewStyle>`                                         | —                | Style applied to the row container.              |
+
+## Accessibility
+
+The primary half is a standard `Button` and the toggle is an `IconButton` labeled by `menuAccessibilityLabel` (default "More actions"). The dropdown inherits `DropdownMenu`'s `menu`/`menuitem` roles. Disabling the control disables both halves so neither can be activated.

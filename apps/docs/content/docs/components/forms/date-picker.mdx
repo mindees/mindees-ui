@@ -1,0 +1,34 @@
+---
+title: DatePicker
+description: A trigger that opens a calendar in a modal to pick a single date, with locale-aware formatting.
+---
+
+`DatePicker` shows a trigger with the selected date (or a placeholder) and a chevron. Tapping it opens a [`Calendar`](/docs/components/display/calendar) inside a centered modal; choosing a day fires `onChange` and closes the modal. Formatting defaults to the runtime locale and is overridable.
+
+## Import
+
+```tsx
+import { DatePicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DatePicker value={date} onChange={setDate} placeholder="Select date…" />
+```
+
+## Props
+
+| Prop          | Type                     | Default            | Description                                      |
+| ------------- | ------------------------ | ------------------ | ------------------------------------------------ |
+| `value`       | `Date`                   | —                  | Currently-selected date (controlled).            |
+| `onChange`    | `(date: Date) => void`   | —                  | Fires when a day is picked from the calendar.    |
+| `placeholder` | `string`                 | `'Select date…'`   | Shown on the trigger when no date is selected.   |
+| `format`      | `(date: Date) => string` | locale date string | Format the selected date for the trigger label.  |
+| `disabled`    | `boolean`                | inherited          | Force a disabled state outside of a `FormField`. |
+| `invalid`     | `boolean`                | inherited          | Force an invalid state outside of a `FormField`. |
+| `style`       | `StyleProp<ViewStyle>`   | —                  | Style applied to the trigger container.          |
+
+## Accessibility
+
+The trigger is a `button` exposing `disabled`/`expanded` state and forwards `FormField` labelling (`accessibilityLabelledBy`, `aria-invalid`, `aria-required`). The modal is labelled `Pick a date`, and the calendar's day cells are individually labelled buttons.

@@ -1,0 +1,15 @@
+{
+  "title": "Media",
+  "pages": [
+    "responsive-image",
+    "image-preview",
+    "file-preview",
+    "logo",
+    "video-player",
+    "audio-player",
+    "pdf-viewer",
+    "qr-scanner",
+    "barcode-scanner",
+    "lottie-view"
+  ]
+}

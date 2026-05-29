@@ -1,0 +1,42 @@
+---
+title: SettingsMenu
+description: Grouped list of tappable settings rows with optional section titles, leading icons, and trailing values, switches, or a default chevron.
+---
+
+`SettingsMenu` renders a settings screen as groups of rows. Each group has an optional uppercase title and a set of items, where every item carries a label, an optional leading icon, and either custom trailing content (a value, switch, or badge) or a default chevron.
+
+## Import
+
+```tsx
+import { SettingsMenu } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SettingsMenu
+  groups={[
+    {
+      title: 'Account',
+      items: [
+        { label: 'Profile', icon: <UserIcon />, onPress: openProfile },
+        { label: 'Notifications', right: <Switch value={on} />, onPress: toggle },
+      ],
+    },
+    { items: [{ label: 'Sign out', onPress: signOut }] },
+  ]}
+/>
+```
+
+## Props
+
+| Prop     | Type                   | Default | Description                                          |
+| -------- | ---------------------- | ------- | ---------------------------------------------------- |
+| `groups` | `SettingsMenuGroup[]`  | —       | Sections, each with an optional `title` and `items`. |
+| `style`  | `StyleProp<ViewStyle>` | —       | Style overrides merged after the computed container. |
+
+Each `SettingsMenuItem` has `label`, an optional `icon`, an `onPress` handler, optional `right` trailing content (replaces the chevron), and `disabled`.
+
+## Accessibility
+
+The container has `accessibilityRole="menu"` and each row is a `menuitem` labelled by its `label`. Disabled rows report `accessibilityState={{ disabled: true }}`, drop their press handler, and dim to 40% opacity. When no `right` content is supplied a chevron is rendered as a non-interactive affordance.

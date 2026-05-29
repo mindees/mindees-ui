@@ -1,0 +1,41 @@
+---
+title: BottomNavigation
+description: Fixed bottom tab bar with icon and label items, active tinting, and automatic safe-area inset handling on devices with a home indicator.
+---
+
+`BottomNavigation` is the persistent tab bar pinned to the bottom of a screen. It renders a row of equal-width items, each with an optional icon above its label, highlights the active item, and respects the bottom safe-area inset so it clears the home indicator.
+
+## Import
+
+```tsx
+import { BottomNavigation } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<BottomNavigation
+  items={[
+    { key: 'home', label: 'Home', icon: <HomeIcon /> },
+    { key: 'search', label: 'Search', icon: <SearchIcon /> },
+    { key: 'profile', label: 'Profile', icon: <UserIcon /> },
+  ]}
+  value={tab}
+  onChange={setTab}
+/>
+```
+
+## Props
+
+| Prop         | Type                     | Default                 | Description                                                           |
+| ------------ | ------------------------ | ----------------------- | --------------------------------------------------------------------- |
+| `items`      | `BottomNavigationItem[]` | —                       | Tab definitions; each has `key`, `label`, and optional `icon`.        |
+| `value`      | `string`                 | —                       | `key` of the currently active item.                                   |
+| `onChange`   | `(key: string) => void`  | —                       | Called with the `key` of the tapped item.                             |
+| `activeTint` | `string`                 | `colors.action.primary` | Color applied to the active item's icon area and label.               |
+| `safeArea`   | `boolean`                | `true`                  | Add the bottom safe-area inset as padding so the bar clears the edge. |
+| `style`      | `StyleProp<ViewStyle>`   | —                       | Style overrides merged after the computed container styles.           |
+
+## Accessibility
+
+The container has `accessibilityRole="tablist"` and each item is a `tab` with its `label` as the `accessibilityLabel`. The active item reports `accessibilityState={{ selected: true }}`; inactive items report `selected: false`. A missing `SafeAreaProvider` degrades gracefully to a zero bottom inset rather than throwing.

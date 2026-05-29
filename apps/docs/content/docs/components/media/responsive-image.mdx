@@ -1,0 +1,39 @@
+---
+title: ResponsiveImage
+description: Picks the best image source for the rendered container width and device pixel ratio, composing the base Image so it inherits its full prop surface.
+---
+
+`ResponsiveImage` chooses the most appropriate candidate source for the current layout. It measures its container width, multiplies by the device pixel ratio, and selects the smallest source that still covers that target (falling back to the widest if none is large enough). It composes the base `Image`, so all of its props pass through.
+
+## Import
+
+```tsx
+import { ResponsiveImage } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ResponsiveImage
+  sources={[
+    { uri: 'https://cdn/img-320.jpg', width: 320 },
+    { uri: 'https://cdn/img-640.jpg', width: 640 },
+    { uri: 'https://cdn/img-1280.jpg', width: 1280 },
+  ]}
+  style={{ width: '100%', aspectRatio: 16 / 9 }}
+/>
+```
+
+## Props
+
+| Prop      | Type                      | Default | Description                                                           |
+| --------- | ------------------------- | ------- | --------------------------------------------------------------------- |
+| `sources` | `ResponsiveImageSource[]` | —       | Candidates, each `{ uri, width }`; the best is chosen for the layout. |
+| `uri`     | `string`                  | —       | Fallback single source when `sources` is absent or empty.             |
+| `style`   | `StyleProp<ImageStyle>`   | —       | Image style; also used to measure the container width.                |
+
+All other `Image` props (such as `resizeMode` and `accessibilityLabel`) are accepted and forwarded.
+
+## Accessibility
+
+Accessibility is inherited from the base `Image`. Supply an `accessibilityLabel` describing the picture so screen readers can announce it; decorative images can set `accessible={false}`.

@@ -1,0 +1,32 @@
+---
+title: AudioPlayer
+description: Minimal play and pause control for an audio clip, loading and releasing an expo-av sound and showing a missing-peer notice when expo-av is absent.
+---
+
+`AudioPlayer` is a compact play/pause control for a single audio clip. It is a gated optional peer that loads `expo-av`'s `Audio.Sound`, lazily creates the sound on first play, and unloads it on unmount or source change. When `expo-av` is not installed it renders a labelled `MissingPeer` notice.
+
+**Required peer:** `expo-av`. Install with `pnpm add expo-av`.
+
+## Import
+
+```tsx
+import { AudioPlayer } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<AudioPlayer source={{ uri: 'https://example.com/track.mp3' }} />
+```
+
+## Props
+
+| Prop                 | Type                        | Default | Description                                          |
+| -------------------- | --------------------------- | ------- | ---------------------------------------------------- |
+| `source`             | `{ uri: string } \| string` | —       | Remote or local URI of the audio clip.               |
+| `accessibilityLabel` | `string`                    | —       | Overrides the default play/pause button label.       |
+| `style`              | `StyleProp<ViewStyle>`      | —       | Style overrides merged after the computed container. |
+
+## Accessibility
+
+The play/pause button is a `button` whose `accessibilityState.selected` reflects whether audio is playing, with a default label of "Play audio" or "Pause audio". Playback errors are swallowed internally. When the peer is missing, the `MissingPeer` fallback uses `accessibilityRole="alert"`.

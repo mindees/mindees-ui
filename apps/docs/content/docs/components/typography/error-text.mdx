@@ -1,0 +1,36 @@
+---
+title: Error Text
+description: A small danger-toned validation message announced as an assertive live region so screen readers read it the moment it appears.
+---
+
+`ErrorText` is a small, danger-toned validation message for form errors. It renders at the `caption` scale with the `danger` tone and announces itself as an assertive live region with an alert role, so screen readers read the error as soon as it appears. The tone and variant are fixed.
+
+## Import
+
+```tsx
+import { ErrorText } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TextInput label="Email" />;
+{
+  hasError ? <ErrorText>Enter a valid email address.</ErrorText> : null;
+}
+```
+
+## Props
+
+| Prop                      | Type                                | Default       | Description                            |
+| ------------------------- | ----------------------------------- | ------------- | -------------------------------------- |
+| `accessibilityLiveRegion` | `'none' \| 'polite' \| 'assertive'` | `'assertive'` | How urgently the message is announced. |
+| `accessibilityRole`       | `string`                            | `'alert'`     | Accessibility role for the message.    |
+| `align`                   | `TextStyle['textAlign']`            | —             | Horizontal text alignment.             |
+| `children`                | `React.ReactNode`                   | —             | Error message content.                 |
+
+Inherits all `TextProps` except `variant` and `tone`, which are fixed.
+
+## Accessibility
+
+`ErrorText` defaults to `accessibilityLiveRegion="assertive"` and `accessibilityRole="alert"` so the validation message is announced immediately on appearance — on Android via the live region and on iOS/web via the alert role. Render it conditionally next to the related field so the error is read in context.

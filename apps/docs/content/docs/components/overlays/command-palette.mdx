@@ -1,0 +1,46 @@
+---
+title: Command Palette
+description: A Cmd or Ctrl-K style searchable command list in a centered modal, with case-insensitive filtering and optional grouping.
+---
+
+`CommandPalette` composes `Modal` with a search field and a filtered, optionally grouped command list. Filtering is a case-insensitive substring match on each command's label, and running a command closes the palette. Group order follows first-seen sequence, and the query resets each time the palette reopens.
+
+## Import
+
+```tsx
+import { CommandPalette } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <CommandPalette
+    visible={visible}
+    onClose={() => setVisible(false)}
+    commands={[
+      { id: 'new', label: 'New file', group: 'File', onRun: newFile },
+      { id: 'open', label: 'Open…', group: 'File', onRun: openFile },
+      { id: 'theme', label: 'Toggle theme', onRun: toggleTheme },
+    ]}
+  />
+);
+```
+
+## Props
+
+| Prop                 | Type                   | Default               | Description                                          |
+| -------------------- | ---------------------- | --------------------- | ---------------------------------------------------- |
+| `visible`            | `boolean`              | —                     | Controls whether the palette is shown.               |
+| `onClose`            | `() => void`           | —                     | Called on backdrop press, back, or after running.    |
+| `commands`           | `readonly Command[]`   | —                     | Commands (`id`, `label`, `onRun`, optional `group`). |
+| `placeholder`        | `string`               | `'Type a command…'`   | Search field placeholder.                            |
+| `emptyLabel`         | `string`               | `'No commands found'` | Copy shown when the filter matches nothing.          |
+| `accessibilityLabel` | `string`               | `'Command palette'`   | Label announced when the palette opens.              |
+| `style`              | `StyleProp<ViewStyle>` | —                     | Style for the elevated panel (not the scrim).        |
+
+## Accessibility
+
+Built on `Modal`, with the body marked `accessibilityViewIsModal`. The search field auto-focuses on open and is labeled by its placeholder. The list is rendered with `accessibilityRole="menu"` and each command row uses `accessibilityRole="menuitem"`, meeting a 44pt minimum tap target.

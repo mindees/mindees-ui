@@ -1,0 +1,38 @@
+---
+title: ImagePreview
+description: An image with a loading spinner placeholder and an optional tap-to-zoom affordance, composing the base Image inside a rounded clipped surface.
+---
+
+`ImagePreview` wraps the base `Image` in a rounded, clipped surface and shows an activity spinner until the image finishes loading. When given an `onPress` handler it becomes a tap target, ready to wire into a lightbox or zoom flow.
+
+## Import
+
+```tsx
+import { ImagePreview } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ImagePreview
+  src="https://example.com/photo.jpg"
+  accessibilityLabel="Sunset over the bay"
+  onPress={() => openLightbox(photo)}
+  style={{ width: 200, height: 200 }}
+/>
+```
+
+## Props
+
+| Prop                 | Type                    | Default | Description                                                  |
+| -------------------- | ----------------------- | ------- | ------------------------------------------------------------ |
+| `onPress`            | `() => void`            | —       | Tap handler; when set the surface becomes a zoomable button. |
+| `accessibilityLabel` | `string`                | —       | Label describing the image for screen readers.               |
+| `style`              | `StyleProp<ViewStyle>`  | —       | Style for the outer container.                               |
+| `imageStyle`         | `StyleProp<ImageStyle>` | —       | Style forwarded to the inner image (it fills the container). |
+
+All other `Image` props (such as `src` and `resizeMode`) are accepted and forwarded.
+
+## Accessibility
+
+With an `onPress` the surface uses `accessibilityRole="imagebutton"` and a hint of "Activates to zoom the image"; without one it uses `accessibilityRole="image"`. The loading spinner is rendered with `pointerEvents="none"` so it never intercepts taps.

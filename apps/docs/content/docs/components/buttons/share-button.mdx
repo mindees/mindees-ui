@@ -1,0 +1,38 @@
+---
+title: Share Button
+description: A button that opens the platform share sheet for a message or URL, with a leading share glyph and a Share default label.
+---
+
+`ShareButton` opens the native share sheet via React Native's `Share` API when pressed. Provide at least one of `message` or `url`; the optional `title` is used as the Android dialog title. It renders a leading share glyph by default and resolves the share result through `onShared`. It inherits base `Button` props except `children` and `onPress`.
+
+## Import
+
+```tsx
+import { ShareButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ShareButton
+  message="Check out MindeesUI"
+  url="https://mindees.dev"
+  onShared={(result) => console.log(result)}
+/>
+```
+
+## Props
+
+| Prop       | Type                            | Default   | Description                                          |
+| ---------- | ------------------------------- | --------- | ---------------------------------------------------- |
+| `message`  | `string`                        | —         | Text body to share. At least one of `message`/`url`. |
+| `url`      | `string`                        | —         | URL to share. At least one of `message`/`url`.       |
+| `title`    | `string`                        | —         | Optional share dialog title (Android).               |
+| `onShared` | `(result: ShareAction) => void` | —         | Called with the platform share result.               |
+| `children` | `React.ReactNode`               | `'Share'` | Label text.                                          |
+
+Inherits the remaining `ButtonBaseProps` (`variant`, `tone`, `size`, `leading`, etc.) except `children` and `onPress`.
+
+## Accessibility
+
+`ShareButton` is a standard `Button` with `accessibilityRole="button"` and tap-target sizing. If neither `message` nor `url` is supplied the press is a no-op rather than crashing, and share-sheet dismissal or unsupported platforms are swallowed silently so callers are never interrupted by an error.

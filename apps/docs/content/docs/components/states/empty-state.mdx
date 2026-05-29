@@ -1,0 +1,38 @@
+---
+title: EmptyState
+description: A centered placeholder for "no data" screens with an icon, title, description, and optional action.
+---
+
+`EmptyState` is a centered layout for when a list or screen has nothing to show. It renders an optional icon, a title (defaulting to `Nothing here yet`), an optional description, and an optional action such as a button to create the first item.
+
+## Import
+
+```tsx
+import { EmptyState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<EmptyState
+  title="No projects yet"
+  description="Create your first project to get started."
+  action={<Button onPress={create}>New project</Button>}
+/>
+```
+
+## Props
+
+| Prop          | Type                   | Default              | Description                                        |
+| ------------- | ---------------------- | -------------------- | -------------------------------------------------- |
+| `title`       | `string`               | `'Nothing here yet'` | Heading copy.                                      |
+| `description` | `string`               | —                    | Supporting copy shown under the title.             |
+| `icon`        | `ReactNode`            | —                    | Icon or illustration rendered above the title.     |
+| `action`      | `ReactNode`            | —                    | Action node (typically a `Button`) below the copy. |
+| `style`       | `StyleProp<ViewStyle>` | —                    | Style applied to the container.                    |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the title and description are announced together as a single status. Keep the title concise and the description actionable.

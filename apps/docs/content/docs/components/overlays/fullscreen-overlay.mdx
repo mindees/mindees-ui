@@ -1,0 +1,43 @@
+---
+title: Fullscreen Overlay
+description: An opaque full-bleed modal surface for immersive flows like onboarding, editors, and media, with caller-owned inner layout.
+---
+
+`FullscreenOverlay` is a generic fullscreen modal that covers the entire screen with the token canvas background. Unlike `Modal`, it is not centered and has no scrim or panel — it is an opaque, full-bleed surface for immersive flows such as onboarding, editors, and media viewers. Callers own all inner layout.
+
+## Import
+
+```tsx
+import { FullscreenOverlay } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <FullscreenOverlay
+    visible={visible}
+    onClose={() => setVisible(false)}
+    accessibilityLabel="Photo editor"
+  >
+    {/* full-screen editor canvas */}
+  </FullscreenOverlay>
+);
+```
+
+## Props
+
+| Prop                 | Type                   | Default | Description                                              |
+| -------------------- | ---------------------- | ------- | -------------------------------------------------------- |
+| `visible`            | `boolean`              | —       | Controls whether the overlay is shown.                   |
+| `onClose`            | `() => void`           | —       | Called on the platform back gesture when `dismissible`.  |
+| `dismissible`        | `boolean`              | `true`  | When `false`, the hardware back button is ignored.       |
+| `accessibilityLabel` | `string`               | —       | Label announced when the overlay opens.                  |
+| `style`              | `StyleProp<ViewStyle>` | —       | Style for the surface (token canvas background default). |
+| `children`           | `React.ReactNode`      | —       | Surface contents; you control all inner layout.          |
+
+## Accessibility
+
+Built on React Native's `Modal` with `presentationStyle="overFullScreen"`, so the platform manages focus capture. The surface is marked `accessibilityViewIsModal`; provide `accessibilityLabel` to describe the flow. When `dismissible` is true the Android back button calls `onClose`. The slide transition is replaced with no animation when reduce motion is enabled.

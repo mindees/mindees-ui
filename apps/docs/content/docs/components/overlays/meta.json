@@ -8,6 +8,19 @@
     "tooltip",
     "toast",
     "alert",
-    "action-sheet"
+    "action-sheet",
+    "dialog",
+    "confirmation-dialog",
+    "snackbar",
+    "banner",
+    "notification",
+    "dropdown-menu",
+    "context-menu",
+    "side-panel",
+    "lightbox",
+    "fullscreen-overlay",
+    "hover-card",
+    "mega-menu",
+    "command-palette"
   ]
 }

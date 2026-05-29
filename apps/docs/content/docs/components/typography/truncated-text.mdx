@@ -1,0 +1,38 @@
+---
+title: Truncated Text
+description: A single-purpose Text that clamps to a line count with a tail ellipsis, with overridable line count and ellipsize mode.
+---
+
+`TruncatedText` is a `Text` that truncates to `numberOfLines` (default 1) with a tail ellipsis. It is the convenient preset for single-line labels in tight rows; override `numberOfLines` and `ellipsizeMode` for multi-line clamping or a different ellipsis position. It inherits all `Text` props.
+
+## Import
+
+```tsx
+import { TruncatedText } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TruncatedText>{veryLongFileName}</TruncatedText>
+```
+
+Clamp to two lines:
+
+```tsx
+<TruncatedText numberOfLines={2}>{description}</TruncatedText>
+```
+
+## Props
+
+| Prop            | Type                                     | Default  | Description                    |
+| --------------- | ---------------------------------------- | -------- | ------------------------------ |
+| `numberOfLines` | `number`                                 | `1`      | Lines shown before truncating. |
+| `ellipsizeMode` | `'head' \| 'middle' \| 'tail' \| 'clip'` | `'tail'` | Where the ellipsis is placed.  |
+| `children`      | `React.ReactNode`                        | —        | Text content to truncate.      |
+
+Inherits all `TextProps`.
+
+## Accessibility
+
+`TruncatedText` renders a `Text` element and respects font scaling. Because the visible text may be clipped, ensure the full value is still available to assistive tech — for example via an `accessibilityLabel` carrying the untruncated string where the clipped text matters.

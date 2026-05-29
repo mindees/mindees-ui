@@ -1,0 +1,40 @@
+---
+title: ImageGallery
+description: A responsive grid of images with configurable columns and an optional tap handler per tile.
+---
+
+`ImageGallery` lays out images in a square-tile grid using `FlatList` with `numColumns`. Each tile crops to a 1:1 aspect ratio over a subtle background. Passing `onPressImage` makes tiles tappable image buttons; otherwise they are static images.
+
+## Import
+
+```tsx
+import { ImageGallery } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ImageGallery
+  images={[
+    { uri: 'https://…/a.jpg', alt: 'Beach at sunset' },
+    { uri: 'https://…/b.jpg', alt: 'Mountain trail' },
+  ]}
+  columns={3}
+  onPressImage={(image, index) => openLightbox(index)}
+/>
+```
+
+## Props
+
+| Prop           | Type                                           | Default | Description                         |
+| -------------- | ---------------------------------------------- | ------- | ----------------------------------- |
+| `images`       | `readonly GalleryImage[]`                      | —       | Images to render (`{ uri, alt? }`). |
+| `columns`      | `number`                                       | `3`     | Cells per row.                      |
+| `onPressImage` | `(image: GalleryImage, index: number) => void` | —       | Called when a cell is tapped.       |
+| `style`        | `StyleProp<ViewStyle>`                         | —       | Style applied to the grid.          |
+
+Inherits the remaining `ViewProps` (except `style`). The grid is non-scrolling, so embed it inside a scroll container if needed.
+
+## Accessibility
+
+Tappable tiles use `accessibilityRole="imagebutton"`; static tiles use `image`. Each tile is labelled with its `alt` text, falling back to `Image {n}`, so always provide `alt` for meaningful descriptions.

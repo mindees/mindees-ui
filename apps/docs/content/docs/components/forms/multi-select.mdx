@@ -1,0 +1,41 @@
+---
+title: MultiSelect
+description: A multi-choice dropdown that toggles options in a modal and summarises selections as a count or chips.
+---
+
+`MultiSelect` lets the user pick several values from a modal list, toggling each on tap. The trigger shows an `N selected` summary by default, or removable chips when `showChips` is set. It reads `FormField` context for invalid, disabled, and labelling.
+
+## Import
+
+```tsx
+import { MultiSelect } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<MultiSelect
+  options={tags}
+  value={selected}
+  onChange={setSelected}
+  showChips
+  placeholder="Pick tags"
+/>
+```
+
+## Props
+
+| Prop          | Type                        | Default     | Description                                                  |
+| ------------- | --------------------------- | ----------- | ------------------------------------------------------------ |
+| `options`     | `readonly SelectOption[]`   | —           | Options to choose from (`{ label, value }`).                 |
+| `value`       | `readonly string[]`         | `[]`        | Currently selected values.                                   |
+| `onChange`    | `(value: string[]) => void` | —           | Fired with the full next array of selected values.           |
+| `placeholder` | `string`                    | `'Select…'` | Shown on the trigger when nothing is selected.               |
+| `showChips`   | `boolean`                   | `false`     | Render selected items as removable chips instead of a count. |
+| `disabled`    | `boolean`                   | inherited   | Force a disabled state outside of a `FormField`.             |
+| `invalid`     | `boolean`                   | inherited   | Force an invalid state outside of a `FormField`.             |
+| `style`       | `StyleProp<ViewStyle>`      | —           | Style applied to the trigger container.                      |
+
+## Accessibility
+
+The trigger is a `button` with `disabled`/`expanded` state and forwards `FormField` labelling. Each option row is a `checkbox` exposing its `checked` state, and chips expose a remove affordance.

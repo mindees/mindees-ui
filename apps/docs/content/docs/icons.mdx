@@ -1,0 +1,86 @@
+---
+title: Icons
+description: Tree-shakeable SVG icons for React Native and Expo built on react-native-svg. Every glyph is a named export customizable via size, color, and strokeWidth, and renders crisp on iOS, Android, and React Native Web.
+---
+
+`@mindees/icons` ships a set of Feather-style stroke glyphs as individual named exports. Because the package sets `sideEffects: false`, your bundler tree-shakes everything you do not import, so a screen that uses two icons ships two icons. Each glyph is a `react-native-svg` component, so it renders crisp at any size on iOS, Android, and React Native Web.
+
+## Install
+
+```sh
+pnpm add @mindees/icons react-native-svg
+```
+
+`react-native-svg` is a peer dependency (also required by `@mindees/ui`).
+
+## Usage
+
+Import each icon by name and render it like any component:
+
+```tsx
+import { HomeIcon, HeartIcon, SearchIcon } from '@mindees/icons';
+
+<HomeIcon size={28} color="#0090ff" />
+<HeartIcon size={20} color="red" />
+<SearchIcon size={16} color="currentColor" />
+```
+
+Inside a themed component, lean on `currentColor` (the default) so the glyph inherits the surrounding text color:
+
+```tsx
+import { useTokens } from '@mindees/ui';
+import { CheckCircleIcon } from '@mindees/icons';
+
+function SuccessRow() {
+  const t = useTokens();
+  return <CheckCircleIcon size={20} color={t.colors.status.success} />;
+}
+```
+
+## Customizing
+
+Every icon accepts three core props plus any valid `SvgProps` (such as `style`, `accessibilityLabel`, or `testID`), which pass straight through to the underlying `Svg`.
+
+| Prop          | Type     | Default          | Description                                                            |
+| ------------- | -------- | ---------------- | ---------------------------------------------------------------------- |
+| `size`        | `number` | `24`             | Sets both `width` and `height` in dp.                                  |
+| `color`       | `string` | `'currentColor'` | Stroke color. `currentColor` inherits from the surrounding color.      |
+| `strokeWidth` | `number` | `2`              | Thickness of the glyph strokes — lower for hairlines, higher for bold. |
+
+```tsx
+import { SettingsIcon } from '@mindees/icons';
+
+<SettingsIcon size={32} color="#111" strokeWidth={1.5} />;
+```
+
+### Your own glyphs
+
+Define custom icons with the same `createIcon` factory the built-ins use — they inherit the identical `size` / `color` / `strokeWidth` API:
+
+```tsx
+import { createIcon } from '@mindees/icons';
+
+export const TriangleIcon = createIcon({
+  name: 'Triangle',
+  viewBox: '0 0 24 24',
+  path: 'M12 2L2 22h20L12 2z',
+});
+
+<TriangleIcon size={32} color="orange" strokeWidth={2.5} />;
+```
+
+## Available icons
+
+All exports end with the `Icon` suffix (for example `<HomeIcon />`).
+
+**Arrows and chevrons:** `ArrowUpIcon`, `ArrowDownIcon`, `ArrowLeftIcon`, `ArrowRightIcon`, `ChevronUpIcon`, `ChevronDownIcon`, `ChevronLeftIcon`, `ChevronRightIcon`.
+
+**Actions:** `PlusIcon`, `MinusIcon`, `EditIcon`, `TrashIcon`, `SaveIcon`, `CopyIcon`, `ShareIcon`, `DownloadIcon`, `UploadIcon`, `RefreshIcon`, `FilterIcon`, `SortIcon`, `SettingsIcon`, `MoreHorizontalIcon`, `MoreVerticalIcon`.
+
+**Navigation and UI:** `HomeIcon`, `MenuIcon`, `BellIcon`, `GridIcon`, `ListIcon`, `ExternalLinkIcon`, `SearchIcon`, `CloseIcon`, `CheckIcon`.
+
+**Status:** `InfoIcon`, `WarningIcon`, `ErrorIcon`, `CheckCircleIcon`, `XCircleIcon`, `HelpIcon`.
+
+**Media:** `PlayIcon`, `PauseIcon`, `StopIcon`, `CameraIcon`, `ImageIcon`, `VideoIcon`, `MicIcon`, `VolumeIcon`.
+
+**Common:** `UserIcon`, `UsersIcon`, `LockIcon`, `UnlockIcon`, `MailIcon`, `PhoneIcon`, `CalendarIcon`, `ClockIcon`, `EyeIcon`, `EyeOffIcon`, `HeartIcon`, `StarIcon`, `BookmarkIcon`, `MapIcon`, `GlobeIcon`.

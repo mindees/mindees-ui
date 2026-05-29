@@ -1,0 +1,40 @@
+---
+title: DataGrid
+description: A scrollable data table with sortable column headers and optional zebra striping.
+---
+
+`DataGrid` builds on the `Table` layout with per-column sorting and alternating row backgrounds. Marking a column `sortable` makes its header tappable, cycling ascending, descending, and unsorted. Sorting is text/number aware and leaves custom node cells stable.
+
+## Import
+
+```tsx
+import { DataGrid } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DataGrid
+  columns={[
+    { key: 'name', title: 'Name', sortable: true },
+    { key: 'score', title: 'Score', sortable: true, width: 80 },
+  ]}
+  data={rows}
+  zebra
+/>
+```
+
+## Props
+
+| Prop      | Type                        | Default | Description                                               |
+| --------- | --------------------------- | ------- | --------------------------------------------------------- |
+| `columns` | `readonly DataGridColumn[]` | —       | Column definitions (`{ key, title, width?, sortable? }`). |
+| `data`    | `readonly DataGridRow[]`    | —       | Row records keyed by column `key`.                        |
+| `zebra`   | `boolean`                   | `true`  | Enable alternating row backgrounds.                       |
+| `style`   | `StyleProp<ViewStyle>`      | —       | Style applied to the scroll container.                    |
+
+Each `DataGridColumn` width defaults to `120`. Inherits the remaining `ScrollView` props (except `style` and `children`).
+
+## Accessibility
+
+Sortable headers are `header` pressables exposing a `selected` state and a `Tap to sort by this column` hint; non-sortable headers are static `header` views. Body rows and cells are marked `none`.

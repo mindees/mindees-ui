@@ -1,0 +1,33 @@
+---
+title: VideoPlayer
+description: Plays a video from a remote or local URI with native controls, loading the expo-video peer when present or falling back to legacy expo-av.
+---
+
+`VideoPlayer` renders native video playback for a given source. It is a gated optional peer: it prefers the modern `expo-video`, falls back to the legacy `expo-av` `Video`, and shows a clearly labelled `MissingPeer` notice when neither is installed.
+
+**Required peer:** `expo-video` (or legacy `expo-av`). Install with `pnpm add expo-video`.
+
+## Import
+
+```tsx
+import { VideoPlayer } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<VideoPlayer source={{ uri: 'https://example.com/clip.mp4' }} controls />
+```
+
+## Props
+
+| Prop       | Type                        | Default | Description                               |
+| ---------- | --------------------------- | ------- | ----------------------------------------- |
+| `source`   | `{ uri: string } \| string` | —       | Remote or local URI of the video to play. |
+| `controls` | `boolean`                   | `true`  | Show native playback controls.            |
+
+Any additional props are forwarded to the underlying native player component.
+
+## Accessibility
+
+Playback controls and their labels come from the native `expo-video` or `expo-av` player. When the peer is missing, the rendered `MissingPeer` fallback uses `accessibilityRole="alert"` and names the required package and install command.

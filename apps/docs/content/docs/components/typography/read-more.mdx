@@ -1,0 +1,34 @@
+---
+title: Read More
+description: Collapsible text that clamps to a line count then reveals a tappable Read more or Show less toggle styled as an inline link.
+---
+
+`ReadMore` clamps its content to `numberOfLines` then appends a tappable toggle that expands and re-collapses the text. The toggle is a link-toned inline `Text` with a button accessibility role. Its expanded state is uncontrolled — `defaultExpanded` only sets the initial state.
+
+## Import
+
+```tsx
+import { ReadMore } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ReadMore numberOfLines={3}>{longBiography}</ReadMore>
+```
+
+## Props
+
+| Prop              | Type              | Default       | Description                          |
+| ----------------- | ----------------- | ------------- | ------------------------------------ |
+| `numberOfLines`   | `number`          | `3`           | Lines shown while collapsed.         |
+| `moreLabel`       | `string`          | `'Read more'` | Toggle label shown when collapsed.   |
+| `lessLabel`       | `string`          | `'Show less'` | Toggle label shown when expanded.    |
+| `defaultExpanded` | `boolean`         | `false`       | Start expanded (initial state only). |
+| `children`        | `React.ReactNode` | —             | Text content to clamp and reveal.    |
+
+Inherits all `TextProps`.
+
+## Accessibility
+
+The toggle is an inline `Text` with `accessibilityRole="button"` and reports `accessibilityState.expanded` so screen readers announce whether the text is collapsed or expanded. The toggle labels ("Read more" / "Show less") describe the action clearly when activated.

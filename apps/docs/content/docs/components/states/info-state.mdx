@@ -1,0 +1,34 @@
+---
+title: InfoState
+description: A centered informational screen in an info tone with a title and optional description.
+---
+
+`InfoState` is a centered layout for neutral, informational messages. Its title defaults to `Good to know` in the info tone, with an optional description and action.
+
+## Import
+
+```tsx
+import { InfoState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<InfoState title="New feature" description="You can now export reports as CSV." />
+```
+
+## Props
+
+| Prop          | Type                   | Default          | Description                                        |
+| ------------- | ---------------------- | ---------------- | -------------------------------------------------- |
+| `title`       | `string`               | `'Good to know'` | Heading copy.                                      |
+| `description` | `string`               | —                | Supporting copy shown under the title.             |
+| `icon`        | `ReactNode`            | —                | Icon or illustration rendered above the title.     |
+| `action`      | `ReactNode`            | —                | Action node (typically a `Button`) below the copy. |
+| `style`       | `StyleProp<ViewStyle>` | —                | Style applied to the container.                    |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the message reads as a single status. Keep the title short and the description specific to what the user should know.

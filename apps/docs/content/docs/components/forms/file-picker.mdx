@@ -1,0 +1,36 @@
+---
+title: FilePicker
+description: A button that opens the system document picker and returns typed file metadata, gated on expo-document-picker.
+---
+
+`FilePicker` is a [`Button`](/docs/components/buttons/button) that launches the OS document picker and reports the chosen files through `onPick` as a typed `PickedFile[]` (empty when cancelled). It is a gated peer: without `expo-document-picker` installed it renders a `MissingPeer` fallback showing the install command instead of throwing.
+
+## Import
+
+```tsx
+import { FilePicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<FilePicker onPick={(files) => setFiles(files)} multiple type="application/pdf">
+  Upload PDFs
+</FilePicker>
+```
+
+## Props
+
+| Prop                   | Type                                     | Default         | Description                                         |
+| ---------------------- | ---------------------------------------- | --------------- | --------------------------------------------------- |
+| `onPick`               | `(files: readonly PickedFile[]) => void` | —               | Fired with the picked files; empty array on cancel. |
+| `multiple`             | `boolean`                                | `false`         | Allow selecting more than one file.                 |
+| `type`                 | `string \| readonly string[]`            | —               | Restrict selectable MIME type(s).                   |
+| `copyToCacheDirectory` | `boolean`                                | `true`          | Copy the picked file into the app cache directory.  |
+| `children`             | `ReactNode`                              | `'Choose file'` | Trigger label.                                      |
+
+Also accepts `ButtonBaseProps` minus `onPress` and `children`, so `variant`, `size`, and `tone` apply to the trigger.
+
+## Accessibility
+
+When the peer is present, the trigger is a standard `Button` and inherits its accessibility. When `expo-document-picker` is missing, a `MissingPeer` block explains the requirement and the `pnpm add expo-document-picker` install command.

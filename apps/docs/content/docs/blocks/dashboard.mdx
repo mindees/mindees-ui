@@ -1,0 +1,148 @@
+---
+title: Dashboard blocks
+description: Ten accessible admin and analytics blocks — KPI cards, audit logs, role and permission controls, filters, bulk actions, user tables, and an admin layout shell.
+---
+
+Admin and analytics building blocks composed from MindeesUI primitives. Blocks never fetch or store — metrics, roles, permissions, and user lists flow through props and out through callbacks.
+
+## Import
+
+```tsx
+import {
+  AnalyticsCards,
+  AuditLog,
+  RoleSelector,
+  PermissionMatrix,
+  SystemStatusPanel,
+  Filters,
+  SortControl,
+  BulkActions,
+  UserManagementTable,
+  AdminLayout,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<AdminLayout title="Console" nav={<SideNav />}>
+  <AnalyticsCards metrics={metrics} onPressMetric={(id) => open(id)} />
+  <UserManagementTable users={users} onEdit={edit} onRemove={remove} />
+</AdminLayout>
+```
+
+## Blocks
+
+### AnalyticsCards
+
+Responsive grid of KPI cards.
+
+| Prop            | Type                         | Description                                        |
+| --------------- | ---------------------------- | -------------------------------------------------- |
+| `metrics`       | `readonly AnalyticsMetric[]` | Metrics to render as KPI cards.                    |
+| `columns`       | `number`                     | Column count; responsive (1 / 2 / 4) when omitted. |
+| `onPressMetric` | `(id: string) => void`       | Called with the metric id when a card is pressed.  |
+
+### AuditLog
+
+`FlatList` of time-stamped audit events.
+
+| Prop                  | Type                              | Description                               |
+| --------------------- | --------------------------------- | ----------------------------------------- |
+| `events`              | `readonly AuditEvent[]`           | Audit events, newest-first by convention. |
+| `ListEmptyComponent`  | `FlatList['ListEmptyComponent']`  | Rendered when empty.                      |
+| `ListHeaderComponent` | `FlatList['ListHeaderComponent']` | Header slot above the list.               |
+| `scrollEnabled`       | `boolean`                         | Disable internal scrolling when nested.   |
+
+### RoleSelector
+
+Dropdown for selecting a role.
+
+| Prop          | Type                    | Description                                   |
+| ------------- | ----------------------- | --------------------------------------------- |
+| `roles`       | `readonly Role[]`       | Roles available for selection.                |
+| `value`       | `string`                | Currently selected role key.                  |
+| `onChange`    | `(key: string) => void` | Called with the newly-selected role key.      |
+| `placeholder` | `string`                | Trigger placeholder when nothing is selected. |
+| `disabled`    | `boolean`               | Force a disabled state.                       |
+
+### PermissionMatrix
+
+Scrollable grid of role × permission toggle cells.
+
+| Prop          | Type                                         | Description                                  |
+| ------------- | -------------------------------------------- | -------------------------------------------- |
+| `roles`       | `readonly Role[]`                            | Roles forming the columns.                   |
+| `permissions` | `readonly Permission[]`                      | Permissions forming the rows.                |
+| `value`       | `PermissionMatrixValue`                      | Granted lookup: `value[roleKey][permKey]`.   |
+| `onToggle`    | `(roleKey: string, permKey: string) => void` | Fired when a cell is toggled.                |
+| `disabled`    | `boolean`                                    | Disable every cell.                          |
+| `columnWidth` | `number`                                     | Role column width in px. Defaults to `96`.   |
+| `labelWidth`  | `number`                                     | Label column width in px. Defaults to `160`. |
+
+### SystemStatusPanel
+
+Card listing services and their up/down/degraded status.
+
+| Prop       | Type                            | Description                           |
+| ---------- | ------------------------------- | ------------------------------------- |
+| `services` | `readonly ServiceStatusEntry[]` | Services to render, in display order. |
+| `title`    | `string`                        | Optional panel title.                 |
+
+### Filters
+
+Renders a set of filter controls and reports changes.
+
+| Prop       | Type                                              | Description                           |
+| ---------- | ------------------------------------------------- | ------------------------------------- |
+| `filters`  | `readonly FilterDef[]`                            | Filter definitions, in display order. |
+| `value`    | `FilterValue`                                     | Current filter state.                 |
+| `onChange` | `(key: string, value: string \| boolean) => void` | Fired when a filter changes.          |
+
+### SortControl
+
+Field + direction sort control.
+
+| Prop       | Type                         | Description                     |
+| ---------- | ---------------------------- | ------------------------------- |
+| `options`  | `readonly SortOption[]`      | Fields available for sorting.   |
+| `value`    | `SortValue`                  | Current sort state.             |
+| `onChange` | `(value: SortValue) => void` | Fired with the next sort state. |
+
+### BulkActions
+
+Selection toolbar that appears when items are selected.
+
+| Prop            | Type                        | Description                                           |
+| --------------- | --------------------------- | ----------------------------------------------------- |
+| `selectedCount` | `number`                    | Selected item count; nothing renders when `0`.        |
+| `actions`       | `readonly BulkAction[]`     | Actions to expose for the selection.                  |
+| `onClear`       | `() => void`                | Clear-selection handler; hidden when absent.          |
+| `renderCount`   | `(count: number) => string` | Builds the summary label. Defaults to `"N selected"`. |
+
+### UserManagementTable
+
+`FlatList`-backed user table with edit and remove row actions.
+
+| Prop                  | Type                              | Description                               |
+| --------------------- | --------------------------------- | ----------------------------------------- |
+| `users`               | `readonly ManagedUser[]`          | Users to render.                          |
+| `onEdit`              | `(user: ManagedUser) => void`     | Called when a user's edit action fires.   |
+| `onRemove`            | `(user: ManagedUser) => void`     | Called when a user's remove action fires. |
+| `ListEmptyComponent`  | `FlatList['ListEmptyComponent']`  | Rendered when empty.                      |
+| `ListHeaderComponent` | `FlatList['ListHeaderComponent']` | Header slot above the list.               |
+| `scrollEnabled`       | `boolean`                         | Disable internal scrolling when nested.   |
+
+### AdminLayout
+
+Responsive console shell with a header, a collapsing sidebar, and content.
+
+| Prop           | Type        | Description                                               |
+| -------------- | ----------- | --------------------------------------------------------- |
+| `title`        | `string`    | Header title when no custom `header` is given.            |
+| `nav`          | `ReactNode` | Sidebar navigation slot; hidden on narrow viewports.      |
+| `header`       | `ReactNode` | Custom header slot, overriding the title bar.             |
+| `children`     | `ReactNode` | Main content.                                             |
+| `sidebarWidth` | `number`    | Sidebar width in px on wide viewports. Defaults to `260`. |
+
+All blocks also accept a `style` prop spread onto the root container.

@@ -1,0 +1,36 @@
+---
+title: Slider
+description: A draggable single-value slider with min, max, optional step snapping, and a continuous change callback.
+---
+
+`Slider` is a gesture-driven track and thumb for picking a value in `[min, max]`. It fires `onChange` continuously while dragging and `onChangeEnd` once the gesture finishes. Setting `step` snaps to discrete increments; leaving it `0` keeps the track continuous.
+
+## Import
+
+```tsx
+import { Slider } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Slider value={volume} onChange={setVolume} min={0} max={100} step={5} />
+```
+
+## Props
+
+| Prop                 | Type                      | Default | Description                                  |
+| -------------------- | ------------------------- | ------- | -------------------------------------------- |
+| `value`              | `number`                  | `0`     | Current value. Clamped into `[min, max]`.    |
+| `onChange`           | `(value: number) => void` | —       | Fired continuously as the thumb is dragged.  |
+| `onChangeEnd`        | `(value: number) => void` | —       | Fired once when the drag gesture ends.       |
+| `min`                | `number`                  | `0`     | Lower bound.                                 |
+| `max`                | `number`                  | `1`     | Upper bound.                                 |
+| `step`               | `number`                  | `0`     | Step granularity; `0` means continuous.      |
+| `disabled`           | `boolean`                 | `false` | Ignore gestures and dim the track and thumb. |
+| `accessibilityLabel` | `string`                  | —       | Accessible name for the slider.              |
+| `style`              | `StyleProp<ViewStyle>`    | —       | Style applied to the root container.         |
+
+## Accessibility
+
+The root uses `accessibilityRole="adjustable"` and exposes `accessibilityValue` with `min`, `max`, and the current `now`, plus a `disabled` state. Provide `accessibilityLabel` so the slider's purpose is announced.

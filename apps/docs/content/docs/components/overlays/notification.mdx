@@ -1,0 +1,47 @@
+---
+title: Notification
+description: A top-anchored toast card with a title, optional body, tone accent, optional icon, and a row of inline action buttons.
+---
+
+`Notification` is a floating card anchored to the top of the screen, suited to system alerts and incoming messages. It renders a `title`, optional `body`, a tone-colored left accent, an optional leading `icon`, and a row of inline `actions`. It auto-dismisses after `duration` and fades in respecting reduce motion.
+
+## Import
+
+```tsx
+import { Notification } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(true);
+
+return (
+  <Notification
+    visible={visible}
+    tone="success"
+    title="Backup complete"
+    body="Your files are safely stored."
+    actions={[{ label: 'View', onPress: openBackups }]}
+    onDismiss={() => setVisible(false)}
+  />
+);
+```
+
+## Props
+
+| Prop        | Type                                           | Default  | Description                                                  |
+| ----------- | ---------------------------------------------- | -------- | ------------------------------------------------------------ |
+| `visible`   | `boolean`                                      | —        | Controls whether the notification is shown.                  |
+| `title`     | `string`                                       | —        | Bold leading line of the card.                               |
+| `body`      | `string`                                       | —        | Optional secondary-toned supporting text.                    |
+| `tone`      | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Sets the left accent color.                                  |
+| `icon`      | `React.ReactNode`                              | —        | Optional leading icon node.                                  |
+| `actions`   | `readonly NotificationAction[]`                | —        | Inline action buttons (`{ label, onPress }`) under the body. |
+| `onDismiss` | `() => void`                                   | —        | Called when the auto-dismiss timer elapses.                  |
+| `duration`  | `number`                                       | `6000`   | Auto-dismiss after N ms. Set to `0` to disable.              |
+| `style`     | `StyleProp<ViewStyle>`                         | —        | Style applied to the card surface.                           |
+
+## Accessibility
+
+The card uses `accessibilityRole="alert"`; danger notifications announce assertively, all others politely. The combined title and body are announced through the library announcer on appearance. Each action is a `Pressable` with `accessibilityRole="button"` labeled by its text. Animation is skipped under reduce motion.

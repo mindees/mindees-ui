@@ -1,0 +1,44 @@
+---
+title: NumberInput
+description: A numeric text input with optional stepper buttons, min/max clamping, and a parsed numeric callback.
+---
+
+`NumberInput` wraps [`Input`](/docs/components/forms/input) with a numeric keyboard and optional `-`/`+` stepper buttons on the trailing edge. It surfaces both the raw text (`onChangeText`) and the parsed number (`onChangeValue`), and the stepper respects `min`, `max`, and `step`.
+
+## Import
+
+```tsx
+import { NumberInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<NumberInput
+  value={qty}
+  onChangeText={setQty}
+  onChangeValue={setQtyNumber}
+  min={0}
+  max={99}
+  step={1}
+  showStepper
+/>
+```
+
+## Props
+
+| Prop            | Type                      | Default | Description                                                             |
+| --------------- | ------------------------- | ------- | ----------------------------------------------------------------------- |
+| `min`           | `number`                  | —       | Minimum allowed value. The stepper and clamping respect this.           |
+| `max`           | `number`                  | —       | Maximum allowed value. The stepper and clamping respect this.           |
+| `step`          | `number`                  | `1`     | Increment used by the stepper buttons.                                  |
+| `showStepper`   | `boolean`                 | `false` | Render `-`/`+` stepper buttons on the trailing edge.                    |
+| `value`         | `string`                  | —       | Controlled text value.                                                  |
+| `onChangeText`  | `(text: string) => void`  | —       | Fired with the raw text on every change.                                |
+| `onChangeValue` | `(value: number) => void` | —       | Fired with the parsed number; `NaN` when the field is empty or invalid. |
+
+Extends `InputProps` minus `keyboardType` and `trailing` (both managed internally). `size`, `leading`, `invalid`, and `disabled` all apply.
+
+## Accessibility
+
+The stepper buttons expose `accessibilityRole="button"` with `Increment`/`Decrement` labels. The underlying field inherits `Input`'s `FormField` wiring, so a `FormField` label and error are announced automatically.

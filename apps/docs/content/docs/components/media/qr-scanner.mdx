@@ -1,0 +1,32 @@
+---
+title: QRScanner
+description: Live camera view that detects QR codes and reports each scan through a strongly typed callback, built on expo-camera with a missing-peer fallback.
+---
+
+`QRScanner` opens a live camera preview tuned to detect QR codes. It is a gated optional peer built on `expo-camera`'s `CameraView`, routing the native barcode event into a typed `onScanned` callback. When `expo-camera` is not installed it renders a labelled `MissingPeer` notice. It defaults the symbologies to `['qr']`.
+
+**Required peer:** `expo-camera`. Install with `pnpm add expo-camera`.
+
+## Import
+
+```tsx
+import { QRScanner } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<QRScanner onScanned={(result) => console.log(result.type, result.data)} style={{ flex: 1 }} />
+```
+
+## Props
+
+| Prop        | Type                           | Default | Description                                          |
+| ----------- | ------------------------------ | ------- | ---------------------------------------------------- |
+| `onScanned` | `(result: ScanResult) => void` | —       | Called once per detected code with `{ type, data }`. |
+
+`barcodeTypes` is fixed to `['qr']` for this variant. Any additional props are forwarded to the underlying `CameraView`.
+
+## Accessibility
+
+The camera surface and its controls come from `expo-camera`. When the peer is missing, the rendered `MissingPeer` fallback uses `accessibilityRole="alert"` and names the required package and install command. Pair the scanner with on-screen instructions so non-visual users know how to aim the camera.

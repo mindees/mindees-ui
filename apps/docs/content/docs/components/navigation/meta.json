@@ -1,4 +1,15 @@
 {
   "title": "Navigation",
-  "pages": ["tabs", "pill-tab-bar", "top-bar", "breadcrumb", "pagination", "stepper"]
+  "pages": [
+    "tabs",
+    "pill-tab-bar",
+    "top-bar",
+    "breadcrumb",
+    "pagination",
+    "stepper",
+    "bottom-navigation",
+    "user-menu",
+    "settings-menu",
+    "global-search"
+  ]
 }

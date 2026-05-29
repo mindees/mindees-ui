@@ -1,0 +1,37 @@
+---
+title: BarcodeScanner
+description: Live camera scanner for common 1D and 2D symbologies, sharing the gated expo-camera implementation with QRScanner and reporting typed scan results.
+---
+
+`BarcodeScanner` opens a camera preview that detects a broad set of 1D and 2D symbologies (EAN, UPC, Code 128, Code 39, PDF417, Data Matrix, QR, and more). It shares the gated `expo-camera` implementation with `QRScanner` and reports each scan through a typed `onScanned` callback. When `expo-camera` is absent it renders a labelled `MissingPeer` notice.
+
+**Required peer:** `expo-camera`. Install with `pnpm add expo-camera`.
+
+## Import
+
+```tsx
+import { BarcodeScanner } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<BarcodeScanner
+  barcodeTypes={['ean13', 'code128']}
+  onScanned={(result) => addToCart(result.data)}
+  style={{ flex: 1 }}
+/>
+```
+
+## Props
+
+| Prop           | Type                           | Default            | Description                                             |
+| -------------- | ------------------------------ | ------------------ | ------------------------------------------------------- |
+| `onScanned`    | `(result: ScanResult) => void` | —                  | Called once per detected code with `{ type, data }`.    |
+| `barcodeTypes` | `string[]`                     | common symbologies | Symbologies to detect; defaults to the full common set. |
+
+Any additional props are forwarded to the underlying `CameraView`.
+
+## Accessibility
+
+The camera surface and its controls come from `expo-camera`. When the peer is missing, the rendered `MissingPeer` fallback uses `accessibilityRole="alert"` and names the required package and install command. Pair the scanner with on-screen instructions so non-visual users know how to aim the camera.

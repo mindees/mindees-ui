@@ -1,0 +1,40 @@
+---
+title: Dropdown Menu
+description: An anchored menu of actions opened by pressing a trigger element, with per-item icons, destructive styling, and disabled states.
+---
+
+`DropdownMenu` attaches a list of actionable items to a `trigger` element, opening an anchored `Popover` when the trigger is pressed. Each `MenuItem` supports an icon, a `destructive` tone, and a `disabled` state. Open state can be controlled or left internal. Selecting an item runs its handler and closes the menu.
+
+## Import
+
+```tsx
+import { DropdownMenu } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DropdownMenu
+  trigger={<Button>Options</Button>}
+  items={[
+    { label: 'Edit', onPress: edit },
+    { label: 'Duplicate', onPress: duplicate },
+    { label: 'Delete', onPress: remove, destructive: true },
+  ]}
+/>
+```
+
+## Props
+
+| Prop           | Type                      | Default    | Description                                                         |
+| -------------- | ------------------------- | ---------- | ------------------------------------------------------------------- |
+| `trigger`      | `React.ReactElement`      | —          | Element that opens the menu when pressed.                           |
+| `items`        | `readonly MenuItem[]`     | —          | Menu items (`label`, `onPress`, `icon`, `destructive`, `disabled`). |
+| `placement`    | `'top' \| 'bottom'`       | `'bottom'` | Side of the trigger the panel opens toward.                         |
+| `open`         | `boolean`                 | —          | Controlled open state. Omit for internal management.                |
+| `onOpenChange` | `(open: boolean) => void` | —          | Called when the open state changes.                                 |
+| `style`        | `StyleProp<ViewStyle>`    | —          | Style applied to the elevated menu panel.                           |
+
+## Accessibility
+
+The panel is rendered with `accessibilityRole="menu"` and each row uses `accessibilityRole="menuitem"`, reporting `accessibilityState.disabled` for disabled items. The trigger's existing `onPress` is preserved and composed with the open toggle, and each row meets a 44pt minimum tap target.

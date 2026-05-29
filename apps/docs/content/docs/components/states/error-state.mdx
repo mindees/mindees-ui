@@ -1,0 +1,36 @@
+---
+title: ErrorState
+description: A centered error screen with a danger-toned title and a built-in retry button via onRetry.
+---
+
+`ErrorState` is a centered layout for failures. Its title defaults to `Something went wrong` in the danger tone. Passing `onRetry` renders a danger-toned retry button automatically; supply your own `action` to override it entirely.
+
+## Import
+
+```tsx
+import { ErrorState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ErrorState description="We couldn't load your data." onRetry={refetch} retryLabel="Try again" />
+```
+
+## Props
+
+| Prop          | Type                   | Default                  | Description                                              |
+| ------------- | ---------------------- | ------------------------ | -------------------------------------------------------- |
+| `title`       | `string`               | `'Something went wrong'` | Heading copy.                                            |
+| `description` | `string`               | —                        | Supporting copy shown under the title.                   |
+| `onRetry`     | `() => void`           | —                        | Renders a default retry button when `action` is omitted. |
+| `retryLabel`  | `string`               | `'Try again'`            | Label for the default retry button.                      |
+| `icon`        | `ReactNode`            | —                        | Icon or illustration rendered above the title.           |
+| `action`      | `ReactNode`            | —                        | Custom action, overriding the `onRetry` button.          |
+| `style`       | `StyleProp<ViewStyle>` | —                        | Style applied to the container.                          |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the message reads as one status. The default retry button is a standard `Button` with its own accessibility; provide a clear `description` of what failed.

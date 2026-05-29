@@ -1,0 +1,40 @@
+---
+title: Banner
+description: A full-width inline status bar with a tone accent, optional icon, optional action, and an optional dismiss control.
+---
+
+`Banner` is a persistent, full-width status message that sits inline within a layout rather than floating. It carries a left accent border colored by `tone`, an optional leading `icon`, an optional trailing text `action`, and an optional dismiss control rendered when `onDismiss` is provided.
+
+## Import
+
+```tsx
+import { Banner } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Banner
+  tone="warning"
+  message="Your trial ends in 3 days."
+  action={{ label: 'Upgrade', onPress: openBilling }}
+  onDismiss={dismiss}
+/>
+```
+
+## Props
+
+| Prop        | Type                                           | Default  | Description                                                |
+| ----------- | ---------------------------------------------- | -------- | ---------------------------------------------------------- |
+| `message`   | `string`                                       | —        | Banner text content.                                       |
+| `tone`      | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Sets the accent border and subtle background color.        |
+| `icon`      | `React.ReactNode`                              | —        | Optional leading icon node before the message.             |
+| `action`    | `BannerAction`                                 | —        | Optional trailing text action (`{ label, onPress }`).      |
+| `onDismiss` | `() => void`                                   | —        | When set, shows a dismiss control that fires this handler. |
+| `style`     | `StyleProp<ViewStyle>`                         | —        | Style applied to the banner surface.                       |
+
+Inherits all `ViewProps` except `style`.
+
+## Accessibility
+
+The banner uses `accessibilityRole="alert"`; danger banners announce with an assertive live region, all others use polite. The action and dismiss controls are `Pressable`s with `accessibilityRole="button"` and 44pt tap targets, labeled by their text and a static "Dismiss" label respectively.

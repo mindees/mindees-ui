@@ -1,0 +1,41 @@
+---
+title: Toggle Button
+description: A two-state button that flips between solid selected and outline unselected, reporting its selected state to assistive tech.
+---
+
+`ToggleButton` is a `Button` that represents an on/off selection. When `selected` it renders solid in the accent `tone`; when unselected it renders as a neutral outline. It is controlled — pass `selected` and handle `onChange`, which receives the next state. It inherits all base `Button` props except `onPress` and `variant`.
+
+## Import
+
+```tsx
+import { ToggleButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [bold, setBold] = useState(false);
+
+return (
+  <ToggleButton selected={bold} onChange={setBold}>
+    Bold
+  </ToggleButton>
+);
+```
+
+## Props
+
+| Prop       | Type                                                           | Default     | Description                                       |
+| ---------- | -------------------------------------------------------------- | ----------- | ------------------------------------------------- |
+| `selected` | `boolean`                                                      | `false`     | Whether the button is currently selected.         |
+| `onChange` | `(selected: boolean) => void`                                  | —           | Called with the next selected state when toggled. |
+| `tone`     | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'primary'` | Accent tone applied while selected.               |
+| `size`     | `'sm' \| 'md' \| 'lg'`                                         | `'md'`      | Controls height, padding, and label type scale.   |
+| `disabled` | `boolean`                                                      | `false`     | Disables press handling and dims the button.      |
+| `children` | `React.ReactNode`                                              | —           | Label content.                                    |
+
+Inherits the remaining `ButtonBaseProps` except `onPress` and `variant`.
+
+## Accessibility
+
+`ToggleButton` sets `accessibilityRole="button"` and reports `accessibilityState={{ selected, disabled }}` so screen readers announce the current pressed state. The variant and tone switch on selection give a visible state change alongside the announced one.

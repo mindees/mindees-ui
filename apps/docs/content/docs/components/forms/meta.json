@@ -6,8 +6,25 @@
     "textarea",
     "password-input",
     "search-input",
+    "email-input",
+    "phone-input",
+    "number-input",
+    "currency-input",
+    "otp-input",
+    "pin-input",
     "checkbox",
     "radio",
-    "switch"
+    "switch",
+    "select",
+    "multi-select",
+    "autocomplete",
+    "tag-input",
+    "slider",
+    "range-slider",
+    "date-picker",
+    "date-range-picker",
+    "time-picker",
+    "file-picker",
+    "image-picker"
   ]
 }

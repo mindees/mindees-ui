@@ -1,0 +1,47 @@
+---
+title: Side Panel
+description: An edge-anchored sliding panel for detail and inspector views, with content-flexible layout and dismiss-on-backdrop.
+---
+
+`SidePanel` slides in from the left or right edge over a scrim. Like `Drawer` but content-flexible — it forces no inner padding, so callers can render full-bleed headers, scroll views, or split layouts. It defaults to the trailing edge, the common spot for detail and inspector panels, and slides with reduce-motion awareness.
+
+## Import
+
+```tsx
+import { SidePanel } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <SidePanel
+    visible={visible}
+    onClose={() => setVisible(false)}
+    side="right"
+    width="82%"
+    accessibilityLabel="Item details"
+  >
+    {/* full-bleed header, scroll view, etc. */}
+  </SidePanel>
+);
+```
+
+## Props
+
+| Prop                 | Type                         | Default   | Description                                             |
+| -------------------- | ---------------------------- | --------- | ------------------------------------------------------- |
+| `visible`            | `boolean`                    | —         | Controls whether the panel is shown.                    |
+| `onClose`            | `() => void`                 | —         | Called on backdrop press (when `dismissible`) and back. |
+| `side`               | `'left' \| 'right'`          | `'right'` | Edge the panel anchors to.                              |
+| `width`              | `` number \| `${number}%` `` | `'82%'`   | Panel width in dp or as a percentage of the screen.     |
+| `dismissible`        | `boolean`                    | `true`    | When `false`, backdrop taps are ignored.                |
+| `accessibilityLabel` | `string`                     | —         | Label announced when the panel opens.                   |
+| `style`              | `StyleProp<ViewStyle>`       | —         | Style for the elevated panel (not the scrim).           |
+| `children`           | `React.ReactNode`            | —         | Panel contents.                                         |
+
+## Accessibility
+
+Built on React Native's `Modal`, so the platform handles the Android back button via `onRequestClose`. The inner surface is marked `accessibilityViewIsModal` so assistive tech treats it as a contained context, and presses inside it do not bubble to the dismissing backdrop. Provide `accessibilityLabel` to describe the panel. The slide animation is skipped under reduce motion.

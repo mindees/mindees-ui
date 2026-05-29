@@ -1,78 +1,72 @@
 # MindeesUI
 
-> Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. Components introspect their children and auto-adjust spacing, sizing, alignment, accessibility roles, and styling — every rule documented and overridable. New Architecture only (Fabric + JSI + TurboModules + Bridgeless). iOS, Android, React Native Web. TypeScript strict, WCAG 2.2 AA, Reanimated v4 UI-thread animations, Unistyles v3 zero-re-render theming.
+> A React Native + Expo UI library whose components read your JSX structure and apply smart, predictable layout defaults — the deterministic Layout Intelligence Layer. ~145 accessible components, 74 ready-made screen blocks (@mindees/blocks), and one-line brand theming. New Architecture only (Fabric + JSI + TurboModules + Bridgeless). iOS, Android, React Native Web. TypeScript strict, WCAG-conscious, Reanimated v4 UI-thread animations, Unistyles v3 (Nitro) theming. Tuned for low-end Android. Positioning: "components that understand layout context" — write less layout code, ship beautiful screens faster, override anything.
 
 ## Getting Started
 
-- [Documentation home](https://mindees.dev/docs)
-- [Installation](https://mindees.dev/docs/installation)
-- [Quickstart](https://mindees.dev/docs)
-- [Compatibility matrix](https://mindees.dev/docs/compatibility)
+- [Documentation home](https://mindees-ui.vercel.app/docs)
+- [Installation](https://mindees-ui.vercel.app/docs/installation)
+- [Compatibility matrix](https://mindees-ui.vercel.app/docs/compatibility)
+- [Comparison: MindeesUI vs Tamagui vs Gluestack](https://mindees-ui.vercel.app/docs/comparison)
+- [Migrating from React Native primitives](https://mindees-ui.vercel.app/docs/migration)
 
-## Architecture
+## Architecture & Theming
 
-- [Layout Intelligence Layer](https://mindees.dev/docs/architecture)
-- [Slot / asChild pattern](https://mindees.dev/docs/architecture#slot--aschild)
-- [Tagged components + child introspection](https://mindees.dev/docs/architecture#tagged-components)
-- [Intrinsic sizing (fill / hug / fixed)](https://mindees.dev/docs/architecture#intrinsic-sizing)
-- [Auto-spacing rules](https://mindees.dev/docs/architecture#auto-spacing-rules)
-- [Specialised parent–child contexts](https://mindees.dev/docs/architecture#specialised-contexts)
+- [Layout Intelligence Layer](https://mindees-ui.vercel.app/docs/architecture)
+- [Theming: createThemes (one-line brand) + createTheme + ThemeProvider](https://mindees-ui.vercel.app/docs/theming)
+- [Providers](https://mindees-ui.vercel.app/docs/providers)
 
-## Theming
-
-- [createTheme + ThemeProvider](https://mindees.dev/docs/theming)
-- [Design tokens](https://mindees.dev/docs/tokens)
-- [Dark mode + high contrast](https://mindees.dev/docs/theming#dark-mode)
-
-## Components
+## Components (~145, package @mindees/ui)
 
 ### Layout & Typography
-- `Box`, `Stack`, `HStack`, `VStack`, `ZStack`, `Grid`, `Divider`, `Spacer`
-- `SafeAreaView`, `ScreenWrapper`
-- `Text`, `Heading`, `Caption`, `Label`, `Link`, `Code`, `Kbd`
+- `Box`, `Stack`, `HStack`, `VStack`, `ZStack`, `Grid`, `Divider`, `Spacer`, `SafeAreaView`, `ScreenWrapper`
+- `Text`, `Heading`, `Subheading`, `Paragraph`, `Caption`, `Label`, `HelperText`, `ErrorText`, `Link`, `Code`, `Kbd`, `QuoteBlock`, `Mark`, `TruncatedText`, `ReadMore`, `RichText`
 
 ### Forms & Inputs
-- `FormField`, `Input`, `Textarea`, `PasswordInput`, `SearchInput`
-- `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`
+- `FormField`, `Input`, `Textarea`, `PasswordInput`, `SearchInput`, `EmailInput`, `PhoneInput`, `NumberInput`, `CurrencyInput`, `OTPInput`, `PINInput`
+- `Select`, `MultiSelect`, `Autocomplete`, `TagInput`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`, `Slider`, `RangeSlider`
+- `DatePicker`, `DateRangePicker`, `TimePicker`, `FilePicker`, `ImagePicker`
 
-### Buttons & Overlays
-- `Button`, `IconButton`, `FAB`, `ButtonGroup`
-- `Modal`, `BottomSheet`, `Toast`, `Tooltip`, `Popover`, `Drawer`, `Alert`, `ActionSheet`
+### Buttons & Actions
+- `Button`, `IconButton`, `FAB`, `ButtonGroup`, `SplitButton`, `ToggleButton`, `CloseButton`, `CopyButton`, `ShareButton`, `DownloadButton`, `UploadButton`, `RetryButton`, `BackButton`
+
+### Overlays
+- `Modal`, `Dialog`, `ConfirmationDialog`, `BottomSheet`, `Drawer`, `SidePanel`, `Popover`, `Tooltip`, `HoverCard`, `Toast`, `Snackbar`, `Banner`, `Notification`, `Alert`, `ActionSheet`, `DropdownMenu`, `ContextMenu`, `MegaMenu`, `Lightbox`, `FullscreenOverlay`, `CommandPalette`
 
 ### Navigation
-- `Tabs` + `Tab` + `TabList` + `TabPanel`
-- `TopBar`, `Breadcrumb`, `Pagination`, `Stepper`
+- `Tabs`, `PillTabBar`, `BottomNavigation`, `TopBar`, `Breadcrumb`, `Pagination`, `Stepper`, `UserMenu`, `SettingsMenu`, `GlobalSearch`
 
 ### Display & Data
-- `Card`, `Avatar`, `AvatarGroup`, `Badge`, `Tag`, `Chip`
-- `Image`, `List`, `ListItem`, `Accordion`
-- `Progress`, `Skeleton`, `Spinner`, `Stat`, `Rating`, `Timeline`
+- `Card`, `Avatar`, `AvatarGroup`, `Badge`, `Tag`, `Chip`, `Pill`, `Image`, `List`, `ListItem`, `Accordion`, `Progress`, `Skeleton`, `Spinner`, `Stat`, `KPICard`, `Rating`, `Timeline`
+- `Table`, `DataGrid`, `Feed`, `ActivityLog`, `DetailView`, `KeyValueRow`, `DescriptionList`, `Carousel`, `ImageGallery`, `TreeView`, `Calendar`
 
-### Specialised (gated optional peers, graceful fallback)
-- `CodeBlock` (zero-deps), `ColorPicker` (zero-deps)
-- `QRCode` (requires `react-native-qrcode-svg`)
-- `Barcode` + `Camera` (requires `expo-camera`)
-- `MapView` (requires `react-native-maps`)
-- `SignaturePad` (requires `react-native-signature-canvas`)
-- `WebView` (requires `react-native-webview`)
+### States
+- `EmptyState`, `ErrorState`, `OfflineState`, `MaintenanceState`, `LoadingState`, `SuccessState`, `WarningState`, `InfoState`
 
-## Foundations & Helpers
+### Media (gated optional peers, graceful MissingPeer fallback)
+- `ResponsiveImage`, `ImagePreview`, `FilePreview`, `Logo` (zero-dep)
+- `VideoPlayer`, `AudioPlayer`, `PDFViewer`, `QRScanner`, `BarcodeScanner`, `LottieView`
+- `CodeBlock`, `ColorPicker`, `QRCode`, `Barcode`, `Camera`, `MapView`, `SignaturePad`, `WebView`
 
-- `Slot`, `tagComponent`, `describeChildren`, `flattenChildren`
-- `resolveSizeProps`, `resolveGapRule`, `resolveGapToken`
-- `ThemeProvider`, `useTheme`, `useTokens`, `useReduceMotion`
-- `PortalProvider`, `Portal`, `ErrorBoundary`
-- `configureUnistyles`, `createStyles`, `resolveResponsive`, `useResponsive`
-- `useUniqueId`, `useFormFieldA11y`, `useAnnouncer`
+### Mobile gestures
+- `SwipeActions`, `SwipeableCard`, `PullToRefresh`, `InfiniteScroll`
+
+## Blocks (74, package @mindees/blocks)
+
+Pre-built screen compositions; pure UI, props-driven, restyle with tokens.
+- Auth: `LoginForm`, `SignupForm`, `ForgotPasswordForm`, `ResetPasswordForm`, `OTPVerification`, `SocialLoginButtons`, `LogoutConfirmation`, `SessionExpiredModal`
+- Commerce: `ProductCard`, `ProductGrid`, `ProductDetails`, `PriceDisplay`, `CartItem`, `CartSummary`, `CheckoutForm`, `AddressForm`, `OrderSummary`, `OrderStatus`, `CouponInput`, `ReviewsList`, `AddToCartButton`, `DiscountBadge`
+- Account: `ProfileCard`, `ProfileEditor`, `AvatarUploader`, `AccountSettings`, `PrivacySettings`, `SecuritySettings`, `PasswordChangeForm`, `SubscriptionCard`, `BillingDetails`, `PaymentMethods`, `InvoiceList`, `DeleteAccountFlow`
+- Social: `ChatList`, `ChatBubble`, `MessageComposer`, `VoiceMessage`, `TypingIndicator`, `ReadReceipt`, `NotificationItem`, `CommentBox`, `CommentsList`, `LikeButton`, `ReactionButton`, `FollowButton`, `ReportContentModal`
+- Dashboard/Admin: `AnalyticsCards`, `AuditLog`, `RoleSelector`, `PermissionMatrix`, `SystemStatusPanel`, `Filters`, `SortControl`, `BulkActions`, `UserManagementTable`, `AdminLayout`
+- Web: `CookieBanner`, `ResponsiveNavbar`, `WebFooter`, `PWAInstallPrompt`
+- Screens: `HomeScreen`, `DashboardScreen`, `DetailsScreen`, `SettingsScreen`, `ProfileScreen`, `NotificationsScreen`, `SearchResultsScreen`, `OnboardingScreen`, `WalkthroughScreens`, `HelpScreen`, `NotFoundScreen`, `UnauthorizedScreen`, `NoInternetScreen`, `PricingScreen`
 
 ## Project
 
 - [GitHub](https://github.com/mindees/mindees-ui)
 - [npm: @mindees/ui](https://www.npmjs.com/package/@mindees/ui)
+- [npm: @mindees/blocks](https://www.npmjs.com/package/@mindees/blocks)
 - [npm: @mindees/tokens](https://www.npmjs.com/package/@mindees/tokens)
 - [npm: @mindees/icons](https://www.npmjs.com/package/@mindees/icons)
 - [License: MIT](https://github.com/mindees/mindees-ui/blob/main/LICENSE)
-- [Roadmap](https://github.com/mindees/mindees-ui/blob/main/docs/ROADMAP.md)
-- [Contributing](https://github.com/mindees/mindees-ui/blob/main/docs/CONTRIBUTING.md)
-- [Architecture deep-dive](https://github.com/mindees/mindees-ui/blob/main/docs/ARCHITECTURE.md)
-- [Performance budgets](https://github.com/mindees/mindees-ui/blob/main/docs/PERFORMANCE.md)

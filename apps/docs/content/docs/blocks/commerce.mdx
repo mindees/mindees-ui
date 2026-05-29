@@ -1,0 +1,222 @@
+---
+title: Commerce blocks
+description: Fourteen accessible commerce blocks for product display, cart, and checkout — cards, grids, pricing, reviews, summaries, and forms. Pure UI, props-driven, no network.
+---
+
+Storefront and checkout building blocks composed from MindeesUI primitives. Blocks never fetch or mutate — map your domain models onto the shared UI shapes (`Product`, `Review`, `CartLineItem`, `SummaryLine`, `OrderLineItem`) and pass everything through props.
+
+## Import
+
+```tsx
+import {
+  ProductCard,
+  ProductGrid,
+  ProductDetails,
+  PriceDisplay,
+  DiscountBadge,
+  ReviewsList,
+  AddToCartButton,
+  CartItem,
+  CartSummary,
+  CheckoutForm,
+  AddressForm,
+  OrderSummary,
+  OrderStatus,
+  CouponInput,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<ProductGrid
+  products={products}
+  numColumns={2}
+  onPressProduct={(p) => navigate('product', { id: p.id })}
+  onAddToCart={(p) => addToCart(p)}
+/>
+```
+
+## Blocks
+
+### PriceDisplay
+
+Formatted price with optional struck-through compare-at value and a discount badge.
+
+| Prop           | Type                                         | Description                                                 |
+| -------------- | -------------------------------------------- | ----------------------------------------------------------- |
+| `price`        | `number`                                     | Current selling price.                                      |
+| `compareAt`    | `number`                                     | Original price; struck through when higher than `price`.    |
+| `currency`     | `string`                                     | ISO 4217 currency code. Defaults to `"USD"`.                |
+| `locale`       | `string`                                     | BCP-47 locale for formatting.                               |
+| `showDiscount` | `boolean`                                    | Show a discount percentage badge when a compare-at applies. |
+| `size`         | `'body' \| 'bodyLg' \| 'h5' \| 'h4' \| 'h3'` | Type scale for the current price. Defaults to `'h4'`.       |
+
+### DiscountBadge
+
+Small toned badge driven by `percent` or an explicit `label`.
+
+| Prop      | Type                                              | Description                                        |
+| --------- | ------------------------------------------------- | -------------------------------------------------- |
+| `percent` | `number`                                          | Renders `-N%`. Ignored when `label` is set.        |
+| `label`   | `string`                                          | Explicit label (e.g. `"SALE"`). Overrides percent. |
+| `tone`    | `'danger' \| 'success' \| 'warning' \| 'primary'` | Badge tone. Defaults to `'danger'`.                |
+
+### AddToCartButton
+
+Add-to-cart action with an optional inline quantity stepper and in-cart state.
+
+| Prop              | Type                         | Description                                   |
+| ----------------- | ---------------------------- | --------------------------------------------- |
+| `onAdd`           | `(quantity: number) => void` | Called with the chosen quantity when added.   |
+| `loading`         | `boolean`                    | Shows a spinner and disables interaction.     |
+| `inCart`          | `boolean`                    | Renders the "in cart" affordance.             |
+| `showQuantity`    | `boolean`                    | Show a quantity stepper beside the button.    |
+| `initialQuantity` | `number`                     | Initial quantity. Defaults to `1`.            |
+| `maxQuantity`     | `number`                     | Maximum quantity. Defaults to `99`.           |
+| `label`           | `string`                     | Button label. Defaults to `"Add to cart"`.    |
+| `fullWidth`       | `boolean`                    | Fill the container width. Defaults to `true`. |
+
+### ProductCard
+
+Single product surface with image, price, and an optional add-to-cart button.
+
+| Prop            | Type                         | Description                                    |
+| --------------- | ---------------------------- | ---------------------------------------------- |
+| `product`       | `Product`                    | Product to render.                             |
+| `onAddToCart`   | `(product: Product) => void` | Called when the add-to-cart button is pressed. |
+| `onPress`       | `(product: Product) => void` | Called when the card body is pressed.          |
+| `hideAddToCart` | `boolean`                    | Hide the add-to-cart button.                   |
+
+### ProductGrid
+
+`FlatList`-backed grid of `ProductCard`s.
+
+| Prop                  | Type                              | Description                                  |
+| --------------------- | --------------------------------- | -------------------------------------------- |
+| `products`            | `readonly Product[]`              | Products to render.                          |
+| `numColumns`          | `number`                          | Number of columns. Defaults to `2`.          |
+| `onPressProduct`      | `(product: Product) => void`      | Called when a card is pressed.               |
+| `onAddToCart`         | `(product: Product) => void`      | Called when a card's add-to-cart is pressed. |
+| `hideAddToCart`       | `boolean`                         | Hide the add-to-cart button on every card.   |
+| `ListEmptyComponent`  | `FlatList['ListEmptyComponent']`  | Rendered when `products` is empty.           |
+| `ListHeaderComponent` | `FlatList['ListHeaderComponent']` | Header slot above the grid.                  |
+| `scrollEnabled`       | `boolean`                         | Disable internal scrolling when nested.      |
+
+### ProductDetails
+
+Full product view with image gallery, price, rating, and add-to-cart.
+
+| Prop           | Type                                           | Description                                        |
+| -------------- | ---------------------------------------------- | -------------------------------------------------- |
+| `product`      | `Product`                                      | Product to display; uses `images` for the gallery. |
+| `onAddToCart`  | `(product: Product, quantity: number) => void` | Called with the chosen quantity.                   |
+| `addingToCart` | `boolean`                                      | Loading state for the add-to-cart action.          |
+| `maxQuantity`  | `number`                                       | Maximum quantity. Defaults to `99`.                |
+
+### ReviewsList
+
+Vertical list of star ratings and review text.
+
+| Prop                 | Type                             | Description                             |
+| -------------------- | -------------------------------- | --------------------------------------- |
+| `reviews`            | `readonly Review[]`              | Reviews to render.                      |
+| `title`              | `string`                         | Optional heading above the list.        |
+| `ListEmptyComponent` | `FlatList['ListEmptyComponent']` | Rendered when `reviews` is empty.       |
+| `scrollEnabled`      | `boolean`                        | Disable internal scrolling when nested. |
+
+### CartItem
+
+Single cart row with a quantity stepper and remove control.
+
+| Prop          | Type                                     | Description                                |
+| ------------- | ---------------------------------------- | ------------------------------------------ |
+| `item`        | `CartLineItem`                           | Line item to render.                       |
+| `onChangeQty` | `(id: string, quantity: number) => void` | Called with the item id and new quantity.  |
+| `onRemove`    | `(id: string) => void`                   | Called when the remove control is pressed. |
+| `maxQuantity` | `number`                                 | Maximum quantity. Defaults to `99`.        |
+
+### CartSummary
+
+Subtotal/shipping/tax rows plus an emphasized total and a checkout button.
+
+| Prop            | Type                     | Description                                  |
+| --------------- | ------------------------ | -------------------------------------------- |
+| `lines`         | `readonly SummaryLine[]` | Summary rows (subtotal, shipping, tax, …).   |
+| `total`         | `number`                 | Final total, emphasized below a divider.     |
+| `totalLabel`    | `string`                 | Total row label. Defaults to `"Total"`.      |
+| `currency`      | `string`                 | ISO 4217 currency code. Defaults to `"USD"`. |
+| `locale`        | `string`                 | BCP-47 locale for formatting.                |
+| `onCheckout`    | `() => void`             | Checkout handler; omit to hide the button.   |
+| `checkoutLabel` | `string`                 | Checkout label. Defaults to `"Checkout"`.    |
+| `loading`       | `boolean`                | Loading state for the checkout button.       |
+| `disabled`      | `boolean`                | Disable the checkout button.                 |
+
+### CheckoutForm
+
+Contact + shipping form that emits a `CheckoutValues` object on submit.
+
+| Prop            | Type                                          | Description                                          |
+| --------------- | --------------------------------------------- | ---------------------------------------------------- |
+| `onSubmit`      | `(values: CheckoutValues) => void`            | Called with contact + shipping details.              |
+| `loading`       | `boolean`                                     | Disable inputs and show a spinner.                   |
+| `error`         | `string`                                      | Top-level error message.                             |
+| `errors`        | `{ email?: string; phone?: string }`          | Per-field validation errors for contact fields.      |
+| `addressErrors` | `Partial<Record<keyof AddressValue, string>>` | Validation errors for shipping address fields.       |
+| `submitLabel`   | `string`                                      | Place-order label. Defaults to `"Place order"`.      |
+| `footer`        | `ReactNode`                                   | Slot above the submit button, e.g. an order summary. |
+
+### AddressForm
+
+Controlled or self-managed address form with per-field errors.
+
+| Prop          | Type                                          | Description                                       |
+| ------------- | --------------------------------------------- | ------------------------------------------------- |
+| `value`       | `Partial<AddressValue>`                       | Controlled value; omit to self-manage state.      |
+| `onChange`    | `(value: AddressValue) => void`               | Called on every field change in controlled mode.  |
+| `onSubmit`    | `(value: AddressValue) => void`               | Called with the address when submitted.           |
+| `submitLabel` | `string`                                      | Submit label; omit `onSubmit` to hide the button. |
+| `loading`     | `boolean`                                     | Disable inputs and show a spinner.                |
+| `errors`      | `Partial<Record<keyof AddressValue, string>>` | Per-field validation errors.                      |
+
+### OrderSummary
+
+Read-only order line items with optional extra rows and an emphasized total.
+
+| Prop         | Type                       | Description                                  |
+| ------------ | -------------------------- | -------------------------------------------- |
+| `items`      | `readonly OrderLineItem[]` | Read-only order line items.                  |
+| `total`      | `number`                   | Order total, emphasized.                     |
+| `lines`      | `readonly SummaryLine[]`   | Optional extra rows (shipping, tax, …).      |
+| `title`      | `string`                   | Optional heading.                            |
+| `totalLabel` | `string`                   | Total row label. Defaults to `"Total"`.      |
+| `currency`   | `string`                   | ISO 4217 currency code. Defaults to `"USD"`. |
+| `locale`     | `string`                   | BCP-47 locale for formatting.                |
+
+### OrderStatus
+
+Fulfilment stepper driven by an `OrderStatusValue` with a status badge.
+
+| Prop          | Type                         | Description                                                           |
+| ------------- | ---------------------------- | --------------------------------------------------------------------- |
+| `status`      | `OrderStatusValue`           | Current status; drives the active step and badge tone.                |
+| `steps`       | `readonly StepperStep[]`     | Ordered steps. Defaults to placed → processing → shipped → delivered. |
+| `orientation` | `'horizontal' \| 'vertical'` | Stepper orientation. Defaults to `'horizontal'`.                      |
+| `hideBadge`   | `boolean`                    | Hide the status badge above the stepper.                              |
+
+### CouponInput
+
+Apply/remove coupon field with applied and error states.
+
+| Prop          | Type                     | Description                                             |
+| ------------- | ------------------------ | ------------------------------------------------------- |
+| `onApply`     | `(code: string) => void` | Called with the trimmed, upper-cased code on apply.     |
+| `onRemove`    | `() => void`             | Called when an applied coupon is removed; omit to hide. |
+| `applied`     | `string`                 | The currently applied coupon code.                      |
+| `error`       | `string`                 | Validation / redemption error message.                  |
+| `loading`     | `boolean`                | Loading state for the apply action.                     |
+| `placeholder` | `string`                 | Input placeholder. Defaults to `"Coupon code"`.         |
+| `applyLabel`  | `string`                 | Apply button label. Defaults to `"Apply"`.              |
+| `uppercase`   | `boolean`                | Force the input to upper case. Defaults to `true`.      |
+
+All blocks also accept a `style` prop spread onto the root container.

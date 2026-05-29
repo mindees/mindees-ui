@@ -1,0 +1,74 @@
+---
+title: Web blocks
+description: Four accessible web and PWA blocks — cookie consent banner, responsive collapsing navbar, multi-column footer, and an install prompt. Pure UI, props-driven.
+---
+
+Web-specific and responsive surfaces composed from MindeesUI primitives. Like every block they are pure UI — consent, navigation, and install actions flow through callbacks.
+
+## Import
+
+```tsx
+import { CookieBanner, ResponsiveNavbar, WebFooter, PWAInstallPrompt } from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<ResponsiveNavbar
+  logo={<Logo />}
+  links={[{ key: 'home', label: 'Home', onPress: goHome }]}
+  cta={{ label: 'Sign up', onPress: signUp }}
+  collapseBelow={768}
+/>
+```
+
+## Blocks
+
+### CookieBanner
+
+Consent notice with accept, decline, and manage actions.
+
+| Prop           | Type         | Description                                         |
+| -------------- | ------------ | --------------------------------------------------- |
+| `onAccept`     | `() => void` | Fired when the user accepts cookies.                |
+| `onDecline`    | `() => void` | Fired on decline; the button is hidden when absent. |
+| `onManage`     | `() => void` | Fired on manage; the button is hidden when absent.  |
+| `message`      | `string`     | Consent copy. Defaults to a generic notice.         |
+| `acceptLabel`  | `string`     | Accept label. Defaults to `"Accept all"`.           |
+| `declineLabel` | `string`     | Decline label. Defaults to `"Decline"`.             |
+| `manageLabel`  | `string`     | Manage label. Defaults to `"Manage"`.               |
+
+### ResponsiveNavbar
+
+Top navbar that collapses to a menu button below a breakpoint.
+
+| Prop            | Type                 | Description                                                        |
+| --------------- | -------------------- | ------------------------------------------------------------------ |
+| `links`         | `readonly NavLink[]` | Navigation links.                                                  |
+| `logo`          | `ReactNode`          | Logo slot rendered at the start.                                   |
+| `cta`           | `NavCta`             | Optional trailing call-to-action.                                  |
+| `collapseBelow` | `number`             | Width (px) at/below which the navbar collapses. Defaults to `768`. |
+
+### WebFooter
+
+Multi-column link footer with a copyright line.
+
+| Prop        | Type                     | Description                            |
+| ----------- | ------------------------ | -------------------------------------- |
+| `groups`    | `readonly FooterGroup[]` | Link groups rendered as columns.       |
+| `copyright` | `string`                 | Legal line rendered below the columns. |
+
+### PWAInstallPrompt
+
+App-install card with install and dismiss actions.
+
+| Prop           | Type         | Description                                          |
+| -------------- | ------------ | ---------------------------------------------------- |
+| `onInstall`    | `() => void` | Fired when the user taps install.                    |
+| `onDismiss`    | `() => void` | Fired on dismiss; the control is hidden when absent. |
+| `icon`         | `ReactNode`  | Optional leading icon / app glyph.                   |
+| `title`        | `string`     | Headline. Defaults to `"Install this app"`.          |
+| `description`  | `string`     | Supporting copy.                                     |
+| `installLabel` | `string`     | Install label. Defaults to `"Install"`.              |
+
+All blocks also accept a `style` prop spread onto the root container.

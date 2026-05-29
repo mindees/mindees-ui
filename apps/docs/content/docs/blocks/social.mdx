@@ -1,0 +1,187 @@
+---
+title: Social blocks
+description: Thirteen accessible social blocks for chat, comments, and engagement — bubbles, composer, voice messages, reactions, follow and like buttons. Pure UI, no sockets.
+---
+
+Messaging and engagement blocks composed from MindeesUI primitives. Blocks never open sockets, fetch, or store — conversation data and interactions flow through props and callbacks.
+
+## Import
+
+```tsx
+import {
+  ChatList,
+  ChatBubble,
+  MessageComposer,
+  VoiceMessage,
+  TypingIndicator,
+  ReadReceipt,
+  NotificationItem,
+  CommentBox,
+  CommentsList,
+  LikeButton,
+  ReactionButton,
+  FollowButton,
+  ReportContentModal,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<>
+  <ChatBubble text="On my way" mine time="09:41" status="read" />
+  <ChatBubble text="See you soon!" time="09:42" />
+  <MessageComposer onSend={(text) => send(text)} onAttach={pickFile} />
+</>
+```
+
+## Blocks
+
+### ChatList
+
+`FlatList` of conversation rows (avatar, name, preview, unread badge).
+
+| Prop                  | Type                             | Description                               |
+| --------------------- | -------------------------------- | ----------------------------------------- |
+| `conversations`       | `readonly Conversation[]`        | Conversations to render.                  |
+| `onPressConversation` | `(id: string) => void`           | Called with the conversation id on press. |
+| `ListEmptyComponent`  | `FlatList['ListEmptyComponent']` | Rendered when empty.                      |
+| `scrollEnabled`       | `boolean`                        | Disable internal scrolling when nested.   |
+
+### ChatBubble
+
+A single message bubble, aligned by ownership with an optional delivery status.
+
+| Prop     | Type               | Description                                         |
+| -------- | ------------------ | --------------------------------------------------- |
+| `text`   | `string`           | Message body text.                                  |
+| `mine`   | `boolean`          | Aligns right with the accent surface (own message). |
+| `time`   | `string`           | Pre-formatted timestamp, e.g. `"09:41"`.            |
+| `status` | `ChatBubbleStatus` | Delivery status; only meaningful for own messages.  |
+
+### MessageComposer
+
+Text input row with send and an optional attach button.
+
+| Prop          | Type                     | Description                                               |
+| ------------- | ------------------------ | --------------------------------------------------------- |
+| `onSend`      | `(text: string) => void` | Called with the trimmed text on send.                     |
+| `onAttach`    | `() => void`             | Shows an attach button when provided.                     |
+| `placeholder` | `string`                 | Input placeholder. Defaults to `"Message"`.               |
+| `disabled`    | `boolean`                | Disable the whole composer.                               |
+| `sendLabel`   | `string`                 | Send button a11y label. Defaults to `"Send message"`.     |
+| `attachLabel` | `string`                 | Attach button a11y label. Defaults to `"Add attachment"`. |
+
+### VoiceMessage
+
+Voice-note player with play/pause and a progress bar.
+
+| Prop           | Type         | Description                                  |
+| -------------- | ------------ | -------------------------------------------- |
+| `duration`     | `string`     | Pre-formatted total duration, e.g. `"0:42"`. |
+| `playing`      | `boolean`    | Whether playback is active.                  |
+| `onTogglePlay` | `() => void` | Called when play/pause is pressed.           |
+| `progress`     | `number`     | Playback progress 0–1; omit for an idle bar. |
+| `disabled`     | `boolean`    | Disable the control.                         |
+
+### TypingIndicator
+
+Animated dots with an optional `"{name} is typing…"` label.
+
+| Prop   | Type     | Description                                                  |
+| ------ | -------- | ------------------------------------------------------------ |
+| `name` | `string` | Name shown as `"{name} is typing…"`; dots only when omitted. |
+
+### ReadReceipt
+
+Compact delivery-state glyph for a message.
+
+| Prop     | Type                | Description             |
+| -------- | ------------------- | ----------------------- |
+| `status` | `ReadReceiptStatus` | Current delivery state. |
+
+### NotificationItem
+
+Single notification row with icon, text, and timestamp.
+
+| Prop           | Type                   | Description                               |
+| -------------- | ---------------------- | ----------------------------------------- |
+| `notification` | `NotificationData`     | Notification to render.                   |
+| `onPress`      | `(id: string) => void` | Called with the notification id on press. |
+
+### CommentBox
+
+Composer for posting a comment with an avatar.
+
+| Prop          | Type                     | Description                                        |
+| ------------- | ------------------------ | -------------------------------------------------- |
+| `onPost`      | `(text: string) => void` | Called with the trimmed comment text.              |
+| `avatarUri`   | `string`                 | Avatar of the commenting user.                     |
+| `name`        | `string`                 | Display name for fallback initials.                |
+| `placeholder` | `string`                 | Input placeholder. Defaults to `"Add a comment…"`. |
+| `disabled`    | `boolean`                | Disable the whole box.                             |
+| `postLabel`   | `string`                 | Post button label. Defaults to `"Post"`.           |
+
+### CommentsList
+
+`FlatList` of comments with a per-comment like toggle.
+
+| Prop                 | Type                                  | Description                              |
+| -------------------- | ------------------------------------- | ---------------------------------------- |
+| `comments`           | `readonly Comment[]`                  | Comments to render.                      |
+| `onLike`             | `(id: string, next: boolean) => void` | Called when a comment's like is toggled. |
+| `ListEmptyComponent` | `FlatList['ListEmptyComponent']`      | Rendered when empty.                     |
+| `scrollEnabled`      | `boolean`                             | Disable internal scrolling when nested.  |
+
+### LikeButton
+
+Toggleable like with an optional count.
+
+| Prop       | Type                      | Description                              |
+| ---------- | ------------------------- | ---------------------------------------- |
+| `liked`    | `boolean`                 | Whether the viewer has liked.            |
+| `count`    | `number`                  | Total like count; hidden when undefined. |
+| `onToggle` | `(next: boolean) => void` | Called with the next liked state.        |
+| `disabled` | `boolean`                 | Disable interaction.                     |
+
+### ReactionButton
+
+Trigger that opens a reaction picker and reflects the selected reaction.
+
+| Prop           | Type                        | Description                                            |
+| -------------- | --------------------------- | ------------------------------------------------------ |
+| `reactions`    | `readonly ReactionOption[]` | Available reactions to choose from.                    |
+| `value`        | `string`                    | Currently selected reaction key.                       |
+| `onReact`      | `(key: string) => void`     | Called with the chosen reaction key.                   |
+| `triggerLabel` | `string`                    | Label when nothing is selected. Defaults to `"React"`. |
+| `disabled`     | `boolean`                   | Disable interaction.                                   |
+
+### FollowButton
+
+Follow/following toggle with a loading state.
+
+| Prop             | Type                      | Description                                       |
+| ---------------- | ------------------------- | ------------------------------------------------- |
+| `following`      | `boolean`                 | Whether the viewer currently follows.             |
+| `onToggle`       | `(next: boolean) => void` | Called with the next following state.             |
+| `loading`        | `boolean`                 | Shows a spinner while a request is in flight.     |
+| `disabled`       | `boolean`                 | Disable interaction.                              |
+| `followLabel`    | `string`                  | Label when not following. Defaults to `"Follow"`. |
+| `followingLabel` | `string`                  | Label when following. Defaults to `"Following"`.  |
+
+### ReportContentModal
+
+Dialog for choosing a report reason and submitting.
+
+| Prop          | Type                      | Description                                   |
+| ------------- | ------------------------- | --------------------------------------------- |
+| `visible`     | `boolean`                 | Controls visibility.                          |
+| `reasons`     | `readonly ReportReason[]` | Available reasons to choose from.             |
+| `onSubmit`    | `(key: string) => void`   | Called with the selected reason key.          |
+| `onClose`     | `() => void`              | Called on dismiss without submitting.         |
+| `title`       | `string`                  | Dialog title. Defaults to `"Report content"`. |
+| `description` | `string`                  | Supporting line under the title.              |
+| `submitLabel` | `string`                  | Submit label. Defaults to `"Submit report"`.  |
+| `cancelLabel` | `string`                  | Cancel label. Defaults to `"Cancel"`.         |
+
+All blocks also accept a `style` prop spread onto the root container.

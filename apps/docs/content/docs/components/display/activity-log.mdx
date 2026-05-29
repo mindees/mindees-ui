@@ -1,0 +1,37 @@
+---
+title: ActivityLog
+description: A compact timeline of events with a fixed time column, optional leading icon, and text per row.
+---
+
+`ActivityLog` lists events in a dense two-column layout: a fixed-width time label on the left and the event text on the right, with an optional leading icon. It suits audit trails, history panels, and recent-activity sections.
+
+## Import
+
+```tsx
+import { ActivityLog } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ActivityLog
+  items={[
+    { time: '09:41', text: 'Signed in' },
+    { time: '09:43', text: 'Updated profile photo' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop        | Type                          | Default | Description                                 |
+| ----------- | ----------------------------- | ------- | ------------------------------------------- |
+| `items`     | `readonly ActivityLogEvent[]` | —       | Events to render (`{ time, text, icon? }`). |
+| `timeWidth` | `number`                      | `64`    | Fixed width of the left time column in px.  |
+| `style`     | `StyleProp<ViewStyle>`        | —       | Style applied to the container.             |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="list"`; each row is marked `none` so the time and text read together. Keep `time` labels short and human-readable since they are announced before the event text.

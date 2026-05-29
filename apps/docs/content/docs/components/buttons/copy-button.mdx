@@ -1,0 +1,42 @@
+---
+title: Copy Button
+description: A button that writes a value to the clipboard and briefly shows a Copied confirmation with a check icon before reverting.
+---
+
+`CopyButton` writes its `value` to the clipboard on press, then briefly swaps the label to "Copied" with a leading check icon before reverting after `copiedDuration`. The clipboard call is guarded so it degrades safely where the API is unavailable. It inherits the base `Button` props except `children` and `onPress`.
+
+## Import
+
+```tsx
+import { CopyButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<CopyButton value="npm i @mindees/ui" />
+```
+
+With a custom confirmation label and callback:
+
+```tsx
+<CopyButton value={token} copiedLabel="Saved" onCopied={track}>
+  Copy token
+</CopyButton>
+```
+
+## Props
+
+| Prop             | Type              | Default    | Description                                         |
+| ---------------- | ----------------- | ---------- | --------------------------------------------------- |
+| `value`          | `string`          | —          | Text written to the clipboard when pressed.         |
+| `children`       | `React.ReactNode` | `'Copy'`   | Label shown in the idle state.                      |
+| `copiedLabel`    | `string`          | `'Copied'` | Label shown briefly after a successful copy.        |
+| `copiedDuration` | `number`          | `1500`     | How long the copied state stays visible, in ms.     |
+| `onCopied`       | `() => void`      | —          | Called after the value is written to the clipboard. |
+
+Inherits the remaining `ButtonBaseProps` (`variant`, `tone`, `size`, etc.) except `children` and `onPress`.
+
+## Accessibility
+
+`CopyButton` is a standard `Button`, so it keeps `accessibilityRole="button"` and tap-target sizing. The label text changes to the confirmation copy on success, giving a visible and screen-reader-announced acknowledgment of the action.

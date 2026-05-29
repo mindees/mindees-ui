@@ -1,0 +1,48 @@
+---
+title: Mega Menu
+description: A wide multi-column dropdown for web-oriented navigation, laying out titled sections as a wrapping row of menu columns.
+---
+
+`MegaMenu` is a wide, multi-column dropdown menu for web-oriented navigation. It composes `Popover` for positioning and the elevated surface, then lays the `sections` out as a wrapping row of titled columns. Each section holds its own items, and selecting one runs its handler and closes the menu.
+
+## Import
+
+```tsx
+import { MegaMenu } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<MegaMenu
+  trigger={<Button variant="ghost">Products</Button>}
+  sections={[
+    {
+      title: 'Build',
+      items: [
+        { label: 'Editor', onPress: goEditor },
+        { label: 'Templates', onPress: goTemplates },
+      ],
+    },
+    {
+      title: 'Learn',
+      items: [{ label: 'Docs', onPress: goDocs }],
+    },
+  ]}
+/>
+```
+
+## Props
+
+| Prop           | Type                         | Default    | Description                                          |
+| -------------- | ---------------------------- | ---------- | ---------------------------------------------------- |
+| `trigger`      | `React.ReactElement`         | —          | Element that opens the menu when pressed.            |
+| `sections`     | `readonly MegaMenuSection[]` | —          | Titled columns, each with a `title` and `items`.     |
+| `placement`    | `'top' \| 'bottom'`          | `'bottom'` | Side of the trigger the panel opens toward.          |
+| `open`         | `boolean`                    | —          | Controlled open state. Omit for internal management. |
+| `onOpenChange` | `(open: boolean) => void`    | —          | Called when the open state changes.                  |
+| `style`        | `StyleProp<ViewStyle>`       | —          | Style applied to the elevated menu panel.            |
+
+## Accessibility
+
+Each column is rendered with `accessibilityRole="menu"` and its items use `accessibilityRole="menuitem"`, reporting `accessibilityState.disabled` for disabled entries. Section titles are rendered with a muted `Label`. The trigger's existing `onPress` is preserved and composed with the open toggle.

@@ -1,0 +1,43 @@
+---
+title: MindeesUI vs Tamagui vs Gluestack
+description: An honest comparison of MindeesUI, Tamagui, and Gluestack for React Native and Expo. Where each shines, and why MindeesUI's deterministic Layout Intelligence Layer is different.
+---
+
+There are several excellent React Native UI libraries. They solve different problems — pick the one whose core idea matches yours.
+
+## The one-line difference
+
+- **Tamagui** is excellent for **compiler-driven styling** — it flattens and optimizes styles at build time for near-native performance.
+- **Gluestack** is great for **accessible, unstyled primitives** you compose and theme yourself.
+- **MindeesUI** focuses on **deterministic layout intelligence**: components derive spacing, sizing, and alignment defaults from your JSX structure, so you write less layout code and screens stay visually consistent. Every rule is documented and overridable.
+
+We respect both projects. This page exists to help you choose, not to sell against them.
+
+## At a glance
+
+|                                       | MindeesUI                                      | Tamagui                         | Gluestack                      |
+| ------------------------------------- | ---------------------------------------------- | ------------------------------- | ------------------------------ |
+| Core idea                             | Layout intelligence (structure-aware defaults) | Compile-time style optimization | Unstyled accessible primitives |
+| Styling engine                        | Unistyles v3 (Nitro)                           | Custom compiler                 | Tailwind-style / NativeWind    |
+| Auto-spacing from JSX                 | ✅ deterministic, documented                   | —                               | —                              |
+| Ready-made screen blocks              | ✅ `@mindees/blocks` (74)                      | —                               | partial                        |
+| One-line brand theming                | ✅ `createThemes({ brand })`                   | ✅ tokens/themes                | ✅ tokens                      |
+| New Architecture only                 | ✅                                             | ✅                              | ✅                             |
+| iOS · Android · Web                   | ✅                                             | ✅                              | ✅                             |
+| Design tokens as a standalone package | ✅ `@mindees/tokens`                           | partial                         | partial                        |
+
+## When to pick MindeesUI
+
+- You want to **stop hand-tuning spacing and alignment** on every screen.
+- You want a **large, batteries-included** component set (~145) plus **ready-made screen blocks**.
+- You want to **rebrand the whole app from one color** and have hover/active/on-accent derived for you.
+- You're on the **New Architecture** (Fabric/JSI) targeting iOS, Android, and web from one codebase.
+
+## When another library fits better
+
+- You need a **style compiler** squeezing out every last millisecond of style resolution → Tamagui.
+- You want **fully unstyled primitives** and will build your own visual language on top → Gluestack.
+
+## Honest caveats
+
+MindeesUI is young — it does not yet have Tamagui's compiler maturity or Gluestack's ecosystem size. What it offers today is the layout-intelligence idea, a broad accessible component set, ready-made blocks, and one-line theming, all New-Architecture-first. See the [Architecture](/docs/architecture) page for exactly how the Layout Intelligence Layer works.

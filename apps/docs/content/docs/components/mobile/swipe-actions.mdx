@@ -1,0 +1,41 @@
+---
+title: SwipeActions
+description: Wraps a row so horizontal drags reveal tinted action buttons anchored at either edge, snapping open or shut past a halfway threshold.
+---
+
+`SwipeActions` lets a row reveal contextual buttons when dragged horizontally. Swiping right exposes `leftActions`; swiping left exposes `rightActions`. The row settles open if dragged past half the panel width, otherwise it snaps shut, and tapping an action runs it and closes the panel.
+
+## Import
+
+```tsx
+import { SwipeActions } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<SwipeActions
+  rightActions={[
+    { label: 'Archive', onPress: archive, tone: 'primary' },
+    { label: 'Delete', onPress: remove, tone: 'danger' },
+  ]}
+>
+  <ListRow title="Inbox item" />
+</SwipeActions>
+```
+
+## Props
+
+| Prop           | Type                   | Default | Description                                                   |
+| -------------- | ---------------------- | ------- | ------------------------------------------------------------- |
+| `leftActions`  | `SwipeAction[]`        | —       | Actions revealed by swiping right, anchored at the left edge. |
+| `rightActions` | `SwipeAction[]`        | —       | Actions revealed by swiping left, anchored at the right edge. |
+| `actionWidth`  | `number`               | `80`    | Width in points of each action button.                        |
+| `children`     | `ReactNode`            | —       | The row surface that slides over the action panels.           |
+| `style`        | `StyleProp<ViewStyle>` | —       | Style applied to the moving row surface.                      |
+
+Each `SwipeAction` has a `label`, an `onPress` handler, and an optional `tone` of `'default'`, `'primary'`, or `'danger'`.
+
+## Accessibility
+
+The root container uses `accessibilityRole="none"`; each revealed action is a `button` labelled by its `label`. Danger and primary actions render onAccent text; default actions use the primary text color. Because the gesture is drag-based, provide an alternative path to the same actions for users who cannot swipe.

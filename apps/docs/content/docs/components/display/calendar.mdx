@@ -1,0 +1,33 @@
+---
+title: Calendar
+description: A dependency-free month calendar with prev/next navigation and a selectable, highlighted day.
+---
+
+`Calendar` renders a single month grid with weekday headers and previous/next navigation. It is pure JS — no date library — and tracks the visible month independently of the selected day. Tapping a day fires `onChange` with a `Date`. It also powers [`DatePicker`](/docs/components/forms/date-picker) and [`DateRangePicker`](/docs/components/forms/date-range-picker).
+
+## Import
+
+```tsx
+import { Calendar } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Calendar value={selected} onChange={setSelected} />
+```
+
+## Props
+
+| Prop           | Type                   | Default          | Description                              |
+| -------------- | ---------------------- | ---------------- | ---------------------------------------- |
+| `value`        | `Date`                 | —                | Currently-selected date (controlled).    |
+| `onChange`     | `(date: Date) => void` | —                | Fires when a day is tapped.              |
+| `defaultMonth` | `Date`                 | `value` or today | Month shown initially when uncontrolled. |
+| `style`        | `StyleProp<ViewStyle>` | —                | Style applied to the container.          |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The month/year heading uses `accessibilityRole="header"`, and the prev/next controls are labelled `Previous month` / `Next month`. Each day is a `button` exposing a `selected` state with a full date label such as `March 14, 2026`.

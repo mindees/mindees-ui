@@ -1,0 +1,34 @@
+---
+title: Pill
+description: A small rounded status label in six semantic tones, optionally with a leading node and tap handler.
+---
+
+`Pill` is a compact, fully rounded label for statuses and counts. It comes in six tones — neutral, primary, success, warning, danger, and info — each pairing a subtle background with a matching foreground. Add a `leading` node for a dot or icon, and `onPress` to make it interactive.
+
+## Import
+
+```tsx
+import { Pill } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Pill tone="success">Active</Pill>
+```
+
+## Props
+
+| Prop       | Type                                                                     | Default     | Description                                  |
+| ---------- | ------------------------------------------------------------------------ | ----------- | -------------------------------------------- |
+| `tone`     | `'neutral' \| 'primary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'neutral'` | Colour treatment of the pill.                |
+| `leading`  | `ReactNode`                                                              | —           | Optional leading node (a small icon or dot). |
+| `onPress`  | `() => void`                                                             | —           | Tap handler; renders the pill as a button.   |
+| `children` | `ReactNode`                                                              | —           | Pill label content.                          |
+| `style`    | `StyleProp<ViewStyle>`                                                   | —           | Style overrides for the pill.                |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+A pill with `onPress` renders as a `button`; a static pill uses `accessibilityRole="text"`. Tone is conveyed by colour, so keep the label text meaningful on its own (for example `Active`, not just a coloured dot).

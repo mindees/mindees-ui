@@ -1,9 +1,9 @@
 ---
 title: Components overview
-description: ~60 accessible React Native components for the New Architecture, grouped by purpose. Layout, typography, forms, buttons, overlays, navigation, display, and specialised.
+description: ~145 accessible React Native components for the New Architecture, grouped by purpose — layout, typography, forms, buttons, overlays, navigation, display, states, media, and mobile.
 ---
 
-MindeesUI ships ~60 components across 8 categories. Every component is type-safe, accessible by default, and composable through the [Layout Intelligence Layer](/docs/architecture).
+MindeesUI ships ~145 components across 12 categories. Every component is type-safe, accessible by default, forwards `style`/native props/`ref`, and composes through the [Layout Intelligence Layer](/docs/architecture). Need whole screens? See the [`@mindees/blocks`](/docs/blocks) package and the [icon set](/docs/icons).
 
 ## Layout
 
@@ -24,11 +24,20 @@ Text primitives with semantic role and consistent rhythm.
 
 - [Text](/docs/components/typography/text) — body and inline text
 - [Heading](/docs/components/typography/heading) — h1–h6 with semantic levels
+- [Subheading](/docs/components/typography/subheading) — secondary heading
+- [Paragraph](/docs/components/typography/paragraph) — block body copy
 - [Caption](/docs/components/typography/caption) — small descriptive text
 - [Label](/docs/components/typography/label) — form labels and tags
+- [HelperText](/docs/components/typography/helper-text) — field hint text
+- [ErrorText](/docs/components/typography/error-text) — field error text (alert role)
 - [Link](/docs/components/typography/link) — accessible navigation links
 - [Code](/docs/components/typography/code) — inline monospace text
 - [Kbd](/docs/components/typography/kbd) — keyboard shortcut rendering
+- [QuoteBlock](/docs/components/typography/quote-block) — blockquote
+- [Mark](/docs/components/typography/mark) — highlighted inline text
+- [TruncatedText](/docs/components/typography/truncated-text) — line-clamped text
+- [ReadMore](/docs/components/typography/read-more) — expandable clamped text
+- [RichText](/docs/components/typography/rich-text) — styled segment renderer
 
 ## Forms
 
@@ -39,9 +48,26 @@ Form controls with built-in accessibility wiring via `useFormFieldA11y`.
 - [Textarea](/docs/components/forms/textarea) — multi-line text input
 - [PasswordInput](/docs/components/forms/password-input) — masked input with reveal toggle
 - [SearchInput](/docs/components/forms/search-input) — input with search affordances
+- [EmailInput](/docs/components/forms/email-input) — email keyboard and autofill hints
+- [PhoneInput](/docs/components/forms/phone-input) — phone keypad and autofill hints
+- [NumberInput](/docs/components/forms/number-input) — numeric input with stepper and clamping
+- [CurrencyInput](/docs/components/forms/currency-input) — localised currency formatting
+- [OTPInput](/docs/components/forms/otp-input) — segmented one-time-code field
+- [PINInput](/docs/components/forms/pin-input) — masked segmented PIN field
 - [Checkbox, CheckboxGroup](/docs/components/forms/checkbox) — boolean and multi-select
 - [Radio, RadioGroup](/docs/components/forms/radio) — single-select group
 - [Switch](/docs/components/forms/switch) — on/off toggle
+- [Select](/docs/components/forms/select) — single-choice dropdown
+- [MultiSelect](/docs/components/forms/multi-select) — multi-choice dropdown with chips
+- [Autocomplete](/docs/components/forms/autocomplete) — input with suggestion dropdown
+- [TagInput](/docs/components/forms/tag-input) — text-to-chips tag field
+- [Slider](/docs/components/forms/slider) — draggable single-value slider
+- [RangeSlider](/docs/components/forms/range-slider) — two-thumb range slider
+- [DatePicker](/docs/components/forms/date-picker) — single-date calendar picker
+- [DateRangePicker](/docs/components/forms/date-range-picker) — start/end date picker
+- [TimePicker](/docs/components/forms/time-picker) — hour/minute/period steppers
+- [FilePicker](/docs/components/forms/file-picker) — gated `expo-document-picker` button
+- [ImagePicker](/docs/components/forms/image-picker) — gated `expo-image-picker` button
 
 ## Buttons
 
@@ -51,19 +77,41 @@ Pressable affordances. Variant, size, and tone are tokenised.
 - [IconButton](/docs/components/buttons/icon-button) — icon-only button with accessible label
 - [FAB](/docs/components/buttons/fab) — floating action button
 - [ButtonGroup](/docs/components/buttons/button-group) — joined or spaced cluster
+- [SplitButton](/docs/components/buttons/split-button) — primary action + dropdown menu
+- [ToggleButton](/docs/components/buttons/toggle-button) — pressed/unpressed toggle
+- [CloseButton](/docs/components/buttons/close-button) — dismiss affordance
+- [CopyButton](/docs/components/buttons/copy-button) — copy-to-clipboard with feedback
+- [ShareButton](/docs/components/buttons/share-button) — native share trigger
+- [DownloadButton](/docs/components/buttons/download-button) — download action
+- [UploadButton](/docs/components/buttons/upload-button) — upload action
+- [RetryButton](/docs/components/buttons/retry-button) — retry action
+- [BackButton](/docs/components/buttons/back-button) — navigation back affordance
 
 ## Overlays
 
-Layers rendered above the page through the `PortalProvider`.
+Layers rendered above the page — most use React Native's native modal or inline positioning (no provider required).
 
 - [Modal](/docs/components/overlays/modal) — centered focus-trapped dialog
+- [Dialog](/docs/components/overlays/dialog) — titled dialog with footer actions
+- [ConfirmationDialog](/docs/components/overlays/confirmation-dialog) — confirm/cancel prompt
 - [BottomSheet](/docs/components/overlays/bottom-sheet) — sliding panel from below
 - [Drawer](/docs/components/overlays/drawer) — slide-in side panel
+- [SidePanel](/docs/components/overlays/side-panel) — edge-anchored panel
 - [Popover](/docs/components/overlays/popover) — anchored floating panel
 - [Tooltip](/docs/components/overlays/tooltip) — short hover/long-press hint
+- [HoverCard](/docs/components/overlays/hover-card) — rich hover/long-press card
 - [Toast](/docs/components/overlays/toast) — transient feedback message
+- [Snackbar](/docs/components/overlays/snackbar) — message with an action
+- [Banner](/docs/components/overlays/banner) — inline full-width message bar
+- [Notification](/docs/components/overlays/notification) — rich notification card
 - [Alert](/docs/components/overlays/alert) — inline messaging block
 - [ActionSheet](/docs/components/overlays/action-sheet) — bottom action menu
+- [DropdownMenu](/docs/components/overlays/dropdown-menu) — anchored menu
+- [ContextMenu](/docs/components/overlays/context-menu) — long-press menu
+- [MegaMenu](/docs/components/overlays/mega-menu) — multi-column menu panel
+- [Lightbox](/docs/components/overlays/lightbox) — fullscreen media viewer
+- [FullscreenOverlay](/docs/components/overlays/fullscreen-overlay) — full-screen layer
+- [CommandPalette](/docs/components/overlays/command-palette) — Cmd-K command search
 
 ## Navigation
 
@@ -71,10 +119,14 @@ Cross-screen and intra-screen navigation patterns.
 
 - [Tabs](/docs/components/navigation/tabs) — segmented page switcher
 - [PillTabBar](/docs/components/navigation/pill-tab-bar) — 2026-style pill tab bar (segmented / floating / dock / glass)
+- [BottomNavigation](/docs/components/navigation/bottom-navigation) — classic bottom tab bar
 - [TopBar](/docs/components/navigation/top-bar) — screen header with leading/trailing slots
 - [Breadcrumb](/docs/components/navigation/breadcrumb) — hierarchical path
 - [Pagination](/docs/components/navigation/pagination) — page selector
 - [Stepper](/docs/components/navigation/stepper) — multi-step flow indicator
+- [UserMenu](/docs/components/navigation/user-menu) — avatar account menu
+- [SettingsMenu](/docs/components/navigation/settings-menu) — grouped settings list
+- [GlobalSearch](/docs/components/navigation/global-search) — app-wide search overlay
 
 ## Display
 
@@ -93,6 +145,56 @@ Content presentation — cards, lists, indicators, media.
 - [Stat](/docs/components/display/stat) — labelled metric
 - [Rating](/docs/components/display/rating) — star rating
 - [Timeline](/docs/components/display/timeline) — chronological list
+- [Pill](/docs/components/display/pill) — small toned status label
+- [Table](/docs/components/display/table) — scrollable column/row table
+- [DataGrid](/docs/components/display/data-grid) — sortable, zebra-striped table
+- [KeyValueRow](/docs/components/display/key-value-row) — label/value row
+- [DescriptionList](/docs/components/display/description-list) — term/description list
+- [DetailView](/docs/components/display/detail-view) — record label/value list
+- [KPICard](/docs/components/display/kpi-card) — metric card with trend delta
+- [Feed](/docs/components/display/feed) — avatar/title/body activity feed
+- [ActivityLog](/docs/components/display/activity-log) — compact time-stamped log
+- [Calendar](/docs/components/display/calendar) — dependency-free month calendar
+- [Carousel](/docs/components/display/carousel) — paged horizontal scroller
+- [ImageGallery](/docs/components/display/image-gallery) — responsive image grid
+- [TreeView](/docs/components/display/tree-view) — nested expandable tree
+
+## States
+
+Full-screen status layouts — centered icon, title, description, and optional action.
+
+- [EmptyState](/docs/components/states/empty-state) — "no data" placeholder
+- [ErrorState](/docs/components/states/error-state) — error screen with retry
+- [OfflineState](/docs/components/states/offline-state) — "no internet" screen with retry
+- [MaintenanceState](/docs/components/states/maintenance-state) — "under maintenance" screen
+- [LoadingState](/docs/components/states/loading-state) — centered spinner with label
+- [SuccessState](/docs/components/states/success-state) — success confirmation screen
+- [WarningState](/docs/components/states/warning-state) — cautionary screen
+- [InfoState](/docs/components/states/info-state) — informational screen
+
+## Media
+
+Image, video, audio, document, and scanner components. Heavy ones are gated optional peers with a `MissingPeer` fallback.
+
+- [ResponsiveImage](/docs/components/media/responsive-image) — aspect-ratio-aware image
+- [ImagePreview](/docs/components/media/image-preview) — tappable image thumbnail
+- [FilePreview](/docs/components/media/file-preview) — file row with type icon
+- [Logo](/docs/components/media/logo) — brand logo slot
+- [VideoPlayer](/docs/components/media/video-player) — gated `expo-video` / `expo-av`
+- [AudioPlayer](/docs/components/media/audio-player) — gated `expo-av`
+- [PDFViewer](/docs/components/media/pdf-viewer) — gated `react-native-pdf`
+- [QRScanner](/docs/components/media/qr-scanner) — gated `expo-camera`
+- [BarcodeScanner](/docs/components/media/barcode-scanner) — gated `expo-camera`
+- [LottieView](/docs/components/media/lottie-view) — gated `lottie-react-native`
+
+## Mobile
+
+Touch-gesture components built on React Native's `PanResponder` (no extra gesture dependency).
+
+- [SwipeActions](/docs/components/mobile/swipe-actions) — swipe-to-reveal row actions
+- [SwipeableCard](/docs/components/mobile/swipeable-card) — swipe-to-dismiss card
+- [PullToRefresh](/docs/components/mobile/pull-to-refresh) — pull-to-refresh scroll view
+- [InfiniteScroll](/docs/components/mobile/infinite-scroll) — list with load-more on end
 
 ## Specialised
 

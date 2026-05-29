@@ -1,0 +1,33 @@
+---
+title: Helper Text
+description: Small muted supporting text for the line beneath a form field, defaulting to the caption scale with a muted tone.
+---
+
+`HelperText` is the small, muted supporting line that sits under a form field. It defaults to the `caption` scale step with the `muted` tone, so it reads as secondary guidance rather than a primary label. Override `tone` for emphasis when needed.
+
+## Import
+
+```tsx
+import { HelperText } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TextInput label="Password" />
+<HelperText>Use at least 8 characters.</HelperText>
+```
+
+## Props
+
+| Prop       | Type                     | Default   | Description                            |
+| ---------- | ------------------------ | --------- | -------------------------------------- |
+| `tone`     | `TextTone`               | `'muted'` | Color role applied to the helper text. |
+| `align`    | `TextStyle['textAlign']` | —         | Horizontal text alignment.             |
+| `children` | `React.ReactNode`        | —         | Helper text content.                   |
+
+Inherits all `TextProps` except `variant` (fixed at `caption`).
+
+## Accessibility
+
+`HelperText` renders a `Text` element and respects font scaling. For form fields, pair it with the input's accessible label so assistive tech associates the guidance with the field; for validation messages prefer `ErrorText`, which announces assertively.

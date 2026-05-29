@@ -1,0 +1,44 @@
+---
+title: Carousel
+description: A paged horizontal scroller with page-indicator dots, driven by data or by direct children.
+---
+
+`Carousel` is a paging horizontal `ScrollView` where each page snaps to the container width. Supply pages either as data (`items` plus `renderItem`) or as direct children. Page-indicator dots track the active page, and `onPageChange` fires as the active page changes.
+
+## Import
+
+```tsx
+import { Carousel } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Carousel items={slides} renderItem={(slide) => <Slide {...slide} />} onPageChange={setPage} />
+```
+
+With direct children:
+
+```tsx
+<Carousel>
+  <FirstPage />
+  <SecondPage />
+</Carousel>
+```
+
+## Props
+
+| Prop           | Type                                    | Default | Description                                 |
+| -------------- | --------------------------------------- | ------- | ------------------------------------------- |
+| `items`        | `readonly T[]`                          | —       | Data-driven pages; pair with `renderItem`.  |
+| `renderItem`   | `(item: T, index: number) => ReactNode` | —       | Renders one page per item.                  |
+| `children`     | `ReactNode`                             | —       | Child-driven pages; each child is one page. |
+| `showDots`     | `boolean`                               | `true`  | Show the page-indicator dots.               |
+| `onPageChange` | `(index: number) => void`               | —       | Called when the active page changes.        |
+| `style`        | `StyleProp<ViewStyle>`                  | —       | Style applied to the root container.        |
+
+Inherits the remaining `ViewProps` (except `style` and `children`).
+
+## Accessibility
+
+The dots row uses `accessibilityRole="adjustable"` and exposes the current page via `accessibilityValue` (1-based). The scroller and pages are marked `none`; label the page content itself for screen-reader clarity.

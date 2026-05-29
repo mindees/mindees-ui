@@ -1,0 +1,36 @@
+---
+title: PINInput
+description: A masked segmented code field for PINs, built on OTPInput with secure entry always on.
+---
+
+`PINInput` is [`OTPInput`](/docs/components/forms/otp-input) with `secureTextEntry` forced on and a default length of 4. Each entered digit renders as a dot, making it suited to short numeric secrets.
+
+## Import
+
+```tsx
+import { PINInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<PINInput length={4} value={pin} onChangeText={setPin} onComplete={unlock} />
+```
+
+## Props
+
+| Prop                 | Type                     | Default | Description                                |
+| -------------------- | ------------------------ | ------- | ------------------------------------------ |
+| `length`             | `number`                 | `4`     | Number of code boxes.                      |
+| `value`              | `string`                 | —       | Controlled value (the full PIN so far).    |
+| `onChangeText`       | `(code: string) => void` | —       | Called whenever the PIN changes.           |
+| `onComplete`         | `(code: string) => void` | —       | Called once when the PIN reaches `length`. |
+| `disabled`           | `boolean`                | `false` | Disable input and dim the boxes.           |
+| `autoFocus`          | `boolean`                | `false` | Focus the hidden input on mount.           |
+| `accessibilityLabel` | `string`                 | —       | Accessible label for the whole code field. |
+
+`PINInputProps` is `OTPInputProps` without `secureTextEntry` (it is always on).
+
+## Accessibility
+
+The field is a single focus target labelled `PIN code` by default. Entered digits are masked visually but remain in the input's value for autofill and validation.

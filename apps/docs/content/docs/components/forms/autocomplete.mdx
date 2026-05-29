@@ -1,0 +1,42 @@
+---
+title: Autocomplete
+description: A text input that suggests matching options in a floating dropdown as the user types.
+---
+
+`Autocomplete` composes [`Input`](/docs/components/forms/input) with a floating suggestion list. It filters `options` against the typed text (case-insensitive label substring by default), shows up to `maxResults` matches while focused, and reports the chosen option through `onSelect`.
+
+## Import
+
+```tsx
+import { Autocomplete } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Autocomplete
+  options={countries}
+  value={query}
+  onChange={setQuery}
+  onSelect={(option) => setQuery(option.label)}
+  placeholder="Search countries"
+/>
+```
+
+## Props
+
+| Prop         | Type                                               | Default         | Description                                 |
+| ------------ | -------------------------------------------------- | --------------- | ------------------------------------------- |
+| `options`    | `readonly SelectOption[]`                          | —               | Options matched against the typed text.     |
+| `value`      | `string`                                           | `''`            | Current text in the field.                  |
+| `onChange`   | `(text: string) => void`                           | —               | Fired on every keystroke with the raw text. |
+| `onSelect`   | `(option: SelectOption) => void`                   | —               | Fired when a suggestion is chosen.          |
+| `filter`     | `(option: SelectOption, query: string) => boolean` | label substring | Override the default match function.        |
+| `maxResults` | `number`                                           | `8`             | Cap on the number of suggestions rendered.  |
+| `listStyle`  | `StyleProp<ViewStyle>`                             | —               | Style applied to the dropdown surface.      |
+
+Also accepts `InputProps` minus `value`, `onChange`, and `onChangeText` (managed internally) — including `size`, `leading`, `invalid`, and `disabled`.
+
+## Accessibility
+
+The input is given `accessibilityRole="search"` and `aria-expanded` reflects whether the list is open. The dropdown is a `menu` and each suggestion is a `menuitem`. `FormField` labelling on the underlying input still applies.

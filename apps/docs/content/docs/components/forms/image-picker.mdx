@@ -1,0 +1,36 @@
+---
+title: ImagePicker
+description: A button that opens the system photo library and returns typed image metadata, gated on expo-image-picker.
+---
+
+`ImagePicker` is a [`Button`](/docs/components/buttons/button) that launches the OS image library and reports the chosen images through `onPick` as a typed `PickedImage[]` (empty when cancelled). It is a gated peer: without `expo-image-picker` installed it renders a `MissingPeer` fallback showing the install command instead of throwing.
+
+## Import
+
+```tsx
+import { ImagePicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<ImagePicker onPick={(images) => setImages(images)} allowsMultipleSelection quality={0.8}>
+  Add photos
+</ImagePicker>
+```
+
+## Props
+
+| Prop                      | Type                                       | Default          | Description                                          |
+| ------------------------- | ------------------------------------------ | ---------------- | ---------------------------------------------------- |
+| `onPick`                  | `(images: readonly PickedImage[]) => void` | —                | Fired with the picked images; empty array on cancel. |
+| `allowsMultipleSelection` | `boolean`                                  | `false`          | Allow selecting more than one image.                 |
+| `quality`                 | `number`                                   | —                | JPEG/PNG compression quality, 0–1.                   |
+| `allowsEditing`           | `boolean`                                  | —                | Show the in-picker crop/edit UI before returning.    |
+| `children`                | `ReactNode`                                | `'Choose image'` | Trigger label.                                       |
+
+Also accepts `ButtonBaseProps` minus `onPress` and `children`, so `variant`, `size`, and `tone` apply to the trigger.
+
+## Accessibility
+
+When the peer is present, the trigger is a standard `Button` and inherits its accessibility. When `expo-image-picker` is missing, a `MissingPeer` block explains the requirement and the `pnpm add expo-image-picker` install command.

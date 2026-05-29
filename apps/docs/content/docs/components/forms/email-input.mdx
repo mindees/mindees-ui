@@ -1,0 +1,33 @@
+---
+title: EmailInput
+description: A text input preconfigured for email entry with the right keyboard, autocomplete, and content type hints.
+---
+
+`EmailInput` is a thin wrapper over [`Input`](/docs/components/forms/input) that sets sensible defaults for entering an email address — an email keyboard, no autocapitalisation or autocorrect, and the platform autofill hints. Every `Input` prop and the surrounding `FormField` wiring still apply.
+
+## Import
+
+```tsx
+import { EmailInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<EmailInput value={email} onChangeText={setEmail} placeholder="you@example.com" />
+```
+
+## Props
+
+| Prop           | Type                     | Default                    | Description                                |
+| -------------- | ------------------------ | -------------------------- | ------------------------------------------ |
+| `value`        | `string`                 | —                          | Controlled text value.                     |
+| `onChangeText` | `(text: string) => void` | —                          | Fired on every keystroke.                  |
+| `invalid`      | `boolean`                | inherited from `FormField` | Forces the error border colour.            |
+| `disabled`     | `boolean`                | inherited from `FormField` | Drops to 60% opacity and disables editing. |
+
+`EmailInputProps` is an alias of `InputProps`, so it accepts every [`Input`](/docs/components/forms/input) prop including `size`, `leading`, and `trailing`. The `keyboardType`, `autoCapitalize`, `autoCorrect`, `autoComplete`, and `textContentType` defaults can each be overridden by passing your own value.
+
+## Accessibility
+
+`EmailInput` inherits all of `Input`'s accessibility behaviour: inside a `FormField` it wires `accessibilityLabelledBy`, `aria-invalid`, and `aria-required` automatically. The `email-address` keyboard and `emailAddress` content type let assistive tech and platform autofill recognise the field.

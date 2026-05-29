@@ -1,0 +1,13 @@
+{
+  "title": "States",
+  "pages": [
+    "empty-state",
+    "error-state",
+    "offline-state",
+    "maintenance-state",
+    "loading-state",
+    "success-state",
+    "warning-state",
+    "info-state"
+  ]
+}

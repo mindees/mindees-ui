@@ -2,9 +2,24 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'MindeesUI — Universal React Native CLI + Expo component library',
+  title: 'MindeesUI — React Native components that understand layout context',
   description:
-    'Universal React Native CLI + Expo component library with a deterministic Layout Intelligence Layer. ~60 accessible components for the New Architecture.',
+    'A React Native + Expo UI library whose components read your JSX structure and apply smart, predictable layout defaults. ~145 accessible components, 74 ready-made screen blocks, one-line theming. iOS, Android, and web. New Architecture.',
+  keywords: [
+    'react native ui library',
+    'react native component library',
+    'expo ui kit',
+    'react native design system',
+    'react native components',
+    'react native web',
+    'layout intelligence',
+    'auto spacing',
+    'react native theming',
+    'react native blocks',
+    'react native templates',
+    'tamagui alternative',
+    'gluestack alternative',
+  ],
   alternates: { canonical: '/' },
 };
 
@@ -12,40 +27,45 @@ const features = [
   {
     icon: '⚙︎',
     title: 'Layout Intelligence Layer',
-    body: 'Smart composition, not AI magic. Stacks auto-space by child type; primitives compose deterministically via Slot/asChild.',
+    body: 'Components read their children and apply deterministic spacing, sizing, and alignment. A Heading above a Label gets tight spacing; an Input above a Button gets loose. Not AI — documented, overridable rules.',
   },
   {
     icon: '◆',
-    title: 'Design tokens, separately',
-    body: 'Colour, typography, spacing, radii, shadows, motion, breakpoints, z-index, density. Usable on its own as @mindees/tokens.',
+    title: '~145 components',
+    body: 'Inputs, selects, sliders, date/time/file pickers, tables, calendars, carousels, command palette, overlays, charts of state, media, navigation, and mobile gestures. All typed, all accessible.',
   },
   {
-    icon: '⌖',
-    title: 'New Architecture only',
-    body: 'Fabric, JSI, TurboModules, Bridgeless. Reanimated v4 worklets, FlashList v2, Unistyles v3 (Nitro).',
+    icon: '⬚',
+    title: '74 ready-made blocks',
+    body: '@mindees/blocks ships login & checkout forms, dashboards, product cards, chat, settings, and full screens — composed from the primitives, restyle with tokens.',
+  },
+  {
+    icon: '◑',
+    title: 'Theme in one line',
+    body: 'createThemes({ light: { brand }, dark: { brand } }) recolors your whole app from a single brand color. Hover/active shades and readable on-accent text are derived for you.',
   },
   {
     icon: '⛚',
-    title: 'Universal',
-    body: 'React Native CLI + Expo SDK 55 & 56 on iOS, Android, React Native Web. One API, three platforms.',
+    title: 'iOS · Android · Web',
+    body: 'React Native CLI + Expo SDK 55 & 56 on all three platforms. New Architecture only — Fabric, JSI, Reanimated v4, Unistyles v3 (Nitro), FlashList v2. Tuned for low-end Android.',
   },
   {
     icon: '◎',
-    title: 'Accessible',
-    body: 'WCAG-conscious defaults, high-contrast tokens, a11y helpers (useFormFieldA11y, useAnnouncer, useUniqueId).',
-  },
-  {
-    icon: '⌥',
-    title: 'Strictly typed',
-    body: 'TypeScript strict, no `any` in public API. CI gates on type / lint / format / test / build / bundle-budget.',
+    title: 'Accessible & strict',
+    body: 'WCAG-conscious defaults, high-contrast tokens, a11y helpers. TypeScript strict, no `any` in the public API, CI-gated on type / lint / test / build / bundle budget.',
   },
 ];
 
 const links = [
   {
     name: '@mindees/ui',
-    sub: 'Components, hooks, providers',
+    sub: '~145 components, hooks, providers',
     href: 'https://www.npmjs.com/package/@mindees/ui',
+  },
+  {
+    name: '@mindees/blocks',
+    sub: '74 ready-made screen blocks',
+    href: 'https://www.npmjs.com/package/@mindees/blocks',
   },
   {
     name: '@mindees/tokens',
@@ -57,12 +77,29 @@ const links = [
     sub: 'Tree-shakeable SVG icons',
     href: 'https://www.npmjs.com/package/@mindees/icons',
   },
-  {
-    name: 'GitHub',
-    sub: 'Source, issues, releases',
-    href: 'https://github.com/mindees/mindees-ui',
-  },
 ];
+
+const BEFORE = `<View style={{ padding: 16, gap: 12, alignItems: "center" }}>
+  <Text style={{ fontSize: 24, fontWeight: "700" }}>
+    Upgrade Pro
+  </Text>
+  <Text style={{ textAlign: "center", color: "#666" }}>
+    Unlock premium analytics and faster exports.
+  </Text>
+  <Pressable style={{ padding: 14, borderRadius: 12 }}>
+    <Text>Continue</Text>
+  </Pressable>
+</View>`;
+
+const AFTER = `<Card>
+  <Stack center>
+    <Title>Upgrade Pro</Title>
+    <Text muted>
+      Unlock premium analytics and faster exports.
+    </Text>
+    <Button>Continue</Button>
+  </Stack>
+</Card>`;
 
 export default function Home() {
   return (
@@ -71,19 +108,19 @@ export default function Home() {
         <div className="hero-inner">
           <span className="eyebrow">
             <span className="eyebrow-dot" aria-hidden />
-            v1.0.0 — live on npm
+            v1.1.0 — ~145 components &amp; 74 blocks, live on npm
           </span>
 
           <h1 className="hero-title">
-            The React Native UI kit
+            Beautiful React Native layouts
             <br />
-            with a brain.
+            without babysitting spacing props.
           </h1>
 
           <p className="hero-tagline">
-            Universal React Native CLI + Expo component library with a deterministic{' '}
-            <strong>Layout Intelligence Layer</strong>. ~60 accessible components for the New
-            Architecture — Fabric, JSI, Reanimated v4, Unistyles v3, FlashList v2.
+            MindeesUI is a New Architecture-first UI library for{' '}
+            <strong>Expo and React Native</strong> that reads your component structure and applies
+            smart, predictable layout defaults. <strong>Override anything. Ship faster.</strong>
           </p>
 
           <div className="cta-row">
@@ -96,7 +133,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              View on GitHub
+              Star on GitHub
             </a>
           </div>
 
@@ -107,11 +144,31 @@ export default function Home() {
       </section>
 
       <section className="section">
+        <p className="section-eyebrow">The idea</p>
+        <h2 className="section-title">Components that understand their children.</h2>
+        <p className="section-sub">
+          Stop hand-tuning padding, alignment, and spacing on every screen. MindeesUI components
+          derive those decisions from your JSX — deterministically, and always overridable.
+        </p>
+
+        <div className="before-after">
+          <div className="ba-card ba-before">
+            <span className="ba-tag">Before</span>
+            <pre>{BEFORE}</pre>
+          </div>
+          <div className="ba-card ba-after">
+            <span className="ba-tag">After · MindeesUI</span>
+            <pre>{AFTER}</pre>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
         <p className="section-eyebrow">Built right</p>
         <h2 className="section-title">Engineered, not assembled.</h2>
         <p className="section-sub">
-          MindeesUI was designed from the brief up: every component is type-safe, composable, and
-          measured against a per-component bundle budget enforced in CI.
+          Every component is type-safe, composable, accessible, and measured against a per-component
+          bundle budget enforced in CI.
         </p>
 
         <div className="feature-grid">
@@ -208,8 +265,8 @@ export function `}
         <p className="section-eyebrow">Packages</p>
         <h2 className="section-title">Pick what you need.</h2>
         <p className="section-sub">
-          Three packages, MIT-licensed, published to npm. Use them together or independently —
-          tokens and icons work without the full UI kit.
+          Four packages, MIT-licensed, published to npm. Use them together or independently — tokens
+          and icons work without the full UI kit, and blocks build on top.
         </p>
 
         <div className="link-grid">
@@ -232,7 +289,7 @@ export function `}
         <a href="https://github.com/mindees" target="_blank" rel="noreferrer">
           Mindees
         </a>{' '}
-        contributors · v1.0.0
+        contributors · v1.1.0
       </footer>
     </>
   );

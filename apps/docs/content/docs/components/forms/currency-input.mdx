@@ -1,0 +1,33 @@
+---
+title: CurrencyInput
+description: A numeric input that formats its value as localised currency on blur and edits raw digits on focus.
+---
+
+`CurrencyInput` accepts a numeric `value` in major units and renders it as a localised currency string via `Intl.NumberFormat`. While focused it shows a raw editable draft so the caret never fights group separators; on blur it reformats. Changes are reported through `onChangeValue` as a parsed number.
+
+## Import
+
+```tsx
+import { CurrencyInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<CurrencyInput value={amount} onChangeValue={setAmount} currency="USD" locale="en-US" />
+```
+
+## Props
+
+| Prop            | Type                      | Default         | Description                                                          |
+| --------------- | ------------------------- | --------------- | -------------------------------------------------------------------- |
+| `value`         | `number`                  | —               | Numeric value in major units (e.g. `12.5` for $12.50). `NaN` clears. |
+| `currency`      | `string`                  | `'USD'`         | ISO 4217 currency code used for formatting.                          |
+| `locale`        | `string`                  | runtime default | BCP 47 locale used for formatting.                                   |
+| `onChangeValue` | `(value: number) => void` | —               | Fired with the parsed number; `NaN` when empty or unparseable.       |
+
+Extends `InputProps` minus `keyboardType`, `value`, and `onChangeText` (all managed internally). `size`, `leading`, `trailing`, `invalid`, and `disabled` apply.
+
+## Accessibility
+
+The field inherits `Input`'s `FormField` wiring for `accessibilityLabelledBy`, `aria-invalid`, and `aria-required`. The numeric keyboard matches the expected input; supply an `accessibilityLabel` outside a `FormField`.

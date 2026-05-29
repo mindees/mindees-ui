@@ -1,0 +1,34 @@
+---
+title: DateRangePicker
+description: A trigger that opens a calendar to pick a start and end date, normalising the order automatically.
+---
+
+`DateRangePicker` selects a `{ start, end }` range from a [`Calendar`](/docs/components/display/calendar) in a modal. The first tap sets the start, the second completes the range (swapping if it lands before the start), and a third restarts. The trigger summarises the chosen range.
+
+## Import
+
+```tsx
+import { DateRangePicker } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DateRangePicker value={range} onChange={setRange} placeholder="Select range…" />
+```
+
+## Props
+
+| Prop          | Type                         | Default            | Description                                      |
+| ------------- | ---------------------------- | ------------------ | ------------------------------------------------ |
+| `value`       | `DateRange`                  | —                  | Currently-selected `{ start?, end? }` range.     |
+| `onChange`    | `(range: DateRange) => void` | —                  | Fires whenever the range changes.                |
+| `placeholder` | `string`                     | `'Select range…'`  | Shown on the trigger when no range is selected.  |
+| `format`      | `(date: Date) => string`     | locale date string | Format a single endpoint for the trigger label.  |
+| `disabled`    | `boolean`                    | inherited          | Force a disabled state outside of a `FormField`. |
+| `invalid`     | `boolean`                    | inherited          | Force an invalid state outside of a `FormField`. |
+| `style`       | `StyleProp<ViewStyle>`       | —                  | Style applied to the trigger container.          |
+
+## Accessibility
+
+The trigger is a `button` with `disabled`/`expanded` state and forwards `FormField` labelling. The modal is labelled `Pick a date range`, and the calendar exposes per-day buttons with selected state.

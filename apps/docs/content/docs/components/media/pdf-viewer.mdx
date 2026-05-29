@@ -1,0 +1,32 @@
+---
+title: PDFViewer
+description: Renders a PDF document from a remote or local URI by delegating to react-native-pdf, with a missing-peer notice shown when that peer is absent.
+---
+
+`PDFViewer` displays a PDF document for a given source. It is a gated optional peer that delegates rendering to `react-native-pdf`, normalising a string URI into the source shape that peer expects. When the peer is not installed it renders a labelled `MissingPeer` notice instead.
+
+**Required peer:** `react-native-pdf`. Install with `pnpm add react-native-pdf`.
+
+## Import
+
+```tsx
+import { PDFViewer } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<PDFViewer source={{ uri: 'https://example.com/report.pdf' }} />
+```
+
+## Props
+
+| Prop     | Type                        | Default | Description                              |
+| -------- | --------------------------- | ------- | ---------------------------------------- |
+| `source` | `{ uri: string } \| string` | —       | Remote or local URI of the PDF document. |
+
+Any additional props are forwarded to the underlying `react-native-pdf` component.
+
+## Accessibility
+
+Document navigation and labelling come from `react-native-pdf`. When the peer is missing, the rendered `MissingPeer` fallback uses `accessibilityRole="alert"` and names the required package and install command.

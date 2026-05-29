@@ -1,0 +1,37 @@
+---
+title: TagInput
+description: A field that turns submitted text into removable chips, with dedupe, a max-tag cap, and backspace removal.
+---
+
+`TagInput` shows the current tags as removable chips above an [`Input`](/docs/components/forms/input). Submitting the field commits the trimmed draft as a new tag; pressing backspace on an empty field removes the last tag. Duplicates are blocked by default and a `maxTags` cap can be set.
+
+## Import
+
+```tsx
+import { TagInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TagInput value={tags} onChange={setTags} maxTags={5} placeholder="Add tag…" />
+```
+
+## Props
+
+| Prop                      | Type                        | Default      | Description                                              |
+| ------------------------- | --------------------------- | ------------ | -------------------------------------------------------- |
+| `value`                   | `readonly string[]`         | `[]`         | Current tags.                                            |
+| `onChange`                | `(value: string[]) => void` | —            | Fired with the full next array of tags after add/remove. |
+| `dedupe`                  | `boolean`                   | `true`       | Block duplicate tags (case-insensitive).                 |
+| `maxTags`                 | `number`                    | —            | Cap on the number of tags.                               |
+| `placeholder`             | `string`                    | `'Add tag…'` | Placeholder for the inner text field.                    |
+| `size`                    | `'sm' \| 'md' \| 'lg'`      | `'md'`       | Inner input size.                                        |
+| `invalid`                 | `boolean`                   | inherited    | Force an invalid state outside of a `FormField`.         |
+| `disabled`                | `boolean`                   | inherited    | Force a disabled state outside of a `FormField`.         |
+| `inputAccessibilityLabel` | `string`                    | —            | Accessible label for the inner text field.               |
+| `style`                   | `StyleProp<ViewStyle>`      | —            | Style applied to the field container.                    |
+
+## Accessibility
+
+Each tag is a `Chip` with a remove control (hidden when disabled). Supply `inputAccessibilityLabel` to name the text field; inside a `FormField` the invalid and disabled states are inherited from context.

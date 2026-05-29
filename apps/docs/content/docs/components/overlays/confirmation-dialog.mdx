@@ -1,0 +1,49 @@
+---
+title: Confirmation Dialog
+description: A focused yes-or-no dialog with confirm and cancel actions and an optional destructive treatment for risky operations.
+---
+
+`ConfirmationDialog` is a thin preset over `Dialog` for binary decisions. It renders a `title`, optional `message`, a ghost cancel button, and a solid confirm button. Set `destructive` to color the confirm action with the danger tone for irreversible actions.
+
+## Import
+
+```tsx
+import { ConfirmationDialog } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <ConfirmationDialog
+    visible={visible}
+    onClose={() => setVisible(false)}
+    title="Delete file?"
+    message="This action cannot be undone."
+    confirmLabel="Delete"
+    destructive
+    onConfirm={deleteFile}
+  />
+);
+```
+
+## Props
+
+| Prop           | Type                   | Default     | Description                                             |
+| -------------- | ---------------------- | ----------- | ------------------------------------------------------- |
+| `visible`      | `boolean`              | —           | Controls whether the dialog is shown.                   |
+| `onClose`      | `() => void`           | —           | Called when the dialog requests close (backdrop/back).  |
+| `title`        | `string`               | —           | Required heading describing the decision.               |
+| `message`      | `string`               | —           | Optional secondary-toned body line.                     |
+| `confirmLabel` | `string`               | `'Confirm'` | Label for the confirm button.                           |
+| `cancelLabel`  | `string`               | `'Cancel'`  | Label for the cancel button.                            |
+| `onConfirm`    | `() => void`           | —           | Called when the confirm button is pressed, then closes. |
+| `onCancel`     | `() => void`           | —           | Called when canceling, before `onClose`.                |
+| `destructive`  | `boolean`              | `false`     | Styles the confirm button with the danger tone.         |
+| `style`        | `StyleProp<ViewStyle>` | —           | Style for the elevated panel (not the scrim).           |
+
+## Accessibility
+
+Inherits `Dialog`'s modal behavior — the `title` doubles as the dialog's accessibility label so screen readers announce the question on open. Both actions are real `Button` controls with `accessibilityRole="button"`. Confirming or canceling both call `onClose`, so the dialog is always dismissible by keyboard or back gesture.

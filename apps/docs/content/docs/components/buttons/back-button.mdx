@@ -1,0 +1,39 @@
+---
+title: Back Button
+description: An icon button preset rendering a chevron-left glyph, sized to the button and tinted by tone, with a default Back label.
+---
+
+`BackButton` is an `IconButton` preset that renders the chevron-left glyph for navigation. The icon size and color match the button's `size` and `tone` automatically, and the screen-reader label defaults to "Back". Wire up navigation through `onPress`.
+
+## Import
+
+```tsx
+import { BackButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<BackButton onPress={() => navigation.goBack()} />
+```
+
+With a larger size and primary tone:
+
+```tsx
+<BackButton size="lg" tone="primary" onPress={goBack} />
+```
+
+## Props
+
+| Prop                 | Type                                                           | Default     | Description                                   |
+| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `size`               | `'sm' \| 'md' \| 'lg'`                                         | `'md'`      | Button size; also sets the default icon size. |
+| `tone`               | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'neutral'` | Color role used to tint the chevron glyph.    |
+| `iconSize`           | `number`                                                       | —           | Override the glyph size in dp.                |
+| `accessibilityLabel` | `string`                                                       | `'Back'`    | Screen-reader label.                          |
+
+Inherits the remaining `IconButtonProps` except `children` and `accessibilityLabel`.
+
+## Accessibility
+
+The label defaults to "Back" so the control's purpose is announced, even though it renders only an icon. It inherits `IconButton`'s `accessibilityRole="button"` and tap-target sizing.

@@ -1,0 +1,33 @@
+---
+title: Subheading
+description: A secondary heading that renders a muted h4-level title for section subtitles sitting beneath a primary heading.
+---
+
+`Subheading` composes `Heading` at level 4 with a secondary tone, for section subtitles that sit under a primary `Heading`. Because it wraps `Heading`, it keeps the header accessibility role so document structure stays correct.
+
+## Import
+
+```tsx
+import { Subheading } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Heading level={2}>Billing</Heading>
+<Subheading>Manage your plan and payment method</Subheading>
+```
+
+## Props
+
+| Prop       | Type                     | Default       | Description                           |
+| ---------- | ------------------------ | ------------- | ------------------------------------- |
+| `tone`     | `TextTone`               | `'secondary'` | Color role applied to the subheading. |
+| `align`    | `TextStyle['textAlign']` | —             | Horizontal text alignment.            |
+| `children` | `React.ReactNode`        | —             | Subheading text.                      |
+
+Inherits all `HeadingProps` except `level` (which is fixed at 4).
+
+## Accessibility
+
+`Subheading` inherits `Heading`'s accessibility role, so it is announced as a heading and contributes to the document outline. Use it after a higher-level `Heading` to keep heading levels nested in order.

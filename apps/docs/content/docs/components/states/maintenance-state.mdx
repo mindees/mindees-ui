@@ -1,0 +1,34 @@
+---
+title: MaintenanceState
+description: A centered "under maintenance" screen in an info tone with sensible default copy.
+---
+
+`MaintenanceState` is a centered layout for planned downtime. Its title defaults to `Under maintenance` in the info tone, and it ships a default description (`We're making things better. Please check back soon.`) that you can override.
+
+## Import
+
+```tsx
+import { MaintenanceState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<MaintenanceState description="Back online around 3pm UTC." />
+```
+
+## Props
+
+| Prop          | Type                   | Default               | Description                                        |
+| ------------- | ---------------------- | --------------------- | -------------------------------------------------- |
+| `title`       | `string`               | `'Under maintenance'` | Heading copy.                                      |
+| `description` | `string`               | default sentence      | Supporting copy; overrides the built-in default.   |
+| `icon`        | `ReactNode`            | —                     | Icon or illustration rendered above the title.     |
+| `action`      | `ReactNode`            | —                     | Action node (typically a `Button`) below the copy. |
+| `style`       | `StyleProp<ViewStyle>` | —                     | Style applied to the container.                    |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the maintenance notice reads as a single status. Override the description with a concrete expectation (such as a return time) where possible.

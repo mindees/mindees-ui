@@ -1,4 +1,18 @@
 {
   "title": "Buttons",
-  "pages": ["button", "icon-button", "fab", "button-group"]
+  "pages": [
+    "button",
+    "icon-button",
+    "fab",
+    "button-group",
+    "split-button",
+    "toggle-button",
+    "close-button",
+    "copy-button",
+    "share-button",
+    "download-button",
+    "upload-button",
+    "retry-button",
+    "back-button"
+  ]
 }

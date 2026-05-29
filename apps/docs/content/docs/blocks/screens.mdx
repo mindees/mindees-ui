@@ -1,0 +1,217 @@
+---
+title: Screen blocks
+description: Fourteen full-page screen compositions — home, dashboard, details, settings, profile, onboarding, search, pricing, and error states. Pure UI, no navigation library.
+---
+
+Opinionated, ready-to-drop full-page compositions assembled from MindeesUI primitives and sibling blocks. They wire up safe areas, headers, scrolling, and empty states for you. They never integrate a navigation library, fetch, or store — every action flows through callbacks.
+
+## Import
+
+```tsx
+import {
+  HomeScreen,
+  DashboardScreen,
+  DetailsScreen,
+  SettingsScreen,
+  ProfileScreen,
+  NotificationsScreen,
+  SearchResultsScreen,
+  OnboardingScreen,
+  WalkthroughScreens,
+  HelpScreen,
+  NotFoundScreen,
+  UnauthorizedScreen,
+  NoInternetScreen,
+  PricingScreen,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<DetailsScreen
+  title="Invoice #1042"
+  subtitle="Paid"
+  onBack={() => navigation.goBack()}
+  footer={<Button onPress={download}>Download PDF</Button>}
+>
+  <OrderSummary items={items} total={total} />
+</DetailsScreen>
+```
+
+## Blocks
+
+### HomeScreen
+
+Scrollable home shell with a sticky header slot.
+
+| Prop             | Type                             | Description                                 |
+| ---------------- | -------------------------------- | ------------------------------------------- |
+| `header`         | `ReactNode`                      | Sticky header above the scrollable content. |
+| `children`       | `ReactNode`                      | Scrollable page content.                    |
+| `contentPadding` | `'none' \| 'sm' \| 'md' \| 'lg'` | Outer content padding. Defaults to `'md'`.  |
+
+### DashboardScreen
+
+KPI grid at the top with content below.
+
+| Prop            | Type                         | Description                                |
+| --------------- | ---------------------------- | ------------------------------------------ |
+| `metrics`       | `readonly AnalyticsMetric[]` | KPI metrics rendered as a responsive grid. |
+| `onPressMetric` | `(id: string) => void`       | Called when a KPI card is pressed.         |
+| `header`        | `ReactNode`                  | Sticky header above the content.           |
+| `children`      | `ReactNode`                  | Additional content below the metrics.      |
+
+### DetailsScreen
+
+Back-header record screen with a scrollable body and a pinned footer.
+
+| Prop             | Type         | Description                                      |
+| ---------------- | ------------ | ------------------------------------------------ |
+| `title`          | `string`     | Title centered in the back header.               |
+| `subtitle`       | `string`     | Subtitle under the title.                        |
+| `onBack`         | `() => void` | Back handler; the button is omitted when absent. |
+| `headerTrailing` | `ReactNode`  | Trailing header slot (e.g. an action menu).      |
+| `children`       | `ReactNode`  | Scrollable detail content.                       |
+| `footer`         | `ReactNode`  | Pinned footer action bar below the content.      |
+
+### SettingsScreen
+
+Grouped settings rendered by the `SettingsMenu` primitive.
+
+| Prop     | Type                           | Description                                      |
+| -------- | ------------------------------ | ------------------------------------------------ |
+| `groups` | `readonly SettingsMenuGroup[]` | Grouped settings rows.                           |
+| `title`  | `string`                       | Header title. Defaults to `"Settings"`.          |
+| `onBack` | `() => void`                   | Back handler; the button is omitted when absent. |
+
+### ProfileScreen
+
+Profile card with stats and a sections area below.
+
+| Prop       | Type                     | Description                                   |
+| ---------- | ------------------------ | --------------------------------------------- |
+| `user`     | `ProfileUser`            | User identity for the `ProfileCard`.          |
+| `stats`    | `readonly ProfileStat[]` | Optional stat row.                            |
+| `onEdit`   | `() => void`             | Shows an "Edit profile" button when provided. |
+| `header`   | `ReactNode`              | Sticky header above the content.              |
+| `children` | `ReactNode`              | Tabs/sections below the card.                 |
+
+### NotificationsScreen
+
+List of notifications with a built-in empty state.
+
+| Prop               | Type                          | Description                                          |
+| ------------------ | ----------------------------- | ---------------------------------------------------- |
+| `notifications`    | `readonly NotificationData[]` | Notifications; empty shows the empty state.          |
+| `title`            | `string`                      | Header title. Defaults to `"Notifications"`.         |
+| `headerTrailing`   | `ReactNode`                   | Trailing header slot (e.g. "mark all read").         |
+| `onPressItem`      | `(id: string) => void`        | Called when a row is pressed.                        |
+| `emptyTitle`       | `string`                      | Empty-state title. Defaults to `"No notifications"`. |
+| `emptyDescription` | `string`                      | Empty-state description.                             |
+
+### SearchResultsScreen
+
+Generic, searchable results screen with a render-prop for rows.
+
+| Prop               | Type                                               | Description                                    |
+| ------------------ | -------------------------------------------------- | ---------------------------------------------- |
+| `query`            | `string`                                           | Current search query (controlled).             |
+| `results`          | `readonly T[]`                                     | Results for the current query.                 |
+| `onChangeQuery`    | `(next: string) => void`                           | Called when the query text changes.            |
+| `placeholder`      | `string`                                           | Search placeholder. Defaults to `"Search…"`.   |
+| `renderResult`     | `(item: T, index: number) => ReactElement \| null` | Renders a single result row.                   |
+| `emptyTitle`       | `string`                                           | Empty-state title. Defaults to `"No results"`. |
+| `emptyDescription` | `string`                                           | Empty-state description.                       |
+
+`SearchResultsScreen` is generic over `T extends SearchResult`.
+
+### OnboardingScreen
+
+Single onboarding page with illustration, copy, and next/skip actions.
+
+| Prop           | Type         | Description                                           |
+| -------------- | ------------ | ----------------------------------------------------- |
+| `title`        | `string`     | Page heading.                                         |
+| `body`         | `string`     | Supporting body copy.                                 |
+| `illustration` | `ReactNode`  | Illustration above the title.                         |
+| `nextLabel`    | `string`     | Primary action label. Defaults to `"Get started"`.    |
+| `onNext`       | `() => void` | Primary handler; the button is omitted when absent.   |
+| `skipLabel`    | `string`     | Secondary action label. Defaults to `"Skip"`.         |
+| `onSkip`       | `() => void` | Secondary handler; the button is omitted when absent. |
+
+### WalkthroughScreens
+
+Swipeable multi-step walkthrough with dots and done/skip controls.
+
+| Prop        | Type                         | Description                                              |
+| ----------- | ---------------------------- | -------------------------------------------------------- |
+| `steps`     | `readonly WalkthroughStep[]` | Ordered steps, one page each.                            |
+| `doneLabel` | `string`                     | Final button label. Defaults to `"Done"`.                |
+| `skipLabel` | `string`                     | Skip button label. Defaults to `"Skip"`.                 |
+| `hint`      | `string`                     | Hint beside the dots. Defaults to `"Swipe to continue"`. |
+| `onDone`    | `() => void`                 | Called when the final step is completed.                 |
+| `onSkip`    | `() => void`                 | Skip handler; the button is omitted when absent.         |
+
+### HelpScreen
+
+Searchable FAQ accordion with a contact-support action.
+
+| Prop                | Type                 | Description                                            |
+| ------------------- | -------------------- | ------------------------------------------------------ |
+| `faqs`              | `readonly HelpFaq[]` | FAQ entries rendered as an accordion.                  |
+| `title`             | `string`             | Header title. Defaults to `"Help"`.                    |
+| `searchPlaceholder` | `string`             | Search placeholder. Defaults to `"Search help…"`.      |
+| `contactLabel`      | `string`             | Contact button label. Defaults to `"Contact support"`. |
+| `onContactSupport`  | `() => void`         | Handler; the button is omitted when absent.            |
+
+### NotFoundScreen
+
+404 state with a "go home" action.
+
+| Prop           | Type         | Description                                 |
+| -------------- | ------------ | ------------------------------------------- |
+| `title`        | `string`     | Heading. Defaults to `"Page not found"`.    |
+| `description`  | `string`     | Supporting copy.                            |
+| `illustration` | `ReactNode`  | Illustration or icon above the title.       |
+| `homeLabel`    | `string`     | Home button label. Defaults to `"Go home"`. |
+| `onGoHome`     | `() => void` | Handler; the button is omitted when absent. |
+
+### UnauthorizedScreen
+
+403 / access-denied state with a sign-in action.
+
+| Prop           | Type         | Description                                    |
+| -------------- | ------------ | ---------------------------------------------- |
+| `title`        | `string`     | Heading. Defaults to `"Access denied"`.        |
+| `description`  | `string`     | Supporting copy.                               |
+| `illustration` | `ReactNode`  | Illustration or icon above the title.          |
+| `signInLabel`  | `string`     | Sign-in button label. Defaults to `"Sign in"`. |
+| `onSignIn`     | `() => void` | Handler; the button is omitted when absent.    |
+
+### NoInternetScreen
+
+Offline state with a retry action.
+
+| Prop           | Type         | Description                                      |
+| -------------- | ------------ | ------------------------------------------------ |
+| `title`        | `string`     | Heading. Defaults to the `OfflineState` default. |
+| `description`  | `string`     | Supporting copy.                                 |
+| `illustration` | `ReactNode`  | Illustration or icon above the title.            |
+| `retryLabel`   | `string`     | Retry button label. Defaults to `"Retry"`.       |
+| `onRetry`      | `() => void` | Handler; the button is omitted when absent.      |
+
+### PricingScreen
+
+Pricing tiers as feature cards with an optional billing-cycle toggle.
+
+| Prop                | Type                            | Description                                      |
+| ------------------- | ------------------------------- | ------------------------------------------------ |
+| `plans`             | `readonly PricingPlan[]`        | Pricing tiers rendered as cards.                 |
+| `title`             | `string`                        | Header title. Defaults to `"Pricing"`.           |
+| `showBillingToggle` | `boolean`                       | Show a monthly/annual segmented toggle.          |
+| `defaultCycle`      | `BillingCycle`                  | Initial cycle. Defaults to `"monthly"`.          |
+| `onChangeCycle`     | `(cycle: BillingCycle) => void` | Called when the billing cycle changes.           |
+| `onSelectPlan`      | `(name: string) => void`        | Called with the plan name when a CTA is pressed. |
+
+All screen blocks also accept a `style` prop spread onto the root screen.

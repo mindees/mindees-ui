@@ -1,0 +1,37 @@
+---
+title: TreeView
+description: A nested, expandable tree of labelled nodes with chevrons, per-node icons, and a select callback.
+---
+
+`TreeView` renders hierarchical `TreeNode` data as indented, expandable rows. Branch nodes show a chevron and toggle their children on tap; leaf nodes align under a chevron slot. Any node tap fires `onSelectNode`, and `defaultExpanded` controls the initial open set.
+
+## Import
+
+```tsx
+import { TreeView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<TreeView
+  data={[{ id: 'src', label: 'src', children: [{ id: 'app', label: 'app.tsx' }] }]}
+  defaultExpanded={['src']}
+  onSelectNode={(node) => console.log(node.id)}
+/>
+```
+
+## Props
+
+| Prop              | Type                       | Default | Description                                      |
+| ----------------- | -------------------------- | ------- | ------------------------------------------------ |
+| `data`            | `readonly TreeNode[]`      | —       | Root nodes to render.                            |
+| `defaultExpanded` | `readonly string[]`        | —       | Node ids expanded on first render.               |
+| `onSelectNode`    | `(node: TreeNode) => void` | —       | Called when any node (leaf or branch) is tapped. |
+| `style`           | `StyleProp<ViewStyle>`     | —       | Style applied to the container.                  |
+
+Each `TreeNode` has an `id`, a `label`, an optional `icon`, and optional `children`. Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container is a `list`; each row is a `button` exposing an `expanded` state on branch nodes. Indentation conveys depth visually, so keep labels distinct enough to be understood from the announced text alone.

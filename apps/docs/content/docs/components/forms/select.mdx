@@ -1,0 +1,42 @@
+---
+title: Select
+description: A single-choice dropdown that opens a modal option list with a tick on the current value.
+---
+
+`Select` renders a trigger showing the chosen option's label (or a placeholder) and a chevron. Tapping it opens a centered `Modal` listing the options, with a check mark on the current value. It reads `FormField` context for invalid, disabled, and labelling.
+
+## Import
+
+```tsx
+import { Select } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Select
+  options={[
+    { label: 'Draft', value: 'draft' },
+    { label: 'Published', value: 'published' },
+  ]}
+  value={status}
+  onChange={setStatus}
+  placeholder="Choose status"
+/>
+```
+
+## Props
+
+| Prop          | Type                      | Default     | Description                                      |
+| ------------- | ------------------------- | ----------- | ------------------------------------------------ |
+| `options`     | `readonly SelectOption[]` | —           | Options to choose from (`{ label, value }`).     |
+| `value`       | `string`                  | —           | Currently selected value.                        |
+| `onChange`    | `(value: string) => void` | —           | Fired with the newly-selected value.             |
+| `placeholder` | `string`                  | `'Select…'` | Shown on the trigger when nothing is selected.   |
+| `disabled`    | `boolean`                 | inherited   | Force a disabled state outside of a `FormField`. |
+| `invalid`     | `boolean`                 | inherited   | Force an invalid state outside of a `FormField`. |
+| `style`       | `StyleProp<ViewStyle>`    | —           | Style applied to the trigger container.          |
+
+## Accessibility
+
+The trigger is a `button` exposing `accessibilityState` with `disabled` and `expanded`, and inside a `FormField` it forwards `accessibilityLabelledBy`, `aria-invalid`, and `aria-required`. Each option row is a `menuitem` with `selected` state; the open list lives in a labelled modal.

@@ -1,0 +1,42 @@
+---
+title: Hover Card
+description: A floating card revealed on pointer hover on web or long-press on native, reusing the popover surface for positioning.
+---
+
+`HoverCard` reveals a floating card from a `trigger` element. On web it binds pointer hover; on native, where there is no hover concept, it falls back to long-press with tap-outside to dismiss. It reuses `Popover` for positioning and the elevated surface. Open state can be controlled or managed internally.
+
+## Import
+
+```tsx
+import { HoverCard } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<HoverCard
+  trigger={<Link>@mindees</Link>}
+  content={
+    <View>
+      <Text weight="semibold">MindeesUI</Text>
+      <Text tone="secondary">Universal component library</Text>
+    </View>
+  }
+/>
+```
+
+## Props
+
+| Prop             | Type                      | Default    | Description                                          |
+| ---------------- | ------------------------- | ---------- | ---------------------------------------------------- |
+| `trigger`        | `React.ReactElement`      | —          | Element that reveals the card.                       |
+| `content`        | `React.ReactNode`         | —          | Floating card body.                                  |
+| `placement`      | `'top' \| 'bottom'`       | `'bottom'` | Side of the trigger the card opens toward.           |
+| `delayLongPress` | `number`                  | `300`      | Long-press delay in ms (native only).                |
+| `open`           | `boolean`                 | —          | Controlled open state. Omit for internal management. |
+| `onOpenChange`   | `(open: boolean) => void` | —          | Called when the open state changes.                  |
+| `style`          | `StyleProp<ViewStyle>`    | —          | Style applied to the elevated card panel.            |
+
+## Accessibility
+
+The trigger is wrapped in a `Pressable` with `accessibilityRole="button"`. On web it opens via `onHoverIn` and closes via `onHoverOut`, which RN-Web maps to pointer enter and leave. On native it opens on long-press and dismisses via tap-outside, so the card is always reachable by touch as well as pointer.

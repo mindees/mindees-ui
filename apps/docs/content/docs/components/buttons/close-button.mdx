@@ -1,0 +1,39 @@
+---
+title: Close Button
+description: An icon button preset rendering a close glyph, sized to the button and tinted by tone, with a default Close screen-reader label.
+---
+
+`CloseButton` is an `IconButton` preset that renders the close (×) glyph. The icon size and color match the button's `size` and `tone` automatically, and the screen-reader label defaults to "Close". Use it for dismissing dialogs, banners, and panels.
+
+## Import
+
+```tsx
+import { CloseButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<CloseButton onPress={dismiss} />
+```
+
+With a larger size and danger tone:
+
+```tsx
+<CloseButton size="lg" tone="danger" onPress={dismiss} />
+```
+
+## Props
+
+| Prop                 | Type                                                           | Default     | Description                                   |
+| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `size`               | `'sm' \| 'md' \| 'lg'`                                         | `'md'`      | Button size; also sets the default icon size. |
+| `tone`               | `'primary' \| 'neutral' \| 'success' \| 'danger' \| 'warning'` | `'neutral'` | Color role used to tint the close glyph.      |
+| `iconSize`           | `number`                                                       | —           | Override the glyph size in dp.                |
+| `accessibilityLabel` | `string`                                                       | `'Close'`   | Screen-reader label.                          |
+
+Inherits the remaining `IconButtonProps` except `children` and `accessibilityLabel`.
+
+## Accessibility
+
+The label defaults to "Close" so the control's purpose is always announced, even though it renders only an icon. It inherits `IconButton`'s `accessibilityRole="button"` and tap-target sizing.

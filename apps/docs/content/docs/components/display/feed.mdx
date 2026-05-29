@@ -1,0 +1,34 @@
+---
+title: Feed
+description: A FlatList-backed activity feed with avatar, title, timestamp, and body, or a custom item renderer.
+---
+
+`Feed` renders a vertical list of items, each defaulting to an avatar, a title with a timestamp, and a body. It is backed by `FlatList` for virtualisation and accepts a `renderItem` override to fully control the row layout.
+
+## Import
+
+```tsx
+import { Feed } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Feed
+  items={[{ id: '1', name: 'Ada', title: 'Ada commented', timestamp: '2m', body: 'Looks great!' }]}
+/>
+```
+
+## Props
+
+| Prop         | Type                                                      | Default | Description                       |
+| ------------ | --------------------------------------------------------- | ------- | --------------------------------- |
+| `items`      | `readonly FeedItem[]`                                     | —       | Feed entries to render.           |
+| `renderItem` | `(item: FeedItem, index: number) => ReactElement \| null` | —       | Override the default item layout. |
+| `style`      | `StyleProp<ViewStyle>`                                    | —       | Style applied to the list.        |
+
+Each `FeedItem` may set `id`, `title`, `timestamp`, `body`, `avatar` (image URL), and `name` (for avatar initials). Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The list uses `accessibilityRole="list"`. The default item composes an [`Avatar`](/docs/components/display/avatar) and themed `Text`; when supplying `renderItem`, give each row meaningful labels so the feed reads clearly with a screen reader.

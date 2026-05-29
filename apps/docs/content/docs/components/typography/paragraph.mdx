@@ -1,0 +1,36 @@
+---
+title: Paragraph
+description: A body-text block with bottom margin for vertical rhythm, with an option to drop the margin on the last paragraph.
+---
+
+`Paragraph` is a `Text` block at the body variant with a bottom margin so stacked paragraphs keep consistent vertical rhythm. Set `noMargin` to remove the trailing space, for example on the last paragraph in a block. It inherits all `Text` props.
+
+## Import
+
+```tsx
+import { Paragraph } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Paragraph>
+  MindeesUI ships universal components that understand layout context.
+</Paragraph>
+<Paragraph noMargin>This is the closing line of the block.</Paragraph>
+```
+
+## Props
+
+| Prop       | Type              | Default  | Description                                       |
+| ---------- | ----------------- | -------- | ------------------------------------------------- |
+| `noMargin` | `boolean`         | `false`  | Omit the bottom margin (e.g. the last paragraph). |
+| `variant`  | `TextStyleName`   | `'body'` | Named text style from the modular type scale.     |
+| `tone`     | `TextTone`        | —        | Color role applied to the text.                   |
+| `children` | `React.ReactNode` | —        | Paragraph content.                                |
+
+Inherits all `TextProps`.
+
+## Accessibility
+
+`Paragraph` renders a `Text` element, so it carries the platform's text semantics and respects the user's font-scaling settings. Keep tone contrast in mind for readability — the default primary text tone meets contrast against the theme background.

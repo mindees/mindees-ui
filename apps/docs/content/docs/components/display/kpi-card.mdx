@@ -1,0 +1,35 @@
+---
+title: KPICard
+description: A metric card showing a label, a prominent value, and an optional trend delta tinted by direction.
+---
+
+`KPICard` presents a single metric inside a [`Card`](/docs/components/display/card): a muted label with an optional icon, a large value, and an optional delta. The delta's tone is driven by `direction` — green for `up`, red for `down`, muted for `neutral`. Pass `onPress` to make the whole card tappable.
+
+## Import
+
+```tsx
+import { KPICard } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<KPICard label="Revenue" value="$12.4k" delta={{ value: '+8.2%', direction: 'up' }} />
+```
+
+## Props
+
+| Prop      | Type                   | Default | Description                                          |
+| --------- | ---------------------- | ------- | ---------------------------------------------------- |
+| `label`   | `string`               | —       | Caption shown above the value.                       |
+| `value`   | `ReactNode`            | —       | The metric; strings/numbers render as a heading.     |
+| `delta`   | `KPIDelta`             | —       | Trend `{ value, direction? }` shown below the value. |
+| `icon`    | `ReactNode`            | —       | Optional leading icon rendered beside the label.     |
+| `onPress` | `() => void`           | —       | Makes the card tappable.                             |
+| `style`   | `StyleProp<ViewStyle>` | —       | Style overrides for the card.                        |
+
+`KPIDelta.direction` is `'up' | 'down' | 'neutral'`. Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+When `onPress` is set the underlying `Card` becomes a `button`. Otherwise the card is a static surface; keep the `label` descriptive so the metric reads in context.

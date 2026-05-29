@@ -1,0 +1,42 @@
+---
+title: Lightbox
+description: A fullscreen image viewer with a dark scrim, tap-to-dismiss, and prev or next paging controls for multi-image sets.
+---
+
+`Lightbox` presents one or more images fullscreen against a strong dark scrim so they read against any theme. Tap the backdrop or the close control to dismiss; multi-image sets show previous and next controls plus a counter. For pinch-zoom or fling-to-dismiss gestures, wrap a gesture-handler image in `FullscreenOverlay` instead.
+
+## Import
+
+```tsx
+import { Lightbox } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <Lightbox
+    visible={visible}
+    onClose={() => setVisible(false)}
+    images={[{ uri: photoA }, { uri: photoB }]}
+    index={0}
+  />
+);
+```
+
+## Props
+
+| Prop                 | Type                       | Default | Description                                            |
+| -------------------- | -------------------------- | ------- | ------------------------------------------------------ |
+| `visible`            | `boolean`                  | —       | Controls whether the viewer is shown.                  |
+| `onClose`            | `() => void`               | —       | Called on backdrop press, close, or platform back.     |
+| `images`             | `readonly LightboxImage[]` | —       | Image set to view, each `{ uri }`.                     |
+| `index`              | `number`                   | `0`     | Index of the initially shown image; re-synced on open. |
+| `accessibilityLabel` | `string`                   | —       | Label announced when the viewer opens.                 |
+| `style`              | `StyleProp<ViewStyle>`     | —       | Style applied to the fullscreen viewer surface.        |
+
+## Accessibility
+
+The surface is marked `accessibilityViewIsModal` and the close, previous, and next controls are `Pressable`s with `accessibilityRole="button"` and explicit labels ("Close", "Previous image", "Next image"). The active image uses `accessibilityRole="image"`, and the page counter is hidden from pointer events. The viewer fades in unless reduce motion is enabled, in which case it appears without animation.

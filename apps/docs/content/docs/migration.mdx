@@ -1,0 +1,91 @@
+---
+title: Migrating from React Native primitives
+description: Replace hand-styled View, Text, and Pressable layouts with MindeesUI components. A practical, side-by-side migration guide for React Native and Expo apps.
+---
+
+You don't have to rewrite your app. MindeesUI drops in next to plain React Native — migrate one screen at a time. The payoff: less layout code, consistent spacing, and accessibility by default.
+
+## 1. Install
+
+```bash
+pnpm add @mindees/ui @mindees/tokens @mindees/icons
+```
+
+Wrap your app once (see [Providers](/docs/providers)):
+
+```tsx
+import { ThemeProvider, PortalProvider } from '@mindees/ui';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <PortalProvider>{/* your navigator */}</PortalProvider>
+    </ThemeProvider>
+  );
+}
+```
+
+## 2. Swap primitives
+
+| React Native                              | MindeesUI                                | Why                                            |
+| ----------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| `<View>` with manual padding/gap          | `<Box>` / `<Stack>`                      | Token spacing; Stacks auto-space children      |
+| `<Text style={{ fontSize, fontWeight }}>` | `<Heading>` / `<Text>` / `<Caption>`     | Semantic type scale, dynamic type, a11y roles  |
+| `<Pressable>` + styled `<Text>`           | `<Button>` / `<IconButton>`              | Variants, tones, focus/hover, min touch target |
+| `<TextInput>`                             | `<Input>` / `<FormField>`                | Labels, errors, a11y wiring, validation states |
+| `<Modal>`                                 | `<Modal>` / `<Dialog>` / `<BottomSheet>` | Scrim, reduce-motion, focus management         |
+| `<FlatList>` rows                         | `<List>` / `<Table>` / `<Feed>`          | Consistent rows, dividers, empty states        |
+| manual `shadow*`/`elevation`              | `shadow` token on `Box`/`Card`           | Correct on iOS, Android, **and web**           |
+
+## 3. Let layout intelligence remove boilerplate
+
+**Before** — every margin tuned by hand:
+
+```tsx
+<View style={{ padding: 16, gap: 12, alignItems: 'center' }}>
+  <Text style={{ fontSize: 24, fontWeight: '700' }}>Upgrade Pro</Text>
+  <Text style={{ textAlign: 'center', color: '#666' }}>Unlock analytics.</Text>
+  <Pressable style={{ padding: 14, borderRadius: 12 }}>
+    <Text>Continue</Text>
+  </Pressable>
+</View>
+```
+
+**After** — structure drives the spacing:
+
+```tsx
+<Card>
+  <Stack center>
+    <Heading>Upgrade Pro</Heading>
+    <Text tone="muted">Unlock analytics.</Text>
+    <Button>Continue</Button>
+  </Stack>
+</Card>
+```
+
+The `Stack` reads its children: the `Heading → Text` pair gets tight spacing, the `Text → Button` pair gets looser spacing — deterministically. Override any of it with the `gap` prop or `disableAutoSpacing`.
+
+## 4. Theme it
+
+Recolor the whole app from one brand color (see [Theming](/docs/theming)):
+
+```tsx
+import { createThemes, ThemeProvider } from '@mindees/ui';
+
+const { light, dark } = createThemes({
+  light: { brand: '#6d28d9' },
+  dark: { brand: '#a78bfa' },
+});
+
+<ThemeProvider light={light} dark={dark}>
+  …
+</ThemeProvider>;
+```
+
+## 5. Skip ahead with blocks
+
+Whole flows are pre-built in [`@mindees/blocks`](/docs/blocks) — `LoginForm`, `CheckoutForm`, `SettingsScreen`, `PricingScreen`, and more. Drop one in, pass your data and handlers, restyle with tokens.
+
+## Incremental adoption
+
+Nothing forces an all-at-once rewrite: MindeesUI components are plain React Native components. Migrate the highest-churn screens first (forms, lists, settings), keep the rest on raw primitives, and convert as you touch each screen.

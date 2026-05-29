@@ -1,0 +1,169 @@
+---
+title: Account blocks
+description: Twelve accessible account blocks for profiles, settings, security, billing, and subscriptions. Pure UI composed from MindeesUI primitives, props-driven, no storage.
+---
+
+Profile and account-management blocks composed from MindeesUI primitives. Blocks never persist, authenticate, or call the network — identity, settings, and billing data flow in through props and out through callbacks.
+
+## Import
+
+```tsx
+import {
+  ProfileCard,
+  ProfileEditor,
+  AvatarUploader,
+  AccountSettings,
+  PrivacySettings,
+  SecuritySettings,
+  PasswordChangeForm,
+  SubscriptionCard,
+  BillingDetails,
+  PaymentMethods,
+  InvoiceList,
+  DeleteAccountFlow,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<ProfileCard
+  user={user}
+  stats={[{ label: 'Followers', value: '1.2k' }]}
+  onEdit={() => navigate('profile/edit')}
+/>
+```
+
+## Blocks
+
+### ProfileCard
+
+Identity card with avatar, name, and an optional stat row and edit button.
+
+| Prop        | Type                     | Description                                      |
+| ----------- | ------------------------ | ------------------------------------------------ |
+| `user`      | `ProfileUser`            | Identity to render.                              |
+| `stats`     | `readonly ProfileStat[]` | Optional stats (followers, following, …).        |
+| `onEdit`    | `() => void`             | Shows an "Edit profile" button when provided.    |
+| `editLabel` | `string`                 | Edit button label. Defaults to `"Edit profile"`. |
+
+### ProfileEditor
+
+Editable profile form with name/bio fields and an avatar-pick action.
+
+| Prop           | Type                                    | Description                                          |
+| -------------- | --------------------------------------- | ---------------------------------------------------- |
+| `value`        | `ProfileEditorValues`                   | Initial field values.                                |
+| `onSave`       | `(values: ProfileEditorValues) => void` | Called with current values on save.                  |
+| `onCancel`     | `() => void`                            | Cancel handler; hides the cancel button when absent. |
+| `onPickAvatar` | `() => void`                            | Called when a new avatar image is requested.         |
+| `loading`      | `boolean`                               | Disables inputs and shows a spinner on save.         |
+| `saveLabel`    | `string`                                | Save label. Defaults to `"Save"`.                    |
+| `cancelLabel`  | `string`                                | Cancel label. Defaults to `"Cancel"`.                |
+
+### AvatarUploader
+
+Large avatar with a change-photo button; pure UI, no filesystem access.
+
+| Prop      | Type         | Description                                        |
+| --------- | ------------ | -------------------------------------------------- |
+| `uri`     | `string`     | Current avatar URL; falls back to initials.        |
+| `name`    | `string`     | Name used to derive fallback initials.             |
+| `onPick`  | `() => void` | Called when the user requests a new image.         |
+| `loading` | `boolean`    | Disables the button and shows an upload spinner.   |
+| `size`    | `AvatarSize` | Avatar size. Defaults to `"xl"`.                   |
+| `label`   | `string`     | Change button label. Defaults to `"Change photo"`. |
+
+### AccountSettings
+
+Grouped settings list mirroring the `SettingsMenu` primitive's API.
+
+| Prop     | Type                           | Description            |
+| -------- | ------------------------------ | ---------------------- |
+| `groups` | `readonly SettingsMenuGroup[]` | Grouped settings rows. |
+
+### PrivacySettings
+
+List of privacy toggle rows.
+
+| Prop    | Type                           | Description            |
+| ------- | ------------------------------ | ---------------------- |
+| `items` | `readonly PrivacyToggleItem[]` | Toggle rows to render. |
+
+### SecuritySettings
+
+Mixed toggle and action rows for the security section.
+
+| Prop    | Type                      | Description                 |
+| ------- | ------------------------- | --------------------------- |
+| `items` | `readonly SecurityItem[]` | Mixed toggle / action rows. |
+
+### PasswordChangeForm
+
+Current + new password form emitting `PasswordChangeValues`.
+
+| Prop          | Type                                     | Description                                    |
+| ------------- | ---------------------------------------- | ---------------------------------------------- |
+| `onSubmit`    | `(values: PasswordChangeValues) => void` | Called with the current and new password.      |
+| `loading`     | `boolean`                                | Disables inputs and shows a spinner.           |
+| `error`       | `string`                                 | Top-level error message.                       |
+| `submitLabel` | `string`                                 | Submit label. Defaults to `"Update password"`. |
+
+### SubscriptionCard
+
+Current-plan card with an optional manage/upgrade action.
+
+| Prop          | Type               | Description                                    |
+| ------------- | ------------------ | ---------------------------------------------- |
+| `plan`        | `SubscriptionPlan` | Plan to render.                                |
+| `onManage`    | `() => void`       | Shows the manage/upgrade button when provided. |
+| `manageLabel` | `string`           | Action label. Defaults to `"Manage plan"`.     |
+
+### BillingDetails
+
+Read-only billing rows with an optional edit button.
+
+| Prop        | Type                       | Description                                       |
+| ----------- | -------------------------- | ------------------------------------------------- |
+| `details`   | `readonly BillingDetail[]` | Read-only billing rows (name, email, …).          |
+| `title`     | `string`                   | Section heading. Defaults to `"Billing details"`. |
+| `onEdit`    | `() => void`               | Shows an edit button when provided.               |
+| `editLabel` | `string`                   | Edit label. Defaults to `"Edit"`.                 |
+
+### PaymentMethods
+
+Saved card list with add, remove, and set-default actions.
+
+| Prop           | Type                       | Description                                    |
+| -------------- | -------------------------- | ---------------------------------------------- |
+| `methods`      | `readonly PaymentMethod[]` | Saved payment methods.                         |
+| `onAdd`        | `() => void`               | Shows an "Add payment method" button.          |
+| `onRemove`     | `(id: string) => void`     | Called when a card is removed.                 |
+| `onSetDefault` | `(id: string) => void`     | Called when a card is made default.            |
+| `addLabel`     | `string`                   | Add label. Defaults to `"Add payment method"`. |
+
+### InvoiceList
+
+List of invoices with a per-row download action.
+
+| Prop         | Type                   | Description                           |
+| ------------ | ---------------------- | ------------------------------------- |
+| `invoices`   | `readonly Invoice[]`   | Invoices, newest-first by convention. |
+| `onDownload` | `(id: string) => void` | Called when an invoice is downloaded. |
+
+### DeleteAccountFlow
+
+Danger card with a trigger button and a destructive confirmation dialog.
+
+| Prop             | Type         | Description                                      |
+| ---------------- | ------------ | ------------------------------------------------ |
+| `onDelete`       | `() => void` | Called when deletion is confirmed in the dialog. |
+| `loading`        | `boolean`    | Disables the trigger and confirm action.         |
+| `title`          | `string`     | Section heading. Defaults to `"Delete account"`. |
+| `description`    | `string`     | Supporting copy in the danger card.              |
+| `triggerLabel`   | `string`     | Trigger label. Defaults to `"Delete account"`.   |
+| `confirmTitle`   | `string`     | Dialog title. Defaults to `"Delete account?"`.   |
+| `confirmMessage` | `string`     | Dialog message.                                  |
+| `confirmLabel`   | `string`     | Dialog confirm label. Defaults to `"Delete"`.    |
+
+All blocks also accept a `style` prop spread onto the root container.

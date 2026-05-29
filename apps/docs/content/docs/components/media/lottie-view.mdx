@@ -1,0 +1,39 @@
+---
+title: LottieView
+description: Plays a Lottie JSON animation that autoplays and loops by default, delegating to lottie-react-native with a missing-peer fallback when it is absent.
+---
+
+`LottieView` renders a Lottie animation from a JSON module, a `{ uri }`, or a raw object. It is a gated optional peer that delegates to `lottie-react-native`, autoplaying and looping by default. When the peer is not installed it renders a labelled `MissingPeer` notice instead.
+
+**Required peer:** `lottie-react-native`. Install with `pnpm add lottie-react-native`.
+
+## Import
+
+```tsx
+import { LottieView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<LottieView
+  source={require('./success.json')}
+  autoPlay
+  loop={false}
+  style={{ width: 160, height: 160 }}
+/>
+```
+
+## Props
+
+| Prop       | Type      | Default | Description                                                       |
+| ---------- | --------- | ------- | ----------------------------------------------------------------- |
+| `source`   | `unknown` | —       | Animation source: a required JSON module, a `{ uri }`, or object. |
+| `autoPlay` | `boolean` | `true`  | Start playing as soon as the view mounts.                         |
+| `loop`     | `boolean` | `true`  | Loop the animation.                                               |
+
+Any additional props are forwarded to the underlying `lottie-react-native` component.
+
+## Accessibility
+
+Lottie animations are decorative by default and expose no inherent role. When the peer is missing, the rendered `MissingPeer` fallback uses `accessibilityRole="alert"` and names the required package and install command. For meaningful animations, wrap the view and supply your own `accessibilityLabel`.

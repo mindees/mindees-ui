@@ -1,0 +1,33 @@
+---
+title: PhoneInput
+description: A text input preconfigured for telephone entry with the phone keypad and platform autofill hints.
+---
+
+`PhoneInput` is a thin wrapper over [`Input`](/docs/components/forms/input) that defaults to a phone keypad and the telephone autofill hints. It performs no formatting or country-code logic — it is a typed convenience for the common case, so every `Input` prop and `FormField` wiring still apply.
+
+## Import
+
+```tsx
+import { PhoneInput } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<PhoneInput value={phone} onChangeText={setPhone} placeholder="(555) 123-4567" />
+```
+
+## Props
+
+| Prop           | Type                     | Default                    | Description                                |
+| -------------- | ------------------------ | -------------------------- | ------------------------------------------ |
+| `value`        | `string`                 | —                          | Controlled text value.                     |
+| `onChangeText` | `(text: string) => void` | —                          | Fired on every keystroke.                  |
+| `invalid`      | `boolean`                | inherited from `FormField` | Forces the error border colour.            |
+| `disabled`     | `boolean`                | inherited from `FormField` | Drops to 60% opacity and disables editing. |
+
+`PhoneInputProps` is an alias of `InputProps`, so it accepts every [`Input`](/docs/components/forms/input) prop. It defaults to `keyboardType="phone-pad"`, `autoComplete="tel"`, and `textContentType="telephoneNumber"`; each can be overridden.
+
+## Accessibility
+
+`PhoneInput` inherits `Input`'s accessibility behaviour: inside a `FormField` it forwards `accessibilityLabelledBy`, `aria-invalid`, and `aria-required`. The telephone content type lets platform autofill offer a saved number.

@@ -1,0 +1,36 @@
+---
+title: DescriptionList
+description: A stacked term-and-description list for glossaries, metadata, and definition-style content.
+---
+
+`DescriptionList` renders `{ term, description }` pairs stacked vertically — the term as a semibold label above its description. Unlike [`KeyValueRow`](/docs/components/display/key-value-row), the value sits below the term rather than beside it, which suits longer descriptions.
+
+## Import
+
+```tsx
+import { DescriptionList } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DescriptionList
+  items={[
+    { term: 'SLA', description: 'Service Level Agreement — uptime guarantee.' },
+    { term: 'TTL', description: 'Time To Live — cache lifetime in seconds.' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop    | Type                             | Default | Description                       |
+| ------- | -------------------------------- | ------- | --------------------------------- |
+| `items` | `readonly DescriptionListItem[]` | —       | Term/description pairs to render. |
+| `style` | `StyleProp<ViewStyle>`           | —       | Style applied to the container.   |
+
+Each `DescriptionListItem` has a `term` and a `description`, both `ReactNode`. Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="list"` and each pair is marked `none`. String terms render with label styling and string descriptions as body text, so each definition reads as a unit.

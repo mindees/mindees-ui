@@ -1,0 +1,142 @@
+---
+title: Auth blocks
+description: Eight accessible authentication blocks for sign in, sign up, password recovery, OTP verification, social login, and session handling. Pure UI, props-driven.
+---
+
+Authentication flows composed from MindeesUI form primitives. Every block is pure UI — credentials and actions flow through `onSubmit` callbacks; nothing is fetched, validated against a server, or stored.
+
+## Import
+
+```tsx
+import {
+  LoginForm,
+  SignupForm,
+  ForgotPasswordForm,
+  ResetPasswordForm,
+  OTPVerification,
+  SocialLoginButtons,
+  LogoutConfirmation,
+  SessionExpiredModal,
+} from '@mindees/blocks';
+```
+
+## Usage
+
+```tsx
+<LoginForm
+  loading={pending}
+  error={error}
+  onSubmit={({ email, password }) => signIn(email, password)}
+  onForgotPassword={() => navigate('forgot')}
+  footer={<SocialLoginButtons providers={providers} />}
+/>
+```
+
+## Blocks
+
+### LoginForm
+
+Email + password form with an optional "Forgot password?" link and a `footer` slot.
+
+| Prop               | Type                                | Description                                                    |
+| ------------------ | ----------------------------------- | -------------------------------------------------------------- |
+| `onSubmit`         | `(values: LoginFormValues) => void` | Called with the trimmed email and raw password on submit.      |
+| `loading`          | `boolean`                           | Disables inputs and shows a spinner on the submit button.      |
+| `error`            | `string`                            | Top-level error message, announced to assistive tech.          |
+| `onForgotPassword` | `() => void`                        | Shows a "Forgot password?" link when provided.                 |
+| `footer`           | `ReactNode`                         | Slot below the submit button, e.g. a `SocialLoginButtons` row. |
+| `submitLabel`      | `string`                            | Submit button label. Defaults to `"Sign in"`.                  |
+
+### SignupForm
+
+Name, email, password, confirm-password, and terms checkbox. Submits a `SignupFormValues` object.
+
+| Prop          | Type                                 | Description                                               |
+| ------------- | ------------------------------------ | --------------------------------------------------------- |
+| `onSubmit`    | `(values: SignupFormValues) => void` | Called with the collected values on submit.               |
+| `loading`     | `boolean`                            | Disables inputs and shows a spinner on the submit button. |
+| `error`       | `string`                             | Top-level error message, announced to a11y.               |
+| `termsLabel`  | `ReactNode`                          | Label rendered next to the terms checkbox.                |
+| `submitLabel` | `string`                             | Submit button label. Defaults to `"Create account"`.      |
+
+### ForgotPasswordForm
+
+Email field that flips to a success confirmation via the `sent` flag.
+
+| Prop          | Type                                         | Description                                           |
+| ------------- | -------------------------------------------- | ----------------------------------------------------- |
+| `onSubmit`    | `(values: ForgotPasswordFormValues) => void` | Called with the trimmed email on submit.              |
+| `loading`     | `boolean`                                    | Disables inputs and shows a spinner.                  |
+| `error`       | `string`                                     | Top-level error message.                              |
+| `sent`        | `boolean`                                    | Renders the success confirmation instead of the form. |
+| `onBack`      | `() => void`                                 | Shows a "Back to sign in" link when provided.         |
+| `submitLabel` | `string`                                     | Submit label. Defaults to `"Send reset link"`.        |
+| `sentMessage` | `string`                                     | Message shown in the `sent` state.                    |
+
+### ResetPasswordForm
+
+New-password + confirm-password form for completing a reset.
+
+| Prop          | Type                                        | Description                                        |
+| ------------- | ------------------------------------------- | -------------------------------------------------- |
+| `onSubmit`    | `(values: ResetPasswordFormValues) => void` | Called with the new password and its confirmation. |
+| `loading`     | `boolean`                                   | Disables inputs and shows a spinner.               |
+| `error`       | `string`                                    | Top-level error message.                           |
+| `submitLabel` | `string`                                    | Submit label. Defaults to `"Reset password"`.      |
+
+### OTPVerification
+
+Segmented one-time-code field with auto-verify and a resend link.
+
+| Prop               | Type                     | Description                                                 |
+| ------------------ | ------------------------ | ----------------------------------------------------------- |
+| `onVerify`         | `(code: string) => void` | Called with the entered code on verify or auto-complete.    |
+| `onResend`         | `() => void`             | Shows a "Resend code" link when provided.                   |
+| `length`           | `number`                 | Number of code digits. Defaults to `6`.                     |
+| `loading`          | `boolean`                | Disables input and shows a spinner on verify.               |
+| `error`            | `string`                 | Top-level error message.                                    |
+| `title`            | `string`                 | Heading above the code field.                               |
+| `description`      | `string`                 | Supporting line under the heading.                          |
+| `verifyOnComplete` | `boolean`                | Verify when the final digit is entered. Defaults to `true`. |
+| `submitLabel`      | `string`                 | Verify button label. Defaults to `"Verify"`.                |
+
+### SocialLoginButtons
+
+Renders a list of SSO providers as a vertical column or a grid.
+
+| Prop        | Type                        | Description                                                   |
+| ----------- | --------------------------- | ------------------------------------------------------------- |
+| `providers` | `readonly SocialProvider[]` | Providers (`key`, `label`, `icon?`, `onPress`, `disabled?`).  |
+| `layout`    | `'vertical' \| 'grid'`      | Single column or multi-column grid. Defaults to `'vertical'`. |
+| `columns`   | `number`                    | Column count when `layout` is `'grid'`. Defaults to `2`.      |
+| `disabled`  | `boolean`                   | Disable every provider button.                                |
+
+### LogoutConfirmation
+
+Destructive confirmation dialog wrapping `ConfirmationDialog`.
+
+| Prop           | Type         | Description                                   |
+| -------------- | ------------ | --------------------------------------------- |
+| `visible`      | `boolean`    | Controls visibility.                          |
+| `onConfirm`    | `() => void` | Called when the user confirms sign-out.       |
+| `onCancel`     | `() => void` | Called on cancel, backdrop, or hardware back. |
+| `title`        | `string`     | Dialog title. Defaults to `"Sign out?"`.      |
+| `message`      | `string`     | Supporting message under the title.           |
+| `confirmLabel` | `string`     | Confirm label. Defaults to `"Sign out"`.      |
+| `cancelLabel`  | `string`     | Cancel label. Defaults to `"Cancel"`.         |
+
+### SessionExpiredModal
+
+Re-authentication dialog; becomes non-dismissible when `onDismiss` is omitted.
+
+| Prop                  | Type         | Description                                                    |
+| --------------------- | ------------ | -------------------------------------------------------------- |
+| `visible`             | `boolean`    | Controls visibility.                                           |
+| `onReauthenticate`    | `() => void` | Called when the user chooses to sign in again.                 |
+| `onDismiss`           | `() => void` | Dismiss handler; when omitted the modal is non-dismissible.    |
+| `title`               | `string`     | Dialog title. Defaults to `"Session expired"`.                 |
+| `description`         | `string`     | Supporting message under the title.                            |
+| `reauthenticateLabel` | `string`     | Re-auth button label. Defaults to `"Sign in again"`.           |
+| `dismissLabel`        | `string`     | Dismiss button label. Only shown when `onDismiss` is provided. |
+
+All blocks also accept a `style` prop spread onto the root container.

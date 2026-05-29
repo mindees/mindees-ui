@@ -1,0 +1,41 @@
+---
+title: UserMenu
+description: Avatar trigger that opens a dropdown of account actions, with an optional compact mode showing the avatar alone and controllable open state.
+---
+
+`UserMenu` is the account control usually placed in a header. It renders an avatar (with an initials fallback) and the user's name as the trigger, then opens a `DropdownMenu` of account actions when tapped. It can be driven as a controlled or uncontrolled menu.
+
+## Import
+
+```tsx
+import { UserMenu } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<UserMenu
+  user={{ name: 'Ada Lovelace', avatar: 'https://example.com/ada.png' }}
+  items={[
+    { label: 'Profile', onPress: openProfile },
+    { label: 'Settings', onPress: openSettings },
+    { label: 'Sign out', onPress: signOut },
+  ]}
+/>
+```
+
+## Props
+
+| Prop           | Type                      | Default    | Description                                                             |
+| -------------- | ------------------------- | ---------- | ----------------------------------------------------------------------- |
+| `user`         | `UserMenuUser`            | —          | `name` plus optional `avatar` URL or RN source; falls back to initials. |
+| `items`        | `MenuItem[]`              | —          | Menu rows passed through to the underlying `DropdownMenu`.              |
+| `compact`      | `boolean`                 | `false`    | Hide the name label, showing only the avatar.                           |
+| `placement`    | `'top' \| 'bottom'`       | `'bottom'` | Side the menu panel opens toward relative to the trigger.               |
+| `open`         | `boolean`                 | —          | Controlled open state; omit to let the component manage it internally.  |
+| `onOpenChange` | `(open: boolean) => void` | —          | Called when the open state changes.                                     |
+| `style`        | `StyleProp<ViewStyle>`    | —          | Style applied to the trigger row, not the menu panel.                   |
+
+## Accessibility
+
+The trigger is a `button` labelled `Account menu for {name}` so screen readers announce whose menu it opens. The avatar and name render inside the pressable trigger; menu items inherit their roles and labels from `DropdownMenu`.

@@ -7,7 +7,12 @@
     "architecture",
     "theming",
     "providers",
+    "comparison",
+    "migration",
     "---Components---",
-    "components"
+    "components",
+    "icons",
+    "---Blocks---",
+    "blocks"
   ]
 }

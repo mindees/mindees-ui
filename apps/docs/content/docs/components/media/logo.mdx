@@ -1,0 +1,35 @@
+---
+title: Logo
+description: Renders a brand mark as an image when a source is given, otherwise as a text wordmark, sizing by a logical height while preserving aspect ratio.
+---
+
+`Logo` displays a brand mark. When a `source` is provided it renders the image at a fixed logical height with its width auto-derived from the aspect ratio; otherwise it falls back to a bold text wordmark from `label`. It composes the base `Image` and `Text`.
+
+## Import
+
+```tsx
+import { Logo } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<Logo source="https://example.com/logo.svg" height={28} accessibilityLabel="Acme" />
+
+<Logo label="Acme" />
+```
+
+## Props
+
+| Prop                 | Type                            | Default | Description                                                  |
+| -------------------- | ------------------------------- | ------- | ------------------------------------------------------------ |
+| `source`             | `string \| ImageSourcePropType` | —       | Image source; when present it wins over `label`.             |
+| `label`              | `string`                        | —       | Text wordmark used when no `source` is given.                |
+| `height`             | `number`                        | `32`    | Logical height of the mark in points; width derives from it. |
+| `accessibilityLabel` | `string`                        | —       | Defaults to `label`, then to a generic `"Logo"`.             |
+| `style`              | `StyleProp<ViewStyle>`          | —       | Style for the outer container.                               |
+| `imageStyle`         | `StyleProp<ImageStyle>`         | —       | Style forwarded to the image when a `source` is rendered.    |
+
+## Accessibility
+
+The container uses `accessibilityRole="image"` with the resolved `accessibilityLabel`. The inner image is marked `accessible={false}` so the mark is announced once, by the container, rather than twice.

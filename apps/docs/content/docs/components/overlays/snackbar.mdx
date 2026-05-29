@@ -1,0 +1,42 @@
+---
+title: Snackbar
+description: A bottom-anchored transient message with one optional action that persists by default until dismissed or auto-hidden.
+---
+
+`Snackbar` shows a short, low-priority message anchored to the bottom of the screen, with one optional trailing action such as Undo. Unlike `Toast`, it persists by default — set a positive `duration` to auto-hide. It fades in respecting reduce motion and announces itself politely to assistive tech.
+
+## Import
+
+```tsx
+import { Snackbar } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <Snackbar
+    visible={visible}
+    message="Message archived"
+    action={{ label: 'Undo', onPress: restore }}
+    onDismiss={() => setVisible(false)}
+  />
+);
+```
+
+## Props
+
+| Prop        | Type                   | Default | Description                                              |
+| ----------- | ---------------------- | ------- | -------------------------------------------------------- |
+| `visible`   | `boolean`              | —       | Controls whether the snackbar is shown.                  |
+| `message`   | `string`               | —       | Text content announced and displayed.                    |
+| `action`    | `SnackbarAction`       | —       | Optional single trailing action (`{ label, onPress }`).  |
+| `onDismiss` | `() => void`           | —       | Called when the auto-dismiss timer elapses.              |
+| `duration`  | `number`               | `0`     | Auto-dismiss after N ms. `0` keeps it open until hidden. |
+| `style`     | `StyleProp<ViewStyle>` | —       | Style applied to the snackbar surface.                   |
+
+## Accessibility
+
+The surface uses `accessibilityRole="alert"` with a polite live region, and the message is announced through the library announcer when it appears. The trailing action is a `Pressable` with `accessibilityRole="button"` labeled by its text and a 44pt minimum tap target. The fade animation is skipped when reduce motion is enabled.

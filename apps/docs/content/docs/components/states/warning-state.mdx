@@ -1,0 +1,34 @@
+---
+title: WarningState
+description: A centered cautionary screen in a warning tone with a title and optional description.
+---
+
+`WarningState` is a centered layout for cautionary messages that need attention without signalling failure. Its title defaults to `Heads up` in the warning tone, with an optional description and action.
+
+## Import
+
+```tsx
+import { WarningState } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<WarningState title="Storage almost full" description="Free up space to keep syncing." />
+```
+
+## Props
+
+| Prop          | Type                   | Default      | Description                                        |
+| ------------- | ---------------------- | ------------ | -------------------------------------------------- |
+| `title`       | `string`               | `'Heads up'` | Heading copy.                                      |
+| `description` | `string`               | —            | Supporting copy shown under the title.             |
+| `icon`        | `ReactNode`            | —            | Icon or illustration rendered above the title.     |
+| `action`      | `ReactNode`            | —            | Action node (typically a `Button`) below the copy. |
+| `style`       | `StyleProp<ViewStyle>` | —            | Style applied to the container.                    |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="summary"` so the warning reads as a single status. Colour conveys the warning tone, so make the title and description clear on their own.

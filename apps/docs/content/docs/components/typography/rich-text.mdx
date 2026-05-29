@@ -1,0 +1,40 @@
+---
+title: Rich Text
+description: Renders an array of simple inline segments into one Text composed of nested spans supporting bold, italic, inline code, and color.
+---
+
+`RichText` renders an ordered array of `segments` into a single `Text` made of nested spans. Each segment can be bold, italic, inline code, or carry an explicit color. It is deliberately not a markdown renderer — it is a minimal way to compose styled inline runs from data.
+
+## Import
+
+```tsx
+import { RichText } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<RichText
+  segments={[
+    { text: 'Run ' },
+    { text: 'npm i @mindees/ui', code: true },
+    { text: ' to ' },
+    { text: 'install', bold: true },
+    { text: '.' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop       | Type                         | Default | Description                                   |
+| ---------- | ---------------------------- | ------- | --------------------------------------------- |
+| `segments` | `readonly RichTextSegment[]` | —       | Ordered inline runs rendered as nested spans. |
+| `variant`  | `TextStyleName`              | —       | Named text style applied to the outer Text.   |
+| `tone`     | `TextTone`                   | —       | Base color role for the composed text.        |
+
+Each `RichTextSegment` is `{ text, bold?, italic?, code?, color? }`. Inherits all `TextProps` except `children`.
+
+## Accessibility
+
+`RichText` renders a single `Text` element with nested `Text` and `Code` spans, so it carries standard text semantics, respects font scaling, and is read as one continuous run by screen readers. Code segments compose the themed `Code` component inline.

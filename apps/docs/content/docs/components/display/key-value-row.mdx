@@ -1,0 +1,33 @@
+---
+title: KeyValueRow
+description: A single row pairing a left-aligned label with a right-aligned value and an optional divider.
+---
+
+`KeyValueRow` lays out one label/value pair on a row — the label muted on the left, the value emphasised and right-aligned. String and number values are wrapped in themed `Text`; any other node is rendered as-is. It is the building block of [`DetailView`](/docs/components/display/detail-view).
+
+## Import
+
+```tsx
+import { KeyValueRow } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<KeyValueRow label="Email" value="ada@example.com" divider />
+```
+
+## Props
+
+| Prop      | Type                   | Default | Description                     |
+| --------- | ---------------------- | ------- | ------------------------------- |
+| `label`   | `ReactNode`            | —       | Left-aligned label.             |
+| `value`   | `ReactNode`            | —       | Right-aligned value.            |
+| `divider` | `boolean`              | `false` | Draw a bottom hairline divider. |
+| `style`   | `StyleProp<ViewStyle>` | —       | Style applied to the row.       |
+
+Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The row is marked `accessibilityRole="none"` so the label and value are announced as one unit. Provide a concise `label` so the pairing is self-explanatory to assistive tech.

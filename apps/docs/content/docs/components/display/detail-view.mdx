@@ -1,0 +1,37 @@
+---
+title: DetailView
+description: A label/value list for a single record, rendered as stacked rows with optional hairline dividers.
+---
+
+`DetailView` renders an array of `{ label, value }` items as stacked [`KeyValueRow`](/docs/components/display/key-value-row)s, ideal for describing a single record on a detail screen. Dividers are drawn between rows by default and can be turned off for a tighter layout.
+
+## Import
+
+```tsx
+import { DetailView } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DetailView
+  items={[
+    { label: 'Status', value: 'Active' },
+    { label: 'Plan', value: 'Pro' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop       | Type                        | Default | Description                             |
+| ---------- | --------------------------- | ------- | --------------------------------------- |
+| `items`    | `readonly DetailViewItem[]` | —       | Label/value rows describing one record. |
+| `dividers` | `boolean`                   | `true`  | Draw hairline dividers between rows.    |
+| `style`    | `StyleProp<ViewStyle>`      | —       | Style applied to the container.         |
+
+Each `DetailViewItem` has a `label` and a `value`, both `ReactNode`. Inherits the remaining `ViewProps` (except `style`).
+
+## Accessibility
+
+The container uses `accessibilityRole="list"`. Each row delegates to `KeyValueRow`, which keeps the label and value visually paired so they are announced together.

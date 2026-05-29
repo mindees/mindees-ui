@@ -1,0 +1,55 @@
+---
+title: Dialog
+description: Centered modal dialog with a title, optional description, body content, and a trailing-aligned footer for action buttons.
+---
+
+`Dialog` composes `Modal` into a structured panel — a header (`title` + `description`), a body for arbitrary content, and a `footer` slot aligned to the trailing edge for actions. It inherits the scrim, dismiss-on-backdrop, and reduce-motion behavior of `Modal`.
+
+## Import
+
+```tsx
+import { Dialog } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+const [visible, setVisible] = useState(false);
+
+return (
+  <Dialog
+    visible={visible}
+    onClose={() => setVisible(false)}
+    title="Rename project"
+    description="Pick a name your team will recognize."
+    footer={
+      <>
+        <Button variant="ghost" tone="neutral" onPress={close}>
+          Cancel
+        </Button>
+        <Button onPress={save}>Save</Button>
+      </>
+    }
+  >
+    <TextInput label="Name" />
+  </Dialog>
+);
+```
+
+## Props
+
+| Prop                 | Type                   | Default | Description                                                      |
+| -------------------- | ---------------------- | ------- | ---------------------------------------------------------------- |
+| `visible`            | `boolean`              | —       | Controls whether the dialog is shown.                            |
+| `onClose`            | `() => void`           | —       | Called on backdrop press (when `dismissible`) and platform back. |
+| `dismissible`        | `boolean`              | `true`  | When `false`, backdrop taps are ignored.                         |
+| `title`              | `string`               | —       | Heading rendered at the top of the panel.                        |
+| `description`        | `string`               | —       | Short secondary-toned line beneath the title.                    |
+| `footer`             | `React.ReactNode`      | —       | Footer slot, typically action buttons, aligned trailing.         |
+| `accessibilityLabel` | `string`               | `title` | Label announced when the dialog opens.                           |
+| `style`              | `StyleProp<ViewStyle>` | —       | Style for the elevated panel (not the scrim).                    |
+| `children`           | `React.ReactNode`      | —       | Body content between the header and footer.                      |
+
+## Accessibility
+
+Built on `Modal`, so focus capture and the Android back button are handled by the platform. The `accessibilityLabel` defaults to `title` so the dialog's purpose is announced on open. The body is marked `accessibilityViewIsModal` so assistive tech treats it as a contained context. When reduce motion is enabled the fade animation is skipped.

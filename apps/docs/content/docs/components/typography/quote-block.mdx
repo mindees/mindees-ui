@@ -1,0 +1,32 @@
+---
+title: Quote Block
+description: An indented italic blockquote with a left accent border colored by the theme brand action color for quoted passages.
+---
+
+`QuoteBlock` renders a blockquote: an indented, italic passage inside a `View` with a left accent border. The border uses the theme's brand action color, so quotes pick up the app's accent automatically. The text defaults to the secondary tone and forced italic; style the wrapper via `containerStyle`.
+
+## Import
+
+```tsx
+import { QuoteBlock } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<QuoteBlock>Components that understand layout context produce more resilient UI.</QuoteBlock>
+```
+
+## Props
+
+| Prop             | Type                   | Default       | Description                                 |
+| ---------------- | ---------------------- | ------------- | ------------------------------------------- |
+| `containerStyle` | `StyleProp<ViewStyle>` | —             | Style applied to the bordered wrapper View. |
+| `tone`           | `TextTone`             | `'secondary'` | Color role applied to the quoted text.      |
+| `children`       | `React.ReactNode`      | —             | Quoted passage.                             |
+
+Inherits all `TextProps` except `italic`, which is always on.
+
+## Accessibility
+
+`QuoteBlock` renders a `Text` element inside a styled `View`, so it carries standard text semantics and respects font scaling. The accent border is decorative; the quoted text itself conveys all meaning to assistive tech.

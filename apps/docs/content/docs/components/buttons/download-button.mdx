@@ -1,0 +1,39 @@
+---
+title: Download Button
+description: A button preset with a leading download glyph and a Download default label that signals a download affordance to users.
+---
+
+`DownloadButton` is a `Button` preset that renders a leading download (↓) glyph and a "Download" label by default. It is a visual affordance only — it performs no filesystem access. Wire up your own download logic through `onDownload`. It inherits base `Button` props except `children` and `onPress`.
+
+## Import
+
+```tsx
+import { DownloadButton } from '@mindees/ui';
+```
+
+## Usage
+
+```tsx
+<DownloadButton onDownload={saveFile} />
+```
+
+With a custom label and tone:
+
+```tsx
+<DownloadButton tone="success" onDownload={exportCsv}>
+  Export CSV
+</DownloadButton>
+```
+
+## Props
+
+| Prop         | Type              | Default      | Description                         |
+| ------------ | ----------------- | ------------ | ----------------------------------- |
+| `onDownload` | `() => void`      | —            | Invoked when the button is pressed. |
+| `children`   | `React.ReactNode` | `'Download'` | Label text.                         |
+
+Inherits the remaining `ButtonBaseProps` (`variant`, `tone`, `size`, `leading`, etc.) except `children` and `onPress`.
+
+## Accessibility
+
+`DownloadButton` is a standard `Button` with `accessibilityRole="button"` and tap-target sizing. The leading glyph is decorative — the label text carries the accessible meaning, so keep a descriptive label when overriding the default.
