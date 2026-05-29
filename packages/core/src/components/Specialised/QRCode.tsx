@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type View } from 'react-native';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { tagComponent } from '../../layout-intelligence/tagged-component';
 import { useTokens } from '../../theme/ThemeProvider';
@@ -11,34 +11,38 @@ export interface QRCodeProps {
   readonly size?: number;
   readonly color?: string;
   readonly backgroundColor?: string;
+  /** Style applied to the wrapping container (caller-last, overrides). */
+  readonly style?: StyleProp<ViewStyle>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type QRCodePeer = React.ComponentType<any>;
 
-const QRCodeImpl = React.forwardRef<View, QRCodeProps>(function QRCode(props, _ref) {
+const QRCodeImpl = React.forwardRef<View, QRCodeProps>(function QRCode(props, ref) {
+  const { value, size, color, backgroundColor, style } = props;
   const tokens = useTokens();
   const QRPeer = tryLoadPeer<QRCodePeer>(() => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const mod = require('react-native-qrcode-svg') as { default: QRCodePeer };
     return mod.default;
   });
-  if (!QRPeer) {
-    return (
-      <MissingPeer
-        peer="react-native-qrcode-svg"
-        install="pnpm add react-native-qrcode-svg"
-        label="QRCode requires react-native-qrcode-svg"
-      />
-    );
-  }
   return (
-    <QRPeer
-      value={props.value}
-      size={props.size ?? 200}
-      color={props.color ?? tokens.colors.text.primary}
-      backgroundColor={props.backgroundColor ?? tokens.colors.background.canvas}
-    />
+    <View ref={ref} style={style}>
+      {QRPeer ? (
+        <QRPeer
+          value={value}
+          size={size ?? 200}
+          color={color ?? tokens.colors.text.primary}
+          backgroundColor={backgroundColor ?? tokens.colors.background.canvas}
+        />
+      ) : (
+        <MissingPeer
+          peer="react-native-qrcode-svg"
+          install="pnpm add react-native-qrcode-svg"
+          label="QRCode requires react-native-qrcode-svg"
+        />
+      )}
+    </View>
   );
 });
 
