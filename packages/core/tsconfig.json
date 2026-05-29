@@ -7,7 +7,9 @@
     "types": ["jest", "node"],
     "paths": {
       "@mindees/tokens": ["../tokens/src"],
-      "@mindees/tokens/*": ["../tokens/src/*"]
+      "@mindees/tokens/*": ["../tokens/src/*"],
+      "@mindees/icons": ["../icons/src"],
+      "@mindees/icons/*": ["../icons/src/*"]
     }
   },
   // Dev/lint tsconfig includes tests + jest.setup so typescript-eslint's
