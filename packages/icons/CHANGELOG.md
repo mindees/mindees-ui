@@ -1,5 +1,11 @@
 # @mindees/icons
 
+## 1.2.0
+
+### Minor Changes
+
+- [`7f71425`](https://github.com/mindees/mindees-ui/commit/7f71425b7156aecebd0634287b3f4b497bebebab) Thanks [@aashir-athar](https://github.com/aashir-athar)! - Add ~50 more tree-shakeable, fully-customizable icons (arrows, actions, nav, status, media, common) — each accepts size/color (+ strokeWidth where stroke-based).
+
 ## 1.0.1
 
 ### Patch Changes
