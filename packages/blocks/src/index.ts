@@ -7,3 +7,5 @@ export * from './auth';
 export * from './commerce';
 export * from './account';
 export * from './social';
+export * from './dashboard';
+export * from './web';
