@@ -8,7 +8,8 @@
 
 <p align="center">
   <b>The universal React Native + Expo UI component library</b> for the New Architecture.<br/>
-  ~60 components. A deterministic <b>Layout Intelligence Layer</b>. iOS, Android, React Native Web.
+  ~145 components that understand layout context — beautiful layouts without babysitting spacing props.<br/>
+  A deterministic <b>Layout Intelligence Layer</b>, one-line theming, iOS, Android &amp; React Native Web.
 </p>
 
 <p align="center">
@@ -21,29 +22,35 @@
 
 <p align="center">
   <a href="https://mindees-ui.vercel.app"><b>Documentation</b></a> ·
+  <a href="https://mindees-ui.vercel.app/docs/components"><b>Components</b></a> ·
+  <a href="https://www.npmjs.com/package/@mindees/blocks"><b>Blocks</b></a> ·
   <a href="https://github.com/mindees/mindees-ui"><b>GitHub</b></a> ·
-  <a href="https://github.com/mindees/mindees-ui/blob/main/docs/ARCHITECTURE.md"><b>Architecture</b></a> ·
-  <a href="https://github.com/mindees/mindees-ui/blob/main/docs/ROADMAP.md"><b>Roadmap</b></a>
+  <a href="https://github.com/mindees/mindees-ui/blob/main/docs/ARCHITECTURE.md"><b>Architecture</b></a>
 </p>
 
 ---
 
 ## Why MindeesUI
 
-`@mindees/ui` is a **React Native component library** built for **Expo SDK 55 / 56** (React Native 0.83 / 0.85) on the **New Architecture only** — Fabric, JSI, TurboModules, and Bridgeless mode. It works on **iOS, Android, and React Native Web** from one codebase, and ships every component with **TypeScript strict types, WCAG 2.2 AA accessibility, Reanimated v4 UI-thread animations, and Unistyles v3 zero-re-render theming**.
+`@mindees/ui` is a **React Native component library** and **design system** built for **Expo SDK 55 / 56** (React Native 0.83 / 0.85) on the **New Architecture only** — Fabric, JSI, TurboModules, and Bridgeless mode. It ships **~145 components** that work on **iOS, Android, and React Native Web** from one codebase, every one with **TypeScript strict types, WCAG 2.2 AA accessibility, Reanimated v4 UI-thread animations, and Unistyles v3 zero-re-render theming**. Tuned to stay smooth even on low-end Android.
 
-The differentiator is a **deterministic Layout Intelligence Layer**: a Radix-style `Slot`/`asChild` pattern + child introspection + token-driven auto-spacing + intrinsic `fill`/`hug`/`fixed` sizing + specialised parent–child contexts. Drop a heading next to a paragraph and the gap is computed for you; nest a `Button` in a `ButtonGroup` and the outer corners merge automatically; wrap an `Input` in a `FormField` and accessibility ids wire themselves up. Every rule is documented and overridable — never a black box.
+The differentiator: these are **components that understand layout context**. A **deterministic Layout Intelligence Layer** — a Radix-style `Slot`/`asChild` pattern + child introspection + token-driven auto-spacing + intrinsic `fill`/`hug`/`fixed` sizing + specialised parent–child contexts — gives you beautiful layouts **without babysitting spacing props**. Drop a heading next to a paragraph and the gap is computed for you; nest a `Button` in a `ButtonGroup` and the outer corners merge automatically; wrap an `Input` in a `FormField` and accessibility ids wire themselves up. Every rule is documented and overridable — never a black box.
+
+Rebranding is **one line**: `createThemes({ light: { brand }, dark: { brand } })` derives a full, accessible light + dark theme from a single color. Need whole screens, not just primitives? Pair it with [`@mindees/blocks`](https://www.npmjs.com/package/@mindees/blocks) — 74 ready-made screen blocks composed from these components.
 
 ## Features
 
+- 🧰 **~145 components** — layout, typography, every input type, buttons, overlays, navigation, data display, states, media, and mobile gestures. See [What's in the box](#whats-in-the-box-145-components).
 - 🧠 **Deterministic Layout Intelligence Layer** — compound components, Radix-style `Slot` / `asChild`, child introspection, auto-spacing, intrinsic sizing, parent–child contexts.
 - 📱 **Universal React Native + Expo + React Native Web** — one codebase ships to iOS, Android, and the web from Expo SDK 55 or 56.
 - ⚡ **New Architecture only** — Fabric + JSI + TurboModules + Bridgeless. No legacy bridge overhead.
-- 🚀 **60 / 120 fps by design** — `react-native-reanimated` v4 worklets, `@shopify/flash-list` for long lists, `react-native-unistyles` v3 Nitro-powered styling.
+- 🚀 **60 / 120 fps by design** — `react-native-reanimated` v4 worklets, `@shopify/flash-list` for long lists, `react-native-unistyles` v3 Nitro-powered styling. Tuned for low-end Android.
+- 🎨 **One-line theming** — `createThemes({ light: { brand }, dark: { brand } })` derives a full accessible light + dark theme from one color. Light, dark, and high-contrast ship out of the box. Web `boxShadow` supported.
+- 🛠️ **Customizable** — every primitive forwards `style`, native props, and `ref`, so you can extend or restyle any component without forking.
 - ♿ **Accessibility-first** — WCAG 2.2 AA, screen reader labels, `prefers-reduced-motion`, Dynamic Type, full RTL, native haptics.
-- 🎨 **Design tokens & theming** — light, dark, and high-contrast themes out of the box. `createTheme` for fully custom brand themes.
 - 🧪 **Tested** — Jest + React Native Testing Library, Reassure perf-regression on every PR.
 - 🪶 **Tree-shakeable** — `sideEffects: false`, subpath exports per component.
+- 🧱 **Screen blocks** — pair with [`@mindees/blocks`](https://www.npmjs.com/package/@mindees/blocks) for 74 ready-made auth, commerce, dashboard, and social screens.
 - 🧠 **TypeScript strict** — zero `any` in the public API.
 
 ## Install
@@ -110,19 +117,22 @@ export default function App() {
 }
 ```
 
-## What's in the box (~60 components)
+## What's in the box (~145 components)
 
-| Domain                                              | Components                                                                                                                                                                                                                                                     |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Layout**                                          | `Box`, `Stack`, `HStack`, `VStack`, `ZStack`, `Grid`, `Divider`, `Spacer`, `SafeAreaView`, `ScreenWrapper`                                                                                                                                                     |
-| **Typography**                                      | `Text`, `Heading`, `Caption`, `Label`, `Link`, `Code`, `Kbd`                                                                                                                                                                                                   |
-| **Forms**                                           | `FormField`, `Input`, `Textarea`, `PasswordInput`, `SearchInput`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`                                                                                                                                 |
-| **Buttons**                                         | `Button`, `IconButton`, `FAB`, `ButtonGroup`                                                                                                                                                                                                                   |
-| **Overlays**                                        | `Modal`, `BottomSheet`, `Toast`, `Tooltip`, `Popover`, `Drawer`, `Alert`, `ActionSheet`                                                                                                                                                                        |
-| **Navigation**                                      | `Tabs`, **`PillTabBar`** (2026 style — segmented / floating / dock / glass variants), `TopBar`, `Breadcrumb`, `Pagination`, `Stepper`                                                                                                                          |
-| **Display & Data**                                  | `Card`, `Avatar`, `AvatarGroup`, `Badge`, `Tag`, `Chip`, `Image`, `List`, `ListItem`, `Accordion`, `Progress`, `Skeleton`, `Spinner`, `Stat`, `Rating`, `Timeline`                                                                                             |
-| **Specialised** (optional peers, graceful fallback) | `CodeBlock`, `ColorPicker` (zero-deps), `QRCode`, `Barcode`, `MapView`, `SignaturePad`, `WebView`, `Camera`                                                                                                                                                    |
-| **Foundations**                                     | `ThemeProvider`, `PortalProvider`, `Portal`, `ErrorBoundary`, `configureUnistyles`, `createStyles`, `useResponsive`, `useTheme`, `useTokens`, `useReduceMotion`, `useUniqueId`, `useAnnouncer`, `useFormFieldA11y`, `Slot`, `tagComponent`, `describeChildren` |
+| Domain                                              | Components                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Layout**                                          | `Box`, `Stack`, `HStack`, `VStack`, `ZStack`, `Grid`, `Divider`, `Spacer`, `SafeAreaView`, `ScreenWrapper`                                                                                                                                                                                                                                                                   |
+| **Typography**                                      | `Text`, `Heading`, `Subheading`, `Paragraph`, `Caption`, `Label`, `HelperText`, `ErrorText`, `Link`, `Code`, `Kbd`, `Mark`, `QuoteBlock`, `TruncatedText`, `ReadMore`, `RichText`                                                                                                                                                                                            |
+| **Forms & inputs**                                  | `FormField`, `Input`, `Textarea`, `PasswordInput`, `SearchInput`, `EmailInput`, `PhoneInput`, `NumberInput`, `CurrencyInput`, `OTPInput`, `PINInput`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`, `Select`, `MultiSelect`, `Autocomplete`, `TagInput`, `Slider`, `RangeSlider`, `DatePicker`, `DateRangePicker`, `TimePicker`, `FilePicker`, `ImagePicker` |
+| **Buttons**                                         | `Button`, `IconButton`, `FAB`, `ButtonGroup`, `SplitButton`, `ToggleButton`, `CloseButton`, `CopyButton`, `ShareButton`, `DownloadButton`, `UploadButton`, `RetryButton`, `BackButton`                                                                                                                                                                                       |
+| **Overlays**                                        | `Modal`, `BottomSheet`, `Toast`, `Tooltip`, `Popover`, `Drawer`, `Alert`, `ActionSheet`, `Dialog`, `ConfirmationDialog`, `Snackbar`, `Banner`, `Notification`, `DropdownMenu`, `ContextMenu`, `SidePanel`, `Lightbox`, `FullscreenOverlay`, `HoverCard`, `MegaMenu`, `CommandPalette`                                                                                        |
+| **Navigation**                                      | `Tabs`, **`PillTabBar`** (2026 style — segmented / floating / dock / glass variants), `TopBar`, `Breadcrumb`, `Pagination`, `Stepper`, `BottomNavigation`, `UserMenu`, `SettingsMenu`, `GlobalSearch`                                                                                                                                                                        |
+| **Display & data**                                  | `Card`, `Avatar`, `AvatarGroup`, `Badge`, `Tag`, `Chip`, `Pill`, `Image`, `List`, `ListItem`, `Accordion`, `Progress`, `Skeleton`, `Spinner`, `Stat`, `Rating`, `Timeline`, `Table`, `DataGrid`, `Feed`, `ActivityLog`, `KPICard`, `DetailView`, `KeyValueRow`, `DescriptionList`, `Carousel`, `ImageGallery`, `TreeView`, `Calendar`                                        |
+| **States**                                          | `EmptyState`, `ErrorState`, `OfflineState`, `MaintenanceState`, `LoadingState`, `SuccessState`, `WarningState`, `InfoState`                                                                                                                                                                                                                                                  |
+| **Media** (gated optional peers)                    | `ResponsiveImage`, `ImagePreview`, `FilePreview`, `Logo`, `VideoPlayer`, `AudioPlayer`, `PDFViewer`, `QRScanner`, `BarcodeScanner`, `LottieView`                                                                                                                                                                                                                             |
+| **Mobile gestures**                                 | `SwipeActions`, `SwipeableCard`, `PullToRefresh`, `InfiniteScroll`                                                                                                                                                                                                                                                                                                           |
+| **Specialised** (optional peers, graceful fallback) | `CodeBlock`, `ColorPicker` (zero-deps), `QRCode`, `Barcode`, `MapView`, `SignaturePad`, `WebView`, `Camera`                                                                                                                                                                                                                                                                  |
+| **Foundations**                                     | `ThemeProvider`, `PortalProvider`, `Portal`, `ErrorBoundary`, `configureUnistyles`, `createStyles`, `createTheme`, `createThemes`, `themeTemplate`, `useResponsive`, `useTheme`, `useTokens`, `useReduceMotion`, `useUniqueId`, `useAnnouncer`, `useFormFieldA11y`, `Slot`, `tagComponent`, `describeChildren`                                                               |
 
 ## 2026-style `PillTabBar`
 
@@ -150,6 +160,30 @@ import { PillTabBar } from '@mindees/ui';
 | `dock`      | Bottom-navigation dock; active item gets a coloured pill with icon + label |
 | `glass`     | Translucent floating bar with a soft border + shadow                       |
 
+## One-line theming
+
+Rebrand the whole app from a single color. `createThemes` derives matched light + dark themes — surfaces, borders, text, hover/active states, and accessible on-accent text are all computed for you.
+
+```tsx
+import { ThemeProvider, createThemes } from '@mindees/ui';
+
+const { light, dark } = createThemes({
+  name: 'acme',
+  light: { brand: '#6d28d9' },
+  dark: { brand: '#a78bfa' },
+});
+
+export function App() {
+  return (
+    <ThemeProvider light={light} dark={dark} mode="auto">
+      {/* every component re-themes automatically */}
+    </ThemeProvider>
+  );
+}
+```
+
+Copy `themeTemplate` for a ready-to-edit starting point, or use `createTheme` for a single fully custom theme. Four themes ship by default: `lightTheme`, `darkTheme`, `highContrastLightTheme`, `highContrastDarkTheme`. Shadows resolve to `boxShadow` on React Native Web so elevated surfaces never render flat.
+
 ## Compatibility
 
 | Runtime          | Versions               | Notes                    |
@@ -165,17 +199,21 @@ Full peer-dependency matrix: [`docs/COMPATIBILITY.md`](https://github.com/mindee
 
 ## How does it compare?
 
-|                                             | MindeesUI | NativeBase | Tamagui    | Gluestack UI |
-| ------------------------------------------- | --------- | ---------- | ---------- | ------------ |
-| Deterministic Layout Intelligence Layer     | ✅        | —          | —          | —            |
-| New Architecture only (Fabric / JSI)        | ✅        | partial    | ✅         | ✅           |
-| Unistyles v3 (Nitro, zero re-renders)       | ✅        | —          | own engine | own engine   |
-| Compound components + Slot / asChild        | ✅        | partial    | ✅         | ✅           |
-| Tree-shakeable subpath exports              | ✅        | partial    | ✅         | ✅           |
-| Built-in tokens + high-contrast theme       | ✅        | partial    | ✅         | partial      |
-| 2026-style pill TabBar variants             | ✅        | —          | —          | —            |
-| Gated specialised peers (QR, Map, WebView…) | ✅        | partial    | —          | —            |
-| MIT licence                                 | ✅        | ✅         | MIT        | MIT          |
+|                                              | MindeesUI | NativeBase | Tamagui    | Gluestack UI |
+| -------------------------------------------- | --------- | ---------- | ---------- | ------------ |
+| Deterministic Layout Intelligence Layer      | ✅        | —          | —          | —            |
+| New Architecture only (Fabric / JSI)         | ✅        | partial    | ✅         | ✅           |
+| Unistyles v3 (Nitro, zero re-renders)        | ✅        | —          | own engine | own engine   |
+| Compound components + Slot / asChild         | ✅        | partial    | ✅         | ✅           |
+| Tree-shakeable subpath exports               | ✅        | partial    | ✅         | ✅           |
+| Built-in tokens + high-contrast theme        | ✅        | partial    | ✅         | partial      |
+| One-line `createThemes` brand theming        | ✅        | —          | partial    | partial      |
+| 2026-style pill TabBar variants              | ✅        | —          | —          | —            |
+| Gated specialised peers (QR, Map, WebView…)  | ✅        | partial    | —          | —            |
+| Ready-made screen blocks (`@mindees/blocks`) | ✅        | —          | —          | —            |
+| MIT licence                                  | ✅        | ✅         | MIT        | MIT          |
+
+A New-Architecture-native **Tamagui alternative** and **Gluestack UI alternative** with layout intelligence the others don't have.
 
 ## FAQ
 
@@ -201,26 +239,36 @@ No. **New Architecture only.**
 
 ### Custom theme?
 
-```ts
-import { createTheme } from '@mindees/ui';
-const brand = createTheme({
+One line gets you a full, accessible light + dark theme from a single brand color:
+
+```tsx
+import { ThemeProvider, createThemes } from '@mindees/ui';
+
+const { light, dark } = createThemes({
   name: 'brand',
-  colorScheme: 'light',
-  colors: { action: { primary: '#ff00aa' } },
+  light: { brand: '#6d28d9' },
+  dark: { brand: '#a78bfa' },
 });
+
+<ThemeProvider light={light} dark={dark}>
+  {/* app */}
+</ThemeProvider>;
 ```
+
+Need finer control? `createTheme` builds a single theme from tokens + overrides. Copy `themeTemplate` for a ready-to-edit starting point.
 
 ## Documentation
 
 - [Getting Started](https://mindees-ui.vercel.app/docs)
 - [Installation](https://mindees-ui.vercel.app/docs/installation)
+- [Components](https://mindees-ui.vercel.app/docs/components)
 - [Architecture & Layout Intelligence Layer](https://mindees-ui.vercel.app/docs/architecture)
 - [Theming](https://mindees-ui.vercel.app/docs/theming)
 - [Providers](https://mindees-ui.vercel.app/docs/providers)
+- [Screen blocks (@mindees/blocks)](https://www.npmjs.com/package/@mindees/blocks)
 - [Compatibility Matrix](https://github.com/mindees/mindees-ui/blob/main/docs/COMPATIBILITY.md)
 - [Performance Budgets](https://github.com/mindees/mindees-ui/blob/main/docs/PERFORMANCE.md)
 - [Contributing](https://github.com/mindees/mindees-ui/blob/main/docs/CONTRIBUTING.md)
-- [Roadmap](https://github.com/mindees/mindees-ui/blob/main/docs/ROADMAP.md)
 
 ## License
 
@@ -231,6 +279,6 @@ const brand = createTheme({
 <details>
 <summary><b>Keywords</b> (for npm + Google search)</summary>
 
-react-native · expo · expo-sdk-56 · expo-sdk-55 · react-native-new-architecture · fabric · react-native-fabric · react-native-jsi · turbomodules · bridgeless · ui-library · component-library · design-system · react-native-ui-kit · react-native-components · cross-platform-ui · universal-react-native · ios · android · react-native-web · typescript · strict-types · unistyles · react-native-unistyles · react-native-reanimated · flash-list · accessibility · wcag · a11y · rtl · dynamic-type · prefers-reduced-motion · dark-mode · high-contrast · design-tokens · theming · layout-intelligence · radix · slot · as-child · compound-components · child-introspection · intrinsic-sizing · auto-spacing · pill-tab-bar · tab-bar · bottom-navigation · 2026-style · mobile-ui · react-native-design-system · expo-router · react-19 · new-arch
+react-native-ui-library · react-native-component-library · react-native-ui-kit · react-native-components · react-native-design-system · expo-ui-kit · expo-ui-library · react-native-theming · react-native-blocks · react-native-templates · tamagui-alternative · gluestack-alternative · nativebase-alternative · react-native · expo · expo-sdk-56 · expo-sdk-55 · react-native-new-architecture · fabric · react-native-fabric · react-native-jsi · turbomodules · bridgeless · ui-library · component-library · design-system · cross-platform-ui · universal-react-native · ios · android · react-native-web · typescript · strict-types · unistyles · react-native-unistyles · react-native-reanimated · flash-list · accessibility · wcag · a11y · rtl · dynamic-type · prefers-reduced-motion · dark-mode · high-contrast · design-tokens · theming · create-themes · brand-theme · box-shadow · layout-intelligence · radix · slot · as-child · compound-components · child-introspection · intrinsic-sizing · auto-spacing · pill-tab-bar · tab-bar · bottom-navigation · 2026-style · mobile-ui · expo-router · react-19 · new-arch
 
 </details>

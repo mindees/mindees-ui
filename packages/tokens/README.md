@@ -31,7 +31,7 @@ Hardcoding `padding: 16` everywhere is the express train to inconsistent layouts
 - 🔤 **Typography** — modular type scale (`2xs`–`6xl`), line heights, weights, letter spacing, platform default font stacks (SF Pro on iOS, Roboto on Android, system-ui on web), plus named text styles (`display`, `h1`–`h6`, `body`, `label`, `caption`, `overline`, `code`).
 - 📐 **Spacing** — 4-point scale (`none`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`).
 - 🟦 **Radii** — `none` through `3xl` and `pill` / `full`.
-- 🌑 **Shadows** — iOS shadow props _and_ Android elevation in one resolver; works cross-platform.
+- 🌑 **Shadows** — iOS shadow props, Android elevation, _and_ web `boxShadow` from one `resolveShadow` resolver; elevated surfaces render correctly on every platform, including React Native Web.
 - ⏱️ **Motion** — Doherty-Threshold-aware durations (`fastest`–`slowest`) and named easings (`standard`, `emphasised`, `bounce`, …).
 - 📱 **Breakpoints** — `xs`–`2xl` for container-aware responsive layouts.
 - 🪜 **Z-index** — named layers (`dropdown`, `drawer`, `overlay`, `modal`, `popover`, `toast`, `tooltip`) so overlays never collide.
@@ -159,6 +159,8 @@ space['2xl']; // 32
 minTouchTarget.cozy; // 44 — Fitts's-Law-safe default button height
 ```
 
+Built on a documented **2026 4-point spacing scale** — every step is a multiple of 4, so spacing stays on a consistent rhythm across platforms.
+
 ### Radii
 
 ```ts
@@ -177,9 +179,13 @@ import { shadows, resolveShadow } from '@mindees/tokens/shadows';
 // Direct spec
 shadows.md;  // { shadowColor, shadowOffset, shadowOpacity, shadowRadius, elevation }
 
-// Platform-resolved (iOS shadow* / Android elevation)
+// Platform-resolved: iOS shadow* props, Android `elevation`,
+// and web `boxShadow` (React Native Web ignores the iOS shadow* props,
+// so this branch keeps elevated surfaces from rendering flat on the web).
 <View style={[resolveShadow('md'), /* ... */]} />
 ```
+
+Shadow tokens: `none`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`.
 
 ### Motion
 
@@ -243,6 +249,6 @@ CSS variables work on the web but not in native React Native (which has its own 
 <details>
 <summary><b>Keywords</b> (for npm + Google search)</summary>
 
-design-tokens · react-native-design-tokens · expo-design-tokens · color-scales · semantic-colors · radix-colors · high-contrast · accessibility · wcag · typography-scale · modular-scale · spacing-scale · 4-point-grid · radii · border-radius · shadow-tokens · cross-platform-shadows · ios-shadow · android-elevation · motion-tokens · easing-curves · doherty-threshold · breakpoints · responsive · z-index · stacking-context · density-modes · theming · dark-mode · light-mode · brand-themes · react-native · expo · typescript · strict-types · tree-shakeable · subpath-exports · side-effects-false · mindees-ui
+design-tokens · react-native-design-tokens · expo-design-tokens · react-native-design-system · color-scales · semantic-colors · radix-colors · high-contrast · accessibility · wcag · typography-scale · modular-scale · spacing-scale · 4-point-grid · radii · border-radius · shadow-tokens · cross-platform-shadows · ios-shadow · android-elevation · web-box-shadow · box-shadow · motion-tokens · easing-curves · doherty-threshold · breakpoints · responsive · z-index · stacking-context · density-modes · theming · dark-mode · light-mode · brand-themes · react-native · react-native-web · expo · typescript · strict-types · tree-shakeable · subpath-exports · side-effects-false · mindees-ui
 
 </details>
