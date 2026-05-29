@@ -9,3 +9,4 @@ export * from './account';
 export * from './social';
 export * from './dashboard';
 export * from './web';
+export * from './screens';
